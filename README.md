@@ -25,6 +25,9 @@ Registro de los usuarios, subida y actualización de contenidos(videos, apuntes)
 
 ## Integrantes del grupo
 Sergio Arévalo Gil -> s.arevalog.2017@alumnos.urjc.es - SergioE17
+
 Pablo Bayona González -> p.bayona.2017@alumnos.urjc.es - pbayona
+
 Carlos Colmenero Gomez-Cambronero -> c.colmenero.2017@alumnos.urjc.es - colme99
+
 Álvaro López Sierra -> a.lopezsi.2017@alumnos.urjc.es - alvarolopez99
