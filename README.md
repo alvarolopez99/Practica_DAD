@@ -1,3 +1,4 @@
+<div class=text-justify>
 # Sapioteca
 
 ## Temática 
