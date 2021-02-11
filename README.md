@@ -1,4 +1,4 @@
-# Sapioteca
+# Sapiotheca
 
 ## Temática 
 Aplicación para contratar cursos, repositorio para apuntes, videopíldoras. Los contenidos estarían divididos en módulos, a los que los usuarios con un plan standard tendrían acceso a los primeros módulos, mientras que los usuarios premium tendrían acceso a otro tipo de servicios, como módulos completos, acceso a clases personalizadas con un profesor, acceso al foro comunitario para resolución de dudas, obtención de apuntes, chat privado personalizado. 
@@ -17,11 +17,11 @@ Solo se pueden examinar del curso los usuarios premium, y al completarlo se obti
 - Chats: mensajes privados intercambiados entre dos usuarios registrados, o entre usuario y profesor.
 - Anuncios: diferentes mensajes que los profesores ponen en un apartado especial para poder ser contratados
 - Cursos: PDFs o videos subidos para que los usuarios puedan visualizarlos directamente. No se pueden descargar.
-- Modulos: cada una de las partes en las que se divide un curso de una asignatura concreta
-- Correos: los correos se envían a los usuarios premium con el certificado una vez terminado un curso determinado
 
 ## Servicio interno
-Registro de los usuarios, subida y actualización de contenidos(videos, apuntes), envío de correos con el certificado
+- Envío de correos con el certificado (Cuando un usuario termine un curso, el servicio interno se encarga de generar y mandar el correo con el certificado generado al usuario determinado.
+- Notificaciones del foro (cuando un usuario mande un mensaje al foro el servicio interno informa de ese mensaje al resto de usuarios)
+- Filtrado de lenguaje soez
 
 ## Integrantes del grupo
 Sergio Arévalo Gil -> s.arevalog.2017@alumnos.urjc.es - SergioE17
