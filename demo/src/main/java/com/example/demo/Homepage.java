@@ -9,7 +9,7 @@ public class Homepage {
 	
 	/*Este método tiene que invocarse cuando se llame a la URL de homepage*/
 	
-	@GetMapping("/hello") //Podemos especificar cualquier html
+	@GetMapping("/") //Podemos especificar cualquier html
 	public String helloUser() {
 		
 		return "hello-user.html";
