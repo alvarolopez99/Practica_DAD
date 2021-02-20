@@ -9,6 +9,6 @@ public class LoginController {
 
 	@GetMapping("/greeting")
 	public String greeting(Model model) {
-		return "Initial_Template";
+		return "Iniciar_Sesion_Template";
 	}
 }

@@ -22,4 +22,9 @@ public class IndexController {
 		return "profesores_main";
 	}
 	
+	@GetMapping("/iniciada")
+	public String sesionIniciadaMain(Model model) {
+		return "iniciada";
+	}
+	
 }
