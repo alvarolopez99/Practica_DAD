@@ -8,11 +8,11 @@ public class Chat {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@ManytoOne
-	private long Usuario profesor;
+	@ManyToOne
+	private Usuario profesor;
 	
-	@ManytoOne
-	private long Usuario alumno;
+	@ManyToOne
+	private Usuario alumno;
 	
 	private String cuerpoMensaje;
 	

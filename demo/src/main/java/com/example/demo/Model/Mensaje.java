@@ -9,10 +9,10 @@ public class Mensaje {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@ManytoOne
+	@ManyToOne
 	private Usuario emisor;
 	
-	@ManytoOne
+	@ManyToOne
 	private Usuario receptor;
 	
 	public Mensaje(Usuario emisor, Usuario receptor) {

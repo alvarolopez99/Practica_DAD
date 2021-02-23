@@ -1,4 +1,6 @@
 package com.example.demo.Model;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,7 +10,7 @@ public class Curso {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@OnetoMany
+	@OneToMany
 	private List<Usuario> alumnos;
 	
 	public Curso() {}

@@ -11,7 +11,7 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@ManytoOne
+	@ManyToOne
 	private Usuario usuario;
 	
 	@Lob
