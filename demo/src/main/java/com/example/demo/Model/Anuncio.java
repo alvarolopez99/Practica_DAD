@@ -1,4 +1,5 @@
 package com.example.demo.Model;
+import javax.persistence.*;
 
 @Entity 
 public class Anuncio {
@@ -7,6 +8,7 @@ public class Anuncio {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	public Anuncio() {}
 	
 	public long getId() {
 		return id;
