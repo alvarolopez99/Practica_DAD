@@ -18,6 +18,8 @@ public class Post {
 	@JsonIgnore
 	private Blob imagen;
 	
+	
+	
 	public Post(Usuario usuario, Blob imagen) {
 		this.usuario = usuario;
 		this.imagen = imagen;

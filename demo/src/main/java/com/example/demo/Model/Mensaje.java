@@ -12,12 +12,11 @@ public class Mensaje {
 	@ManyToOne
 	private Usuario emisor;
 	
-	@ManyToOne
-	private Usuario receptor;
+	String cuerpoMensaje;
 	
-	public Mensaje(Usuario emisor, Usuario receptor) {
+	public Mensaje(Usuario emisor, String mensaje) {
 		this.emisor = emisor;
-		this.receptor = receptor;
+		this.cuerpoMensaje = mensaje;
 	}
 	
 	public long getId() {
@@ -26,6 +25,14 @@ public class Mensaje {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+	public String getCuerpoMensaje() {
+		return cuerpoMensaje;
+	}
+	
+	public void setCuerpoMensaje(String s) {
+		cuerpoMensaje = s;
 	}
 
 	

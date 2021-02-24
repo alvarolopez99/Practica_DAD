@@ -1,4 +1,7 @@
 package com.example.demo.Model;
+
+import java.util.ArrayList;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,12 +17,13 @@ public class Chat {
 	@ManyToOne
 	private Usuario alumno;
 	
-	private String cuerpoMensaje;
+	@OneToMany
+	private ArrayList<Mensaje> mensajes;
 	
 	public Chat(Usuario profesor, Usuario alumno, String cuerpoMensaje) {
 		this.profesor = profesor;
 		this.alumno = alumno;
-		this.cuerpoMensaje = cuerpoMensaje;
+		this.mensajes = new ArrayList<Mensaje>();
 	}
 	
 	public long getId() {
