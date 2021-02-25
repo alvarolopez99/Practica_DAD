@@ -1,0 +1,19 @@
+<html>
+<body>
+
+	<h1>CLASES PARTICULARES</h1>
+
+	<h1>Profesores disponibles</h1>
+	
+	{{#posts}}
+	<a href="post/{{id}}">{{user}} {{title}}</a><br>
+	{{/posts}}
+	
+	{{^posts}}
+	<p>No posts yet.</p>
+	{{/posts}}
+
+	<br>
+	<a href="post/new">New Post</a>
+</body>
+</html>

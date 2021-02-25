@@ -32,4 +32,12 @@ public class IndexController {
 		return "iniciada";
 	}
 	
+	@GetMapping("/anuncios")
+	public String cursos(Model model) {
+		
+		
+		return "Anuncios";
+	}
+	
+	
 }
