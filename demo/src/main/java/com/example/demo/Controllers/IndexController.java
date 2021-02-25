@@ -3,6 +3,7 @@ package com.example.demo.Controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -33,11 +34,23 @@ public class IndexController {
 	}
 	
 	@GetMapping("/anuncios")
-	public String cursos(Model model) {
+	public String anuncios(Model model) {
 		
 		
 		return "Anuncios";
 	}
+	
+	
+	@GetMapping("/anuncio/{infoProfesor}")
+	public String anuncio(Model model, @PathVariable String infoProfesor) {
+		
+		model.addAttribute("infoProfesor", infoProfesor);
+		model.addAttribute("nombreProfesor", "Nombre del profesor");
+		
+		return "anuncio";
+	}
+	
+	
 	
 	
 }
