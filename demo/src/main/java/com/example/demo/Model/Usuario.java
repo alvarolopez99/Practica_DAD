@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mysql.cj.jdbc.Blob;
 
 @Entity
-public class Usuario{
+public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

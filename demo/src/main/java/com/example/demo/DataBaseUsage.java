@@ -46,12 +46,12 @@ public class DataBaseUsage implements CommandLineRunner {
 		System.out.println();
 
 		// fetch customers by last name
-		/*List<Usuario> bauers = usuario_repository.findByNombre("Pablo");
+		List<Usuario> bauers = usuario_repository.findByNombre("Pablo");
 		System.out.println("Customer found with findByNombre('Pablo'):");
 		System.out.println("--------------------------------------------");
 		for (Usuario bauer : bauers) {
 			System.out.println(bauer);
-		}*/
+		}
 
 		//usuario_repository.delete(bauers.get(0));
 	}
