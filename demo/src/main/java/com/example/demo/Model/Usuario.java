@@ -23,6 +23,8 @@ public class Usuario {
 	@JsonIgnore
 	private Blob fotoPerfil;
 	
+	//Prueba arreglo
+	
 	public Usuario() {
 		
 	}
