@@ -41,13 +41,21 @@ public class IndexController {
 	}
 	
 	
-	@GetMapping("/anuncio/{infoProfesor}")
-	public String anuncio(Model model, @PathVariable String infoProfesor) {
+	@GetMapping("/anuncios/{idAnuncio}")
+	public String anuncio(Model model, @PathVariable String idAnuncio) {
 		
-		model.addAttribute("infoProfesor", infoProfesor);
+		model.addAttribute("infoProfesor", idAnuncio);
 		model.addAttribute("nombreProfesor", "Nombre del profesor");
 		
-		return "anuncio";
+		return "Anuncio";
+	}
+	
+	
+	@GetMapping("/foros")
+	public String foros(Model model) {
+		
+
+		return "Foros";
 	}
 	
 	

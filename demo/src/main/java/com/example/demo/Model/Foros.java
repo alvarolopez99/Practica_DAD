@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mysql.cj.jdbc.Blob;
 
 @Entity
-public class Post {
+public class Foros {
 
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,7 +23,7 @@ public class Post {
 	@OneToMany
 	private List<Mensaje> mensajes;
 	
-	public Post(Usuario usuario, Blob imagen) {
+	public Foros(Usuario usuario, Blob imagen) {
 		this.usuario = usuario;
 		this.imagen = imagen;
 	}
