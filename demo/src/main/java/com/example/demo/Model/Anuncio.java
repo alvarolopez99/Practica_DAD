@@ -12,6 +12,10 @@ public class Anuncio {
 	
 	public Anuncio() {}
 	
+	public Anuncio(String contenido) {
+		this.contenido = contenido;
+	}
+	
 	public long getId() {
 		return id;
 	}
