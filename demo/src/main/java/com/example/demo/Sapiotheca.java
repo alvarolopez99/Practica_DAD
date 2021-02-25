@@ -14,8 +14,4 @@ public class Sapiotheca {
 		SpringApplication.run(Sapiotheca.class, args);
 	}
 	
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	@ExceptionHandler(NoSuchElementException.class)
-	public void handleNoTFound() {
-	}
 }
