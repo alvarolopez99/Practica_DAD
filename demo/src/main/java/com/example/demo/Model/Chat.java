@@ -1,6 +1,7 @@
 package com.example.demo.Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -18,13 +19,12 @@ public class Chat {
 	private Usuario alumno;
 	
 	@OneToMany
-	//private ArrayList<Mensaje> mensajes;
+	private List<Mensaje> mensajes;
 	
-	//public Chat(Usuario profesor, Usuario alumno, String cuerpoMensaje) {
-		//this.profesor = profesor;
-		//this.alumno = alumno;
-		//this.mensajes = new ArrayList<Mensaje>();
-	//}
+	public Chat(Usuario profesor, Usuario alumno, String cuerpoMensaje) {
+		this.profesor = profesor;
+		this.alumno = alumno;
+	}
 	
 	public long getId() {
 		return id;

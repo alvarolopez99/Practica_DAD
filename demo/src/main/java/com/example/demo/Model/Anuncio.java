@@ -8,6 +8,8 @@ public class Anuncio {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	private String contenido;
+	
 	public Anuncio() {}
 	
 	public long getId() {
@@ -16,6 +18,14 @@ public class Anuncio {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+	public void setContenido(String contenido) {
+		this.contenido = contenido;
+	}
+	
+	public String getContenido() {
+		return contenido;
 	}
 	
 	
