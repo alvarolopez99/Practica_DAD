@@ -15,6 +15,7 @@ public class Usuario {
 	private String nombre;
 	private String primerApellido;
 	private String segundoApellido;
+	private String contraseña;
 	private int tipoUsuario;
 	private int tipoSuscripcion;
 	private String correo;
@@ -23,16 +24,20 @@ public class Usuario {
 	@JsonIgnore
 	private Blob fotoPerfil;
 	
+	//@OneToOne(cascade=CascadeType.ALL)
+	//private UsuarioContraseña uc
+	
 	public Usuario() {
 		
 	}
 	
-	public Usuario(String nombre, String primerApellido, String segundoApellido, int tipoUsuario, 
-			int tipoSuscripcion, String correo, int metodoPago, Blob fotoPerfil) {
+	public Usuario(String nombre, String primerApellido, String segundoApellido, String contraseña,
+			int tipoUsuario, int tipoSuscripcion, String correo, int metodoPago, Blob fotoPerfil) {
 		super();
 		this.nombre = nombre;
 		this.primerApellido = primerApellido;
 		this.segundoApellido = segundoApellido;
+		this.contraseña = contraseña;
 		this.tipoUsuario = tipoUsuario;
 		this.tipoSuscripcion = tipoSuscripcion;
 		this.correo = correo;
@@ -103,6 +108,14 @@ public class Usuario {
 	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public String getContraseña() {
+		return contraseña;
+	}
+	
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
 	}
 
 }
