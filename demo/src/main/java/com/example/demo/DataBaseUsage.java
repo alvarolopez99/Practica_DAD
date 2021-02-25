@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
 
 import com.example.demo.Model.Usuario;
+import com.example.demo.Repository.UsuarioRepository;
 
 @Controller
 public class DataBaseUsage implements CommandLineRunner {
