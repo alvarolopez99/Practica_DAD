@@ -41,7 +41,8 @@ public class LoginController {
 		return url;
 	}
 	
-	@GetMapping("/iniciada")
+	
+	@GetMapping("/UsuarioRegistrado")
 	public String sesionIniciada(Model model) {
 			
 		return "";
