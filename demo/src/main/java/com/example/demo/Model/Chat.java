@@ -18,13 +18,13 @@ public class Chat {
 	private Usuario alumno;
 	
 	@OneToMany
-	private ArrayList<Mensaje> mensajes;
+	//private ArrayList<Mensaje> mensajes;
 	
-	public Chat(Usuario profesor, Usuario alumno, String cuerpoMensaje) {
-		this.profesor = profesor;
-		this.alumno = alumno;
-		this.mensajes = new ArrayList<Mensaje>();
-	}
+	//public Chat(Usuario profesor, Usuario alumno, String cuerpoMensaje) {
+		//this.profesor = profesor;
+		//this.alumno = alumno;
+		//this.mensajes = new ArrayList<Mensaje>();
+	//}
 	
 	public long getId() {
 		return id;
