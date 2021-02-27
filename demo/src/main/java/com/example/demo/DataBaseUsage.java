@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -46,13 +47,14 @@ public class DataBaseUsage implements CommandLineRunner {
 		System.out.println();
 
 		// fetch customers by last name
-		List<Usuario> bauers = usuario_repository.findByNombre("Pablo");
+		Optional<Usuario> bauers = usuario_repository.findByNombre("Pablo");
 		System.out.println("Customer found with findByNombre('Pablo'):");
 		System.out.println("--------------------------------------------");
+		/*
 		for (Usuario bauer : bauers) {
 			System.out.println(bauer);
-		}
-
+		}*/
+		System.out.println(bauers.get());
 		//usuario_repository.delete(bauers.get(0));
 	}
 }
