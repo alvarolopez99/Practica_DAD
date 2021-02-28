@@ -23,7 +23,7 @@ public class LoginController {
 		return "Iniciar_Sesion_Template";
 	}
 	
-	@PostMapping("/checkLogin")
+/*	@PostMapping("/checkLogin")
 	public String comprobarLogin(Model model, @RequestParam String nombre, @RequestParam String contraseña) {		
 	
 		String url = "Error_Login";
@@ -46,7 +46,7 @@ public class LoginController {
 		
 		
 		return url;
-	}
+	}*/
 	
 	
 	@GetMapping("/UsuarioRegistrado")

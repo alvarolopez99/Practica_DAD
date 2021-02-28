@@ -14,21 +14,26 @@ public class Foros {
 	private long id;
 	
 	private String titulo;
+	
 	@ManyToOne
 	private Usuario usuario;
+	
 	@Lob
 	@JsonIgnore
 	private Blob imagen;
-	
-	private String user;
-	private String title;
-	private String text;
 	
 	@OneToMany
 	private List<Mensaje> mensajes;
 	
 	
+	//******************************//
 	
+	private String user;
+	private String title;
+	private String text;
+
+	//******************************//	
+
 	
 	public Foros() {
 
@@ -39,14 +44,6 @@ public class Foros {
 		this.user = user;
 		this.title = title;
 		this.text = text;
-	}
-
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(long id) {
-		this.id = id;
 	}
 	
 	public String getUser() {
@@ -77,8 +74,6 @@ public class Foros {
 	public String toString() {
 		return "Post [id="+id+", user=" + user + ", title=" + title + ", text=" + text + "]";
 	}
-	
-	
 	
 	
 	/*
