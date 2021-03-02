@@ -1,4 +1,5 @@
 package com.example.demo.Model;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -22,15 +23,17 @@ public class Foros {
 	@JsonIgnore
 	private Blob imagen;
 	
-	@OneToMany
-	private List<Mensaje> mensajes;
+
 	
 	
 	//******************************//
 	
 	//private String user;
-	private String title;
-	private String text;
+	private String asunto;
+	private String cuerpo;
+	
+	@OneToMany
+	private List<Mensaje> mensajes;
 
 	//******************************//	
 
@@ -42,8 +45,9 @@ public class Foros {
 	public Foros(String title, String text) {
 		super();
 		//this.user = user;
-		this.title = title;
-		this.text = text;
+		this.asunto = title;
+		this.cuerpo = text;
+		this.mensajes = new ArrayList<Mensaje>();
 	}
 	
 	/*public String getUser() {
@@ -53,26 +57,31 @@ public class Foros {
 	/*public void setUser(String user) {
 		this.user = user;
 	}/*/
+	
+	public ArrayList getMensajes() {
+		return (ArrayList) mensajes;
+	}
+
 
 	public String getTitle() {
-		return title;
+		return asunto;
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		this.asunto = title;
 	}
 
 	public String getText() {
-		return text;
+		return cuerpo;
 	}
 
 	public void setText(String text) {
-		this.text = text;
+		this.cuerpo = text;
 	}
 	
 	@Override
 	public String toString() {
-		return "Post [id="+id+", user=" + "user" + ", title=" + title + ", text=" + text + "]";
+		return "Post [id="+id+", user=" + "user" + ", title=" + asunto + ", text=" + cuerpo + "]";
 	}
 	
 	

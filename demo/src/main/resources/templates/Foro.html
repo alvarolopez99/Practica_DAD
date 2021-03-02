@@ -5,9 +5,16 @@
 	<h1>{{title}}</h1>
 	{{/info}}
 	
+	
 	{{#info}}
 	<p>{{text}}</p>
 	{{/info}}
+	
+	
+	{{#mensaje}}
+    <br><b>{{emisor.nombre}}:&nbsp;</b>{{CuerpoMensaje}}
+    {{/mensaje}}
+	
 	
 	<a href="/foros">VOLVER</a>
 </body>

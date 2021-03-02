@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.Model.Foros;
+import com.example.demo.Model.Mensaje;
+import com.example.demo.Model.Usuario;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +49,15 @@ public class IndexController {
 	public String VerForo (Model model, @PathVariable int IDForo) {
 		
 		Foros foro = foros.get(IDForo-1);
+		ArrayList m = foro.getMensajes();
+		
+		
+		Usuario usuario = new Usuario();
+		usuario.setNombre("soyunusuario");
+		m.add(new Mensaje(usuario, "hola"));
+		
 		model.addAttribute("info", foro);
+		model.addAttribute("mensaje", m);
 		
 		return "Foro";
 	}
