@@ -1,8 +1,32 @@
 <html>
 <body>
 
-	<p>Esta es la sección de profesores</p>
 
-	<a href="/">Volver</a>
+<form action="bienvenido" method="post">
+	<p>Introduzca el correo electrónico:</p>
+	<input type='text' name='nombreUsuario'/>
+	<p><br/></p>
+	<p>Introduzca el nombre de usuario:</p>
+	<input type='text' name='nombreUsuario'/>
+	<p><br/></p>
+	<p>Introduzca la password:</p>
+	<input type='text' name='contraseña_1'/>
+	<p><br/></p>
+	<p>Repita la password:</p>
+	<input type='text' name='contraseña_2'/>
+	<p><br/></p>
+	<p>Indique el tipo de usuario:</p>
+	<p>Usuario estándar
+	<input type='checkbox' name='usuarioEstandar' value='valorOpcion_1'>
+	</p>
+	<p>
+	Usuario premium
+	<input type='checkbox' name='usuarioPremium' value='valorOpcion_2'>
+	</p>
+	<p><br/></p>
+	<input type='submit' value='Registrarme'/>
+</form>
+
+
 </body>
 </html>
