@@ -13,6 +13,9 @@ public class Curso {
 	@OneToMany
 	private List<Usuario> alumnos;
 	
+	@OneToMany
+	private List<Material> materiales;
+	
 	public Curso() {}
 	
 	public long getId() {
@@ -25,5 +28,9 @@ public class Curso {
 	
 	public void AñadirUsuario(Usuario alumno) {
 		
+	}
+	
+	public void AñadirMaterial(Material material) {
+		materiales.add(material);
 	}
 }
