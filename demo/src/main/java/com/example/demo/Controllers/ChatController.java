@@ -37,9 +37,11 @@ public class ChatController {
 		
 		//Añadir la carga de mensajes mediante lista
 		
-		Usuario u = new Usuario();
-		u.setNombre("Pablo");
-		mensajes.add(new Mensaje(u, usermsg));
+		if(!usermsg.equals("")) {
+			Usuario u = new Usuario();
+			u.setNombre("Pablo");
+			mensajes.add(new Mensaje(u, usermsg));
+		}
 		
 		model.addAttribute("mensajes", mensajes);
 		model.addAttribute("user", "Pablo");
