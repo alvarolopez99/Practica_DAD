@@ -36,10 +36,9 @@ public class IndexController {
 	@PostMapping("/foros/nuevoforo/creado")
 	public String NuevoForo(Model model, @RequestParam String asunto, @RequestParam String mensaje) {
 
-		foros.add(new Foros(asunto, mensaje));
-		model.addAttribute("foros", foros);
+		//foros.add(new Foros(asunto, mensaje));
 		
-		return "Foros";
+		return "forocreado";
 	}
 	
 	
