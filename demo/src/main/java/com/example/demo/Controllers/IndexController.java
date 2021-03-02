@@ -29,9 +29,10 @@ public class IndexController {
 	@GetMapping("/foros")
 	public String MostrarForos (Model model) {
 		
+		foros.add(new Foros("PRUEBA", "DE", "FORO"));
 		model.addAttribute("foros", foros);
 		
-		return "foros.html";
+		return "Foros";
 	}
 	
 	
@@ -82,13 +83,6 @@ public class IndexController {
 		return "Anuncio";
 	}
 	
-	
-	@GetMapping("/foros")
-	public String foros(Model model) {
-		
-
-		return "Foros";
-	}
 	
 	
 	
