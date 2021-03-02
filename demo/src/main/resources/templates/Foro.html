@@ -16,6 +16,16 @@
     {{/mensaje}}
 	
 	
+	{{#info}}
+	<form action="/foros/{{IDForo}}/respuesta" method="post">
+	
+	
+	<p>Responder:</p>
+	<textarea name='respuesta' rows=5 cols=40></textarea>
+	<input type='submit' value='Enviar'/>
+	</form>
+	{{/info}}
+	
 	<a href="/foros">VOLVER</a>
 </body>
 </html>

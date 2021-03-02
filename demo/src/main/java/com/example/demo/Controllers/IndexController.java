@@ -22,9 +22,11 @@ import java.util.List;
 public class IndexController {
 	
 	private List<Foros> foros = new ArrayList<>();
+	private ArrayList m;
+	private Usuario usuario = new Usuario();
 	
 	public IndexController () {		
-		foros.add(new Foros("DUDA", "BLABLABLA"));		
+		foros.add(new Foros("DUDA", "BLABLABLA"));	
 	}
 	
 	@GetMapping("/foros")
@@ -45,19 +47,36 @@ public class IndexController {
 	}
 	
 	
-	@GetMapping("/foros/{IDForo}")
-	public String VerForo (Model model, @PathVariable int IDForo) {
+	@PostMapping("/foros/{IDForo}/respuesta")
+	public String VerForo (Model model, @PathVariable int IDForo, @RequestParam String respuesta) {
 		
 		Foros foro = foros.get(IDForo-1);
-		ArrayList m = foro.getMensajes();
 		
+		m = foro.getMensajes();
 		
-		Usuario usuario = new Usuario();
-		usuario.setNombre("soyunusuario");
-		m.add(new Mensaje(usuario, "hola"));
+		usuario.setNombre("Soy un usuario");
+		m.add(new Mensaje(usuario, respuesta));
 		
 		model.addAttribute("info", foro);
 		model.addAttribute("mensaje", m);
+		model.addAttribute("IDForo", (IDForo));
+		
+		return "Foro";
+	}
+	
+	@GetMapping("/foros/{IDForo}")
+	public String VerForo(Model model, @PathVariable int IDForo) {
+		
+		Foros foro = foros.get(IDForo-1);
+		
+		m = foro.getMensajes();
+		
+		usuario.setNombre("Soy un usuario");
+		m.add(new Mensaje(usuario, "Y este es mi mensaje estático"));
+		
+		model.addAttribute("info", foro);
+		model.addAttribute("mensaje", m);
+		model.addAttribute("IDForo", (IDForo));
 		
 		return "Foro";
 	}
