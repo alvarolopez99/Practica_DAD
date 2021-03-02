@@ -27,50 +27,64 @@ public class IndexController {
 	@GetMapping("/foros")
 	public String MostrarForos (Model model) {
 		
+		foros.add(new Foros("p", "d", "f"));		
 		model.addAttribute("foros", foros);
 		
 		return "Foros";
 	}
+	
+	
+	@GetMapping("/foros/{IDForo}")
+	public String VerForo (Model model, @PathVariable int IDForo) {
+		
+		Foros foro = foros.get(IDForo-1);
+		model.addAttribute("info", foro);
+		
+		return "Foro";
+	}
+	
+	
 	
 	@GetMapping("/")
 	public String indexMain(Model model) {
 		return "index.html";
 	}
 	
+	//Llamada cuando pulsamos el botón de Login, aparecerá el formulario para logearse.
 	@GetMapping("/login")
 	public String loginMain(Model model) {
 		return "formulario_login";
 	}
 	
+	//Llamada cuando pulsemos el botón de Registrarse, aparecerá el formulario de New User
 	@GetMapping("/newuser")
 	public String newuserMain(Model model) {
 		return "formulario_newuser";
 	}
 	
+	//Se llama al método cuando se pulsa el botón "Iniciar Sesión" o "Registrarse", y se muestra la plantilla de bienvenido.
 	@PostMapping("/bienvenido")
-	public String bienvenido(Model model, @RequestParam String correo /*,@RequestParam String contraseña*/) {
+	public String bienvenido(Model model, @RequestParam String correo, @RequestParam String contrasena) {
 		model.addAttribute("correo", correo);
-		//model.addAttribute("contraseña", contraseña);
+		model.addAttribute("contraseña", contrasena);
 		
 		return "bienvenido";
 	}
 	
-	@GetMapping("/iniciada")
-	public String sesionIniciadaMain(Model model, @RequestParam String nombreUsuario) {
-		
+	/*@GetMapping("/iniciada")
+	public String sesionIniciadaMain(Model model, @RequestParam String nombreUsuario) {		
 		
 		model.addAttribute("name", nombreUsuario);
 		
 		return "iniciada";
-	}
+	}*/
 	
 	@GetMapping("/anuncios")
 	public String anuncios(Model model) {
 		
 		
 		return "Anuncios";
-	}
-	
+	}	
 	
 	@GetMapping("/anuncios/{idAnuncio}")
 	public String anuncio(Model model, @PathVariable String idAnuncio) {
