@@ -27,10 +27,23 @@ public class IndexController {
 	@GetMapping("/foros")
 	public String MostrarForos (Model model) {
 		
+		foros.add(new Foros("p", "d", "f"));		
 		model.addAttribute("foros", foros);
 		
 		return "Foros";
 	}
+	
+	
+	@GetMapping("/foros/{IDForo}")
+	public String VerForo (Model model, @PathVariable int IDForo) {
+		
+		Foros foro = foros.get(IDForo-1);
+		model.addAttribute("info", foro);
+		
+		return "Foro";
+	}
+	
+	
 	
 	@GetMapping("/")
 	public String indexMain(Model model) {
