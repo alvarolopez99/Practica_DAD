@@ -28,7 +28,7 @@ public class Foros {
 	
 	//******************************//
 	
-	private String user;
+	//private String user;
 	private String title;
 	private String text;
 
@@ -39,20 +39,20 @@ public class Foros {
 
 	}
 
-	public Foros(String user, String title, String text) {
+	public Foros(String title, String text) {
 		super();
-		this.user = user;
+		//this.user = user;
 		this.title = title;
 		this.text = text;
 	}
 	
-	public String getUser() {
+	/*public String getUser() {
 		return user;
-	}
+	}*/
 
-	public void setUser(String user) {
+	/*public void setUser(String user) {
 		this.user = user;
-	}
+	}/*/
 
 	public String getTitle() {
 		return title;
@@ -72,7 +72,7 @@ public class Foros {
 	
 	@Override
 	public String toString() {
-		return "Post [id="+id+", user=" + user + ", title=" + title + ", text=" + text + "]";
+		return "Post [id="+id+", user=" + "user" + ", title=" + title + ", text=" + text + "]";
 	}
 	
 	

@@ -21,23 +21,24 @@ public class IndexController {
 	private List<Foros> foros = new ArrayList<>();
 	
 	public IndexController () {		
-		foros.add(new Foros("PRUEBA", "DE", "FORO"));		
+		foros.add(new Foros("DUDA", "BLABLABLA"));		
 	}
 	
 	@GetMapping("/foros")
 	public String MostrarForos (Model model) {
 		
-		foros.add(new Foros("p", "d", "f"));		
+		foros.add(new Foros("PREGUNTA", "BLABLABLA"));		
 		model.addAttribute("foros", foros);
 		
 		return "Foros";
 	}
 	
 	@PostMapping("/foros/nuevoforo/creado")
-	public String newPost(Model model, Foros ForoNuevo) {
+	public String NuevoForo(Model model, @RequestParam String asunto, @RequestParam String mensaje) {
 
-		foros.add(ForoNuevo);
-
+		foros.add(new Foros(asunto, mensaje));
+		model.addAttribute("foros", foros);
+		
 		return "Foros";
 	}
 	
