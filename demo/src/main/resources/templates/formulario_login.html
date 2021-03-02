@@ -1,13 +1,20 @@
 <html>
+<head>
+  <meta charset="UTF-8">
+</head>
 <body>
 
 <form action="bienvenido" method="post">
   
   <p>Introduzca su correo:</p><input type='text' name='correo'/><br>
-  <p>Introduzca su contrasena:</p><input type='text' name='contrasena'/><br>  
-  <br><input type='submit' value='Iniciar sesi�n'/>
+  <p>Introduzca su contraseña:</p><input type='text' name='contrasena'/><br>
+  {{#contrasena}}
+		<br><input type='submit' value='Iniciar sesión'/>
+  {{/contrasena}} 
+  <br><input type='submit' value='Iniciar sesión'/>
   
 </form>
 
+	<a href="/">Volver a la página principal</a><br>
 </body>
 </html>
