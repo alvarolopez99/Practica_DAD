@@ -33,6 +33,14 @@ public class IndexController {
 		return "Foros";
 	}
 	
+	@PostMapping("/foros/nuevoforo/creado")
+	public String newPost(Model model, Foros ForoNuevo) {
+
+		foros.add(ForoNuevo);
+
+		return "Foros";
+	}
+	
 	
 	@GetMapping("/foros/{IDForo}")
 	public String VerForo (Model model, @PathVariable int IDForo) {
@@ -44,7 +52,7 @@ public class IndexController {
 	}
 	
 	
-	@GetMapping("/foros/nuevo")
+	@GetMapping("/foros/nuevoforo")
 	public String CrearForo (Model model) {
 		
 		return "CrearForo";

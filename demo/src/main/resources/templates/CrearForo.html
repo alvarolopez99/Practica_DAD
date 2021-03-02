@@ -1,8 +1,22 @@
 <html>
+<head>
+
+	<meta charset="UTF-8"/>
+	
+</head>
+
 <body>
 
-	<h1>crear</h1>
+	<form action="/foros/nuevoforo/creado" method="post">
+		<p>User: </p>	
+		<input type='text' name='usuario'/>
+		<p>Title:</p>
+		<input type='text' name='title'/>
+		<p>Text:</p>
+		<textarea name='text' rows=5 cols=40></textarea>
 
+		<input type='submit' value='Save'/>
+	</form>
 	
 </body>
 </html>
