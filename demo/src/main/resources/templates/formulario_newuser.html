@@ -71,18 +71,20 @@ p {
 <div id="disp" style="color:green; font-size:18px; font-weight:bold;"></div>
 
 </body>
-<script> 
-        function display() {  
-            if(document.getElementById('choice1').checked) { 
-                document.getElementById('submit').disabled = false;
-            } 
-            else if(document.getElementById('choice2').checked) { 
-                 document.getElementById('submit').disabled = false;
-            }
-            else { 
-                document.getElementById("disp").innerHTML 
-                    = "No one selected"; 
-            } 
-        } 
-    </script>
+<script>
+		var password = document.getElementById('pwd');
+		confirm_password = document.getElementById('cpwd');
+		    function display() {
+		        if ((confirm_password.value!='')&&(password.value != confirm_password.value)) {
+		            document.getElementById('errorMsg').innerHTML='Passwords Don\'t Match';
+		            document.getElementById('submit').disabled = true;
+		        } else if((confirm_password.value!='')&&(password.value == confirm_password.value)){
+		        	document.getElementById('errorMsg').innerHTML='';
+		        	if((document.getElementById('choice1').checked)||(document.getElementById('choice2').checked)){
+		        		document.getElementById('submit').disabled = false;
+		        	}		            
+		        }
+		    }
+
+</script>
 </html>
