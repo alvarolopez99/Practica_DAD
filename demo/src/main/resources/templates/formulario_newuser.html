@@ -1,7 +1,5 @@
 <html>
-
 {{>index}}
-
 <style>
 body {
   background-color: ivory;
@@ -25,29 +23,50 @@ p {
 <div align="center">
 	<form action="bienvenido" method="post">
 		<p>Introduzca el correo electrónico:</p>
-		<input type='text' name='nombreUsuario' required>
+		<input type='text' name='nombreUsuario' placeholder="Introduzca su correo electrónico" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
 		<p><br/></p>
 		<p>Introduzca el nombre de usuario:</p>
-		<input type='text' name='nombreUsuario' required>
+		<input type='text' name='nombreUsuario' placeholder="Introduzca un nombre de usuario" required>
 		<p><br/></p>
 		<p>Introduzca la password:</p>
-		<input type='text' name='contraseña_1' required>
+		<input type='password' name='contraseña_1' placeholder="Introduzca su contraseña" id='pwd' required>
 		<p><br/></p>
 		<p>Repita la password:</p>
-		<input type='text' name='contraseña_2' required>
+		<input type='password' name='contraseña_2' placeholder="Repita su contraseña" id='cpwd' required>
+		
+		<div id="errorMsg" style="color:red; font-size:18px; font-weight:bold;"></div>
+		<script>
+		var password = document.getElementById('pwd');
+		confirm_password = document.getElementById('cpwd');
+		    function validatePassword() {
+		        if ((confirm_password.value!='')&&(password.value != confirm_password.value)) {
+		            document.getElementById('errorMsg').innerHTML='Passwords Don\'t Match';
+		            document.getElementById('submit').disabled = true;
+		        } else if((document.getElementById('choice1').checked)||(document.getElementById('choice2').checked)){
+		        	document.getElementById('submit').disabled = false;
+		            document.getElementById('errorMsg').innerHTML='';
+		        }
+		    }
+		    password.onchange = validatePassword;
+		    confirm_password.onkeyup = validatePassword;
+		</script>
+		
 		<p><br/></p>
 		<p>Indique el tipo de usuario:</p>
-		<p>Usuario estándar
-		<input type='checkbox' name='usuarioEstandar' value='valorOpcion_1'>
-		</p>
-		<p>
-		Usuario premium
-		<input type='checkbox' name='usuarioPremium' value='valorOpcion_2'>
-		</p>
-		<p><br/></p>
-		<input type='submit' value='Registrarme'/>
+		<input type="radio" id="choice1"
+     	name="tipoUsuario" value="valorOpcion_1" onclick="display()">
+    	<label for="choice1">Usuario estándar</label><br>
+
+    	<input type="radio" id="choice2"
+     	name="tipoUsuario" value="valorOpcion_2" onclick="display()">
+    	<label for="choice2">Usuario premium</label>
+    	<br>
+		<br/><input type='submit' id='submit' value='Registrarme' disabled="disabled">
+
 	</form>
+	<div id="disp" style= "color:green; font-size:18px; font-weight:bold;"> </div>
 </div>
 
 </body>
+{{>footer}}
 </html>
