@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.Model.Chat;
+import com.example.demo.Model.Foros;
 import com.example.demo.Model.Mensaje;
 import com.example.demo.Model.Usuario;
 import com.example.demo.Repository.ChatRepository;
 import com.example.demo.Repository.UsuarioRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,13 +29,19 @@ public class ChatController {
 	@Autowired
 	private ChatRepository chatRepo;
 	
+	
+	private List<Mensaje> mensajes;
 	@GetMapping("/chat/{profesor}/send")	//Pagina del chat cuando se envia un mensaje
 	public String greeting(Model model, @RequestParam String usermsg, @PathVariable String profesor, HttpSession sesion) {
 
 		
 		//Añadir la carga de mensajes mediante lista
 		
-		model.addAttribute("msg", usermsg);
+		Usuario u = new Usuario();
+		u.setNombre("Pablo");
+		mensajes.add(new Mensaje(u, usermsg));
+		
+		model.addAttribute("mensajes", mensajes);
 		model.addAttribute("user", "Pablo");
 		model.addAttribute("target", profesor);
 		
@@ -79,7 +87,17 @@ public class ChatController {
 		 */
 		
 		//Provisional
-		model.addAttribute("msg", "");
+		mensajes = new ArrayList<Mensaje>();
+		Usuario u = new Usuario();
+		u.setNombre("Pablo");
+		Usuario v = new Usuario();
+		v.setNombre(profesor);
+		Mensaje m1 = new Mensaje(u, "Hola, necesito ayuda");
+		Mensaje m2 = new Mensaje(v, "Patata");
+		mensajes.add(m1);
+		mensajes.add(m2);
+		
+		model.addAttribute("mensajes", mensajes);
 		model.addAttribute("user", "Pablo");
 		model.addAttribute("target", profesor);
 		

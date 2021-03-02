@@ -12,7 +12,7 @@ public class Mensaje {
 	@ManyToOne
 	private Usuario emisor;
 	
-	String cuerpoMensaje;
+	private String cuerpoMensaje;
 	
 	public Mensaje(Usuario emisor, String mensaje) {
 		this.emisor = emisor;

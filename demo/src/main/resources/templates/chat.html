@@ -17,8 +17,10 @@
     	<p align="center"> Historial de chat -&nbsp;  <b>{{target}}</b> 
     </div> 
     <div id="chatbox">
-    	<p align="center">
-			{{msg}}
+    	<p align="center"> 
+			{{#mensajes}}
+				<br><b>{{emisor.nombre}}:&nbsp;</b>{{CuerpoMensaje}}
+			{{/mensajes}}
 		</p>
 	</div>
     
