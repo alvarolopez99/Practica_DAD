@@ -1,5 +1,4 @@
 <html>
-{{>index}}
 <style>
 body {
   background-color: ivory;
@@ -42,9 +41,11 @@ p {
 		        if ((confirm_password.value!='')&&(password.value != confirm_password.value)) {
 		            document.getElementById('errorMsg').innerHTML='Passwords Don\'t Match';
 		            document.getElementById('submit').disabled = true;
-		        } else if((document.getElementById('choice1').checked)||(document.getElementById('choice2').checked)){
-		        	document.getElementById('submit').disabled = false;
-		            document.getElementById('errorMsg').innerHTML='';
+		        } else if((confirm_password.value!='')&&(password.value == confirm_password.value)){
+		        	document.getElementById('errorMsg').innerHTML='';
+		        	if((document.getElementById('choice1').checked)||(document.getElementById('choice2').checked)){
+		        		document.getElementById('submit').disabled = false;
+		        	}		            
 		        }
 		    }
 		    password.onchange = validatePassword;
@@ -67,6 +68,21 @@ p {
 	<div id="disp" style= "color:green; font-size:18px; font-weight:bold;"> </div>
 </div>
 
+<div id="disp" style="color:green; font-size:18px; font-weight:bold;"></div>
+
 </body>
-{{>footer}}
+<script> 
+        function display() {  
+            if(document.getElementById('choice1').checked) { 
+                document.getElementById('submit').disabled = false;
+            } 
+            else if(document.getElementById('choice2').checked) { 
+                 document.getElementById('submit').disabled = false;
+            }
+            else { 
+                document.getElementById("disp").innerHTML 
+                    = "No one selected"; 
+            } 
+        } 
+    </script>
 </html>
