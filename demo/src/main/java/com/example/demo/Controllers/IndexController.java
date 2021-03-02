@@ -44,6 +44,12 @@ public class IndexController {
 	}
 	
 	
+	@GetMapping("/foros/nuevo")
+	public String CrearForo (Model model) {
+		
+		return "CrearForo";
+	}
+	
 	
 	@GetMapping("/")
 	public String indexMain(Model model) {
