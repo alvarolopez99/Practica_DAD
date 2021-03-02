@@ -45,6 +45,10 @@ public class Usuario {
 		this.fotoPerfil = fotoPerfil;
 	}
 	
+	public long getId() {
+		return id;
+	}
+	
 	public String getCorreo() {
 		return correo;
 	}
