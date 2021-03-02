@@ -18,10 +18,6 @@ public class LoginController {
 	@Autowired 
 	private UsuarioRepository repositorio;
 	
-	@GetMapping("/greeting")
-	public String greeting(Model model) {
-		return "Iniciar_Sesion_Template";
-	}
 	
 /*	@PostMapping("/checkLogin")
 	public String comprobarLogin(Model model, @RequestParam String correo, @RequestParam String contrasena) {		
@@ -49,9 +45,4 @@ public class LoginController {
 	}*/
 	
 	
-	@GetMapping("/UsuarioRegistrado")
-	public String sesionIniciada(Model model) {
-			
-		return "";
-	}
 }
