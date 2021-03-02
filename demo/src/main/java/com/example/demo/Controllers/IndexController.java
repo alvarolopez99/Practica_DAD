@@ -61,7 +61,7 @@ public class IndexController {
 	
 	@GetMapping("/")
 	public String indexMain(Model model) {
-		return "index.html";
+		return "index";
 	}
 	
 	//Llamada cuando pulsamos el botón de Login, aparecerá el formulario para logearse.
