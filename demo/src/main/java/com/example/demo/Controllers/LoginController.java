@@ -24,7 +24,7 @@ public class LoginController {
 	}
 	
 /*	@PostMapping("/checkLogin")
-	public String comprobarLogin(Model model, @RequestParam String nombre, @RequestParam String contraseña) {		
+	public String comprobarLogin(Model model, @RequestParam String correo, @RequestParam String contrasena) {		
 	
 		String url = "Error_Login";
 		
@@ -32,7 +32,7 @@ public class LoginController {
 		
 		if(usuario.isPresent()) {
 			
-			if (contraseña == usuario.getContraseña()) {
+			if (contrasena == usuario.getContraseña()) {
 				url = "Sesion_Iniciada_Template";
 			} else {
 				String error = "Contraseña errónea";

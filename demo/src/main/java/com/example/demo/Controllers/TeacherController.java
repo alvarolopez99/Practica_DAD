@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class TeacherController {
 
-	@GetMapping("/material_subido")
+	@GetMapping("/materialSubido")
 	public String greeting(Model model, @RequestParam String nombre, @RequestParam MultipartFile archivo) {
 		
 		return "";
