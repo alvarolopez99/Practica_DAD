@@ -34,5 +34,9 @@ public class Chat {
 		this.id = id;
 	}
 	
+	public List<Mensaje> getMensajes(){
+		return mensajes;
+	}
+	
 	
 }
