@@ -1,8 +1,6 @@
 <html>
-<head>
-	<meta charset="UTF-8"/>
-</head>
 <body>
+
 	<form action="/post/new" method="post">
 		<p>User: </p>
 		<input type='text' name='user' value='{{#user}}{{.}}{{/user}}'/>
@@ -13,5 +11,6 @@
 
 		<input type='submit' value='Save'/>
 	</form>
+	
 </body>
 </html>
