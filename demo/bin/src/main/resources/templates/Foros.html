@@ -1,19 +1,45 @@
-  
 <html>
+
+{{>Inicial}}
+
+<style>
+body {
+  background-color: ivory;
+  overflow-y:  scroll
+}
+
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+
+a {
+  font-family: verdana;
+  font-size: 15px;
+}
+</style>
+
+
 <body>
 
-	
-	<h1>FOROS</h1>
-	
-	{{#posts}}
-	<a href="post/{{id}}">{{user}} {{title}}</a><br>
-	{{/posts}}
-	
-	{{^posts}}
-	<p>No posts yet.</p>
-	{{/posts}}
+	<div id="titulo">
+		<p align="center" style="font-size:25px"><br><br><b>Foros</b><br><br></p>
+	</div>
 
-	<br>
-	<a href="post/new">New Post</a>
+	<div align="center">
+		{{#foros}}
+		<a href="foros/{{-index}}">{{title}}</a><br><br>
+		{{/foros}}
+
+		{{^posts}}
+		<p>No hay foros disponibles.</p>
+		{{/posts}}
+
+		<br>
+		<a href="/foros/nuevoforo">CREAR FORO</a>
+   </div>
+	
 </body>
 </html>
+
+

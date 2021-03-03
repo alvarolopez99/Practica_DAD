@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>Chat</title>
+</head>
+ 
+<div>
+  <div>
+        <p align="center">Bienvenido, <b>{{user}}</b> 
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        <a id="exit" href="/">X</a></p>
+    </div>
+    
+    <div>
+    	<p align="center"> Historial de chat -&nbsp;  <b>{{target}}</b> 
+    </div> 
+    <div>
+    	<p align="center"> 
+			{{#mensajes}}
+				<br><b>{{emisor.nombre}}:&nbsp;</b>{{CuerpoMensaje}}
+			{{/mensajes}}
+		</p>
+	</div>
+    
+    <div align="center">
+	    <form name="message" action="/chat/{{target}}/send">
+	        <input name="usermsg" type="text" id="usermsg" size="63" />
+	        <input name="submitmsg" type="submit"  id="submitmsg" />
+	    </form>
+    </div> 
+</div>
+</body>
+{{>footer}}
+</html>

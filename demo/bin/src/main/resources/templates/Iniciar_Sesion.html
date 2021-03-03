@@ -1,0 +1,42 @@
+<html>
+
+{{>Inicial}}
+
+<style>
+body {
+  background-color: ivory;
+}
+
+
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+</style>
+
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+
+<div id="titulo">
+	<p align="center" style="font-size:25px"><br><br><b>Inicio de sesión</b><br><br></p>
+</div>
+
+<div align="center">
+	<form action="bienvenido" method="post">
+	  
+	  <p>Introduzca su correo:</p><input type='text' name='correo' placeholder="Introduzca su correo" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/><br><br>
+	  <p>Introduzca su contraseña:</p><input type='password' name='contrasena' placeholder="Introduzca su contraseña" aria-hidden="true" required/><br><br>
+	  <br><input type='submit' value='Iniciar sesión'/>
+	  
+	</form>
+</div>
+
+<div align="center">
+	<a href="/">Volver a la página principal</a><br>
+</div>
+
+</body>
+{{>footer}}
+</html>
