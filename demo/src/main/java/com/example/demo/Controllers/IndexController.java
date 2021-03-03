@@ -230,5 +230,13 @@ public class IndexController {
 		return "Nuevo_Curso";
 	}
 	
+	@GetMapping("/paginaprincipal")
+	public String paginaPrincipal(Model model) {
+		
+		
+		
+		return "paginaprincipal";
+	}
+	
 
 }
