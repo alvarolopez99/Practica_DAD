@@ -2,6 +2,9 @@ package com.example.demo.Controllers;
 
 import java.util.ArrayList;
 
+import java.net.MalformedURLException;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.Model.Foros;
 import com.example.demo.Model.Mensaje;
 import com.example.demo.Model.Usuario;
+import com.example.demo.Repository.UsuarioRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +28,9 @@ public class IndexController {
 	private List<Foros> foros = new ArrayList<>();
 	private ArrayList m;
 	private Usuario usuario = new Usuario();
+	
+	@Autowired 
+	private UsuarioRepository repositorio;
 	
 	public IndexController () {		
 		foros.add(new Foros("DUDA", "BLABLABLA"));	
@@ -99,6 +106,43 @@ public class IndexController {
 	public String loginMain(Model model) {
 		return "formulario_login";
 	}
+	
+	/*	@PostMapping("/checkLogin")
+	public String comprobarLogin(Model model, @RequestParam String correo, @RequestParam String contrasena) {		
+	
+		String url = "Error_Login";
+		
+		Optional<Usuario> usuario = repositorio.findByNombre(nombre);
+		
+		if(usuario.isPresent()) {
+			
+			if (contrasena == usuario.getContraseña()) {
+				url = "Sesion_Iniciada_Template";
+			} else {
+				String error = "Contraseña errónea";
+				model.addAttribute("mensajeError", error);
+			}
+			
+		} else {
+			String error = "Nombre de usuario erróneo";
+			model.addAttribute("mensajeError", error);
+		}
+		
+		
+		return url;
+	}*/
+	
+	/*
+	@GetMapping("/descargarMaterial")
+	public ResponseEntity<Object> descargarMaterial(Model model) throws MalformedURLException {
+		
+		Path pathMaterial = MATERIAL_FOLDER.resolve("material.pdf");
+		Resource material = new UrlResource(pathMaterial.toUri());
+		
+		return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "file/pdf").body(material);
+
+	}
+	*/
 	
 	//Llamada cuando pulsemos el botón de Registrarse, aparecerá el formulario de New User
 	@GetMapping("/newuser")
