@@ -98,13 +98,13 @@ public class IndexController {
 	
 	@GetMapping("/")
 	public String indexMain(Model model) {
-		return "index";
+		return "Inicial";
 	}
 	
 	//Llamada cuando pulsamos el botón de Login, aparecerá el formulario para logearse.
 	@GetMapping("/login")
 	public String loginMain(Model model) {
-		return "formulario_login";
+		return "Iniciar_Sesion";
 	}
 	
 	/*	@PostMapping("/checkLogin")
@@ -147,7 +147,7 @@ public class IndexController {
 	//Llamada cuando pulsemos el botón de Registrarse, aparecerá el formulario de New User
 	@GetMapping("/newuser")
 	public String newuserMain(Model model) {
-		return "formulario_newuser";
+		return "Registro_NuevoUsuario";
 	}
 	
 	//Se llama al método cuando se pulsa el botón "Iniciar Sesión" o "Registrarse", y se muestra la plantilla de bienvenido.
