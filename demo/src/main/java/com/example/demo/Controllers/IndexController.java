@@ -38,6 +38,18 @@ public class IndexController {
 		foros.add(new Foros("DUDA", "BLABLABLA"));	
 	}
 	
+	
+	//************ PAGINA INCIAL ************//
+	
+	@GetMapping("/")
+	public String indexMain(Model model) {
+		return "PaginaInicio";
+	}
+	
+	
+	//************ FOROS ************//
+	
+	
 	@GetMapping("/foros")
 	public String MostrarForos (Model model) {
 		
@@ -47,6 +59,7 @@ public class IndexController {
 		return "Foros";
 	}
 	
+	
 	@PostMapping("/foros/nuevoforo/creado")
 	public String NuevoForo(Model model, @RequestParam String asunto, @RequestParam String mensaje) {
 
@@ -55,17 +68,13 @@ public class IndexController {
 		return "forocreado";
 	}
 	
-	
 	@PostMapping("/foros/{IDForo}/respuesta")
 	public String VerForo (Model model, @PathVariable int IDForo, @RequestParam String respuesta) {
 		
 		Foros foro = foros.get(IDForo-1);
-		
 		m = foro.getMensajes();
-		
 		usuario.setNombre("Soy un usuario");
 		m.add(new Mensaje(usuario, respuesta));
-		
 		model.addAttribute("info", foro);
 		model.addAttribute("mensaje", m);
 		model.addAttribute("IDForo", (IDForo));
@@ -77,19 +86,15 @@ public class IndexController {
 	public String VerForo(Model model, @PathVariable int IDForo) {
 		
 		Foros foro = foros.get(IDForo-1);
-		
 		m = foro.getMensajes();
-		
 		usuario.setNombre("Soy un usuario");
 		m.add(new Mensaje(usuario, "Y este es mi mensaje estático"));
-		
 		model.addAttribute("info", foro);
 		model.addAttribute("mensaje", m);
 		model.addAttribute("IDForo", (IDForo));
-		
+	
 		return "Foro";
 	}
-	
 	
 	@GetMapping("/foros/nuevoforo")
 	public String CrearForo (Model model) {
@@ -98,10 +103,7 @@ public class IndexController {
 	}
 	
 	
-	@GetMapping("/")
-	public String indexMain(Model model) {
-		return "Inicial";
-	}
+	//************ LOGIN Y REGISTRO ************//
 	
 	//Llamada cuando pulsamos el botón de Login, aparecerá el formulario para logearse.
 	@GetMapping("/login")
@@ -152,6 +154,9 @@ public class IndexController {
 		return "Registro_NuevoUsuario";
 	}
 	
+	
+	//************ BIENVENIDA Y PAGINA PRINCIPAL ************//
+	
 	//Se llama al método cuando se pulsa el botón "Iniciar Sesión" o "Registrarse", y se muestra la plantilla de bienvenido.
 	@PostMapping("/bienvenido")
 	public String bienvenido(Model model, @RequestParam String correo, @RequestParam String contrasena) {
@@ -169,9 +174,11 @@ public class IndexController {
 		return "iniciada";
 	}*/
 	
+	
+	//************ ANUNCIOS ************//
+	
 	@GetMapping("/anuncios")
 	public String anuncios(Model model) {
-		
 		
 		return "Anuncios";
 	}	
@@ -185,6 +192,8 @@ public class IndexController {
 		return "Anuncio";
 	}
 	
+	
+	//************ CURSOS ************//
 	
 	@GetMapping("/cursosDisponibles")
 	public String cursosDisponibles(Model model) {
