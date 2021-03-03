@@ -1,7 +1,7 @@
 package com.example.demo.Controllers;
 
 import java.util.ArrayList;
-
+import java.util.Arrays;
 import java.net.MalformedURLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +33,13 @@ public class IndexController {
 	private UsuarioRepository repositorio;
 	
 	public IndexController () {		
-		foros.add(new Foros("Duda lengua", "blablabla blabla blabla"));	
+		foros.add(new Foros("DUDA", "BLABLABLA"));	
 	}
 	
 	@GetMapping("/foros")
 	public String MostrarForos (Model model) {
 		
-		//foros.add(new Foros("PREGUNTA", "BLABLABLA"));		
+		foros.add(new Foros("PREGUNTA", "BLABLABLA"));		
 		model.addAttribute("foros", foros);
 		
 		return "Foros";
@@ -48,7 +48,7 @@ public class IndexController {
 	@PostMapping("/foros/nuevoforo/creado")
 	public String NuevoForo(Model model, @RequestParam String asunto, @RequestParam String mensaje) {
 
-		foros.add(new Foros(asunto, mensaje));
+		//foros.add(new Foros(asunto, mensaje));
 		
 		return "forocreado";
 	}
@@ -94,15 +94,6 @@ public class IndexController {
 		
 		return "CrearForo";
 	}
-	
-	
-	
-	@GetMapping("/paginaprincipal")
-	public String paginaPrincipal (Model model) {
-		
-		return "PaginaPrincipal";
-	}
-	
 	
 	
 	@GetMapping("/")
@@ -191,4 +182,20 @@ public class IndexController {
 		
 		return "Anuncio";
 	}
+	
+	
+	@GetMapping("/cursosDisponibles")
+	public String cursosDisponibles(Model model) {
+		
+		List<String> imagenes_Cursos = Arrays.asList("https://i0.wp.com/mathsteachercircles.org.au/wp-content/uploads/2020/10/cropped-MTC_Icon_RGB.png?fit=190%2C190&ssl=1","https://pbs.twimg.com/profile_images/1110160859689615361/V8CE--1C.png");
+		
+		//imagenes_Cursos.add("https://i0.wp.com/mathsteachercircles.org.au/wp-content/uploads/2020/10/cropped-MTC_Icon_RGB.png?fit=190%2C190&ssl=1");
+		//imagenes_Cursos.add("https://pbs.twimg.com/profile_images/1110160859689615361/V8CE--1C.png");
+		
+		model.addAttribute("cursos", imagenes_Cursos);
+		
+		return "Cursos";
+	}
+	
+
 }

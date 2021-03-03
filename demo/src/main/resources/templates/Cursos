@@ -1,0 +1,38 @@
+<html>
+
+{{>Inicial}}
+
+<style>
+
+body {
+  background-color: ivory;
+}
+
+</style>
+
+
+
+<head>
+  <meta charset="UTF-8">
+</head>
+
+
+<body>
+
+<div id="titulo">
+	<p align="center" style="font-size:25px"><br><br><b>Cursos disponibles</b><br><br></p>
+</div>
+
+<div align="center">
+	{{#cursos}}
+	<ol style="list-style: none; font-size: 14px; line-height: 32px;">
+		<li><img style="float: center;" src={{.}} width="45" /> Descripción del curso</li>
+	</ol>
+	{{/cursos}}
+</div>
+
+</body>
+
+
+{{>footer}}
+</html>
