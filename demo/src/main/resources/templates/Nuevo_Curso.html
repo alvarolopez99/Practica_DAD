@@ -1,0 +1,48 @@
+<html>
+
+{{>Inicial}}
+
+<style>
+
+body {
+  background-color: ivory;
+}
+
+</style>
+
+
+
+<head>
+  <meta charset="UTF-8">
+</head>
+
+
+<body>
+
+<div id="titulo">
+	<p align="center" style="font-size:25px"><br><br><b>Cursos disponibles para añadir</b><br><br></p>
+</div>
+
+<div align="center">
+
+	<p> Haz click en el curso que quieras añadir: </p> <br>
+
+	{{#cursos}}
+	<ol style="list-style: none; font-size: 14px; line-height: 32px;">
+		<li>
+			<form action='/cursosDisponibles/Actualizado'> <input type='image' src={{.}} width="45">
+			</form>
+			Descripción del curso
+		</li>
+	</ol>
+	{{/cursos}}
+	
+	<br>
+	<a href="/cursosDisponibles">Volver a mis cursos</a>
+</div>
+
+</body>
+
+
+{{>footer}}
+</html>

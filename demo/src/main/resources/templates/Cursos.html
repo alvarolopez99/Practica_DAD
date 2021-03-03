@@ -20,15 +20,24 @@ body {
 <body>
 
 <div id="titulo">
-	<p align="center" style="font-size:25px"><br><br><b>Cursos disponibles</b><br><br></p>
+	<p align="center" style="font-size:25px"><br><br><b>Mis cursos</b><br><br></p>
 </div>
 
 <div align="center">
+
 	{{#cursos}}
 	<ol style="list-style: none; font-size: 14px; line-height: 32px;">
-		<li><img style="float: center;" src={{.}} width="45" /> Descripción del curso</li>
+		<li><img style="float: center;" src={{.}} width="45" /> </li>
+		Descripción del curso
 	</ol>
 	{{/cursos}}
+	
+	{{^cursos}}
+		<p>No hay cursos añadidos</p>
+	{{/cursos}}
+	
+	<br>
+	<a href="/cursosDisponibles/nuevoCurso">Añadir curso</a>
 </div>
 
 </body>

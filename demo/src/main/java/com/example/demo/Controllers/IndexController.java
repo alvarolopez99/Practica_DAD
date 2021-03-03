@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.Model.Curso;
 import com.example.demo.Model.Foros;
+import com.example.demo.Model.Material;
 import com.example.demo.Model.Mensaje;
 import com.example.demo.Model.Usuario;
 import com.example.demo.Repository.UsuarioRepository;
@@ -187,7 +189,9 @@ public class IndexController {
 	@GetMapping("/cursosDisponibles")
 	public String cursosDisponibles(Model model) {
 		
-		List<String> imagenes_Cursos = Arrays.asList("https://i0.wp.com/mathsteachercircles.org.au/wp-content/uploads/2020/10/cropped-MTC_Icon_RGB.png?fit=190%2C190&ssl=1","https://pbs.twimg.com/profile_images/1110160859689615361/V8CE--1C.png");
+		List<Curso> cursos = new ArrayList<Curso>();
+		
+		List <String> imagenes_Cursos = Arrays.asList("https://i0.wp.com/mathsteachercircles.org.au/wp-content/uploads/2020/10/cropped-MTC_Icon_RGB.png?fit=190%2C190&ssl=1","https://pbs.twimg.com/profile_images/1110160859689615361/V8CE--1C.png");
 		
 		//imagenes_Cursos.add("https://i0.wp.com/mathsteachercircles.org.au/wp-content/uploads/2020/10/cropped-MTC_Icon_RGB.png?fit=190%2C190&ssl=1");
 		//imagenes_Cursos.add("https://pbs.twimg.com/profile_images/1110160859689615361/V8CE--1C.png");
@@ -195,6 +199,26 @@ public class IndexController {
 		model.addAttribute("cursos", imagenes_Cursos);
 		
 		return "Cursos";
+	}
+	
+	@GetMapping("/cursosDisponibles/nuevoCurso")
+	public String nuevoCurso(Model model) {
+		
+		List<Curso> cursos = new ArrayList<Curso>();
+			
+		List <String> imagenes_Cursos = Arrays.asList("https://i0.wp.com/mathsteachercircles.org.au/wp-content/uploads/2020/10/cropped-MTC_Icon_RGB.png?fit=190%2C190&ssl=1","https://pbs.twimg.com/profile_images/1110160859689615361/V8CE--1C.png", "https://upload.wikimedia.org/wikipedia/en/c/cd/March_for_Science.png");
+		
+		model.addAttribute("cursos", imagenes_Cursos);
+		
+		return "Nuevo_Curso";
+	}
+	
+	@GetMapping("/cursosDisponibles/Actualizado")
+	public String actualizarNuevoCurso(Model model) {
+		
+		
+		
+		return "Nuevo_Curso";
 	}
 	
 

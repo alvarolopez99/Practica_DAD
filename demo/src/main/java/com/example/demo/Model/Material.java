@@ -32,5 +32,6 @@ public class Material {
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	
 }

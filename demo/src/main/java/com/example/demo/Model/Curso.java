@@ -33,4 +33,8 @@ public class Curso {
 	public void AñadirMaterial(Material material) {
 		materiales.add(material);
 	}
+	
+	public List<Material> getMateriales() {
+		return materiales;
+	}
 }
