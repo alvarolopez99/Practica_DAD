@@ -3,22 +3,26 @@
 
 	<div align="center">
 	<h1>CLASES PARTICULARES</h1>
-<h2>PROFESOR: {{materia}}</h2>
+	
+{{#profesor}}
+	<h2>Nombre:</h2> {{nombre}}
+{{/profesor}}
 
-<h2>Horario:</h2>
-<p>----------</p>
-
-<h2>Temario:</h2>
-<p>----------</p>
-
-<h2>Direccion:</h2>
-<p>----------</p>
-
-<p>Info del profesor: {{infoProfesor}}</p>
+{{#infoAnuncio}}
+	
+		<h2>Materia:</h2> {{materia}}<br>
+		<h2>Curso: </h2>{{curso}}<br>	
+		<h2>Precio: </h2>{{precio}}<br>	
+		<h2>Horario: </h2>{{horario}}<br>	
+		<h2>Contenido: </h2>{{contenido}}<br>	
+	
+	
+{{/infoAnuncio}}
 
 </div>
-<div align="right">
-<a href="/anuncios">Volver</a>
+<div align="center">
+<br><a href="/anuncios">Volver</a><br>
+<p><a href="/chat/{-profesor}">Chatea</a> con las chicas que quieren conocerte</p>
 </div>
 </body>
 </html>

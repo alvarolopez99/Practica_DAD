@@ -34,6 +34,7 @@ public class IndexController {
 	private ArrayList m;
 	private Usuario usuario = new Usuario();
 	
+	
 	@Autowired 
 	private UsuarioRepository repositorio;
 	
@@ -198,12 +199,13 @@ public class IndexController {
 	public String anuncioCreado(Model model, @RequestParam String materia, @RequestParam String curso, 
 			@RequestParam String horario, @RequestParam String precio, @RequestParam String contenido) {
 		
-		anuncios.add(new Anuncio (materia, contenido, horario, precio, curso) );
+		usuario.setNombre("Alvaro");
+		anuncios.add(new Anuncio (usuario, materia, contenido, horario, precio, curso) ); //Falta pasar como primer parámetro el profesor que crea el anuncio
 			
 		return "anuncio_creado";
 	}
 	
-	@GetMapping("/anuncios/{idAnuncio}")
+	@GetMapping("/anuncios/{IDAnuncio}")
 	public String anuncio(Model model, @PathVariable int IDAnuncio) {
 		
 		//model.addAttribute("infoProfesor", idAnuncio);
@@ -213,7 +215,10 @@ public class IndexController {
 		Anuncio anuncio = anuncios.get(IDAnuncio-1);
 		
 		
+		
 		model.addAttribute("infoAnuncio", anuncio);
+		Usuario profesor = anuncio.getProfesor();
+		model.addAttribute("profesor", profesor);
 		
 		
 		
