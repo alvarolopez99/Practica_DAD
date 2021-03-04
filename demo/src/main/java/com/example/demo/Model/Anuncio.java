@@ -12,12 +12,12 @@ public class Anuncio {
 	private Usuario profesor;	
 	private String materia;
 	private String horario;
-	private double precio;
+	private String precio;
 	private String curso;
 	
 	public Anuncio() {}
 	
-	public Anuncio(Usuario profesor, String materia, String contenido, String horario, double precio, String curso) {
+	public Anuncio(Usuario profesor, String materia, String contenido, String horario, String precio, String curso) {
 		this.profesor = profesor;
 		this.materia = materia;
 		this.contenido = contenido;
@@ -25,6 +25,16 @@ public class Anuncio {
 		this.precio = precio;
 		this.curso = curso;
 	}
+	
+	public Anuncio(String materia, String contenido, String horario, String precio, String curso) {
+
+		this.materia = materia;
+		this.contenido = contenido;
+		this.horario = horario;
+		this.precio = precio;
+		this.curso = curso;
+	}
+	
 	
 	public String getHorario() {
 		return horario;
@@ -34,11 +44,11 @@ public class Anuncio {
 		this.horario = horario;
 	}
 
-	public double getPrecio() {
+	public String getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(double precio) {
+	public void setPrecio(String precio) {
 		this.precio = precio;
 	}
 

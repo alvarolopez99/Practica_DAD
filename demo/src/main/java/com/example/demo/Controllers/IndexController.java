@@ -196,18 +196,27 @@ public class IndexController {
 	
 	@PostMapping("/anuncioCreado")
 	public String anuncioCreado(Model model, @RequestParam String materia, @RequestParam String curso, 
-			@RequestParam String contenido) {
+			@RequestParam String horario, @RequestParam String precio, @RequestParam String contenido) {
 		
-		anuncios.add(new Anuncio(profesor, titulo, contenido));
+		anuncios.add(new Anuncio (materia, contenido, horario, precio, curso) );
 			
 		return "anuncio_creado";
 	}
 	
 	@GetMapping("/anuncios/{idAnuncio}")
-	public String anuncio(Model model, @PathVariable String idAnuncio) {
+	public String anuncio(Model model, @PathVariable int IDAnuncio) {
 		
-		model.addAttribute("infoProfesor", idAnuncio);
-		model.addAttribute("nombreProfesor", "Nombre del profesor");
+		//model.addAttribute("infoProfesor", idAnuncio);
+		//model.addAttribute("nombreProfesor", "Nombre del profesor");
+
+		
+		Anuncio anuncio = anuncios.get(IDAnuncio-1);
+		
+		
+		model.addAttribute("infoAnuncio", anuncio);
+		
+		
+		
 		
 		return "Anuncio";
 	}

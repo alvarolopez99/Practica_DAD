@@ -31,28 +31,29 @@
 <div align="center">
 
 	{{#anuncios}}
-	<!-- <ol style="list-style: none; font-size: 14px; line-height: 32px;"> -->	
+	
 	<table>
 	<tr>
-		<td><a href="/anuncios/{{-index}}"> <b>Profesor que imparte el curso:</b> {{profesor}}<br> <b>Curso:</b> " {{titulo}} "<br><b>Descripción del curso:</b> {{contenido}} </a></td>
-		
+	
+		<td><a><b>Materia:</b> {{materia}}
+		<br> <b>Curso: </b>{{materia}}
 		<td><a href="/eliminarAnuncio/{{-index}}">Eliminar anuncio</a></td>
+		<td><a href="/anuncios/{{-index}}">Ver</a></td>
+	
 	</tr>
 	</table>
-		<!--<li><img style="float: center;" src={{.}} width="45" /> </li>-->
-		
-	<br>
-	<!--</ol> -->
+	
 	{{/anuncios}}
 	
 	{{^anuncios}}
-		<p>No hay anuncios añadidos</p>
+	<p>No hay anuncios añadidos</p>
 	{{/anuncios}}
 	
 	<br>
 	<div class="enlace">
 	<a href="/crearAnuncio">Crear anuncio</a>
 	</div>
+	
 	<br>
 </div>
 
