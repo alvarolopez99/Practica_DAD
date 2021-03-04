@@ -195,7 +195,7 @@ public class IndexController {
 	}
 	
 	@PostMapping("/anuncioCreado")
-	public String anuncioCreado(Model model, @RequestParam String profesor, @RequestParam String titulo, @RequestParam String contenido) {
+	public String anuncioCreado(Model model, @RequestParam Usuario profesor, @RequestParam String titulo, @RequestParam String contenido) {
 		
 		anuncios.add(new Anuncio(profesor, titulo, contenido));
 			

@@ -98,7 +98,7 @@ public class Usuario {
 		this.tipoSuscripcion = tipoSuscripcion;
 	}
 	
-	public int getUsuario() {
+	public int getTipoUsuario() {
 		return tipoUsuario;
 	}
 

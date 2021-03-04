@@ -9,7 +9,10 @@ public class Anuncio {
 	private long id;
 	
 	private String contenido;
+	
+	@ManyToOne
 	private Usuario profesor;
+	
 	private String titulo;
 	private String horario;
 	
