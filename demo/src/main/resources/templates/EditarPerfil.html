@@ -20,33 +20,39 @@ p {
 </head>
 <body>
 
+<br><br>
 <div style="float: left; width: 45%">
 
-	<div align="center">
+	<div align= "left" style="margin-left:35%">
+		<p align="left" style="font-size:25px"><br><br><b>Datos de usuario</b><br><br></p>
+	</div>
+	<div align= "left" style="margin-left:35%">
+	<p >
 		<p><b>Nombre: </b> {{usuario.nombre}}</p>
 		<p><b>Primer apellido: </b> {{usuario.primerApellido}}</p>
 		<p><b>Segundo Apellido: </b> {{usuario.segundoApellido}}</p>
 		<p><b>Correo electrónico: </b> {{usuario.correo}}</p>
 		<p><b>Tipo de usuario: </b> {{tipoUsuario}}</p>
 		<p><b>Suscripción: </b> {{tipoSuscripcion}}</p>
-		
-	</div>
-
+		<br><br>
+		<b><a href="/deleteUser">Eliminar usuario</a></b>
+		</div>
 </div>
 
 
+
 <div style="float: right; width: 45%">
-	<div id="titulo">
-		<p align="center" style="font-size:25px"><br><br><b>Editar perfil</b><br><br></p>
+	<div id="titulo" align= "left" style="margin-left:15%">
+		<p align="left" style="font-size:25px"><br><br><b>Editar perfil</b><br><br></p>
 	</div>
-	<div align="center">
-		<form action="bienvenido" method="post">
+	<div align="left" style="margin-left:15%">
+		<form action="/modifyUser" method="post">
 			<p>Actualice su nombre:</p>
-			<input type='text' name='nombreUsuario' placeholder="Introduzca nombre" required>
+			<input type='text' name='nombreUsuario' placeholder="Introduzca nombre">
 			<p>Primer apellido:</p>
-			<input type='text' name='apellido1' placeholder="Introduzca apellido 1" required>
+			<input type='text' name='apellido1' placeholder="Introduzca apellido 1">
 			<p>Segundo apellido:</p>
-			<input type='text' name='apellido2' placeholder="Introduzca apellido 2" required>
+			<input type='text' name='apellido2' placeholder="Introduzca apellido 2">
 			<p><br/></p>
 			<p>Introduzca su contraseña para confirmar el cambio:</p>
 			<input type='password' name='contraseña_1' placeholder="Introduzca su contraseña" id='pwd' required>		

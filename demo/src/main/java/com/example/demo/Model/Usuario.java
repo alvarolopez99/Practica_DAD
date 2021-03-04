@@ -3,7 +3,7 @@ package com.example.demo.Model;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mysql.cj.jdbc.Blob;
+import java.sql.Blob;
 
 @Entity
 public class Usuario {
