@@ -1,18 +1,38 @@
 <html>
+
+
+{{>Inicial}}
 <head>
 	<meta charset="UTF-8"/>	
 </head>
 
 <body>
 
-	<form action="/anuncioCreado" method="post">
-		<p>Profesor que imparte el curso:</p>
-		<input type='text' name='profesor'/>
-		<p>Título del curso:</p>
-		<input type='text' name='titulo'/>
-		<p>Contenido del curso:</p>
-		<textarea name='contenido' rows=5 cols=40></textarea>
+<div align="center">
+	
 
-		<input type='submit' value='Publicar'/>
+	<h1> Crear anuncio de clases particulares </h1>
+
+	<form action="/anuncioCreado" method="post">
+	
+		<p>Materia:</p>
+		<input type='text' name='materia'/>
+		
+		<p>Curso:</p>
+		<input type='text' name='curso'/>
+		
+		<p>Horario:</p>
+		<input type='text' name='horario'/>
+		
+		<p>Precio:</p>
+		<input type='text' name='precio'/>
+
+		<p>Contenido:</p>
+		<textarea name='contenido' rows=5 cols=40></textarea>
+		
+		<br><br><br><input type='submit' value='Publicar'/>
+				
 	</form>
 	
+	</div>
+	<body>
