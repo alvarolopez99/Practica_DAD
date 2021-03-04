@@ -1,23 +1,63 @@
 <html>
-<body>
-	<div align="center">
-	<h1>CLASES PARTICULARES</h1>
+{{>Inicial}}
+<style type="text/css">
+.enlace{                    
+    font-family:verdana,arial;
+    font-size:10pt;
+    text-align:center;
+    color: #2F4F4F;            
+}
 
-	<h1>Profesores disponibles</h1>
-	
-		<div align="center">
-	<br><a href="anuncios/1">PROFESOR 1</a>
-	</div>
-	
-		<div align="center">
-	<br><a href="anuncios/2">PROFESOR 2</a>
-	</div>
-		<div align="center">
-	<br><a href="anuncios/3">PROFESOR 3</a>
-	
+.enlace body {background-color: ivory;} 
+.enlace ul {padding: 0; width: 100%;}
+.enlace li {display: inline;}
+.enlace a {outline: none; text-decoration: none; display: inline-block; width: 19.5%; margin-right: 0.625%; text-align: center; line-height: 3; color: black;}
+.enlace li:last-child a {margin-right: 0;}
+.enlace a:link, a:visited, a:focus {background: yellow;}
+.enlace a:hover {background: orange;}
+.enlace a:active {background: red; color: white;}
+</style>
+
+<head>
+  <meta charset="UTF-8">
+</head>
+
+<div id="titulo">
+	<p align="center" style="font-size:25px"><br><br><b>Tablón de anuncios</b><br><br></p>
 </div>
+
+<body>
+	
 <div align="center">
-<br><br><a href="paginaprincipal">Volver</a>
+
+	{{#anuncios}}
+	<!-- <ol style="list-style: none; font-size: 14px; line-height: 32px;"> -->	
+	<table>
+	<tr>
+		<td><a href="/anuncios/{{-index}}"> <b>Profesor que imparte el curso:</b> {{profesor}}<br> <b>Curso:</b> " {{titulo}} "<br><b>Descripción del curso:</b> {{contenido}} </a></td>
+		
+		<td><a href="/eliminarAnuncio/{{-index}}">Eliminar anuncio</a></td>
+	</tr>
+	</table>
+		<!--<li><img style="float: center;" src={{.}} width="45" /> </li>-->
+		
+	<br>
+	<!--</ol> -->
+	{{/anuncios}}
+	
+	{{^anuncios}}
+		<p>No hay anuncios añadidos</p>
+	{{/anuncios}}
+	
+	<br>
+	<div class="enlace">
+	<a href="/crearAnuncio">Crear anuncio</a>
+	</div>
+	<br>
 </div>
+
 </body>
+
+
+{{>footer}}
 </html>

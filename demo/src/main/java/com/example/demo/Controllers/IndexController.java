@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.Model.Anuncio;
 import com.example.demo.Model.Curso;
 import com.example.demo.Model.Foros;
 import com.example.demo.Model.Material;
@@ -29,6 +30,7 @@ public class IndexController {
 	
 	private List<Foros> foros = new ArrayList<>();
 	private List<Curso> cursos = new ArrayList<Curso>();
+	private List<Anuncio> anuncios = new ArrayList<Anuncio>();
 	private ArrayList m;
 	private Usuario usuario = new Usuario();
 	
@@ -40,7 +42,7 @@ public class IndexController {
 	}
 	
 	
-	//************ PAGINA INCIAL ************//
+	//************ PAGINA INICIAL ************//
 	
 	@GetMapping("/")
 	public String indexMain(Model model) {
@@ -181,8 +183,24 @@ public class IndexController {
 	@GetMapping("/anuncios")
 	public String anuncios(Model model) {
 		
+		model.addAttribute("anuncios", anuncios);
+		
 		return "Anuncios";
 	}	
+	
+	@GetMapping("/crearAnuncio")
+	public String crearAnuncio(Model model) {
+		
+		return "formulario_crear_anuncio";
+	}
+	
+	@PostMapping("/anuncioCreado")
+	public String anuncioCreado(Model model, @RequestParam String profesor, @RequestParam String titulo, @RequestParam String contenido) {
+		
+		anuncios.add(new Anuncio(profesor, titulo, contenido));
+			
+		return "anuncio_creado";
+	}
 	
 	@GetMapping("/anuncios/{idAnuncio}")
 	public String anuncio(Model model, @PathVariable String idAnuncio) {
@@ -191,6 +209,14 @@ public class IndexController {
 		model.addAttribute("nombreProfesor", "Nombre del profesor");
 		
 		return "Anuncio";
+	}
+	
+	@GetMapping("/eliminarAnuncio/{index}")
+	public String eliminarAnuncio(Model model, @PathVariable int index) {
+		
+		anuncios.remove(index-1);
+		
+		return "anuncio_eliminado";
 	}
 	
 	

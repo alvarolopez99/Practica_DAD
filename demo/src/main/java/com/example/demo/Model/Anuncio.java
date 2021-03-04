@@ -9,9 +9,34 @@ public class Anuncio {
 	private long id;
 	
 	private String contenido;
+	private Usuario profesor;
+	private String titulo;
+	private String horario;
 	
 	public Anuncio() {}
 	
+	public Anuncio(Usuario profesor, String titulo, String contenido) {
+		this.profesor = profesor;
+		this.titulo = titulo;
+		this.contenido = contenido;
+	}
+	
+	public Usuario getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(Usuario profesor) {
+		this.profesor = profesor;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
 	public Anuncio(String contenido) {
 		this.contenido = contenido;
 	}
