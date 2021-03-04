@@ -6,24 +6,42 @@ public class Anuncio {
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	
-	private String contenido;
-	
+	private long id;	
+	private String contenido;	
 	@ManyToOne
-	private Usuario profesor;
-	
-	private String titulo;
+	private Usuario profesor;	
+	private String materia;
 	private String horario;
+	private double precio;
+	private String curso;
 	
 	public Anuncio() {}
 	
-	public Anuncio(Usuario profesor, String titulo, String contenido) {
+	public Anuncio(Usuario profesor, String materia, String contenido, String horario, double precio, String curso) {
 		this.profesor = profesor;
-		this.titulo = titulo;
+		this.materia = materia;
 		this.contenido = contenido;
+		this.horario = horario;
+		this.precio = precio;
+		this.curso = curso;
 	}
 	
+	public String getHorario() {
+		return horario;
+	}
+
+	public void setHorario(String horario) {
+		this.horario = horario;
+	}
+
+	public double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
 	public Usuario getProfesor() {
 		return profesor;
 	}
@@ -32,12 +50,20 @@ public class Anuncio {
 		this.profesor = profesor;
 	}
 
-	public String getTitulo() {
-		return titulo;
+	public String getMateria() {
+		return materia;
 	}
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setMateria(String materia) {
+		this.materia = materia;
+	}
+
+	public String getCurso() {
+		return curso;
+	}
+
+	public void setCurso(String curso) {
+		this.curso = curso;
 	}
 
 	public Anuncio(String contenido) {
