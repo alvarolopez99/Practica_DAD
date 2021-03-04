@@ -1,20 +1,40 @@
 <html>
-<head>
 
-	<meta charset="UTF-8"/>
-	
-</head>
+{{>Inicial}}
+
+<style>
+body {
+  background-color: ivory;
+  overflow-y:  scroll
+}
+
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+
+a {
+  font-family: verdana;
+  font-size: 15px;
+}
+</style>
+
 
 <body>
-
+	
+	<div align="center">
+	
+	
+	<h1> Agregar un nuevo foro </h1>
+	
 	<form action="/foros/nuevoforo/creado" method="post">
 		<p>Asunto:</p>
 		<input type='text' name='asunto'/>
 		<p>Mensaje:</p>
-		<textarea name='mensaje' rows=5 cols=40></textarea>
+		<textarea name='mensaje' rows=5 cols=70></textarea>
 
 		<input type='submit' value='Guardar'/>
 	</form>
-	
+	</div>
 </body>
 </html>

@@ -54,7 +54,7 @@ public class IndexController {
 	@GetMapping("/foros")
 	public String MostrarForos (Model model) {
 		
-		foros.add(new Foros("PREGUNTA", "BLABLABLA"));		
+		//foros.add(new Foros("PREGUNTA", "BLABLABLA"));		
 		model.addAttribute("foros", foros);
 		
 		return "Foros";
@@ -64,7 +64,7 @@ public class IndexController {
 	@PostMapping("/foros/nuevoforo/creado")
 	public String NuevoForo(Model model, @RequestParam String asunto, @RequestParam String mensaje) {
 
-		//foros.add(new Foros(asunto, mensaje));
+		foros.add(new Foros(asunto, mensaje));
 		
 		return "forocreado";
 	}
