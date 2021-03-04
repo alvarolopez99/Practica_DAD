@@ -36,7 +36,18 @@ p {
 		<p><b>Suscripción: </b> {{tipoSuscripcion}}</p>
 		<p><b>Foto de perfil: </b>
 		<br><br>
+		<!--		Prototipo script para mostrar imagen blob
 		<b><a href="/deleteUser">Eliminar usuario</a></b>
+		
+		<a download="imagen.jpg" href='#' id="link"> </a>
+
+		<script>
+			let blob = new Blob([{{foto_bytes}}], {type: 'file/jpeg'});
+
+			link.href = URL.createObjectURL(blob);
+		</script>
+		-->
+		
 		</div>
 </div>
 
