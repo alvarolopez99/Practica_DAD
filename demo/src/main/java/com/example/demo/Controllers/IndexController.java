@@ -28,6 +28,7 @@ import java.util.List;
 public class IndexController {
 	
 	private List<Foros> foros = new ArrayList<>();
+	private List<Curso> cursos = new ArrayList<Curso>();
 	private ArrayList m;
 	private Usuario usuario = new Usuario();
 	
@@ -198,42 +199,66 @@ public class IndexController {
 	@GetMapping("/cursosDisponibles")
 	public String cursosDisponibles(Model model) {
 		
-		List<Curso> cursos = new ArrayList<Curso>();
-		
+		/*
 		List <String> imagenes_Cursos = Arrays.asList("https://i0.wp.com/mathsteachercircles.org.au/wp-content/uploads/2020/10/cropped-MTC_Icon_RGB.png?fit=190%2C190&ssl=1","https://pbs.twimg.com/profile_images/1110160859689615361/V8CE--1C.png");
 		
+		for (int i=0; i<imagenes_Cursos.size();i++) {
+			Curso c = new Curso();
+			c.setImagen(imagenes_Cursos.get(i));
+			cursos.add(c);
+		}
+		*/
 		//imagenes_Cursos.add("https://i0.wp.com/mathsteachercircles.org.au/wp-content/uploads/2020/10/cropped-MTC_Icon_RGB.png?fit=190%2C190&ssl=1");
 		//imagenes_Cursos.add("https://pbs.twimg.com/profile_images/1110160859689615361/V8CE--1C.png");
 		
-		model.addAttribute("cursos", imagenes_Cursos);
+		model.addAttribute("cursos", cursos);
 		
 		return "Cursos";
 	}
 	
+	
+	@GetMapping("/eliminarCurso/{index}")
+	public String eliminarCurso(Model model, @PathVariable int index) {
+		
+		cursos.remove(index-1);
+		
+		return "CursoEliminado";
+	}
+	
+	/*
 	@GetMapping("/cursosDisponibles/nuevoCurso")
 	public String nuevoCurso(Model model) {
-		
-		List<Curso> cursos = new ArrayList<Curso>();
-			
-		List <String> imagenes_Cursos = Arrays.asList("https://i0.wp.com/mathsteachercircles.org.au/wp-content/uploads/2020/10/cropped-MTC_Icon_RGB.png?fit=190%2C190&ssl=1","https://pbs.twimg.com/profile_images/1110160859689615361/V8CE--1C.png", "https://upload.wikimedia.org/wikipedia/en/c/cd/March_for_Science.png");
+				
+		//List <String> imagenes_Cursos = Arrays.asList("https://i0.wp.com/mathsteachercircles.org.au/wp-content/uploads/2020/10/cropped-MTC_Icon_RGB.png?fit=190%2C190&ssl=1","https://pbs.twimg.com/profile_images/1110160859689615361/V8CE--1C.png", "https://upload.wikimedia.org/wikipedia/en/c/cd/March_for_Science.png");
 		
 		model.addAttribute("cursos", imagenes_Cursos);
 		
 		return "Nuevo_Curso";
 	}
+	*/
+	
+	@GetMapping("/crearCurso")
+	public String crearCurso(Model model) {
+	
+		return "Crear_Curso";
+	}
+	
+	@PostMapping("/crearCursoConfirmacion")
+	public String crearCursoConfirmacion(Model model, @RequestParam String titulo, @RequestParam String descripcion) {
+	
+		cursos.add(new Curso(titulo, descripcion));
+		
+		return "Curso_Creado_Confirmacion";
+	}
 	
 	@GetMapping("/cursosDisponibles/Actualizado")
-	public String actualizarNuevoCurso(Model model) {
-		
-		
+	public String actualizarNuevoCurso(Model model) {	
 		
 		return "Nuevo_Curso";
 	}
 	
 	@GetMapping("/paginaprincipal")
-	public String paginaPrincipal(Model model) {
-		
-		
+	public String paginaPrincipal(Model model) {	
 		
 		return "paginaprincipal";
 	}

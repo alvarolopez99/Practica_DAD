@@ -26,10 +26,18 @@ body {
 <div align="center">
 
 	{{#cursos}}
-	<ol style="list-style: none; font-size: 14px; line-height: 32px;">
-		<li><img style="float: center;" src={{.}} width="45" /> </li>
-		Descripción del curso
-	</ol>
+	<!-- <ol style="list-style: none; font-size: 14px; line-height: 32px;"> -->	
+	<table>
+	<tr>
+		<td><p>{{titulo}} </p></td>
+		<td><p>{{descripcion}} </p></td>
+		<td><a href="/eliminarCurso/{{-index}}">Eliminar curso</a></td>
+	</tr>
+	</table>
+		<!--<li><img style="float: center;" src={{.}} width="45" /> </li>-->
+		
+	<br>
+	<!--</ol> -->
 	{{/cursos}}
 	
 	{{^cursos}}
@@ -37,7 +45,8 @@ body {
 	{{/cursos}}
 	
 	<br>
-	<a href="/cursosDisponibles/nuevoCurso">Añadir curso</a>
+	<a href="/crearCurso">Crear curso</a>
+	<br>
 </div>
 
 </body>
