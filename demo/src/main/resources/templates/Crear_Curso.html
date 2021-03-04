@@ -1,20 +1,39 @@
 <html>
-<head>
 
-	<meta charset="UTF-8"/>
-	
-</head>
+{{>Inicial}}
+
+<style>
+body {
+  background-color: ivory;
+  overflow-y:  scroll
+}
+
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+
+a {
+  font-family: verdana;
+  font-size: 15px;
+}
+</style>
+
 
 <body>
-
+	
+	<div align="center">
+		
+	<h1> Crear un nuevo curso </h1>
+	
 	<form action="/crearCursoConfirmacion" method="post">
-		<p>Título del curso:</p>
+		<p>Nombre del curso:</p>
 		<input type='text' name='titulo'/>
-		<p>Descripción:</p>
-		<textarea name='descripcion' rows=5 cols=40></textarea>
+		<p>Resumen:</p>
+		<textarea name='descripcion' rows=5 cols=60></textarea>
 
 		<input type='submit' value='Crear'/>
 	</form>
-	
+	</div>
 </body>
 </html>
