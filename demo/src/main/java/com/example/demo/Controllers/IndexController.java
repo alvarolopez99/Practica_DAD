@@ -3,6 +3,7 @@ package com.example.demo.Controllers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.net.MalformedURLException;
+import java.sql.Blob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Model.Anuncio;
 import com.example.demo.Model.Curso;
@@ -163,10 +165,26 @@ public class IndexController {
 	
 	//Se llama al método cuando se pulsa el botón "Iniciar Sesión" o "Registrarse", y se muestra la plantilla de bienvenido.
 	@PostMapping("/bienvenido")
-	public String bienvenido(Model model, @RequestParam String correo, @RequestParam String contrasena) {
-		model.addAttribute("correo", correo);
-		model.addAttribute("contraseña", contrasena);
+	public String bienvenido(Model model, @RequestParam String correo, @RequestParam String contraseña_1, @RequestParam MultipartFile image) {
 		
+		model.addAttribute("correo", correo);
+		model.addAttribute("contraseña", contraseña_1);
+		
+		if (image != null) {
+			try {
+				// Por si se quiere guardar tambien el nombre y el tamaño de la imagen
+				String nombreFoto = image.getOriginalFilename();
+				long tamañoFoto = image.getSize();
+				
+				byte[] bytes = image.getBytes();
+				Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);
+				usuario.setFotoPerfil(imagen);
+			}
+			catch (Exception exc){
+				return "Fallo al establecer la imagen de perfil";
+			}
+		}
+			
 		return "bienvenido";
 	}
 	

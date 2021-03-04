@@ -51,6 +51,8 @@ public class UserController {
 			model.addAttribute("tipoUsuario", "Profesor");
 		}
 		
+		model.addAttribute("imagen", user.getFotoPerfil());
+		
 		return "editarperfil";
 	}
 	
