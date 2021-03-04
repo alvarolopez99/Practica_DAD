@@ -188,6 +188,14 @@ public class IndexController {
 		return "bienvenido";
 	}
 	
+	@PostMapping("/bienvenidoI")
+	public String bienvenidoInicio(Model model, @RequestParam String correo, @RequestParam String contrasena) {
+		
+		model.addAttribute("correo", correo);
+		
+		return "bienvenido";
+	}
+	
 	/*@GetMapping("/iniciada")
 	public String sesionIniciadaMain(Model model, @RequestParam String nombreUsuario) {		
 		
