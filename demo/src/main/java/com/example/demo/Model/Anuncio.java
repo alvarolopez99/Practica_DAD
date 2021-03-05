@@ -1,20 +1,23 @@
 package com.example.demo.Model;
 import javax.persistence.*;
 
-@Entity 
+@Entity //Persistir esta clase en una BD
 public class Anuncio {
 	
 	@Id 
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;	
-	private String contenido;	
+	@GeneratedValue(strategy = GenerationType.AUTO) //Generado automaticamente
+	private long id;
+	
 	@ManyToOne
 	private Usuario profesor;	
+	
+	private String contenido;
 	private String materia;
 	private String horario;
 	private String precio;
 	private String curso;
 	
+	//Constructor por defecto necesario para cuando se llame desde la BD
 	public Anuncio() {}
 	
 	public Anuncio(Usuario profesor, String materia, String contenido, String horario, String precio, String curso) {

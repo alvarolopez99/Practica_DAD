@@ -21,6 +21,7 @@ import com.example.demo.Model.Material;
 import com.example.demo.Model.Mensaje;
 import com.example.demo.Model.Usuario;
 import com.example.demo.Repository.UsuarioRepository;
+import com.example.demo.services.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,12 +37,13 @@ public class IndexController {
 	private ArrayList m;
 	public static Usuario usuario = new Usuario();
 	public static String bphoto;
-	
+	public Service service = new Service();
 	
 	@Autowired 
 	private UsuarioRepository repositorio;
 	
 	public IndexController () {		
+		
 		foros.add(new Foros("DUDA", "BLABLABLA"));	
 	}
 	
@@ -236,7 +238,9 @@ public class IndexController {
 		
 		usuario.setNombre("Alvaro");
 		anuncios.add(new Anuncio (usuario, materia, contenido, horario, precio, curso) ); //Falta pasar como primer parámetro el profesor que crea el anuncio
-			
+		
+		//service.CrearAnuncio();
+		
 		return "anuncio_creado";
 	}
 	
