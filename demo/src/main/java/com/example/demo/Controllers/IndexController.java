@@ -42,7 +42,7 @@ public class IndexController {
 	private UsuarioRepository repositorio;
 	
 	public IndexController () {		
-		foros.add(new Foros("DUDA", "BLABLABLA"));	
+		foros.add(new Foros("DUDA", "BLABLABLA", null));	
 	}
 	
 	
@@ -70,7 +70,7 @@ public class IndexController {
 	@PostMapping("/foros/nuevoforo/creado")
 	public String NuevoForo(Model model, @RequestParam String asunto, @RequestParam String mensaje) {
 
-		foros.add(new Foros(asunto, mensaje));
+		foros.add(new Foros(asunto, mensaje, null));
 		
 		return "forocreado";
 	}
@@ -330,7 +330,7 @@ public class IndexController {
 	@PostMapping("/crearCursoConfirmacion")
 	public String crearCursoConfirmacion(Model model, @RequestParam String titulo, @RequestParam String descripcion) {
 	
-		cursos.add(new Curso(titulo, descripcion));
+		cursos.add(new Curso(titulo, descripcion, null));
 		
 		return "Curso_Creado_Confirmacion";
 	}

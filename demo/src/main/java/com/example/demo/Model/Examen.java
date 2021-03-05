@@ -26,6 +26,8 @@ public class Examen {
 	public Examen(Curso curso) {
 		this.curso = curso;
 	}
+	public Examen() {
+	}
 	
 	
 	public long getId() {
