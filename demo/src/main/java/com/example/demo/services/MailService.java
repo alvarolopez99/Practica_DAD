@@ -1,4 +1,4 @@
-package com.example.services;
+package com.example.demo.services;
 
 import org.springframework.stereotype.Component;
 import java.util.*;
@@ -9,9 +9,9 @@ import javax.activation.*;
 @Component
 public class MailService {
 	
-	public void sendEmail(String to) {
+	public void sendEmail(String to, String subject, String content) {
         // Email de la web en gmail 
-        String from = "emailfrom@gmail.com";
+        String from = "urjc.fower@gmail.com";
 
         String host = "smtp.gmail.com";
 
@@ -29,7 +29,7 @@ public class MailService {
 
             protected PasswordAuthentication getPasswordAuthentication() {
 
-                return new PasswordAuthentication(from, "******");
+                return new PasswordAuthentication(from, "fower4fower4");
 
             }
 
@@ -49,15 +49,14 @@ public class MailService {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
             // Set Subject: header field
-            message.setSubject("This is the Subject Line!");
+            message.setSubject(subject);
 
             // Now set the actual message
-            message.setText("This is actual message");
+            message.setText(content);
 
-            System.out.println("sending...");
             // Send message
             Transport.send(message);
-            System.out.println("Sent message successfully....");
+            System.out.println("Enviado....");
         } catch (MessagingException mex) {
             mex.printStackTrace();
         }

@@ -1,10 +1,10 @@
 
 <html>
-
+{{>Inicial}}
 
 <div align="center">
-    <p><b><br><br>Ex√°men de evaluaci√≥n</b></p>	
-    <form method="get" action="/examencompleto">
+    <p><b><br><br>Ex·men de evaluaciÛn: {{curso}}</b></p>	
+    <form method="post" action="/{{curso}}/examen/completado">
 	{{#preguntas}}
 		<p><b> Pregunta {{-index}}</b></p>
         	<p> {{enunciado}} </p>
@@ -16,4 +16,5 @@
 
 </div>
 
+{{>footer}}
 </html>

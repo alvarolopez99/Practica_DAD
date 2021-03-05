@@ -1,6 +1,8 @@
 package com.example.demo.Controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,12 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Model.Usuario;
+import com.example.demo.Model.Pregunta;
+import com.example.demo.Repository.ExamenRepository;
 import com.example.demo.Repository.UsuarioRepository;
+import com.example.demo.services.MailService;
 import com.mysql.cj.jdbc.Blob;
 
 @Controller
@@ -22,6 +28,11 @@ public class UserController {
 	
 	@Autowired
 	UsuarioRepository userRepo;
+	@Autowired
+	ExamenRepository examRepo;
+	
+	@Autowired
+	MailService mail;
 	
 	@GetMapping("/profile")
 	public String editUser(Model model, HttpSession session) {
@@ -93,5 +104,60 @@ public class UserController {
 
 		model.addAttribute("mensaje", "Se han modificado correctamente tus datos");
 		return "usuarioModificado";
+	}
+	
+	List<Pregunta> preguntas = new ArrayList<Pregunta>();
+	@GetMapping("/{curso}/examen")
+	public String hacerExamen(Model model, @PathVariable String curso){
+		
+		
+		preguntas.add(new Pregunta("¿Patata frita?", "Si"));
+		preguntas.add(new Pregunta("¿En qué continente está España?", "Europa"));
+		preguntas.add(new Pregunta("¿En qué continente está España?", "Europa"));
+		preguntas.add(new Pregunta("¿En qué continente está España?", "Europa"));
+		preguntas.add(new Pregunta("¿En qué continente está España?", "Europa"));
+		
+		model.addAttribute("curso", curso);
+		model.addAttribute("preguntas", preguntas);
+		return "resolverExamen";
+	}
+	
+	@PostMapping("/{curso}/examen/completado")
+	public String completarExamen(Model model, @RequestParam String resp1, @RequestParam String resp2, @RequestParam String resp3,
+			@RequestParam String resp4, @RequestParam String resp5, HttpSession session, @PathVariable String curso){
+		
+		List<String> respuestas = new ArrayList<String>();
+		respuestas.add(resp1);
+		respuestas.add(resp2);
+		respuestas.add(resp3);
+		respuestas.add(resp4);
+		respuestas.add(resp5);
+		
+		int i = 0;
+		int puntuacion = 0;
+		for(Pregunta p: preguntas){
+			if(p.getRespuesta().equalsIgnoreCase(respuestas.get(i))) {
+				puntuacion++;
+			}
+			i++;
+		}
+		
+		if(puntuacion >= 3) {
+			Usuario u = (Usuario)session.getAttribute("user");
+			
+			//Provisional
+			u = new Usuario();
+			u.setCorreo("urjc.fower@gmail.com");
+			String contenido = "Enhorabuena. Has completado con éxito el curso "+ curso+"disponible en la plataforma Sapiotheca";
+			mail.sendEmail(u.getCorreo(), "Certificado "+curso, contenido);
+			model.addAttribute("mensaje","Has obtenido una puntuación de "+puntuacion+"/5");
+			model.addAttribute("mensaje2", "¡Enhorabuena por completar el curso!");
+		}
+		else {
+			model.addAttribute("mensaje","Has obtenido una puntuación de "+puntuacion+"/5");
+			model.addAttribute("mensaje2", "Sigue intentándolo para obtener tu certificado");
+		}
+		
+		return "examenCompletado";
 	}
 }
