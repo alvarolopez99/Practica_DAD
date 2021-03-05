@@ -32,7 +32,7 @@ public class Foros {
 	private String asunto;
 	private String cuerpo;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Mensaje> mensajes;
 
 	@ManyToOne

@@ -18,7 +18,7 @@ public class Chat {
 	@ManyToOne
 	private Usuario alumno;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Mensaje> mensajes;
 	
 	public Chat(Usuario profesor, Usuario alumno, String cuerpoMensaje) {
