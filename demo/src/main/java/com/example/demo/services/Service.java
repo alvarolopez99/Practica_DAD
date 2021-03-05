@@ -11,7 +11,7 @@ import com.example.demo.Model.Anuncio;
 import com.example.demo.Model.Usuario;
 import com.example.demo.Repository.AnuncioRepository;
 
-public class Service implements CommandLineRunner{
+public class Service{
 
 	@Autowired
 	private AnuncioRepository RepositorioAnuncio;
@@ -19,13 +19,6 @@ public class Service implements CommandLineRunner{
 	private Anuncio anuncio;
 	private Usuario user;
 	
-	@Override
-	public void run(String... args) throws Exception {
-		
-		user = new Usuario("Profesor", "Sanchez", "Gomez", "12341234", 1, 1, "profesor@gmail.com",1,null);
-		RepositorioAnuncio.save(new Anuncio(user, "matematicas", "tema 1", "10 a 14","10 euros","cero"));
-		
-	}
 
 	public int CrearAnuncio (String materia, String contenido, String horario, 
 			String precio, String curso) {

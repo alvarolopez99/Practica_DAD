@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.net.MalformedURLException;
 import java.sql.Blob;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.Uso_BD;
 import com.example.demo.Model.Anuncio;
 import com.example.demo.Model.Curso;
 import com.example.demo.Model.Foros;
@@ -37,14 +39,15 @@ public class IndexController {
 	private ArrayList m;
 	public static Usuario usuario = new Usuario();
 	public static String bphoto;
-	public Service service = new Service();
+	public Uso_BD uso_bd = new Uso_BD();
+	//public Service service = new Service();
 	
 	@Autowired 
-	private UsuarioRepository repositorio;
+	private UsuarioRepository userRep;
 	
 	public IndexController () {		
 		
-		foros.add(new Foros("DUDA", "BLABLABLA"));	
+		foros.add(new Foros("DUDA", "BLABLABLA", null));	
 	}
 	
 	
@@ -72,7 +75,7 @@ public class IndexController {
 	@PostMapping("/foros/nuevoforo/creado")
 	public String NuevoForo(Model model, @RequestParam String asunto, @RequestParam String mensaje) {
 
-		foros.add(new Foros(asunto, mensaje));
+		foros.add(new Foros(asunto, mensaje, null));
 		
 		return "forocreado";
 	}
@@ -160,6 +163,7 @@ public class IndexController {
 	//Llamada cuando pulsemos el botón de Registrarse, aparecerá el formulario de New User
 	@GetMapping("/newuser")
 	public String newuserMain(Model model) {
+
 		return "Registro_NuevoUsuario";
 	}
 	
@@ -168,10 +172,14 @@ public class IndexController {
 	
 	//Se llama al método cuando se pulsa el botón "Iniciar Sesión" o "Registrarse", y se muestra la plantilla de bienvenido.
 	@PostMapping("/bienvenido")
-	public String bienvenido(Model model, @RequestParam String correo, @RequestParam String contraseña_1, @RequestParam MultipartFile image) {
+	public String bienvenido(Model model, @RequestParam String correo, @RequestParam String contraseña_1, @RequestParam MultipartFile image,
+			@RequestParam String nombreUsuario) {
 		
 		model.addAttribute("correo", correo);
 		model.addAttribute("contraseña", contraseña_1);
+		
+		
+		
 		
 		byte[] bytes;
 		
@@ -188,6 +196,8 @@ public class IndexController {
 				bphoto = java.util.Base64.getEncoder().encodeToString(bytes);
 				
 				model.addAttribute("fotoperfil", bphoto);
+				
+				userRep.save(new Usuario(nombreUsuario, "lopez", "sierra", contraseña_1, 0, 0, correo, 0, imagen));
 			}
 			catch (Exception exc){
 				return "Fallo al establecer la imagen de perfil";
@@ -204,7 +214,7 @@ public class IndexController {
 		
 		model.addAttribute("correo", correo);
 		
-		return "bienvenido";
+		return "bienvenidoI";
 	}
 	
 	/*@GetMapping("/iniciada")
@@ -334,7 +344,7 @@ public class IndexController {
 	@PostMapping("/crearCursoConfirmacion")
 	public String crearCursoConfirmacion(Model model, @RequestParam String titulo, @RequestParam String descripcion) {
 	
-		cursos.add(new Curso(titulo, descripcion));
+		cursos.add(new Curso(titulo, descripcion, null));
 		
 		return "Curso_Creado_Confirmacion";
 	}
@@ -347,6 +357,9 @@ public class IndexController {
 	
 	@GetMapping("/paginaprincipal")
 	public String paginaPrincipal(Model model) {	
+		
+		Optional<Usuario> u = userRep.findByNombre("alvaro");
+		model.addAttribute("usuario", u);
 		
 		return "paginaprincipal";
 	}

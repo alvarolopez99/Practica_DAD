@@ -24,15 +24,15 @@ import com.example.demo.Repository.MensajeRepository;
 import com.example.demo.Repository.PostRepository;
 import com.example.demo.Repository.PreguntaRepository;
 import com.example.demo.Repository.UsuarioRepository;
+import com.mysql.cj.jdbc.Blob;
 
 @Controller
-public class Uso_BD implements CommandLineRunner {
+public class Uso_BD{
 
 	@Autowired
 	private UsuarioRepository usuario_repository;
 	@Autowired
 	private AnuncioRepository anuncio_repository;
-
 	@Autowired
 	private ForosRepository foros_repository;
 	@Autowired
@@ -48,10 +48,13 @@ public class Uso_BD implements CommandLineRunner {
 	@Autowired
 	private ExamenRepository examen_repository;
 	
-	@Override
-	public void run(String... args) throws Exception {
+	/*public void guardarUsuario(String nombre, String primerApellido, String segundoApellido, String correo, String contraseña, int tipoSuscripcion, 
+			int tipoUsuario, int metodoPago, Blob fotoPerfil) {
+		usuario_repository.save(new Usuario(nombre, "lopez", "sierra", contraseña, 0, 0, correo, 0, fotoPerfil));
+	}*/
+	
 
-		
+	public void llamada() {
 		// Usuarios	
 		Usuario alumno1 = new Usuario("Alvaro", "Lopez", "Sierra", "pass1", 0, 0, "correo1", 1, null);
 		Usuario alumno2 = new Usuario("Pablo", "Bayona", "Gonzalez", "pass2", 0, 1, "correo2", 0, null);
@@ -176,8 +179,8 @@ public class Uso_BD implements CommandLineRunner {
 		}
 		System.out.println(bauers.get());
 		//usuario_repository.delete(bauers.get(0));
+		}*/
 		
-		*/
 		
 	}
 }
