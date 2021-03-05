@@ -34,7 +34,8 @@ public class IndexController {
 	private List<Curso> cursos = new ArrayList<Curso>();
 	private List<Anuncio> anuncios = new ArrayList<Anuncio>();
 	private ArrayList m;
-	private Usuario usuario = new Usuario();
+	public static Usuario usuario = new Usuario();
+	public static String bphoto;
 	
 	
 	@Autowired 
@@ -170,20 +171,28 @@ public class IndexController {
 		model.addAttribute("correo", correo);
 		model.addAttribute("contraseña", contraseña_1);
 		
+		byte[] bytes;
+		
 		if (image != null) {
 			try {
 				// Por si se quiere guardar tambien el nombre y el tamaño de la imagen
 				String nombreFoto = image.getOriginalFilename();
 				long tamañoFoto = image.getSize();
 				
-				byte[] bytes = image.getBytes();
+				bytes = image.getBytes();
 				Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);
 				usuario.setFotoPerfil(imagen);
+				
+				bphoto = java.util.Base64.getEncoder().encodeToString(bytes);
+				
+				model.addAttribute("fotoperfil", bphoto);
 			}
 			catch (Exception exc){
 				return "Fallo al establecer la imagen de perfil";
 			}
 		}
+		
+		
 			
 		return "bienvenido";
 	}
