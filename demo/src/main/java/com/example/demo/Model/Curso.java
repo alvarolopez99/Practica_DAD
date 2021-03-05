@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -19,11 +20,30 @@ public class Curso {
 	private String imagen;
 	
 	
-	public Curso (String titulo, String descripcion) {
+	@ManyToOne
+	private Usuario profesor;
+	
+	@OneToMany
+	private List <Usuario> alumnos;
+	
+	@OneToMany
+	private List <Examen> examenes;
+	
+	public Curso (String titulo, String descripcion, Usuario profesor) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
+		this.profesor = profesor;
+		alumnos = new ArrayList<Usuario>();
+		examenes = new ArrayList<Examen>();
 	}
 	
+	public void AñadirExamen(Examen examen) {
+		examenes.add(examen);
+	}
+	
+	public void AñadirAlumno(Usuario alumno) {
+		alumnos.add(alumno);
+	}
 	
 	public String getImagen() {
 		return imagen;

@@ -23,6 +23,11 @@ public class Examen {
 	@OneToOne
 	private Curso curso;
 	
+	public Examen(Curso curso) {
+		this.curso = curso;
+	}
+	
+	
 	public long getId() {
 		return id;
 	}

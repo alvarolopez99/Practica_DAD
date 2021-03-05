@@ -8,13 +8,17 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
 
 import com.example.demo.Model.Anuncio;
+import com.example.demo.Model.Chat;
 import com.example.demo.Model.Curso;
+import com.example.demo.Model.Examen;
 import com.example.demo.Model.Foros;
 import com.example.demo.Model.Mensaje;
+import com.example.demo.Model.Pregunta;
 import com.example.demo.Model.Usuario;
 import com.example.demo.Repository.AnuncioRepository;
 import com.example.demo.Repository.ChatRepository;
 import com.example.demo.Repository.CursoRepository;
+import com.example.demo.Repository.ExamenRepository;
 import com.example.demo.Repository.ForosRepository;
 import com.example.demo.Repository.MensajeRepository;
 import com.example.demo.Repository.PostRepository;
@@ -32,7 +36,7 @@ public class Uso_BD implements CommandLineRunner {
 	@Autowired
 	private ForosRepository foros_repository;
 	@Autowired
-	private ChatRepository char_repository;
+	private ChatRepository chat_repository;
 	@Autowired
 	private CursoRepository curso_repository;
 	@Autowired
@@ -42,7 +46,7 @@ public class Uso_BD implements CommandLineRunner {
 	@Autowired
 	private PreguntaRepository pregunta_repository;
 	@Autowired
-	
+	private ExamenRepository examen_repository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -65,11 +69,12 @@ public class Uso_BD implements CommandLineRunner {
 		
 		
 		// Cursos
-		Curso curso_Realidad_Virtual = new Curso("Realidad Virtual",  "Clases de Realidad Virtual");
-		Curso curso_Animacion_3D = new Curso("Animación 3D", "Clases de Animación 3D");
+		Curso curso_Realidad_Virtual = new Curso("Realidad Virtual",  "Clases de Realidad Virtual", profesor1);
+		Curso curso_Animacion_3D = new Curso("Animación 3D", "Clases de Animación 3D", profesor2);
 		
-		curso_repository.save(curso_Realidad_Virtual);
-		curso_repository.save(curso_Animacion_3D);
+		curso_Realidad_Virtual.AñadirAlumno(alumno1);
+		curso_Realidad_Virtual.AñadirAlumno(alumno2);
+		curso_Animacion_3D.AñadirAlumno(alumno2);
 		
 		
 		// Anuncios
@@ -81,19 +86,66 @@ public class Uso_BD implements CommandLineRunner {
 		
 		
 		// Foros
-		Foros foro_Coches = new Foros("Foro sobre coches", "Los coches son muy complejos");
-		Foros foro_Flores = new Foros("Foro sobre flores", "Las flores huelen a rosa");
+		Foros foro_Coches = new Foros("Foro sobre coches", "Los coches son muy complejos", alumno1);
+		Foros foro_Flores = new Foros("Foro sobre flores", "Las flores huelen a rosa", profesor1);
+		
+		
+		// Mensajes
+		Mensaje mensaje_Foro_Coches1 = new Mensaje(alumno2, "Y muy caros");
+		Mensaje mensaje_Foro_Coches2 = new Mensaje(profesor_ClasesParticulares1, "Pero muy cómodos");
+		Mensaje mensaje_Foro_Flores = new Mensaje(profesor2, "Pero se marchitan pronto");
+		
+		mensaje_repository.save(mensaje_Foro_Coches1);
+		mensaje_repository.save(mensaje_Foro_Coches2);
+		mensaje_repository.save(mensaje_Foro_Flores);		
+		
+		foro_Coches.AñadirMensaje(mensaje_Foro_Coches1);
+		foro_Coches.AñadirMensaje(mensaje_Foro_Coches2);
+		foro_Flores.AñadirMensaje(mensaje_Foro_Flores);
 		
 		foros_repository.save(foro_Coches);
 		foros_repository.save(foro_Flores);
 		
 		
-		// Mensajes
-		Mensaje saludar_Alumno1 = new Mensaje(alumno1, "Hola alumno1");
-		Mensaje saludar_Alumno2 = new Mensaje(alumno2, "Hola alumno2");
+		// Chats
+		Chat chat1 = new Chat(profesor1, alumno1, "Hola, ¿cómo estás?");
 		
-		mensaje_repository.save(saludar_Alumno1);
-		mensaje_repository.save(saludar_Alumno2);
+		Mensaje chat1_Mensaje2 = new Mensaje(alumno2, "Bien, y tú?");
+		chat1.AñadirMensaje(chat1_Mensaje2);
+		
+		Mensaje chat1_Mensaje3 = new Mensaje(alumno1, "Genial");
+		chat1.AñadirMensaje(chat1_Mensaje3);
+		
+		chat_repository.save(chat1);
+			
+		
+		// Examenes
+		Examen curso_Realidad_Virtual_Examen1 = new Examen(curso_Realidad_Virtual);
+		Examen curso_Animacion_3DExamen1 = new Examen(curso_Animacion_3D);
+		
+		
+		// Preguntas
+		Pregunta curso_Realidad_Virtual_Examen1_p1 = new Pregunta("¿2>3?", "Falso");
+		Pregunta curso_Realidad_Virtual_Examen1_p2 = new Pregunta("¿3>2?", "Verdadero");
+		Pregunta curso_Animacion_3DExamen1_p2 = new Pregunta("¿2>=2?", "Verdadero");
+		
+		pregunta_repository.save(curso_Realidad_Virtual_Examen1_p1);
+		pregunta_repository.save(curso_Realidad_Virtual_Examen1_p2);
+		pregunta_repository.save(curso_Animacion_3DExamen1_p2);
+		
+		curso_Realidad_Virtual_Examen1.addPregunta(curso_Realidad_Virtual_Examen1_p1);
+		curso_Realidad_Virtual_Examen1.addPregunta(curso_Realidad_Virtual_Examen1_p2);
+		curso_Animacion_3DExamen1.addPregunta(curso_Animacion_3DExamen1_p2);
+		
+		examen_repository.save(curso_Realidad_Virtual_Examen1);
+		examen_repository.save(curso_Animacion_3DExamen1);
+		
+		
+		curso_Realidad_Virtual.AñadirExamen(curso_Realidad_Virtual_Examen1);
+		curso_Realidad_Virtual.AñadirExamen(curso_Animacion_3DExamen1);
+
+		curso_repository.save(curso_Realidad_Virtual);
+		curso_repository.save(curso_Animacion_3D);
 		
 		
 		

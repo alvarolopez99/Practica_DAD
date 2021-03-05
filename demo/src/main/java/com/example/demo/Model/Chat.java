@@ -24,6 +24,11 @@ public class Chat {
 	public Chat(Usuario profesor, Usuario alumno, String cuerpoMensaje) {
 		this.profesor = profesor;
 		this.alumno = alumno;
+		mensajes = new ArrayList<Mensaje>();
+	}
+	
+	public void AñadirMensaje(Mensaje mensaje) {
+		mensajes.add(mensaje);
 	}
 	
 	public long getId() {

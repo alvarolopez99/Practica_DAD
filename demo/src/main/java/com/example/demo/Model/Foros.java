@@ -35,6 +35,9 @@ public class Foros {
 	@OneToMany
 	private List<Mensaje> mensajes;
 
+	@ManyToOne
+	private Usuario creador;
+	
 	//******************************//	
 
 	
@@ -42,9 +45,9 @@ public class Foros {
 
 	}
 
-	public Foros(String title, String text) {
+	public Foros(String title, String text, Usuario creador) {
 		super();
-		//this.user = user;
+		this.creador = creador;
 		this.asunto = title;
 		this.cuerpo = text;
 		this.mensajes = new ArrayList<Mensaje>();
@@ -57,6 +60,10 @@ public class Foros {
 	/*public void setUser(String user) {
 		this.user = user;
 	}/*/
+	
+	public void AñadirMensaje(Mensaje mensaje) {
+		mensajes.add(mensaje);
+	}
 	
 	public ArrayList getMensajes() {
 		return (ArrayList) mensajes;
