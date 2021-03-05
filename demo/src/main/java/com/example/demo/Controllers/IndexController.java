@@ -292,6 +292,14 @@ public class IndexController {
 		return "CursoEliminado";
 	}
 	
+	@GetMapping("/curso/{index}")
+	public String verCurso(Model model, @PathVariable int index) {	
+		
+		model.addAttribute("index", index);
+		
+		return "informacion_curso";
+	}
+	
 	/*
 	@GetMapping("/cursosDisponibles/nuevoCurso")
 	public String nuevoCurso(Model model) {
