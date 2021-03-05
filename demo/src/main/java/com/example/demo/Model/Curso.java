@@ -26,8 +26,11 @@ public class Curso {
 	@OneToMany
 	private List <Usuario> alumnos;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
 	private List <Examen> examenes;
+	
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
+	private List <Material> materiales;
 	
 	public Curso (String titulo, String descripcion, Usuario profesor) {
 		this.titulo = titulo;
@@ -35,6 +38,7 @@ public class Curso {
 		this.profesor = profesor;
 		alumnos = new ArrayList<Usuario>();
 		examenes = new ArrayList<Examen>();
+		materiales = new ArrayList<Material>();
 	}
 	
 	public void AñadirExamen(Examen examen) {
