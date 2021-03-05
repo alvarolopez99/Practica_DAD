@@ -1,0 +1,35 @@
+
+<html>
+{{>Inicial}}
+
+<div align="center">
+    <p><b><br><br>Cree un exámen de evaluación: {{curso}}</b></p>	
+    <form method="post" action="/{{curso}}/examencreado">
+        <p><b>Enunciado 1:</b></p>
+        <input name="preg1" type="text" id="preg1" size="63" required/>
+        <p><b>Respuesta 1:</b></p>
+        <input name="resp1" type="text" id="resp1" size="63" required />
+        <p><b>Enunciado 2:</b></p>
+        <input name="preg2" type="text" id="preg2" size="63" required/>
+        <p><b>Respuesta 2:</b></p>
+        <input name="resp2" type="text" id="resp2" size="63" required/>
+        <p><b>Enunciado 3:</b></p>
+        <input name="preg3" type="text" id="preg3" size="63" required/>
+        <p><b>Respuesta 3:</b></p>
+        <input name="resp3" type="text" id="resp3" size="63" required/>
+        <p><b>Enunciado 4:</b></p>
+        <input name="preg4" type="text" id="preg4" size="63" required/>
+        <p><b>Respuesta 4:</b></p>
+        <input name="resp4" type="text" id="resp4" size="63" required/>
+        <p><b>Enunciado 5:</b></p>
+        <input name="preg5" type="text" id="preg5" size="63" required/>
+        <p><b>Respuesta 5:</b></p>
+        <input name="resp5" type="text" id="resp5" size="63" required/>
+	
+    	<br><br><button type="submit">Finalizar</button>
+    </form>
+
+</div>
+
+{{>footer}}
+</html>

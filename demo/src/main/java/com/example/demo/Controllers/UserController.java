@@ -3,6 +3,7 @@ package com.example.demo.Controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,11 +18,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Model.Usuario;
+import com.example.demo.Model.Curso;
+import com.example.demo.Model.Examen;
 import com.example.demo.Model.Pregunta;
+import com.example.demo.Repository.CursoRepository;
 import com.example.demo.Repository.ExamenRepository;
 import com.example.demo.Repository.UsuarioRepository;
 import com.example.demo.services.MailService;
 import com.mysql.cj.jdbc.Blob;
+
 
 @Controller
 public class UserController {
@@ -30,6 +35,8 @@ public class UserController {
 	UsuarioRepository userRepo;
 	@Autowired
 	ExamenRepository examRepo;
+	@Autowired
+	CursoRepository cursoRepo;
 	
 	@Autowired
 	MailService mail;
@@ -147,7 +154,10 @@ public class UserController {
 			
 			//Provisional
 			u = new Usuario();
-			u.setCorreo("urjc.fower@gmail.com");
+			u.setCorreo("urjc.fower@gmail.com");			
+			
+			/******/
+			
 			String contenido = "Enhorabuena. Has completado con éxito el curso "+ curso+"disponible en la plataforma Sapiotheca";
 			mail.sendEmail(u.getCorreo(), "Certificado "+curso, contenido);
 			model.addAttribute("mensaje","Has obtenido una puntuación de "+puntuacion+"/5");
@@ -159,5 +169,47 @@ public class UserController {
 		}
 		
 		return "examenCompletado";
+	}
+	
+	@GetMapping("/{curso}/crearexamen")
+	public String crearExamen(Model model, @PathVariable String curso){
+		
+		model.addAttribute("curso", curso);
+		
+		return "crearExamen";
+	}
+	
+	@PostMapping("/{curso}/examencreado")
+	public String creadoExamen(Model model, @RequestParam String resp1, @RequestParam String resp2, @RequestParam String resp3,
+			@RequestParam String resp4, @RequestParam String resp5, HttpSession session, @PathVariable String curso,
+			@RequestParam String preg1, @RequestParam String preg2, @RequestParam String preg3,
+			@RequestParam String preg4, @RequestParam String preg5){
+		
+		Examen m = new Examen();	//Crear y guardar nuevo examen
+		m.addPregunta(new Pregunta(preg1, resp1));
+		m.addPregunta(new Pregunta(preg2, resp2));
+		m.addPregunta(new Pregunta(preg3, resp3));
+		m.addPregunta(new Pregunta(preg4, resp4));
+		m.addPregunta(new Pregunta(preg5, resp5));
+		
+		//Base de datos
+		/*Optional<Curso> c = cursoRepo.findByTitulo(curso);
+		if(c.isPresent()) {
+			m.setCurso(c.get());	//Lo asocia con el curso concreto
+			
+			Optional<Examen> examenActual = examRepo.findByCurso(c.get().getId());
+			
+			if(examenActual.isPresent()) {
+				examRepo.delete(examenActual.get());
+			}
+		}
+		
+		
+		
+		examRepo.save(m);*/
+		
+		model.addAttribute("curso", curso);
+		model.addAttribute("mensaje", "Se ha creado el exámen con éxito");
+		return "examenCreado";
 	}
 }

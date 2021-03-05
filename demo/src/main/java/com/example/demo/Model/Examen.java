@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -17,7 +18,7 @@ public class Examen {
 	private long id;
 	
 	@OneToMany
-	private List<Pregunta> preguntas;
+	private List<Pregunta> preguntas = new ArrayList<Pregunta>();
 	
 	@OneToOne
 	private Curso curso;
