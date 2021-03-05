@@ -1,0 +1,19 @@
+
+<html>
+
+
+<div align="center">
+    <p><b><br><br>Exámen de evaluación</b></p>	
+    <form method="get" action="/examencompleto">
+	{{#preguntas}}
+		<p><b> Pregunta {{-index}}</b></p>
+        	<p> {{enunciado}} </p>
+        	<input name="resp{{-index}}" type="text" id="resp{{-index}}" size="63" />
+	{{/preguntas}}
+	
+    	<br><br><button type="submit">Finalizar</button>
+    </form>
+
+</div>
+
+</html>
