@@ -36,6 +36,14 @@ p {
 		<input type='text' name='nombreUsuario' placeholder="Introduzca un nombre de usuario" required>
 		<p><br/></p>
 		
+		<p>Primer apellido:</p>
+		<input type='text' name='primerApellido' placeholder="Introduzca el primer apellido" required>
+		<p><br/></p>
+		
+		<p>Segundo apellido:</p>
+		<input type='text' name='primerApellido' placeholder="Introduzca el segundo apellildo" required>
+		<p><br/></p>
+		
 		<p>Contraseña:</p>
 		<input type='password' name='contraseña_1' placeholder="Introduzca su contraseña" id='pwd' required>
 		<p><br/></p>
@@ -65,7 +73,7 @@ p {
 		</script>
 		
 		
-		<p><br/></p><p>Indique el tipo de usuario:</p>
+		<p><br/></p><p>Indique el tipo de suscripción:</p>
 		<input type="radio" id="choice1"
      	name="tipoUsuario" value="valorOpcion_1" onclick="display()">
     	<label for="choice1">Usuario estándar</label><br>
@@ -73,6 +81,15 @@ p {
     	<input type="radio" id="choice2"
      	name="tipoUsuario" value="valorOpcion_2" onclick="display()">
     	<label for="choice2">Usuario premium</label>
+    	
+    	<p><br/></p><p>Indique el método de pago:</p>
+		<input type="radio" id="choice2_1"
+     	name="metodoPago" value="valorOpcion_1" onclick="display()">
+    	<label for="choice2_1">Tarjeta de crédito</label><br>
+
+    	<input type="radio" id="choice2_2"
+     	name="metodoPago" value="valorOpcion_2" onclick="display()">
+    	<label for="choice2_2">Paypal</label>
     	
     	<br><p><br>Sube una foto de perfil (Opcional):</p><input type='file' name='image' accept=".jpg, .jpeg, .png">
         
