@@ -59,6 +59,14 @@ public class IndexController {
 	}
 	
 	
+	@GetMapping("/administrador")
+	public String administrador(Model model) {
+		return "Administrador";
+	}
+	
+
+	
+	
 	//************ FOROS ************//
 	
 	
