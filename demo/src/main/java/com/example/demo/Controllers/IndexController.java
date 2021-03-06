@@ -64,7 +64,13 @@ public class IndexController {
 		return "Administrador";
 	}
 	
+	@PostMapping("/profesorAgregado")
+	public String profesorAgregado(Model model, @RequestParam String correo, @RequestParam String contraseña) {
 
+		model.addAttribute("correo", correo);
+		
+		return "ProfesorAgregadoConfirmacion";
+	}
 	
 	
 	//************ FOROS ************//

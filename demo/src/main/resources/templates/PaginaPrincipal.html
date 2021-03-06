@@ -1,32 +1,59 @@
 <html>
 
+<style>
+
+	.contenedorExterior {
+    vertical-align: middle;
+    display: table;
+    width: 300px; /* anchura del padre */
+    height: 400px; /* altura del padre */
+    overflow: hidden;
+	}
+	
+	.contenedorExterior .contenedorInterior {
+    display: table-cell;
+    vertical-align: middle;
+    width: 150%;
+    margin: 0 auto;
+    text-align: center;
+     background: #C1EEEA;
+	}
+
+</style>
+
 <head>
+
   <meta charset="UTF-8">
+  
 </head>
 
 <body>
 
-
-{{>Inicial}}
-
+<br><br><br><br><br>
 
 	<div align="center">
-	<h1></h1>
-	<h1>SAPIOTHECA</h1>
+		<div class="contenedorExterior">
+    		<div class="contenedorInterior">
+   
+				<h1>SAPIOTHECA</h1>
 
+				<a href="cursosDisponibles">Cursos</a><br>
+				<br>
 	
+				<a href="foros">Foros</a><br>
+				<br>
 	
-	<a href="/cursosDisponibles">Cursos</a><br>
-	<br>
-	<a href="foros">Foros</a><br>
-	<br>
-	<a href="anuncios">Tablón de anuncios</a><br>
-	<br>
-	<a href="anuncios/3">Chat</a><br>
-	<br>
-	<p>{{usuario}}</p><br>
+				<a href="anuncios">Tablón de anuncios</a><br>
+				<br>
 	
-</div>
+				<a href="chat/{profesor}">Chat</a><br>
+				<br>
+	
+				<p>{{usuario}}</p><br>
+	
+	   		</div>
+		</div>
+	</div>
 	
 </body>
 </html>
