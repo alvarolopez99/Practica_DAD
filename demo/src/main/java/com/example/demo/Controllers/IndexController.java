@@ -373,8 +373,14 @@ public class IndexController {
 	public String paginaPrincipal(Model model) {	
 		
 		Optional<Usuario> u = userRep.findByNombre("alvaro");
-		model.addAttribute("usuario", u);
-		
+		if (u.isPresent()) {
+			model.addAttribute("hayUsuario", true);
+			model.addAttribute("usuario", u);
+		}
+		else {
+			model.addAttribute("hayUsuario", false);
+		}
+			
 		return "paginaprincipal";
 	}
 	
