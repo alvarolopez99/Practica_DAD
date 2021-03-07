@@ -34,7 +34,9 @@ p {
 		<p><b>Correo electrónico: </b> {{usuario.correo}}</p>
 		<p><b>Tipo de usuario: </b> {{tipoUsuario}}</p>
 		<p><b>Suscripción: </b> {{tipoSuscripcion}}</p>
-		<p><b>Foto de perfil: </b><img src="data:image/jpg;base64,{{imagen}}"/></p>
+		{{#hayUsuario}}
+			<p><b>Foto de perfil: </b><img src="data:image/jpg;base64,{{imagen}}"/></p>
+		{{/hayUsuario}}
 		<br><br>
 
 		

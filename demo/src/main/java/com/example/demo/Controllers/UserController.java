@@ -69,7 +69,14 @@ public class UserController {
 			model.addAttribute("tipoUsuario", "Profesor");
 		}
 		
-		model.addAttribute("imagen", user.getFotoPerfil());
+		if (user.getFotoPerfil() != null) {
+			model.addAttribute("hayUsuario", true);
+			model.addAttribute("imagen", user.getFotoPerfil());
+		}
+		else {
+			model.addAttribute("hayUsuario", false);
+		}
+		
 		
 		return "editarperfil";
 	}
