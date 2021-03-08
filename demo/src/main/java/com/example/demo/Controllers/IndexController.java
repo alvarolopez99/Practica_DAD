@@ -6,6 +6,8 @@ import java.net.MalformedURLException;
 import java.sql.Blob;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -192,7 +194,7 @@ public class IndexController {
 	@PostMapping("/bienvenido")
 	public String bienvenido(Model model, @RequestParam String correo, @RequestParam String contraseña_1, @RequestParam MultipartFile image,
 			@RequestParam String nombreUsuario, @RequestParam String primerApellido, @RequestParam String apellido2,
-			@RequestParam("tipoUsuario") String tipoUsuario, @RequestParam("metodoPago") String metodoPago) {
+			@RequestParam("tipoUsuario") String tipoUsuario, @RequestParam("metodoPago") String metodoPago, HttpSession sesion) {
 		
 			
 		model.addAttribute("correo", correo);
@@ -242,16 +244,28 @@ public class IndexController {
 			
 			userRep.save(registrado);
 				
+			sesion.setAttribute("user", registrado);
+			
 			return "bienvenido";
 		}
 	}
 	
 	@PostMapping("/bienvenidoI")
-	public String bienvenidoInicio(Model model, @RequestParam String correo, @RequestParam String contrasena) {
+	public String bienvenidoInicio(Model model, @RequestParam String correo, @RequestParam String contrasena, HttpSession sesion) {
 		
 		model.addAttribute("correo", correo);
 		
-		return "bienvenidoI";
+		Optional<Usuario> u = userRep.findByCorreo(correo);
+		if(u.isPresent()) {
+			if(contrasena.equals(u.get().getContraseña())) {
+				sesion.setAttribute("user", u.get());
+				return "bienvenidoI";
+			}else {
+				return "volver_a_login";
+			}
+		}else {
+			return "no_registrado";
+		}
 	}
 	
 	/*@GetMapping("/iniciada")

@@ -1,9 +1,13 @@
 package com.example.demo.Controllers;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.sql.Blob;
 
 import javax.servlet.http.HttpSession;
 
@@ -25,7 +29,6 @@ import com.example.demo.Repository.CursoRepository;
 import com.example.demo.Repository.ExamenRepository;
 import com.example.demo.Repository.UsuarioRepository;
 import com.example.demo.services.MailService;
-import com.mysql.cj.jdbc.Blob;
 
 
 @Controller
@@ -42,11 +45,14 @@ public class UserController {
 	MailService mail;
 	
 	@GetMapping("/profile")
-	public String editUser(Model model, HttpSession sesion) {
+	public String editUser(Model model, HttpSession sesion) throws SQLException, IOException, ClassNotFoundException {
 		
 		//Leer usuario actual del httpsession
 		
 		Usuario user = (Usuario)sesion.getAttribute("user");
+		Blob foto = user.getFotoPerfil();
+		byte[] bdata = foto.getBytes(1, (int) foto.length());
+		String s = java.util.Base64.getEncoder().encodeToString(bdata);
 		
 		
 		//Inicializacion de usuario provisional
@@ -70,7 +76,7 @@ public class UserController {
 				model.addAttribute("tipoUsuario", "Profesor");
 			}
 			
-			model.addAttribute("imagen", user.getFotoPerfil());
+			model.addAttribute("imagen", s);
 
 		} else {
 			
