@@ -2,8 +2,12 @@ package com.example.demo.Model;
 
 import javax.persistence.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.demo.Repository.CursoRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.sql.Blob;
+import java.util.List;
 
 @Entity
 public class Usuario {
@@ -23,6 +27,12 @@ public class Usuario {
 	@Lob
 	@JsonIgnore
 	private Blob fotoPerfil;
+	
+	@OneToMany
+	private List<Curso> cursos;
+
+	@Autowired 
+	private CursoRepository repositorioCurso;
 	
 	//@OneToOne(cascade=CascadeType.ALL)
 	//private UsuarioContraseña uc
@@ -120,6 +130,22 @@ public class Usuario {
 	
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
+	}
+	
+	public void AñadirCurso(String titulo, String descripcion) {
+		Curso nuevoCurso = new Curso(titulo, descripcion, null);
+		repositorioCurso.save(nuevoCurso);
+	}
+	
+	public List<Curso> getCursos() {
+		List<Curso> listaCursos = repositorioCurso.findAll();
+		return listaCursos;
+	}
+	
+	public void EliminarCurso(int index) {
+		Curso cursoEliminado = repositorioCurso.findById(index);
+		
+		repositorioCurso.delete(cursoEliminado);
 	}
 
 }

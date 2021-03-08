@@ -398,7 +398,7 @@ public class IndexController {
 	//************ CURSOS ************//
 	
 	@GetMapping("/cursosDisponibles")
-	public String cursosDisponibles(Model model) {
+	public String cursosDisponibles(Model model, HttpSession sesion) {
 		
 		/*
 		List <String> imagenes_Cursos = Arrays.asList("https://i0.wp.com/mathsteachercircles.org.au/wp-content/uploads/2020/10/cropped-MTC_Icon_RGB.png?fit=190%2C190&ssl=1","https://pbs.twimg.com/profile_images/1110160859689615361/V8CE--1C.png");
@@ -412,8 +412,9 @@ public class IndexController {
 		//imagenes_Cursos.add("https://i0.wp.com/mathsteachercircles.org.au/wp-content/uploads/2020/10/cropped-MTC_Icon_RGB.png?fit=190%2C190&ssl=1");
 		//imagenes_Cursos.add("https://pbs.twimg.com/profile_images/1110160859689615361/V8CE--1C.png");
 		
+		Usuario usuario = (Usuario) sesion.getAttribute("user");
 		
-		List<Curso> listaCursos = repositorioCurso.findAll();
+		List<Curso> listaCursos = usuario.getCursos();
 		
 		model.addAttribute("cursos", listaCursos);
 		
@@ -422,11 +423,11 @@ public class IndexController {
 	
 	
 	@GetMapping("/eliminarCurso/{index}")
-	public String eliminarCurso(Model model, @PathVariable int index) {
+	public String eliminarCurso(Model model, @PathVariable int index, HttpSession sesion) {
 		
-		Curso cursoEliminado = repositorioCurso.findById(index);
 		
-		repositorioCurso.delete(cursoEliminado);
+		Usuario usuario = (Usuario) sesion.getAttribute("user");
+		usuario.EliminarCurso(index);
 		
 		
 		return "CursoEliminado";
@@ -459,11 +460,11 @@ public class IndexController {
 	}
 	
 	@PostMapping("/crearCursoConfirmacion")
-	public String crearCursoConfirmacion(Model model, @RequestParam String titulo, @RequestParam String descripcion) {
+	public String crearCursoConfirmacion(Model model, @RequestParam String titulo, @RequestParam String descripcion, HttpSession sesion) {
 	
-		Curso nuevoCurso = new Curso(titulo, descripcion, null);
-		repositorioCurso.save(nuevoCurso);
-		
+		Usuario usuario = (Usuario) sesion.getAttribute("user");
+		usuario.AñadirCurso(titulo, descripcion);
+			
 		return "Curso_Creado_Confirmacion";
 	}
 	
