@@ -12,7 +12,7 @@ public interface AnuncioRepository extends JpaRepository<Anuncio, Integer> {
 	
 	//consultas personalizadas
 	
-	List<Anuncio> findById(int id);	
+	
 	
 	List<Anuncio> findByprofesor(Usuario profesor);
 

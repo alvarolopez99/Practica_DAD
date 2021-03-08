@@ -52,12 +52,11 @@ public class UserController {
 		Usuario user = (Usuario)sesion.getAttribute("user");
 		Blob foto = user.getFotoPerfil();
 		
-		
-		
-		//Inicializacion de usuario provisional
-		//Usuario user = new Usuario("Pablo", "Bayona", "González", "contraseña123", 0, 0, "correo@correo.es", 0, null);
-		
-		if (user != null) {
+		if(foto == null) {
+			return "no_registrado";
+		}
+
+		else{
 			model.addAttribute("hayUsuario", true);
 			model.addAttribute("usuario", user);
 			
@@ -81,14 +80,10 @@ public class UserController {
 			}else {
 				model.addAttribute("imagen", "");
 			}
-		} else {
 			
-			model.addAttribute("hayUsuario", false);
+			return "editarperfil";
+			
 		}
-		
-		
-		
-		return "editarperfil";
 	}
 	
 	@GetMapping("/deleteUser")

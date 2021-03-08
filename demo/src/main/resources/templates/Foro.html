@@ -23,32 +23,33 @@ a {
 
 	<div align="center">	  
 
-	{{#infoForo}}
-	<h1>{{Asunto}}</h1>
-	{{/infoForo}}
+		{{#infoForo}}
+			<h1>{{Asunto}}</h1>
+		{{/infoForo}}
 	
-	{{#infoForo}}
-	<p>{{Cuerpo}}</p>
-	{{/infoForo}}
-	
-	
-	{{#mensaje}}
-    <br><b>{{emisor.nombre}}:&nbsp;</b>{{CuerpoMensaje}}
-    {{/mensaje}}
+		{{#infoForo}}
+			<p>{{Cuerpo}}</p>
+		{{/infoForo}}
 	
 	
-	{{#infoForo}}
-	<form action="/foros/{{IDForo}}/respuesta" method="post">	
+		{{#mensaje}}
+   	 		<br><b>{{emisor.nombre}}:&nbsp;</b>{{CuerpoMensaje}}
+    	{{/mensaje}}
 	
-	<p>Responder:</p>
-	<textarea name='respuesta' rows=5 cols=40></textarea>
-	<input type='submit' value='Enviar'/>
-	</form>
-	{{/infoForo}}
+	
+		{{#infoForo}}
+			<form action="/foros/{{IDForo}}/respuesta" method="post">	
+	
+				<p>Responder:</p>
+				<textarea name='respuesta' rows=5 cols=40></textarea>
+				<input type='submit' value='Enviar'/>
+			
+			</form>
+		{{/infoForo}}
 	
 	<a href="/foros">VOLVER</a>
 	
-	 </div>
+	</div>
 	 
 </body>
 {{>footer}}
