@@ -108,43 +108,47 @@ public class UserController {
 	
 	@PostMapping("/modifyUser")
 	public String modifyUser(Model model, HttpSession sesion, @RequestParam String nombreUsuario, @RequestParam String apellido1,
-			@RequestParam String apellido2, @RequestParam MultipartFile image) throws IOException{
-		
-		//Leer usuario actual del httpsession
+			@RequestParam String apellido2, @RequestParam String contraseña_1, @RequestParam MultipartFile image) throws IOException, SQLException{
 
 		
 		Usuario user = (Usuario)sesion.getAttribute("user");
+		Blob foto = user.getFotoPerfil();
 		
-		if(!nombreUsuario.equals("")) user.setNombre(nombreUsuario);
-		if(!apellido1.equals("")) user.setPrimerApellido(apellido1);
-		if(!apellido2.equals("")) user.setSegundoApellido(apellido2);
-		
-		//if(image!=null) user.setFotoPerfil(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
-		
-		if(image != null) {
-			try {
-				byte[] bytes;
-				bytes = image.getBytes();
-				Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);
-				
-				
-				String bphoto = java.util.Base64.getEncoder().encodeToString(bytes);
-				
-				model.addAttribute("fotoperfil", bphoto);
-				
-				user.setFotoPerfil(imagen);
+		if(!user.getContraseña().equals(contraseña_1)) {
+			return "volver_a_profile";
+		}else {		
+			if(!nombreUsuario.equals("")) user.setNombre(nombreUsuario);
+			if(!apellido1.equals("")) user.setPrimerApellido(apellido1);
+			if(!apellido2.equals("")) user.setSegundoApellido(apellido2);
+			
+			if (!image.isEmpty()) {
+				try {					
+					byte[] bytes = image.getBytes();
+					Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);
+					
+					String bphoto = java.util.Base64.getEncoder().encodeToString(bytes);
+					
+					model.addAttribute("imagen", bphoto);
+					
+					user.setFotoPerfil(imagen);
+				}
+				catch (Exception exc){
+					return "Fallo al establecer la imagen de perfil";
+				}
+			} else {
+				byte[] bdata = foto.getBytes(1, (int) foto.length());
+				String s = java.util.Base64.getEncoder().encodeToString(bdata);
+				model.addAttribute("imagen", s);
+				user.setFotoPerfil(foto);
 			}
-			catch (Exception exc){
-				return "Fallo al establecer la imagen de perfil";
-			}
+			
+			userRepo.save(user);
+			sesion.setAttribute("user", user);
+			
+	
+			model.addAttribute("mensaje", "Se han modificado correctamente tus datos");
+			return "usuarioModificado";
 		}
-		
-		userRepo.save(user);
-		sesion.setAttribute("user", user);
-		
-
-		model.addAttribute("mensaje", "Se han modificado correctamente tus datos");
-		return "usuarioModificado";
 	}
 	
 	List<Pregunta> preguntas = new ArrayList<Pregunta>();
