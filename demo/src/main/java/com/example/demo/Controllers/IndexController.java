@@ -23,7 +23,6 @@ import com.example.demo.Model.Material;
 import com.example.demo.Model.Mensaje;
 import com.example.demo.Model.Usuario;
 import com.example.demo.Repository.UsuarioRepository;
-import com.example.demo.services.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -187,14 +186,29 @@ public class IndexController {
 	//Se llama al método cuando se pulsa el botón "Iniciar Sesión" o "Registrarse", y se muestra la plantilla de bienvenido.
 	@PostMapping("/bienvenido")
 	public String bienvenido(Model model, @RequestParam String correo, @RequestParam String contraseña_1, @RequestParam MultipartFile image,
-			@RequestParam String nombreUsuario) {
+			@RequestParam String nombreUsuario, @RequestParam String primerApellido, @RequestParam String apellido2,
+			@RequestParam("tipoUsuario") String tipoUsuario, @RequestParam("metodoPago") String metodoPago) {
 		
+			
 		model.addAttribute("correo", correo);
 		model.addAttribute("contraseña", contraseña_1);
 		
+		int tipoU, metodoP;
 		
+		if(tipoUsuario.equals("Usuario estándar")) tipoU = 0;
+		else tipoU = 1;
 		
+		if(metodoPago.equals("Tarjeta de crédito")) metodoP = 0;
+		else metodoP = 1;
 		
+		Usuario registrado = new Usuario(nombreUsuario, primerApellido, apellido2, 
+				contraseña_1, 0, tipoU, correo, metodoP, null);
+		
+		System.out.println("Metodo Pago "+ metodoPago);
+		
+		//Comprobar que no haya nadie en la base de datos con ese correo
+		//*****************
+				
 		byte[] bytes;
 		
 		if (image != null) {
@@ -211,14 +225,14 @@ public class IndexController {
 				
 				model.addAttribute("fotoperfil", bphoto);
 				
-				userRep.save(new Usuario(nombreUsuario, "lopez", "sierra", contraseña_1, 0, 0, correo, 0, imagen));
+				registrado.setFotoPerfil(imagen);
 			}
 			catch (Exception exc){
 				return "Fallo al establecer la imagen de perfil";
 			}
 		}
 		
-		
+		userRep.save(registrado);
 			
 		return "bienvenido";
 	}

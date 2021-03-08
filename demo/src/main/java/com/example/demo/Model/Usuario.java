@@ -16,10 +16,10 @@ public class Usuario {
 	private String primerApellido;
 	private String segundoApellido;
 	private String contraseña;
-	private int tipoUsuario;
-	private int tipoSuscripcion;
+	private int tipoUsuario;	//0: Alumno - 1:Profesor
+	private int tipoSuscripcion;	//0: Estándar - 1:Premium
 	private String correo;
-	private int metodoPago;
+	private int metodoPago;		//0: Crédito - 1:Paypal
 	@Lob
 	@JsonIgnore
 	private Blob fotoPerfil;
