@@ -191,50 +191,54 @@ public class IndexController {
 		
 			
 		model.addAttribute("correo", correo);
-		model.addAttribute("contraseña", contraseña_1);
 		
-		int tipoU, metodoP;
-		
-		if(tipoUsuario.equals("Usuario estándar")) tipoU = 0;
-		else tipoU = 1;
-		
-		if(metodoPago.equals("Tarjeta de crédito")) metodoP = 0;
-		else metodoP = 1;
-		
-		Usuario registrado = new Usuario(nombreUsuario, primerApellido, apellido2, 
-				contraseña_1, 0, tipoU, correo, metodoP, null);
-		
-		System.out.println("Metodo Pago "+ metodoPago);
-		
-		//Comprobar que no haya nadie en la base de datos con ese correo
-		//*****************
-				
-		byte[] bytes;
-		
-		if (image != null) {
-			try {
-				// Por si se quiere guardar tambien el nombre y el tamaño de la imagen
-				String nombreFoto = image.getOriginalFilename();
-				long tamañoFoto = image.getSize();
-				
-				bytes = image.getBytes();
-				Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);
-				usuario.setFotoPerfil(imagen);
-				
-				bphoto = java.util.Base64.getEncoder().encodeToString(bytes);
-				
-				model.addAttribute("fotoperfil", bphoto);
-				
-				registrado.setFotoPerfil(imagen);
-			}
-			catch (Exception exc){
-				return "Fallo al establecer la imagen de perfil";
-			}
-		}
-		
-		userRep.save(registrado);
+		Optional<Usuario> u = userRep.findByCorreo(correo);
+		if(u.isPresent()) {
+			return "volver_a_registro";
+		}else {		
+			int tipoU, metodoP;
 			
-		return "bienvenido";
+			if(tipoUsuario.equals("Usuario estándar")) tipoU = 0;
+			else tipoU = 1;
+			
+			if(metodoPago.equals("Tarjeta de crédito")) metodoP = 0;
+			else metodoP = 1;
+			
+			Usuario registrado = new Usuario(nombreUsuario, primerApellido, apellido2, 
+					contraseña_1, 0, tipoU, correo, metodoP, null);
+			
+			System.out.println("Metodo Pago "+ metodoPago);
+			
+			//Comprobar que no haya nadie en la base de datos con ese correo
+			//*****************
+					
+			byte[] bytes;
+			
+			if (image != null) {
+				try {
+					// Por si se quiere guardar tambien el nombre y el tamaño de la imagen
+					String nombreFoto = image.getOriginalFilename();
+					long tamañoFoto = image.getSize();
+					
+					bytes = image.getBytes();
+					Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);
+					usuario.setFotoPerfil(imagen);
+					
+					bphoto = java.util.Base64.getEncoder().encodeToString(bytes);
+					
+					model.addAttribute("fotoperfil", bphoto);
+					
+					registrado.setFotoPerfil(imagen);
+				}
+				catch (Exception exc){
+					return "Fallo al establecer la imagen de perfil";
+				}
+			}
+			
+			userRep.save(registrado);
+				
+			return "bienvenido";
+		}
 	}
 	
 	@PostMapping("/bienvenidoI")

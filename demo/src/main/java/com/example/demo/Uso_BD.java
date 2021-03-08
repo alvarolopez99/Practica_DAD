@@ -111,7 +111,7 @@ public class Uso_BD{
 		
 		
 		// Chats
-		Chat chat1 = new Chat(profesor1, alumno1, "Hola, ¿cómo estás?");
+		Chat chat1 = new Chat(profesor1, alumno1);
 		
 		Mensaje chat1_Mensaje2 = new Mensaje(alumno2, "Bien, y tú?");
 		chat1.AñadirMensaje(chat1_Mensaje2);

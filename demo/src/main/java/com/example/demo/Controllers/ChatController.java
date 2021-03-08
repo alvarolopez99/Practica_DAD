@@ -29,18 +29,19 @@ public class ChatController {
 	@Autowired
 	private ChatRepository chatRepo;
 	
+	Chat chat = null;
+	
 	
 	private List<Mensaje> mensajes;
 	@GetMapping("/chat/{profesor}/send")	//Pagina del chat cuando se envia un mensaje
-	public String greeting(Model model, @RequestParam String usermsg, @PathVariable String profesor, HttpSession sesion) {
+	public String envioMensaje(Model model, @RequestParam String usermsg, @PathVariable String profesor, HttpSession sesion) {
 
 		
 		//Añadir la carga de mensajes mediante lista
 		
 		if(!usermsg.equals("")) {
-			Usuario u = new Usuario();
-			u.setNombre("Pablo");
-			mensajes.add(new Mensaje(u, usermsg));
+			Usuario user = (Usuario)sesion.getAttribute("user");
+			chat.AñadirMensaje(new Mensaje(user, usermsg));	//Se añade el nuevo mensaje creado
 		}
 		
 		model.addAttribute("mensajes", mensajes);
@@ -52,18 +53,18 @@ public class ChatController {
 	}
 	
 	@GetMapping("/chat/{profesor}")	//Pagina de inicio del chat
-	public String greeting(Model model, @PathVariable String profesor, HttpSession sesion) {
+	public String abrirChat(Model model, @PathVariable String profesor, HttpSession sesion) {
 		
-		/*	Para recuperar el usuario actual
+		/*	Para recuperar el usuario actual */
 		Usuario user = (Usuario)sesion.getAttribute("user");
 		model.addAttribute("user", user.getNombre());
-		*/
+
 		
-		/* Para la lista de mensajes
+		/* Para la lista de mensajes */
 		 
 		 Optional<Usuario> profUser = repositorio.findByNombre(profesor);
 		 
-		 if(profUser.isPresent()) {
+		 if(profUser.isPresent()) {	//Busca al profesor del chat y si existe
 			 
 			 Usuario prof = profUser.get();
 			 model.addAttribute("target", prof.getNombre() + prof.getPrimerApellido());
@@ -72,22 +73,21 @@ public class ChatController {
 			 
 			 if(currentChat.isPresent()) {	//El chat ya existe
 				 
-				 Chat chat = currentChat.get();
+				 chat = currentChat.get();
 				 List<Mensaje> mensajes = chat.getMensajes();
-				 
-				 //Añadir atributo mensajes al modelo
 				 
 			 }
 			 else {	// Se crea el chat porque no existe
 				 
-				 //Crear chat y almacenar en la base de datos
-				 
-				 //No se añade nada a la lista de mensajes
+				 chat = new Chat(prof, user);
+				 chatRepo.save(chat);
 			 }
+			 
+			 model.addAttribute("mensajes", chat.getMensajes());
 		 }
 		 
-		 */
 		
+		 /*
 		//Provisional
 		mensajes = new ArrayList<Mensaje>();
 		Usuario u = new Usuario();
@@ -101,7 +101,7 @@ public class ChatController {
 		
 		model.addAttribute("mensajes", mensajes);
 		model.addAttribute("user", "Pablo");
-		model.addAttribute("target", profesor);
+		model.addAttribute("target", profesor);*/
 		
 
 		return "chat";
