@@ -37,6 +37,7 @@ import com.example.demo.Repository.AnuncioRepository;
 import com.example.demo.Repository.CursoRepository;
 import com.example.demo.Repository.ForosRepository;
 import com.example.demo.Repository.UsuarioRepository;
+import com.example.demo.services.ImageService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +75,9 @@ public class IndexController {
 	
 	@Autowired 
 	private CursoRepository repositorioCurso;
+	
+	@Autowired
+	private ImageService imageServ;
 	
 	
 	public IndexController () {		
@@ -264,65 +268,67 @@ public class IndexController {
 	
 	//************ BIENVENIDA Y PAGINA PRINCIPAL ************//
 	
-	//Se llama al método cuando se pulsa el botón "Iniciar Sesión" o "Registrarse", y se muestra la plantilla de bienvenido.
-	@PostMapping("/bienvenido")
-	public String bienvenido(Model model, @RequestParam String correo, @RequestParam String contraseña_1, @RequestParam MultipartFile image,
-			@RequestParam String nombreUsuario, @RequestParam String primerApellido, @RequestParam String apellido2,
-			@RequestParam("tipoUsuario") String tipoUsuario, @RequestParam("metodoPago") String metodoPago, HttpSession sesion) {
-		
+		//Se llama al método cuando se pulsa el botón "Iniciar Sesión" o "Registrarse", y se muestra la plantilla de bienvenido.
+		@PostMapping("/bienvenido")
+		public String bienvenido(Model model, @RequestParam String correo, @RequestParam String contraseña_1, @RequestParam MultipartFile image,
+				@RequestParam String nombreUsuario, @RequestParam String primerApellido, @RequestParam String apellido2,
+				@RequestParam("tipoUsuario") String tipoUsuario, @RequestParam("metodoPago") String metodoPago, HttpSession sesion) {
 			
-		model.addAttribute("correo", correo);
-		
-		Optional<Usuario> u = userRep.findByCorreo(correo);
-		if(u.isPresent()) {
-			return "volver_a_registro";
-		}else {		
-			int tipoU, metodoP;
-			
-			if(tipoUsuario.equals("Usuario estándar")) tipoU = 0;
-			else tipoU = 1;
-			
-			if(metodoPago.equals("Tarjeta de crédito")) metodoP = 0;
-			else metodoP = 1;
-			
-			Usuario registrado = new Usuario(nombreUsuario, primerApellido, apellido2, 
-					contraseña_1, 0, tipoU, correo, metodoP, null);
-			
-			System.out.println("Metodo Pago "+ metodoPago);
-			
-			//Comprobar que no haya nadie en la base de datos con ese correo
-			//*****************
-					
-			byte[] bytes;
-			
-			if (image != null) {
-				try {
-					// Por si se quiere guardar tambien el nombre y el tamaño de la imagen
-					String nombreFoto = image.getOriginalFilename();
-					long tamañoFoto = image.getSize();
-					
-					bytes = image.getBytes();
-					Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);
-					usuario.setFotoPerfil(imagen);
-					
-					bphoto = java.util.Base64.getEncoder().encodeToString(bytes);
-					
-					model.addAttribute("fotoperfil", bphoto);
-					
-					registrado.setFotoPerfil(imagen);
-				}
-				catch (Exception exc){
-					return "Fallo al establecer la imagen de perfil";
-				}
-			}
-			
-			userRep.save(registrado);
 				
-			sesion.setAttribute("user", registrado);
+			model.addAttribute("correo", correo);
 			
-			return "bienvenido";
+			Optional<Usuario> u = userRep.findByCorreo(correo);
+			if(u.isPresent()) {
+				return "volver_a_registro";
+			}else {		
+				int tipoU, metodoP;
+				
+				if(tipoUsuario.equals("Usuario estándar")) tipoU = 0;
+				else tipoU = 1;
+				
+				if(metodoPago.equals("Tarjeta de crédito")) metodoP = 0;
+				else metodoP = 1;
+				
+				Usuario registrado = new Usuario(nombreUsuario, primerApellido, apellido2, 
+						contraseña_1, 0, tipoU, correo, metodoP, null);
+				
+				//Comprobar que no haya nadie en la base de datos con ese correo
+				//*****************
+						
+				byte[] bytes;
+				
+				if (image != null) {
+					try {
+						// Por si se quiere guardar tambien el nombre y el tamaño de la imagen
+						String nombreFoto = image.getOriginalFilename();
+						long tamañoFoto = image.getSize();
+						
+						bytes = image.getBytes();
+						
+						String formatName = nombreFoto.substring(nombreFoto.lastIndexOf(".") + 1);	
+						bytes = imageServ.resize(bytes, 200, 200, formatName);
+						
+						Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);
+						usuario.setFotoPerfil(imagen);
+						
+						bphoto = java.util.Base64.getEncoder().encodeToString(bytes);
+						
+						model.addAttribute("fotoperfil", bphoto);
+						
+						registrado.setFotoPerfil(imagen);
+					}
+					catch (Exception exc){
+						return "Fallo al establecer la imagen de perfil";
+					}
+				}
+				
+				userRep.save(registrado);
+					
+				sesion.setAttribute("user", registrado);
+				
+				return "bienvenido";
+			}
 		}
-	}
 	
 	@PostMapping("/bienvenidoI")
 	public String bienvenidoInicio(Model model, @RequestParam String correo, @RequestParam String contrasena, HttpSession sesion) {
@@ -457,7 +463,8 @@ public class IndexController {
 		
 		
 		Usuario usuario = (Usuario) sesion.getAttribute("user");
-		usuario.EliminarCurso(index);
+		Curso c = repositorioCurso.findById(index);
+		usuario.EliminarCurso(c);
 		
 		
 		return "CursoEliminado";

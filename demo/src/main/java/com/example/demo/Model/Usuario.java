@@ -30,9 +30,6 @@ public class Usuario {
 	
 	@OneToMany
 	private List<Curso> cursos;
-
-	@Autowired 
-	private CursoRepository repositorioCurso;
 	
 	//@OneToOne(cascade=CascadeType.ALL)
 	//private UsuarioContraseña uc
@@ -134,18 +131,15 @@ public class Usuario {
 	
 	public void AñadirCurso(String titulo, String descripcion) {
 		Curso nuevoCurso = new Curso(titulo, descripcion, null);
-		repositorioCurso.save(nuevoCurso);
+		cursos.add(nuevoCurso);
 	}
 	
 	public List<Curso> getCursos() {
-		List<Curso> listaCursos = repositorioCurso.findAll();
-		return listaCursos;
+		return cursos;
 	}
 	
-	public void EliminarCurso(int index) {
-		Curso cursoEliminado = repositorioCurso.findById(index);
-		
-		repositorioCurso.delete(cursoEliminado);
+	public void EliminarCurso(Curso c) {
+		cursos.remove(c);
 	}
 
 }
