@@ -241,11 +241,9 @@ public class UserController {
 			if(examenActual.isPresent()) {
 				examRepo.delete(examenActual.get());
 			}
+			examRepo.save(m);
 		}
 		
-		
-		
-		examRepo.save(m);
 		
 		model.addAttribute("curso", curso);
 		model.addAttribute("mensaje", "Se ha creado el exámen con éxito");
