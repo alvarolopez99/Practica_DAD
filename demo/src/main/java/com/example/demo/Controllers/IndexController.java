@@ -474,16 +474,21 @@ public class IndexController {
 	}
 	
 	@GetMapping("/paginaprincipal")
-	public String paginaPrincipal(Model model) {	
+	public String paginaPrincipal(Model model, HttpSession sesion) {	
 		
-		Optional<Usuario> u = userRep.findByNombre("alvaro");
+		Usuario u = (Usuario) sesion.getAttribute("user");
+		if(u == null) {
+			Usuario user = new Usuario("------------", "------------", "------------", "------------", 0, 0, "------------", 0, null);
+			sesion.setAttribute("user", user);
+		}
+		/*Optional<Usuario> u = userRep.findByNombre("alvaro");
 		if (u.isPresent()) {
 			model.addAttribute("hayUsuario", true);
 			model.addAttribute("usuario", u);
 		}
 		else {
 			model.addAttribute("hayUsuario", false);
-		}
+		}*/
 			
 		return "paginaprincipal";
 	}
