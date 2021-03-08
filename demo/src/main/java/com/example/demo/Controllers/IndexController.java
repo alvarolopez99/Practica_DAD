@@ -25,6 +25,7 @@ import com.example.demo.Model.Material;
 import com.example.demo.Model.Mensaje;
 import com.example.demo.Model.Usuario;
 import com.example.demo.Repository.AnuncioRepository;
+import com.example.demo.Repository.ForosRepository;
 import com.example.demo.Repository.UsuarioRepository;
 
 import java.util.ArrayList;
@@ -38,10 +39,13 @@ public class IndexController {
 	private List<Foros> foros = new ArrayList<>();
 	private List<Curso> cursos = new ArrayList<Curso>();
 	private List<Anuncio> anuncios = new ArrayList<Anuncio>();
-	private ArrayList m;
+	private List<Mensaje> m;
 	public static Usuario usuario = new Usuario();
 	public static String bphoto;
 	public Uso_BD uso_bd = new Uso_BD();
+	//public Service service = new Service();
+
+
 	//public Service service = new Service();
 	
 	@Autowired 
@@ -49,6 +53,11 @@ public class IndexController {
 	
 	@Autowired 
 	private AnuncioRepository repositorioAnuncio;
+	
+
+	@Autowired 
+	private ForosRepository repositorioForos;
+	
 	
 	
 	public IndexController () {		
@@ -79,6 +88,8 @@ public class IndexController {
 	}
 	
 	
+
+
 	//************ FOROS ************//
 	
 	
@@ -86,7 +97,12 @@ public class IndexController {
 	public String MostrarForos (Model model) {
 		
 		//foros.add(new Foros("PREGUNTA", "BLABLABLA"));		
-		model.addAttribute("foros", foros);
+	
+		
+		if (repositorioForos.findAll() != null) {
+			model.addAttribute("foro",  repositorioForos.findAll());
+		}
+		
 		
 		return "Foros";
 	}
@@ -94,14 +110,55 @@ public class IndexController {
 	
 	@PostMapping("/foros/nuevoforo/creado")
 	public String NuevoForo(Model model, @RequestParam String asunto, @RequestParam String mensaje) {
-
+		
+		Foros foroNuevo = new Foros(asunto, mensaje, null);
+		
+		repositorioForos.save(foroNuevo);
+		
+		/*
 		foros.add(new Foros(asunto, mensaje, null));
+		*/
 		
 		return "forocreado";
 	}
 	
+	@GetMapping("/foros/{IDForo}")
+	public String VerForo(Model model, @PathVariable int IDForo) {
+		
+		
+		Optional<Foros> foro = repositorioForos.findById(IDForo);
+		 if (foro.isPresent()) {
+				model.addAttribute("infoForo",foro.get());
+		 } else {
+		
+		 }
+		/*
+		 if(foro.get().getMensajes() != null) {
+			 
+				m = foro.get().getMensajes();
+				usuario.setNombre("Soy un usuario");
+				m.add(new Mensaje(usuario, "mensaje enviado"));
+				model.addAttribute("mensaje", m);
+			 
+		 }*/
+		
+	
+		//Foros miforo = foros.get(IDForo-1);
+		
+		//m = miforo.getMensajes();
+		
+		//model.addAttribute("info", foro);
+	
+		//model.addAttribute("IDForo", (IDForo));
+		
+		
+		return "Foro";
+	}
+	
 	@PostMapping("/foros/{IDForo}/respuesta")
 	public String VerForo (Model model, @PathVariable int IDForo, @RequestParam String respuesta) {
+		
+		
 		
 		Foros foro = foros.get(IDForo-1);
 		m = foro.getMensajes();
@@ -111,22 +168,11 @@ public class IndexController {
 		model.addAttribute("mensaje", m);
 		model.addAttribute("IDForo", (IDForo));
 		
-		return "Foro";
-	}
-	
-	@GetMapping("/foros/{IDForo}")
-	public String VerForo(Model model, @PathVariable int IDForo) {
 		
-		Foros foro = foros.get(IDForo-1);
-		m = foro.getMensajes();
-		usuario.setNombre("Soy un usuario");
-		m.add(new Mensaje(usuario, "Y este es mi mensaje estático"));
-		model.addAttribute("info", foro);
-		model.addAttribute("mensaje", m);
-		model.addAttribute("IDForo", (IDForo));
-	
 		return "Foro";
 	}
+	
+	
 	
 	@GetMapping("/foros/nuevoforo")
 	public String CrearForo (Model model) {
