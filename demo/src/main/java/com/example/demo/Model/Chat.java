@@ -21,7 +21,7 @@ public class Chat {
 	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Mensaje> mensajes;
 	
-	public Chat(Usuario profesor, Usuario alumno, String cuerpoMensaje) {
+	public Chat(Usuario profesor, Usuario alumno) {
 		this.profesor = profesor;
 		this.alumno = alumno;
 		mensajes = new ArrayList<Mensaje>();
