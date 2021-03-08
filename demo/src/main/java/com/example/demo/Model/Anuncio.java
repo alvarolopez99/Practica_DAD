@@ -6,7 +6,7 @@ public class Anuncio {
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO) //Generado automaticamente
-	private long id;
+	private int id;
 	
 	@ManyToOne
 	private Usuario profesor;	
@@ -83,11 +83,11 @@ public class Anuncio {
 		this.contenido = contenido;
 	}
 	
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	

@@ -8,11 +8,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.Model.Anuncio;
 import com.example.demo.Model.Usuario;
 
-public interface AnuncioRepository extends JpaRepository<Anuncio, Long> {
+public interface AnuncioRepository extends JpaRepository<Anuncio, Integer> {
 	
 	//consultas personalizadas
 	
-	List<Anuncio> findById(long id);	
+	List<Anuncio> findById(int id);	
 	
 	List<Anuncio> findByprofesor(Usuario profesor);
 

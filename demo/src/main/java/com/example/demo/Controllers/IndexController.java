@@ -22,6 +22,7 @@ import com.example.demo.Model.Foros;
 import com.example.demo.Model.Material;
 import com.example.demo.Model.Mensaje;
 import com.example.demo.Model.Usuario;
+import com.example.demo.Repository.AnuncioRepository;
 import com.example.demo.Repository.UsuarioRepository;
 
 import java.util.ArrayList;
@@ -43,6 +44,10 @@ public class IndexController {
 	
 	@Autowired 
 	private UsuarioRepository userRep;
+	
+	@Autowired 
+	private AnuncioRepository repositorioAnuncio;
+	
 	
 	public IndexController () {		
 		
@@ -263,8 +268,11 @@ public class IndexController {
 	@GetMapping("/anuncios")
 	public String anuncios(Model model) {
 		
-		model.addAttribute("anuncios", anuncios);
-		
+	
+		if (repositorioAnuncio.findAll() != null) {
+			model.addAttribute("anuncios",  repositorioAnuncio.findAll());
+		}
+
 		return "Anuncios";
 	}	
 	
@@ -272,19 +280,25 @@ public class IndexController {
 	public String crearAnuncio(Model model) {
 		
 		return "formulario_crear_anuncio";
+		
 	}
+	
 	
 	@PostMapping("/anuncioCreado")
 	public String anuncioCreado(Model model, @RequestParam String materia, @RequestParam String curso, 
 			@RequestParam String horario, @RequestParam String precio, @RequestParam String contenido) {
 		
 		usuario.setNombre("Alvaro");
-		anuncios.add(new Anuncio (usuario, materia, contenido, horario, precio, curso) ); //Falta pasar como primer parámetro el profesor que crea el anuncio
+		//anuncios.add(new Anuncio (usuario, materia, contenido, horario, precio, curso) ); //Falta pasar como primer parámetro el profesor que crea el anuncio
+		Anuncio anuncio = new Anuncio(materia, contenido, horario, precio, curso);
+		repositorioAnuncio.save(anuncio);
 		
 		//service.CrearAnuncio();
 		
 		return "anuncio_creado";
 	}
+	
+	
 	
 	@GetMapping("/anuncios/{IDAnuncio}")
 	public String anuncio(Model model, @PathVariable int IDAnuncio) {
@@ -310,8 +324,10 @@ public class IndexController {
 	@GetMapping("/eliminarAnuncio/{index}")
 	public String eliminarAnuncio(Model model, @PathVariable int index) {
 		
-		anuncios.remove(index-1);
+		//anuncios.remove(index-1);
 		
+		repositorioAnuncio.deleteById(index);
+
 		return "anuncio_eliminado";
 	}
 	
