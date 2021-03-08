@@ -25,6 +25,7 @@ import com.example.demo.Model.Material;
 import com.example.demo.Model.Mensaje;
 import com.example.demo.Model.Usuario;
 import com.example.demo.Repository.AnuncioRepository;
+import com.example.demo.Repository.CursoRepository;
 import com.example.demo.Repository.ForosRepository;
 import com.example.demo.Repository.UsuarioRepository;
 
@@ -58,6 +59,8 @@ public class IndexController {
 	@Autowired 
 	private ForosRepository repositorioForos;
 	
+	@Autowired 
+	private CursoRepository repositorioCurso;
 	
 	
 	public IndexController () {		
@@ -409,7 +412,10 @@ public class IndexController {
 		//imagenes_Cursos.add("https://i0.wp.com/mathsteachercircles.org.au/wp-content/uploads/2020/10/cropped-MTC_Icon_RGB.png?fit=190%2C190&ssl=1");
 		//imagenes_Cursos.add("https://pbs.twimg.com/profile_images/1110160859689615361/V8CE--1C.png");
 		
-		model.addAttribute("cursos", cursos);
+		
+		List<Curso> listaCursos = repositorioCurso.findAll();
+		
+		model.addAttribute("cursos", listaCursos);
 		
 		return "Cursos";
 	}
@@ -418,7 +424,10 @@ public class IndexController {
 	@GetMapping("/eliminarCurso/{index}")
 	public String eliminarCurso(Model model, @PathVariable int index) {
 		
-		cursos.remove(index-1);
+		Curso cursoEliminado = repositorioCurso.findById(index);
+		
+		repositorioCurso.delete(cursoEliminado);
+		
 		
 		return "CursoEliminado";
 	}
@@ -452,7 +461,8 @@ public class IndexController {
 	@PostMapping("/crearCursoConfirmacion")
 	public String crearCursoConfirmacion(Model model, @RequestParam String titulo, @RequestParam String descripcion) {
 	
-		cursos.add(new Curso(titulo, descripcion, null));
+		Curso nuevoCurso = new Curso(titulo, descripcion, null);
+		repositorioCurso.save(nuevoCurso);
 		
 		return "Curso_Creado_Confirmacion";
 	}

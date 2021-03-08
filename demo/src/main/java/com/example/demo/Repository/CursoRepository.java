@@ -8,7 +8,7 @@ import com.example.demo.Model.Curso;
 
 public interface CursoRepository extends JpaRepository<Curso, Long> {
 	
-	List<Curso> findById(long id);
+	Curso findById(long id);
 	Optional<Curso> findByTitulo(String titulo);
 	List<Curso> findByDescripcion(String descripcion);
 	List<Curso> findByImagen(String imagen);
