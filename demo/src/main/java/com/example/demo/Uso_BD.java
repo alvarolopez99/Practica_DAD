@@ -89,8 +89,8 @@ public class Uso_BD{
 		
 		
 		// Foros
-		Foros foro_Coches = new Foros("Foro sobre coches", "Los coches son muy complejos", alumno1);
-		Foros foro_Flores = new Foros("Foro sobre flores", "Las flores huelen a rosa", profesor1);
+		//Foros foro_Coches = new Foros("Foro sobre coches", "Los coches son muy complejos", alumno1);
+		//Foros foro_Flores = new Foros("Foro sobre flores", "Las flores huelen a rosa", profesor1);
 		
 		
 		// Mensajes
@@ -102,12 +102,13 @@ public class Uso_BD{
 		mensaje_repository.save(mensaje_Foro_Coches2);
 		mensaje_repository.save(mensaje_Foro_Flores);		
 		
-		foro_Coches.AñadirMensaje(mensaje_Foro_Coches1);
-		foro_Coches.AñadirMensaje(mensaje_Foro_Coches2);
-		foro_Flores.AñadirMensaje(mensaje_Foro_Flores);
 		
-		foros_repository.save(foro_Coches);
-		foros_repository.save(foro_Flores);
+		//foro_Coches.AñadirMensaje(mensaje_Foro_Coches1);
+		//foro_Coches.AñadirMensaje(mensaje_Foro_Coches2);
+		//foro_Flores.AñadirMensaje(mensaje_Foro_Flores);
+		
+		//foros_repository.save(foro_Coches);
+		//foros_repository.save(foro_Flores);
 		
 		
 		// Chats

@@ -45,12 +45,18 @@ public class Foros {
 
 	}
 
-	public Foros(String title, String text, Usuario creador) {
+	public Foros(String title, String text) {
 		super();
-		this.creador = creador;
 		this.Asunto = title;
 		this.Cuerpo = text;
-		this.mensajes = new ArrayList<Mensaje>();
+		mensajes = new ArrayList<Mensaje>();
+	}
+	
+	public Foros(String title, String text,List<Mensaje> mensajes ) {
+		super();
+		this.Asunto = title;
+		this.Cuerpo = text;
+		mensajes = mensajes;
 	}
 	
 	/*public String getUser() {
@@ -65,8 +71,8 @@ public class Foros {
 		mensajes.add(mensaje);
 	}
 	
-	public ArrayList getMensajes() {
-		return (ArrayList) mensajes;
+	public List<Mensaje>  getMensajes() {
+		return mensajes;
 	}
 
 
