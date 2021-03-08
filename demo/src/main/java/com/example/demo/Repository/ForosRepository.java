@@ -3,5 +3,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.Model.Foros;
 
-public interface ForosRepository extends JpaRepository<Foros, Long> {
+public interface ForosRepository extends JpaRepository<Foros, Integer> {
 }

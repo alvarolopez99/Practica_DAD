@@ -23,13 +23,13 @@ a {
 
 	<div align="center">	  
 
-	{{#info}}
-	<h1>{{title}}</h1>
-	{{/info}}
+	{{#infoForo}}
+	<h1>{{Asunto}}</h1>
+	{{/infoForo}}
 	
-	{{#info}}
-	<p>{{text}}</p>
-	{{/info}}
+	{{#infoForo}}
+	<p>{{Cuerpo}}</p>
+	{{/infoForo}}
 	
 	
 	{{#mensaje}}
@@ -37,14 +37,14 @@ a {
     {{/mensaje}}
 	
 	
-	{{#info}}
+	{{#infoForo}}
 	<form action="/foros/{{IDForo}}/respuesta" method="post">	
 	
 	<p>Responder:</p>
 	<textarea name='respuesta' rows=5 cols=40></textarea>
 	<input type='submit' value='Enviar'/>
 	</form>
-	{{/info}}
+	{{/infoForo}}
 	
 	<a href="/foros">VOLVER</a>
 	

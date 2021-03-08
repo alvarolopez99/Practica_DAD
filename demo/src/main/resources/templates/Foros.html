@@ -32,13 +32,13 @@ a {
 	</div>
 
 	<div align="center">
-		{{#foros}}
-		<a href="foros/{{-index}}">{{title}}</a><br><br>
-		{{/foros}}
+		{{#foro}}
+		<a href="foros/{{id}}">{{Asunto}}</a><br><br>
+		{{/foro}}
 
-		{{^foros}}
+		{{^foro}}
 		<p>No hay foros disponibles.</p>
-		{{/foros}}
+		{{/foro}}
 
 		<br>
 		<a href="/foros/nuevoforo">Crear foro</a>

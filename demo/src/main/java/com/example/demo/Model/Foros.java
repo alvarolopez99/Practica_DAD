@@ -12,7 +12,7 @@ public class Foros {
 
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private int id;
 	
 	private String titulo;
 	
@@ -29,8 +29,8 @@ public class Foros {
 	//******************************//
 	
 	//private String user;
-	private String asunto;
-	private String cuerpo;
+	private String Asunto;
+	private String Cuerpo;
 	
 	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Mensaje> mensajes;
@@ -48,8 +48,8 @@ public class Foros {
 	public Foros(String title, String text, Usuario creador) {
 		super();
 		this.creador = creador;
-		this.asunto = title;
-		this.cuerpo = text;
+		this.Asunto = title;
+		this.Cuerpo = text;
 		this.mensajes = new ArrayList<Mensaje>();
 	}
 	
@@ -70,25 +70,33 @@ public class Foros {
 	}
 
 
-	public String getTitle() {
-		return asunto;
+	public int getid() {
+		return id;
 	}
 
-	public void setTitle(String title) {
-		this.asunto = title;
+	public void setid(int id) {
+		this.id = id;
+	}
+	
+	public String getAsunto() {
+		return Asunto;
 	}
 
-	public String getText() {
-		return cuerpo;
+	public void setAsunto(String Asunto) {
+		this.Asunto = Asunto;
 	}
 
-	public void setText(String text) {
-		this.cuerpo = text;
+	public String getCuerpo() {
+		return Cuerpo;
+	}
+
+	public void setCuerpo(String Cuerpo) {
+		this.Cuerpo = Cuerpo;
 	}
 	
 	@Override
 	public String toString() {
-		return "Post [id="+id+", user=" + "user" + ", title=" + asunto + ", text=" + cuerpo + "]";
+		return "Post [id="+id+", user=" + "user" + ", title=" + Asunto + ", text=" + Cuerpo + "]";
 	}
 	
 	
