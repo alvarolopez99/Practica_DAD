@@ -51,8 +51,7 @@ public class UserController {
 		
 		Usuario user = (Usuario)sesion.getAttribute("user");
 		Blob foto = user.getFotoPerfil();
-		byte[] bdata = foto.getBytes(1, (int) foto.length());
-		String s = java.util.Base64.getEncoder().encodeToString(bdata);
+		
 		
 		
 		//Inicializacion de usuario provisional
@@ -75,9 +74,13 @@ public class UserController {
 			else {
 				model.addAttribute("tipoUsuario", "Profesor");
 			}
-			
-			model.addAttribute("imagen", s);
-
+			if(foto.length() > 1) {
+				byte[] bdata = foto.getBytes(1, (int) foto.length());
+				String s = java.util.Base64.getEncoder().encodeToString(bdata);
+				model.addAttribute("imagen", s);
+			}else {
+				model.addAttribute("imagen", "");
+			}
 		} else {
 			
 			model.addAttribute("hayUsuario", false);
