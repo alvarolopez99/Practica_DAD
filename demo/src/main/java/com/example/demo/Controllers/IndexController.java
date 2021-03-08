@@ -2,12 +2,21 @@ package com.example.demo.Controllers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.Optional;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
+import javax.sql.rowset.serial.SerialException;
+import javax.swing.ImageIcon;
 
+import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +40,10 @@ import com.example.demo.Repository.UsuarioRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import java.io.ByteArrayOutputStream;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 
 
@@ -83,12 +96,24 @@ public class IndexController {
 	}
 	
 	@PostMapping("/profesorAgregado")
-	public String profesorAgregado(Model model, @RequestParam String correo, @RequestParam String contraseña) {
+	public String profesorAgregado(Model model, @RequestParam String correo, @RequestParam String contraseña_1, @RequestParam String apellido1,
+			@RequestParam String apellido2, @RequestParam String nombreUsuario) throws IOException, SerialException, SQLException {
 
+		BufferedImage bImage = ImageIO.read(getClass().getResourceAsStream("/profesor.png"));
+	    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+	    ImageIO.write(bImage, "jpg", bos );
+	    byte [] data = bos.toByteArray();
+	    Blob imagen = new javax.sql.rowset.serial.SerialBlob(data);
+		
+		Usuario profesor = new Usuario(nombreUsuario, apellido1, apellido2, 
+				contraseña_1, 1, 1, correo, 0, imagen);				
+		userRep.save(profesor);
+		
 		model.addAttribute("correo", correo);
 		
 		return "ProfesorAgregadoConfirmacion";
 	}
+
 	
 	
 
