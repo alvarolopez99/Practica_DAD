@@ -53,7 +53,7 @@ public class IndexController {
 	private UsuarioRepository userRep;
 	
 	@Autowired 
-	private AnuncioRepository repositorioAnuncio;
+	private AnuncioRepository repositorioAnuncios;
 	
 
 	@Autowired 
@@ -328,75 +328,80 @@ public class IndexController {
 	
 	//************ ANUNCIOS ************//
 	
-	@GetMapping("/anuncios")
-	public String anuncios(Model model) {
+		@GetMapping("/anuncios")
+		public String anuncios(Model model) {
+			
 		
-	
-		if (repositorioAnuncio.findAll() != null) {
-			model.addAttribute("anuncios",  repositorioAnuncio.findAll());
+			if (repositorioAnuncios.findAll() != null) {
+				model.addAttribute("anuncios",  repositorioAnuncios.findAll());
+			}
+
+			return "Anuncios";
+		}	
+		
+		@GetMapping("/crearAnuncio")
+		public String crearAnuncio(Model model) {
+			
+			return "formulario_crear_anuncio";
+			
 		}
+		
+		
+		@PostMapping("/anuncioCreado")
+		public String anuncioCreado(Model model, @RequestParam String materia, @RequestParam String curso, 
+				@RequestParam String horario, @RequestParam String precio, @RequestParam String contenido) {
+			
+			usuario.setNombre("Alvaro");
+			//anuncios.add(new Anuncio (usuario, materia, contenido, horario, precio, curso) ); //Falta pasar como primer parámetro el profesor que crea el anuncio
+			Anuncio anuncio = new Anuncio(materia, contenido, horario, precio, curso);
+			repositorioAnuncios.save(anuncio);
+			
+			//service.CrearAnuncio();
+			
+			return "anuncio_creado";
+		}
+		
+		
+		
+		@GetMapping("/anuncios/{IDAnuncio}")
+		public String anuncio(Model model, @PathVariable int IDAnuncio) {
+			
+			//model.addAttribute("infoProfesor", idAnuncio);
+			//model.addAttribute("nombreProfesor", "Nombre del profesor");
 
-		return "Anuncios";
-	}	
-	
-	@GetMapping("/crearAnuncio")
-	public String crearAnuncio(Model model) {
+			
+			Optional<Anuncio> anuncio = repositorioAnuncios.findById(IDAnuncio);
+			
+			 if (anuncio.isPresent()) {
+					model.addAttribute("infoAnuncio",anuncio.get());
+			 } else {
+			
+			 }
+			
+			/*Anuncio anuncio = anuncios.get(IDAnuncio-1);
+			
+			model.addAttribute("infoAnuncio", anuncio);
+			Usuario profesor = anuncio.getProfesor();
+			model.addAttribute("profesor", profesor);
+			
+			*/
+			
+			return "Anuncio";
+		}
 		
-		return "formulario_crear_anuncio";
-		
-	}
-	
-	
-	@PostMapping("/anuncioCreado")
-	public String anuncioCreado(Model model, @RequestParam String materia, @RequestParam String curso, 
-			@RequestParam String horario, @RequestParam String precio, @RequestParam String contenido) {
-		
-		usuario.setNombre("Alvaro");
-		//anuncios.add(new Anuncio (usuario, materia, contenido, horario, precio, curso) ); //Falta pasar como primer parámetro el profesor que crea el anuncio
-		Anuncio anuncio = new Anuncio(materia, contenido, horario, precio, curso);
-		repositorioAnuncio.save(anuncio);
-		
-		//service.CrearAnuncio();
-		
-		return "anuncio_creado";
-	}
-	
-	
-	
-	@GetMapping("/anuncios/{IDAnuncio}")
-	public String anuncio(Model model, @PathVariable int IDAnuncio) {
-		
-		//model.addAttribute("infoProfesor", idAnuncio);
-		//model.addAttribute("nombreProfesor", "Nombre del profesor");
+		@GetMapping("/eliminarAnuncio/{index}")
+		public String eliminarAnuncio(Model model, @PathVariable int index) {
+			
+			//anuncios.remove(index-1);
+			
+			repositorioAnuncios.deleteById(index);
 
-		
-		Anuncio anuncio = anuncios.get(IDAnuncio-1);
-		
-		
-		
-		model.addAttribute("infoAnuncio", anuncio);
-		Usuario profesor = anuncio.getProfesor();
-		model.addAttribute("profesor", profesor);
+			return "anuncio_eliminado";
+		}
 		
 		
+		//************ CURSOS ************//
 		
-		
-		return "Anuncio";
-	}
-	
-	@GetMapping("/eliminarAnuncio/{index}")
-	public String eliminarAnuncio(Model model, @PathVariable int index) {
-		
-		//anuncios.remove(index-1);
-		
-		repositorioAnuncio.deleteById(index);
-
-		return "anuncio_eliminado";
-	}
-	
-	
-	//************ CURSOS ************//
-	
 	@GetMapping("/cursosDisponibles")
 	public String cursosDisponibles(Model model) {
 		
