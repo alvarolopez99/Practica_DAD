@@ -3,16 +3,21 @@
 {{>Inicial}}
 
 <div align="center">
-    <p><b><br><br>Exámen de evaluación: {{curso}}</b></p>	
-    <form method="post" action="/{{curso}}/examen/completado">
-	{{#preguntas}}
-		<p><b> Pregunta {{-index}}</b></p>
-        	<p> {{enunciado}} </p>
-        	<input name="resp{{-index}}" type="text" id="resp{{-index}}" size="63" />
-	{{/preguntas}}
+
+    <br><br>
+    <p>Exámen de evaluación: {{curso}}</p>	
+    
+    	<form method="post" action="/{{curso}}/examen/completado">
+			{{#preguntas}}
+				<p> Pregunta {{-index}}</p>
+        		<p> {{enunciado}} </p>
+        	
+        		<input name="resp{{-index}}" type="text" id="resp{{-index}}" size="50" />
+			{{/preguntas}}
 	
-    	<br><br><button type="submit">Finalizar</button>
-    </form>
+  	    	<br><br>
+    		<button type="submit">Finalizar</button>
+    	</form>
 
 </div>
 
