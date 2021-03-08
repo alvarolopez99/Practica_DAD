@@ -219,19 +219,20 @@ public class UserController {
 			@RequestParam String preg1, @RequestParam String preg2, @RequestParam String preg3,
 			@RequestParam String preg4, @RequestParam String preg5){
 		
-		/*Examen m = new Examen();	//Crear y guardar nuevo examen
-		m.addPregunta(new Pregunta(preg1, resp1));
-		m.addPregunta(new Pregunta(preg2, resp2));
-		m.addPregunta(new Pregunta(preg3, resp3));
-		m.addPregunta(new Pregunta(preg4, resp4));
-		m.addPregunta(new Pregunta(preg5, resp5));*/
+
 		
 		//Base de datos
-		/*Optional<Curso> c = cursoRepo.findByTitulo(curso);
-		if(c.isPresent()) {
-			m.setCurso(c.get());	//Lo asocia con el curso concreto
+		Curso c = cursoRepo.findById(Long.parseLong(curso));
+		if(c != null) {
+			Examen m = new Examen(c);	//Crear y guardar nuevo examen
+			m.addPregunta(new Pregunta(preg1, resp1));
+			m.addPregunta(new Pregunta(preg2, resp2));
+			m.addPregunta(new Pregunta(preg3, resp3));
+			m.addPregunta(new Pregunta(preg4, resp4));
+			m.addPregunta(new Pregunta(preg5, resp5));
+			m.setCurso(c);	//Lo asocia con el curso concreto
 			
-			Optional<Examen> examenActual = examRepo.findByCurso(c.get().getId());
+			Optional<Examen> examenActual = examRepo.findByCurso(c.getId());
 			
 			if(examenActual.isPresent()) {
 				examRepo.delete(examenActual.get());
@@ -240,7 +241,7 @@ public class UserController {
 		
 		
 		
-		examRepo.save(m);*/
+		examRepo.save(m);
 		
 		model.addAttribute("curso", curso);
 		model.addAttribute("mensaje", "Se ha creado el exámen con éxito");
