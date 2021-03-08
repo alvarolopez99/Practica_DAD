@@ -24,6 +24,7 @@ public class Examen {
 	@OneToOne
 	private Curso curso;
 	
+	public Examen() {}
 	public Examen(Curso curso) {
 		this.curso = curso;
 	}

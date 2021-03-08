@@ -156,14 +156,14 @@ public class UserController {
 	public String hacerExamen(Model model, @PathVariable String curso){
 		
 		
-		preguntas.add(new Pregunta("¿Patata frita?", "Si"));
-		preguntas.add(new Pregunta("¿En qué continente está España?", "Europa"));
-		preguntas.add(new Pregunta("¿En qué continente está España?", "Europa"));
-		preguntas.add(new Pregunta("¿En qué continente está España?", "Europa"));
-		preguntas.add(new Pregunta("¿En qué continente está España?", "Europa"));
+		Curso c = cursoRepo.findById(Long.parseLong(curso));
+		model.addAttribute("curso", c.getTitulo());
 		
-		model.addAttribute("curso", curso);
-		model.addAttribute("preguntas", preguntas);
+		Optional<Examen> e = examRepo.findByCurso(c);
+		if(e.isPresent()) {			
+			model.addAttribute("preguntas", e.get().getPreguntas());
+		}
+		
 		return "resolverExamen";
 	}
 	
@@ -218,8 +218,8 @@ public class UserController {
 	}
 	
 	@PostMapping("/{curso}/examencreado")
-	public String creadoExamen(Model model, @RequestParam String resp1, @RequestParam String resp2, @RequestParam String resp3,
-			@RequestParam String resp4, @RequestParam String resp5, HttpSession session, @PathVariable String curso,
+	public String creadoExamen(Model model,  @PathVariable String curso, @RequestParam String resp1, @RequestParam String resp2, @RequestParam String resp3,
+			@RequestParam String resp4, @RequestParam String resp5, HttpSession session,
 			@RequestParam String preg1, @RequestParam String preg2, @RequestParam String preg3,
 			@RequestParam String preg4, @RequestParam String preg5){
 		
@@ -227,6 +227,7 @@ public class UserController {
 		
 		//Base de datos
 		Curso c = cursoRepo.findById(Long.parseLong(curso));
+		
 		if(c != null) {
 			Examen m = new Examen(c);	//Crear y guardar nuevo examen
 			m.addPregunta(new Pregunta(preg1, resp1));
@@ -234,16 +235,15 @@ public class UserController {
 			m.addPregunta(new Pregunta(preg3, resp3));
 			m.addPregunta(new Pregunta(preg4, resp4));
 			m.addPregunta(new Pregunta(preg5, resp5));
-			m.setCurso(c);	//Lo asocia con el curso concreto
+			m.setCurso(c);	//Lo asocia con el curso concreto 
 			
-			Optional<Examen> examenActual = examRepo.findByCurso(c.getId());
+			Optional<Examen> examenActual = examRepo.findByCurso(c);
 			
 			if(examenActual.isPresent()) {
 				examRepo.delete(examenActual.get());
 			}
 			examRepo.save(m);
 		}
-		
 		
 		model.addAttribute("curso", curso);
 		model.addAttribute("mensaje", "Se ha creado el exámen con éxito");
