@@ -1,26 +1,30 @@
 <html>
 {{>Inicial}}
+
 <style>
 body {
   background-color: ivory;
   overflow-y:  scroll
 }
-
 p {
   font-family: verdana;
   font-size: 15px;
 }
 </style>
 
-
 <head>
+
   <meta charset="UTF-8">
+  
 </head>
+
 <body>
 
-
 <div id="titulo">
-	<p align="center" style="font-size:25px"><br><br><b>Formulario de registro</b><br><br></p>
+
+	<p align="center" style="font-size:25px"> 
+	<b>Formulario de registro</p>
+	
 </div>
 
 
@@ -94,7 +98,9 @@ p {
     	<br><p><br>Sube una foto de perfil (Opcional):</p><input type='file' name='image' accept=".jpg, .jpeg, .png">
         
         <br><br><br/><input type='submit' id='submit' value='Registrarme' disabled="disabled">
-
+        
+        <br><br><br><br>
+	
 	</form>
 	
 	
@@ -108,21 +114,26 @@ p {
 
 
 
-<script>
-		var password = document.getElementById('pwd');
-		confirm_password = document.getElementById('cpwd');
-		    function display() {
-		        if ((confirm_password.value!='')&&(password.value != confirm_password.value)) {
-		            document.getElementById('errorMsg').innerHTML='Passwords Don\'t Match';
-		            document.getElementById('submit').disabled = true;
-		        } else if((confirm_password.value!='')&&(password.value == confirm_password.value)){
-		        	document.getElementById('errorMsg').innerHTML='';
-		        	if((document.getElementById('choice1').checked)||(document.getElementById('choice2').checked)){
-		        		document.getElementById('submit').disabled = false;
-		        	}		            
-		        }
-		    }
-</script>
+	<script>
+			var password = document.getElementById('pwd');
+			confirm_password = document.getElementById('cpwd');
+			   
+			    function display() {
+			    
+		        	if ((confirm_password.value!='')&&(password.value != confirm_password.value)) {
+		           		 document.getElementById('errorMsg').innerHTML='Passwords Don\'t Match';
+		           		 document.getElementById('submit').disabled = true;
+		       		 } else if((confirm_password.value!='')&&(password.value == confirm_password.value))
+		       		 {
+		        			document.getElementById('errorMsg').innerHTML='';
+		        		
+		        			if((document.getElementById('choice1').checked)||(document.getElementById('choice2').checked))
+		        			{
+		        				document.getElementById('submit').disabled = false;
+		        			}		            
+		       		 }
+		   		}
+	</script>
 
 
 {{>footer}}
