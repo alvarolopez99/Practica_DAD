@@ -42,40 +42,41 @@ public class UserController {
 	MailService mail;
 	
 	@GetMapping("/profile")
-	public String editUser(Model model, HttpSession session) {
+	public String editUser(Model model, HttpSession sesion) {
 		
 		//Leer usuario actual del httpsession
-		/*
+		
 		Usuario user = (Usuario)sesion.getAttribute("user");
-		*/
+		
 		
 		//Inicializacion de usuario provisional
-		Usuario user = new Usuario("Pablo", "Bayona", "González", "contraseña123", 0, 0, "correo@correo.es", 0, null);
+		//Usuario user = new Usuario("Pablo", "Bayona", "González", "contraseña123", 0, 0, "correo@correo.es", 0, null);
 		
-		
-		model.addAttribute("usuario", user);
-		
-		if(user.getTipoSuscripcion()==0){
-			model.addAttribute("tipoSuscripcion", "Estándar");
-		}
-		else {
-			model.addAttribute("tipoSuscripcion", "Premium");
-		}
-		
-		if(user.getTipoUsuario()==0){
-			model.addAttribute("tipoUsuario", "Alumno");
-		}
-		else {
-			model.addAttribute("tipoUsuario", "Profesor");
-		}
-		
-		if (user.getFotoPerfil() != null) {
+		if (user != null) {
 			model.addAttribute("hayUsuario", true);
+			model.addAttribute("usuario", user);
+			
+			if(user.getTipoSuscripcion()==0){
+				model.addAttribute("tipoSuscripcion", "Estándar");
+			}
+			else {
+				model.addAttribute("tipoSuscripcion", "Premium");
+			}
+			
+			if(user.getTipoUsuario()==0){
+				model.addAttribute("tipoUsuario", "Alumno");
+			}
+			else {
+				model.addAttribute("tipoUsuario", "Profesor");
+			}
+			
 			model.addAttribute("imagen", user.getFotoPerfil());
-		}
-		else {
+
+		} else {
+			
 			model.addAttribute("hayUsuario", false);
 		}
+		
 		
 		
 		return "editarperfil";
@@ -85,12 +86,12 @@ public class UserController {
 	public String deleteUser(Model model, HttpSession session) {
 		
 		//Leer usuario actual del httpsession
-		/*
+		
 		Usuario user = (Usuario)session.getAttribute("user");
-		userRepo.remove(user);
+		userRepo.delete(user);
 		session.setAttribute("user", null);
 		
-		*/
+		
 		
 		model.addAttribute("mensaje", "Se ha eliminado correctamente al usuario");
 		return "usuarioModificado";
