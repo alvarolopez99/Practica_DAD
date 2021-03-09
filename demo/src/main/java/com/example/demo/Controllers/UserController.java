@@ -28,6 +28,7 @@ import com.example.demo.Model.Pregunta;
 import com.example.demo.Repository.CursoRepository;
 import com.example.demo.Repository.ExamenRepository;
 import com.example.demo.Repository.UsuarioRepository;
+import com.example.demo.services.ImageService;
 import com.example.demo.services.MailService;
 
 
@@ -40,6 +41,9 @@ public class UserController {
 	ExamenRepository examRepo;
 	@Autowired
 	CursoRepository cursoRepo;
+	
+	@Autowired
+	private ImageService imageServ;
 	
 	@Autowired
 	MailService mail;
@@ -127,7 +131,13 @@ public class UserController {
 			if (!image.isEmpty()) {
 				try {					
 					byte[] bytes = image.getBytes();
+					
+					String nombreFoto = image.getOriginalFilename();
+					String formatName = nombreFoto.substring(nombreFoto.lastIndexOf(".") + 1);	
+					bytes = imageServ.resize(bytes, 200, 200, formatName);
+					
 					Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);
+					
 					
 					String bphoto = java.util.Base64.getEncoder().encodeToString(bytes);
 					

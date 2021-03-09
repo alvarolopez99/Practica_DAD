@@ -14,14 +14,12 @@ public class FilterService {
 	
 	public String filtrarLenguaje(String input) {
 		
-		System.out.println("Cadena inicial: "+ input);
 		for(String s: filtro) {
 			
 			input = input.replaceAll(s, "***");
 			
 		}
 		
-		System.out.println("Cadena modificada: "+input);
 		return input;
 	}
 }
