@@ -59,14 +59,6 @@ public class Foros {
 		mensajes = mensajes;
 	}
 	
-	/*public String getUser() {
-		return user;
-	}*/
-
-	/*public void setUser(String user) {
-		this.user = user;
-	}/*/
-	
 	public void AñadirMensaje(Mensaje mensaje) {
 		mensajes.add(mensaje);
 	}
@@ -104,37 +96,4 @@ public class Foros {
 	public String toString() {
 		return "Post [id="+id+", user=" + "user" + ", title=" + Asunto + ", text=" + Cuerpo + "]";
 	}
-	
-	
-	/*
-	public Foros(Usuario usuario, Blob imagen) {
-		this.usuario = usuario;
-		this.imagen = imagen;
-	}
-	
-	
-	
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-	
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-	
-	public Usuario getUsuario() {
-		return usuario;
-	}
-	
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-	
-	public String getTitulo() {
-		return titulo;
-	}*/
 }

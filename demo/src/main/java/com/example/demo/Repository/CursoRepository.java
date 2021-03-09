@@ -13,7 +13,6 @@ public interface CursoRepository extends JpaRepository<Curso, Long> {
 	Curso findById(long id);
 	Optional<Curso> findByTitulo(String titulo);
 	List<Curso> findByDescripcion(String descripcion);
-	//List<Curso> findByImagen(Blob archivo);	
 }
 
 
