@@ -256,6 +256,7 @@ public class IndexController {
 	//Llamada cuando pulsamos el botón de Login, aparecerá el formulario para logearse.
 	@GetMapping("/login")
 	public String loginMain(Model model) {
+		model.addAttribute("atributo", true);
 		return "Iniciar_Sesion";
 	}
 	
@@ -299,7 +300,7 @@ public class IndexController {
 	//Llamada cuando pulsemos el botón de Registrarse, aparecerá el formulario de New User
 	@GetMapping("/newuser")
 	public String newuserMain(Model model) {
-
+		model.addAttribute("atributo", true);
 		return "Registro_NuevoUsuario";
 	}
 	
@@ -572,6 +573,8 @@ public class IndexController {
 	
 	@GetMapping("/paginaprincipal")
 	public String paginaPrincipal(Model model, HttpSession sesion) {	
+		
+		
 		
 		Usuario u = (Usuario) sesion.getAttribute("user");
 		if(u == null) {
