@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.example.demo.Repository.CursoRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -50,6 +51,7 @@ public class Usuario {
 		this.correo = correo;
 		this.metodoPago = metodoPago;
 		this.fotoPerfil = fotoPerfil;
+		cursos = new ArrayList<Curso>();
 	}
 	
 	public long getId() {
@@ -129,6 +131,7 @@ public class Usuario {
 		this.contraseña = contraseña;
 	}
 	
+	/*
 	public void AñadirCurso(String titulo, String descripcion) {
 		Curso nuevoCurso = new Curso(titulo, descripcion, null);
 		cursos.add(nuevoCurso);
@@ -141,5 +144,6 @@ public class Usuario {
 	public void EliminarCurso(Curso c) {
 		cursos.remove(c);
 	}
+	*/
 
 }

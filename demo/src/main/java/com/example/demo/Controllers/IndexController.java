@@ -486,23 +486,31 @@ public class IndexController {
 		//imagenes_Cursos.add("https://i0.wp.com/mathsteachercircles.org.au/wp-content/uploads/2020/10/cropped-MTC_Icon_RGB.png?fit=190%2C190&ssl=1");
 		//imagenes_Cursos.add("https://pbs.twimg.com/profile_images/1110160859689615361/V8CE--1C.png");
 		
-		Usuario usuario = (Usuario) sesion.getAttribute("user");
+		/*
+		 * Usuario usuario = (Usuario) sesion.getAttribute("user");
+		 * List<Curso> listaCursos = usuario.getCursos(); */
 		
-		List<Curso> listaCursos = usuario.getCursos();
 		
-		model.addAttribute("cursos", listaCursos);
+		List<Curso> cursos = repositorioCurso.findAll();
+		
+		
+		model.addAttribute("cursos", cursos);
 		
 		return "Cursos";
 	}
 	
 	
 	@GetMapping("/eliminarCurso/{index}")
-	public String eliminarCurso(Model model, @PathVariable int index, HttpSession sesion) {
+	public String eliminarCurso(Model model, @PathVariable int index/*, HttpSession sesion*/) {
+			
+		/*
+		 * Usuario usuario = (Usuario) sesion.getAttribute("user");
+		 * Curso c = repositorioCurso.findById(index);
+		 * usuario.EliminarCurso(c);
+		*/
 		
-		
-		Usuario usuario = (Usuario) sesion.getAttribute("user");
-		Curso c = repositorioCurso.findById(index);
-		usuario.EliminarCurso(c);
+		Curso cursoEliminado = repositorioCurso.findById(index);
+		repositorioCurso.delete(cursoEliminado);
 		
 		
 		return "CursoEliminado";
@@ -535,11 +543,14 @@ public class IndexController {
 	}
 	
 	@PostMapping("/crearCursoConfirmacion")
-	public String crearCursoConfirmacion(Model model, @RequestParam String titulo, @RequestParam String descripcion, HttpSession sesion) {
+	public String crearCursoConfirmacion(Model model, @RequestParam String titulo, @RequestParam String descripcion/*, HttpSession sesion*/) {
 	
-		Usuario usuario = (Usuario) sesion.getAttribute("user");
-		usuario.AñadirCurso(titulo, descripcion);
+		/*Usuario usuario = (Usuario) sesion.getAttribute("user");
+		usuario.AñadirCurso(titulo, descripcion);*/
 			
+		Curso nuevoCurso = new Curso(titulo, descripcion, null);
+		repositorioCurso.save(nuevoCurso);
+		
 		return "Curso_Creado_Confirmacion";
 	}
 	
