@@ -40,7 +40,10 @@ img {
 		<p><b>Segundo Apellido: </b> {{usuario.segundoApellido}}</p>
 		<p><b>Correo electrónico: </b> {{usuario.correo}}</p>
 		<p><b>Tipo de usuario: </b> {{tipoUsuario}}</p>
-		<p><b>Suscripción: </b> {{tipoSuscripcion}}</p>
+		{{#esAlumno}}
+			<p><b>Suscripción: </b> {{tipoSuscripcion}}</p>
+			<p><b>Método de pago: </b> {{pago}}</p>
+		{{/esAlumno}}
 		<p><b>Foto de perfil: </b><img src="data:image/jpg;base64,{{imagen}}"/></p>
 		<br><br>
 	{{/hayUsuario}}

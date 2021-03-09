@@ -101,19 +101,57 @@ public class IndexController {
 	
 	@PostMapping("/profesorAgregado")
 	public String profesorAgregado(Model model, @RequestParam String correo, @RequestParam String contraseña_1, @RequestParam String apellido1,
-			@RequestParam String apellido2, @RequestParam String nombreUsuario) throws IOException, SerialException, SQLException {
+			@RequestParam String apellido2, @RequestParam String nombreUsuario, HttpSession sesion, @RequestParam MultipartFile image) throws IOException, SerialException, SQLException {
 
-		BufferedImage bImage = ImageIO.read(getClass().getResourceAsStream("/profesor.png"));
+		/*BufferedImage bImage = ImageIO.read(getClass().getResourceAsStream("/profesor.png"));
 	    ByteArrayOutputStream bos = new ByteArrayOutputStream();
 	    ImageIO.write(bImage, "jpg", bos );
 	    byte [] data = bos.toByteArray();
-	    Blob imagen = new javax.sql.rowset.serial.SerialBlob(data);
-		
-		Usuario profesor = new Usuario(nombreUsuario, apellido1, apellido2, 
-				contraseña_1, 1, 1, correo, 0, imagen);				
-		userRep.save(profesor);
-		
+	    Blob imagen = new javax.sql.rowset.serial.SerialBlob(data); */
+			
 		model.addAttribute("correo", correo);
+		
+		Optional<Usuario> u = userRep.findByCorreo(correo);
+		if(u.isPresent()) {
+			return "volver_a_registro";
+		}else {		
+			
+			Usuario profesor = new Usuario(nombreUsuario, apellido1, apellido2, contraseña_1, 0, 1, correo, 0, null);
+			
+			//Comprobar que no haya nadie en la base de datos con ese correo
+			//*****************
+					
+			byte[] bytes;
+			
+			if (image != null) {
+				try {
+					
+					String nombreFoto = image.getOriginalFilename();
+					long tamañoFoto = image.getSize();
+					
+					bytes = image.getBytes();
+					
+					String formatName = nombreFoto.substring(nombreFoto.lastIndexOf(".") + 1);	
+					bytes = imageServ.resize(bytes, 200, 200, formatName);
+					
+					Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);
+					usuario.setFotoPerfil(imagen);
+					
+					bphoto = java.util.Base64.getEncoder().encodeToString(bytes);
+					
+					model.addAttribute("fotoperfil", bphoto);
+					
+					profesor.setFotoPerfil(imagen);
+				}
+				catch (Exception exc){
+					return "Fallo al establecer la imagen de perfil";
+				}
+			}
+			
+			userRep.save(profesor);
+				
+			sesion.setAttribute("user", profesor);
+		}
 		
 		return "ProfesorAgregadoConfirmacion";
 	}

@@ -69,9 +69,11 @@ public class UserController {
 			
 			if(user.getTipoUsuario()==0){
 				model.addAttribute("tipoUsuario", "Alumno");
+				model.addAttribute("esAlumno", "true");
 			}
 			else {
 				model.addAttribute("tipoUsuario", "Profesor");
+				model.addAttribute("esAlumno", "false");
 			}
 			if(foto.length() > 1) {
 				byte[] bdata = foto.getBytes(1, (int) foto.length());
@@ -79,6 +81,12 @@ public class UserController {
 				model.addAttribute("imagen", s);
 			}else {
 				model.addAttribute("imagen", "");
+			}
+			
+			if (user.getMetodoPago() == 0) {
+				model.addAttribute("pago", "Tarjeta de crédito");
+			} else {
+				model.addAttribute("imagen", "Paypal");
 			}
 			
 			return "editarperfil";
