@@ -260,4 +260,16 @@ public class UserController {
 		model.addAttribute("mensaje", "Se ha creado el exámen con éxito");
 		return "examenCreado";
 	}
+	
+	@GetMapping("/sesion_cerrada")
+	public String sesionCerrada(Model model, HttpSession sesion) {
+		
+		Usuario u = (Usuario)sesion.getAttribute("user");
+		
+		if(u != null) {
+			sesion.setAttribute("user", null);
+		}
+		
+		return "sesion_cerrada";
+	}
 }
