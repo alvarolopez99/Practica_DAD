@@ -36,6 +36,7 @@ import com.example.demo.Repository.AnuncioRepository;
 import com.example.demo.Repository.CursoRepository;
 import com.example.demo.Repository.ForosRepository;
 import com.example.demo.Repository.UsuarioRepository;
+import com.example.demo.services.FilterService;
 import com.example.demo.services.ImageService;
 
 import java.util.ArrayList;
@@ -78,6 +79,9 @@ public class IndexController {
 	@Autowired
 	private ImageService imageServ;
 	
+	@Autowired
+	private FilterService filter;
+	
 	
 	public IndexController () {		
 		
@@ -101,12 +105,6 @@ public class IndexController {
 	@PostMapping("/profesorAgregado")
 	public String profesorAgregado(Model model, @RequestParam String correo, @RequestParam String contraseña_1, @RequestParam String apellido1,
 			@RequestParam String apellido2, @RequestParam String nombreUsuario, HttpSession sesion, @RequestParam MultipartFile image) throws IOException, SerialException, SQLException {
-
-		/*BufferedImage bImage = ImageIO.read(getClass().getResourceAsStream("/profesor.png"));
-	    ByteArrayOutputStream bos = new ByteArrayOutputStream();
-	    ImageIO.write(bImage, "jpg", bos );
-	    byte [] data = bos.toByteArray();
-	    Blob imagen = new javax.sql.rowset.serial.SerialBlob(data); */
 			
 		model.addAttribute("correo", correo);
 		
@@ -165,9 +163,6 @@ public class IndexController {
 	@GetMapping("/foros")
 	public String MostrarForos (Model model) {
 		
-		//foros.add(new Foros("PREGUNTA", "BLABLABLA"));		
-	
-		
 		if (repositorioForos.findAll() != null) {
 			model.addAttribute("foro",  repositorioForos.findAll());
 		}
@@ -183,11 +178,7 @@ public class IndexController {
 		Foros foroNuevo = new Foros(asunto, mensaje, null);
 		
 		repositorioForos.save(foroNuevo);
-		
-		/*
-		foros.add(new Foros(asunto, mensaje, null));
-		*/
-		
+
 		return "forocreado";
 	}
 	
@@ -211,7 +202,7 @@ public class IndexController {
 		 if (foro.isPresent()) {
 			Foros f = foro.get();
 			Usuario user = (Usuario) session.getAttribute("user");
-			f.AñadirMensaje(new Mensaje(user, respuesta));
+			f.AñadirMensaje(new Mensaje(user, filter.filtrarLenguaje(respuesta)));
 			repositorioForos.save(f);
 			
 			model.addAttribute("infoForo",foro.get());
@@ -237,43 +228,6 @@ public class IndexController {
 		model.addAttribute("atributo", true);
 		return "Iniciar_Sesion";
 	}
-	
-	/*	@PostMapping("/checkLogin")
-	public String comprobarLogin(Model model, @RequestParam String correo, @RequestParam String contrasena) {		
-	
-		String url = "Error_Login";
-		
-		Optional<Usuario> usuario = repositorio.findByNombre(nombre);
-		
-		if(usuario.isPresent()) {
-			
-			if (contrasena == usuario.getContraseña()) {
-				url = "Sesion_Iniciada_Template";
-			} else {
-				String error = "Contraseña errónea";
-				model.addAttribute("mensajeError", error);
-			}
-			
-		} else {
-			String error = "Nombre de usuario erróneo";
-			model.addAttribute("mensajeError", error);
-		}
-		
-		
-		return url;
-	}*/
-	
-	/*
-	@GetMapping("/descargarMaterial")
-	public ResponseEntity<Object> descargarMaterial(Model model) throws MalformedURLException {
-		
-		Path pathMaterial = MATERIAL_FOLDER.resolve("material.pdf");
-		Resource material = new UrlResource(pathMaterial.toUri());
-		
-		return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "file/pdf").body(material);
-
-	}
-	*/
 	
 	//Llamada cuando pulsemos el botón de Registrarse, aparecerá el formulario de New User
 	@GetMapping("/newuser")
@@ -365,16 +319,6 @@ public class IndexController {
 		}
 	}
 	
-	
-	/*@GetMapping("/iniciada")
-	public String sesionIniciadaMain(Model model, @RequestParam String nombreUsuario) {		
-		
-		model.addAttribute("name", nombreUsuario);
-		
-		return "iniciada";
-	}*/
-	
-	
 	//************ ANUNCIOS ************//
 	
 		@GetMapping("/anuncios")
@@ -438,16 +382,7 @@ public class IndexController {
 	public String cursosDisponibles(Model model, HttpSession sesion) {
 		
 		
-		Usuario usuario = (Usuario) sesion.getAttribute("user");
-		
-		/*
-		if (userRep.findById(usuario.getId()) == null) {
-			model.addAttribute("puedeGestionarCursos", false);
-		} else {
-			model.addAttribute("puedeGestionarCursos", true);
-		}
-		*/
-		
+		Usuario usuario = (Usuario) sesion.getAttribute("user");		
 		
 		
 		if (userRep.findById(usuario.getId()).isPresent()) {
@@ -498,17 +433,6 @@ public class IndexController {
 		return "informacion_curso";
 	}
 	
-	/*
-	@GetMapping("/cursosDisponibles/nuevoCurso")
-	public String nuevoCurso(Model model) {
-				
-		//List <String> imagenes_Cursos = Arrays.asList("https://i0.wp.com/mathsteachercircles.org.au/wp-content/uploads/2020/10/cropped-MTC_Icon_RGB.png?fit=190%2C190&ssl=1","https://pbs.twimg.com/profile_images/1110160859689615361/V8CE--1C.png", "https://upload.wikimedia.org/wikipedia/en/c/cd/March_for_Science.png");
-		
-		model.addAttribute("cursos", imagenes_Cursos);
-		
-		return "Nuevo_Curso";
-	}
-	*/
 	
 	@GetMapping("/crearCurso")
 	public String crearCurso(Model model) {

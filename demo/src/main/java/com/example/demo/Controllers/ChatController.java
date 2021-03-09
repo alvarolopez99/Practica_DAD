@@ -15,6 +15,7 @@ import com.example.demo.Model.Mensaje;
 import com.example.demo.Model.Usuario;
 import com.example.demo.Repository.ChatRepository;
 import com.example.demo.Repository.UsuarioRepository;
+import com.example.demo.services.FilterService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,9 @@ public class ChatController {
 	
 	@Autowired
 	private ChatRepository chatRepo;
+	
+	@Autowired
+	private FilterService filter;
 	
 	@GetMapping("/chatsProfesor")
 	public String chatsProfesor(Model model, HttpSession session) {
@@ -65,7 +69,7 @@ public class ChatController {
 		if(chat.isPresent()) {
 			Chat c = chat.get();
 			Usuario profesor = (Usuario)session.getAttribute("user");
-			c.AñadirMensaje(new Mensaje(profesor, usermsg));
+			c.AñadirMensaje(new Mensaje(profesor, filter.filtrarLenguaje(usermsg)));
 			
 			chatRepo.save(c);
 			
@@ -94,7 +98,7 @@ public class ChatController {
 				Chat chat = chatO.get();
 				if(!usermsg.equals("")) {
 					
-					chat.AñadirMensaje(new Mensaje(user, usermsg));	//Se añade el nuevo mensaje creado
+					chat.AñadirMensaje(new Mensaje(user, filter.filtrarLenguaje(usermsg)));	//Se añade el nuevo mensaje creado
 					model.addAttribute("mensajes", chat.getMensajes());
 					chatRepo.save(chat);
 							
