@@ -469,7 +469,15 @@ public class IndexController {
 	@GetMapping("/curso/{index}")
 	public String verCurso(Model model, @PathVariable int index) {	
 		
-		model.addAttribute("index", index);
+		Curso curso = repositorioCurso.findById(index);
+		
+		if (curso != null) {
+			List <Material> materiales = curso.getMateriales();
+			model.addAttribute("materiales", materiales);
+			model.addAttribute("index", index);
+		}
+		
+		
 		
 		return "informacion_curso";
 	}
@@ -490,6 +498,38 @@ public class IndexController {
 	public String crearCurso(Model model) {
 	
 		return "Crear_Curso";
+	}
+	
+	@GetMapping("/{{id}}/materialAñadido")
+	public String materialAñadido (Model model){
+		
+		return "material_Añadido";
+	}
+	
+	@GetMapping("/{{id}}/añadirMaterial")
+	public String subirMaterial (Model model, @PathVariable int index, @RequestParam MultipartFile material){
+		
+		Curso curso = repositorioCurso.findById(index);
+		
+		String archivo;	
+		byte[] bytes;
+		
+		if (material != null) {
+			try {
+				bytes = material.getBytes();
+				archivo = java.util.Base64.getEncoder().encodeToString(bytes);				
+				model.addAttribute("material", material);
+								
+			}
+			catch (Exception exc){
+				return "Fallo al establecer la imagen de perfil";
+			}
+			
+			curso.AñadirMaterial(archivo);
+		}
+			
+			
+		return "subir_Material";
 	}
 	
 	@PostMapping("/crearCursoConfirmacion")
