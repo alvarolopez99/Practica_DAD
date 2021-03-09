@@ -67,7 +67,7 @@ p {
 		            document.getElementById('submit').disabled = true;
 		        } else if((confirm_password.value!='')&&(password.value == confirm_password.value)){
 		        	document.getElementById('errorMsg').innerHTML='';
-		        	if((document.getElementById('choice1').checked)||(document.getElementById('choice2').checked)){
+		        	if(((document.getElementById('choice1').checked)||(document.getElementById('choice2').checked))&&((document.getElementById('choice2_1').checked)||(document.getElementById('choice2_2').checked))){
 		        		document.getElementById('submit').disabled = false;
 		        	}		            
 		        }
@@ -127,7 +127,7 @@ p {
 		       		 {
 		        			document.getElementById('errorMsg').innerHTML='';
 		        		
-		        			if((document.getElementById('choice1').checked)||(document.getElementById('choice2').checked))
+		        			if(((document.getElementById('choice1').checked)||(document.getElementById('choice2').checked))&&((document.getElementById('choice2_1').checked)||(document.getElementById('choice2_2').checked)))
 		        			{
 		        				document.getElementById('submit').disabled = false;
 		        			}		            

@@ -50,51 +50,49 @@ public class UserController {
 	
 	@GetMapping("/profile")
 	public String editUser(Model model, HttpSession sesion) throws SQLException, IOException, ClassNotFoundException {
-		
-		//Leer usuario actual del httpsession
-		
-		Usuario user = (Usuario)sesion.getAttribute("user");
-		Blob foto = user.getFotoPerfil();
-		
-		if(foto == null) {
-			return "no_registrado";
-		}
 
-		else{
+		// Leer usuario actual del httpsession
+
+		Usuario user = (Usuario) sesion.getAttribute("user");
+		Blob foto = user.getFotoPerfil();
+
+		if (user.getCorreo() == null) {
+			return "no_registrado";
+		} else {
 			model.addAttribute("hayUsuario", true);
 			model.addAttribute("usuario", user);
-			
-			if(user.getTipoSuscripcion()==0){
+
+			if (user.getTipoSuscripcion() == 0) {
 				model.addAttribute("tipoSuscripcion", "Estándar");
-			}
-			else {
+			} else {
 				model.addAttribute("tipoSuscripcion", "Premium");
 			}
-			
-			if(user.getTipoUsuario()==0){
+
+			if (user.getTipoUsuario() == 0) {
 				model.addAttribute("tipoUsuario", "Alumno");
 				model.addAttribute("esAlumno", "true");
-			}
-			else {
+			} else {
 				model.addAttribute("tipoUsuario", "Profesor");
 				model.addAttribute("esAlumno", "false");
 			}
-			if(foto.length() > 1) {
-				byte[] bdata = foto.getBytes(1, (int) foto.length());
-				String s = java.util.Base64.getEncoder().encodeToString(bdata);
-				model.addAttribute("imagen", s);
-			}else {
-				model.addAttribute("imagen", "");
-			}
-			
+
 			if (user.getMetodoPago() == 0) {
 				model.addAttribute("pago", "Tarjeta de crédito");
 			} else {
-				model.addAttribute("imagen", "Paypal");
+				model.addAttribute("pago", "Paypal");
 			}
-			
+			if (foto != null) {
+				if (foto.length() > 1) {
+					byte[] bdata = foto.getBytes(1, (int) foto.length());
+					String s = java.util.Base64.getEncoder().encodeToString(bdata);
+					model.addAttribute("imagen", s);
+				} else {
+					model.addAttribute("imagen", "");
+				}
+			}else {
+				model.addAttribute("imagen", false);
+			}
 			return "editarperfil";
-			
 		}
 	}
 	
