@@ -335,7 +335,7 @@ public class IndexController {
 						
 				byte[] bytes;
 				
-				if (image != null) {
+				if (!image.isEmpty()) {
 					try {
 						// Por si se quiere guardar tambien el nombre y el tamaño de la imagen
 						String nombreFoto = image.getOriginalFilename();
