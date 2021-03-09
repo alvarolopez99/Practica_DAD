@@ -30,7 +30,6 @@ import com.example.demo.Uso_BD;
 import com.example.demo.Model.Anuncio;
 import com.example.demo.Model.Curso;
 import com.example.demo.Model.Foros;
-import com.example.demo.Model.Material;
 import com.example.demo.Model.Mensaje;
 import com.example.demo.Model.Usuario;
 import com.example.demo.Repository.AnuncioRepository;
@@ -467,13 +466,20 @@ public class IndexController {
 	}
 	
 	@GetMapping("/curso/{index}")
-	public String verCurso(Model model, @PathVariable int index) {	
+	public String verCurso(Model model, @PathVariable int index) throws SQLException {	
 		
 		Curso curso = repositorioCurso.findById(index);
+		ArrayList<String> listaImagenes = new ArrayList<String>();
 		
 		if (curso != null) {
-			List <Material> materiales = curso.getMateriales();
-			model.addAttribute("materiales", materiales);
+			List<Blob> listaArchivosMostrar = curso.getArchivos();
+			for(int i = 0; i<listaArchivosMostrar.size(); i++) {
+				byte[] bdata = listaArchivosMostrar.get(i).getBytes(1, (int) listaArchivosMostrar.get(i).length());
+				String s = java.util.Base64.getEncoder().encodeToString(bdata);
+				listaImagenes.add(s);
+			}
+			
+			model.addAttribute("archivos", listaImagenes);
 			model.addAttribute("index", index);
 		}
 		
@@ -500,37 +506,35 @@ public class IndexController {
 		return "Crear_Curso";
 	}
 	
-	@GetMapping("/{{id}}/materialAñadido")
-	public String materialAñadido (Model model){
+	@PostMapping("/{id}/materialSubido")
+	public String materialAñadido (Model model, @PathVariable int id, @RequestParam MultipartFile archivo){
 		
-		return "material_Añadido";
-	}
-	
-	@GetMapping("/{{id}}/añadirMaterial")
-	public String subirMaterial (Model model, @PathVariable int index, @RequestParam MultipartFile material){
-		
-		Curso curso = repositorioCurso.findById(index);
-		
-		String archivo;	
-		byte[] bytes;
-		
-		if (material != null) {
+		Curso curso = repositorioCurso.findById(id);
+		ArrayList<Blob> listaAntigua = curso.getArchivos();
+			
+		byte[] bytes;		
+		if (!archivo.isEmpty()) {
 			try {
-				bytes = material.getBytes();
-				archivo = java.util.Base64.getEncoder().encodeToString(bytes);				
-				model.addAttribute("material", material);
-								
+				bytes = archivo.getBytes();
+				Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);
+				listaAntigua.add(imagen);
+				curso.setArchivo(listaAntigua);								
 			}
 			catch (Exception exc){
 				return "Fallo al establecer la imagen de perfil";
-			}
-			
-			curso.AñadirMaterial(archivo);
-		}
-			
-			
+			}			
+			repositorioCurso.save(curso);
+		}	
+		return "material_Añadido";
+	}
+	
+	@GetMapping("/{id}/añadirMaterial")
+	public String subirMaterial (Model model, @PathVariable int id){
+		model.addAttribute("id", id);
 		return "subir_Material";
 	}
+	
+	
 	
 	@PostMapping("/crearCursoConfirmacion")
 	public String crearCursoConfirmacion(Model model, @RequestParam String titulo, @RequestParam String descripcion, HttpSession sesion) {

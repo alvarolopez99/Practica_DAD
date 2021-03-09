@@ -16,10 +16,10 @@ public class Curso {
 
 	private String titulo;
 	private String creador;
-
-	private String descripcion;
-	
-	private String imagen;
+	private String descripcion;	
+	@Lob
+	@JsonIgnore
+	private ArrayList<Blob> archivo;
 	
 	
 	@ManyToOne
@@ -31,8 +31,6 @@ public class Curso {
 	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
 	private List <Examen> examenes;
 	
-	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
-	private List <Material> materiales;
 	
 	public Curso (String titulo, String descripcion, Usuario profesor) {
 		this.titulo = titulo;
@@ -43,7 +41,7 @@ public class Curso {
 		}
 		alumnos = new ArrayList<Usuario>();
 		examenes = new ArrayList<Examen>();
-		materiales = new ArrayList<Material>();
+		archivo = new ArrayList<Blob>();
 	}
 	
 	public void AñadirExamen(Examen examen) {
@@ -62,12 +60,12 @@ public class Curso {
 		this.creador = creador;
 	}
 
-	public String getImagen() {
-		return imagen;
+	public ArrayList<Blob> getArchivos() {
+		return archivo;
 	}
 
-	public void setImagen(String image) {
-		this.imagen = image;
+	public void setArchivo(ArrayList<Blob> archivo) {
+		this.archivo = archivo;
 	}
 
 	public String getTitulo() {
@@ -89,15 +87,6 @@ public class Curso {
 	public String getProfesor() {
 		return profesor.getNombre();
 	}
-	/*
-	@OneToMany
-	private List<Usuario> alumnos;
-	*/
-	
-	/*
-	@OneToMany
-	private List<Material> materiales;
-	*/
 	
 	public Curso() {}
 	
@@ -117,13 +106,13 @@ public class Curso {
 	*/
 	
 	
-	public void AñadirMaterial(String material) {
+	/*public void AñadirMaterial(String material) {
 		Material nuevoMaterial = new Material(material);
 		materiales.add(nuevoMaterial);
 	}
 	
 	public List<Material> getMateriales() {
 		return materiales;
-	}
+	}*/
 	
 }
