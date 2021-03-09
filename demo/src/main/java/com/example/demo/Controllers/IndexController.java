@@ -185,10 +185,6 @@ public class IndexController {
 		
 		repositorioForos.save(foroNuevo);
 		
-		/*
-		foros.add(new Foros(asunto, mensaje, null));
-		*/
-		
 		return "forocreado";
 	}
 	
@@ -199,44 +195,27 @@ public class IndexController {
 		Optional<Foros> foro = repositorioForos.findById(IDForo);
 		 if (foro.isPresent()) {
 				model.addAttribute("infoForo",foro.get());
-		 } else {
-		
-		 }
-		/*
-		 if(foro.get().getMensajes() != null) {
-			 
-				m = foro.get().getMensajes();
-				usuario.setNombre("Soy un usuario");
-				m.add(new Mensaje(usuario, "mensaje enviado"));
-				model.addAttribute("mensaje", m);
-			 
-		 }*/
-		
-	
-		//Foros miforo = foros.get(IDForo-1);
-		
-		//m = miforo.getMensajes();
-		
-		//model.addAttribute("info", foro);
-	
-		//model.addAttribute("IDForo", (IDForo));
-		
+				model.addAttribute("mensajes", foro.get().getMensajes());
+		}		
 		
 		return "Foro";
 	}
 	
 	@PostMapping("/foros/{IDForo}/respuesta")
-	public String VerForo (Model model, @PathVariable int IDForo, @RequestParam String respuesta) {
+	public String VerForo (Model model, @PathVariable int IDForo, @RequestParam String respuesta, HttpSession session) {
 		
 		
-		
-		Foros foro = foros.get(IDForo-1);
-		m = foro.getMensajes();
-		usuario.setNombre("Soy un usuario");
-		m.add(new Mensaje(usuario, respuesta));
-		model.addAttribute("info", foro);
-		model.addAttribute("mensaje", m);
-		model.addAttribute("IDForo", (IDForo));
+		Optional<Foros> foro = repositorioForos.findById(IDForo);
+		if (foro.isPresent()) {
+			 
+			Foros f = foro.get();
+			Usuario user = (Usuario)session.getAttribute("user");
+			f.AñadirMensaje(new Mensaje(user, respuesta));
+			repositorioForos.save(f);
+			
+			model.addAttribute("infoForo", f);
+			model.addAttribute("mensajes", f.getMensajes());
+		}
 		
 		
 		return "Foro";

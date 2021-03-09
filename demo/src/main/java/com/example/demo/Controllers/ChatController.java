@@ -42,6 +42,7 @@ public class ChatController {
 		if(!usermsg.equals("")) {
 			Usuario user = (Usuario)sesion.getAttribute("user");
 			chat.AñadirMensaje(new Mensaje(user, usermsg));	//Se añade el nuevo mensaje creado
+			chatRepo.save(chat);
 		}
 		
 		model.addAttribute("mensajes", mensajes);
