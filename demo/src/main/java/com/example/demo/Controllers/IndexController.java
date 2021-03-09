@@ -497,23 +497,18 @@ public class IndexController {
 		
 		Usuario u = (Usuario) sesion.getAttribute("user");
 		if(u == null) {
-			Usuario user = new Usuario("------------", "------------", "------------", "------------", 0, 0, "------------", 0, null);
-			sesion.setAttribute("user", user);
-			model.addAttribute("hayUsuario", false);
-		} else {
-			model.addAttribute("hayUsuario", true);
-		}
-		/*Optional<Usuario> u = userRep.findByNombre("alvaro");
-		if (u.isPresent()) {
-			model.addAttribute("hayUsuario", true);
-			model.addAttribute("usuario", u);
-		}
-		else {
-			model.addAttribute("hayUsuario", false);
-		}*/
-		
-		
 			
+			Optional<Usuario> user = userRep.findByCorreo("------------");
+			if(user.isPresent()){
+			  sesion.setAttribute("user", user.get());
+			}
+			else{
+			  u = new Usuario("------------", "------------", "------------", "------------", 0, 0, "------------", 0, null);;
+			  sesion.setAttribute("user", u);
+			  userRep.save(u);
+			}
+		} 
+
 		return "paginaprincipal";
 	}
 	

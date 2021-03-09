@@ -29,26 +29,26 @@ p {
 <div align="center">
 
 	{{#cursos}}
-	<!-- <ol style="list-style: none; font-size: 14px; line-height: 32px;"> -->	
+
 	<table>
 	<tr>
-		<td><p>{{titulo}} | </p></td>
-		<td><p>{{descripcion}} | </p></td>
-		<td><p>Creado por: {{creador}} | </p></td>
-		<td><a href="/curso/{{id}}">Ver | </a></td>
-		<td><a href="/{{id}}/examen">Resolver examen | </a></td>
+		<td><p>{{titulo}}  </p></td>
+		<td><p>{{descripcion}}  </p></td>
+		<td><p>Creado por: {{creador}}  </p></td>
+		<td><a href="/curso/{{id}}">Ver  </a></td>
+		<td><a href="/{{id}}/examen">Resolver examen  </a></td>
 		{{#puedeGestionarCursos}}
-			<td><a href="/{{id}}/crearexamen">Crear examen | </a></td>
-			<td><a href="/eliminarCurso/{{id}}">Eliminar curso | </a></td>
-			<td><a href="/{{id}}/añadirMaterial">Añadir material | </a></td>
+			<td><a href="/{{id}}/crearexamen">Crear examen  </a></td>
+			<td><a href="/eliminarCurso/{{id}}">Eliminar curso  </a></td>
+			<td><a href="/{{id}}/añadirMaterial">Añadir material  </a></td>
 		{{/puedeGestionarCursos}}
 		
 	</tr>
 	</table>
-		<!--<li><img style="float: center;" src={{.}} width="45" /> </li>-->
+		
 		
 	<br>
-	<!--</ol> -->
+
 	{{/cursos}}
 	
 	{{^cursos}}
