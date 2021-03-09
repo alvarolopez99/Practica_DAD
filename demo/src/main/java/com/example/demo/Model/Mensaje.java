@@ -14,6 +14,7 @@ public class Mensaje {
 	
 	private String cuerpoMensaje;
 	
+	public Mensaje() {}
 	public Mensaje(Usuario emisor, String mensaje) {
 		this.emisor = emisor;
 		this.cuerpoMensaje = mensaje;
