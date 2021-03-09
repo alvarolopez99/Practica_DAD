@@ -98,21 +98,4 @@ public class Curso {
 		this.id = id;
 	}
 	
-	
-	/*
-	public void AñadirUsuario(Usuario alumno) {
-		
-	} 
-	*/
-	
-	
-	/*public void AñadirMaterial(String material) {
-		Material nuevoMaterial = new Material(material);
-		materiales.add(nuevoMaterial);
-	}
-	
-	public List<Material> getMateriales() {
-		return materiales;
-	}*/
-	
 }

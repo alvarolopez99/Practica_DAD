@@ -32,9 +32,6 @@ public class Usuario {
 	@OneToMany
 	private List<Curso> cursos;
 	
-	//@OneToOne(cascade=CascadeType.ALL)
-	//private UsuarioContraseña uc
-	
 	public Usuario() {
 		
 	}
@@ -130,20 +127,5 @@ public class Usuario {
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
 	}
-	
-	/*
-	public void AñadirCurso(String titulo, String descripcion) {
-		Curso nuevoCurso = new Curso(titulo, descripcion, null);
-		cursos.add(nuevoCurso);
-	}
-	
-	public List<Curso> getCursos() {
-		return cursos;
-	}
-	
-	public void EliminarCurso(Curso c) {
-		cursos.remove(c);
-	}
-	*/
 
 }
