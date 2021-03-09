@@ -44,7 +44,9 @@ img {
 			<p><b>Suscripción: </b> {{tipoSuscripcion}}</p>
 			<p><b>Método de pago: </b> {{pago}}</p>
 		{{/esAlumno}}
-		<p><b>Foto de perfil: </b><img src="data:image/jpg;base64,{{imagen}}"/></p>
+		
+		<p><b>Foto de perfil:<br><br> {{#imagen}}</b><img src="data:image/jpg;base64,{{imagen}}"/></p>{{/imagen}}
+		
 		<br><br>
 	{{/hayUsuario}}
 
