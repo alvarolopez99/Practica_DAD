@@ -491,6 +491,14 @@ public class IndexController {
 		 * List<Curso> listaCursos = usuario.getCursos(); */
 		
 		
+		Usuario usuario = (Usuario) sesion.getAttribute("user");
+		
+		if (userRep.findById(usuario.getId()) == null) {
+			model.addAttribute("puedeGestionarCursos", false);
+		} else {
+			model.addAttribute("puedeGestionarCursos", true);
+		}
+		
 		List<Curso> cursos = repositorioCurso.findAll();
 		
 		
