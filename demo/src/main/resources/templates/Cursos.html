@@ -56,8 +56,10 @@ p {
 	{{/cursos}}
 	
 	<br>
-	<a href="/crearCurso">Crear curso</a>
-
+	
+	{{#puedeGestionarCursos}}
+		<a href="/crearCurso">Crear curso</a>
+	{{/puedeGestionarCursos}}
 
    	<br><br> <a href="/paginaprincipal">Pagina principal</a>
 	
