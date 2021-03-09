@@ -15,6 +15,8 @@ public class Curso {
 	private long id;
 
 	private String titulo;
+	private String creador;
+
 	private String descripcion;
 	
 	private String imagen;
@@ -35,7 +37,10 @@ public class Curso {
 	public Curso (String titulo, String descripcion, Usuario profesor) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
-		this.profesor = profesor;
+		if (profesor != null) {
+			this.profesor = profesor;
+			creador = profesor.getNombre();
+		}
 		alumnos = new ArrayList<Usuario>();
 		examenes = new ArrayList<Examen>();
 		materiales = new ArrayList<Material>();
@@ -49,6 +54,14 @@ public class Curso {
 		alumnos.add(alumno);
 	}
 	
+	public String getCreador() {
+		return creador;
+	}
+
+	public void setCreador(String creador) {
+		this.creador = creador;
+	}
+
 	public String getImagen() {
 		return imagen;
 	}
@@ -73,6 +86,9 @@ public class Curso {
 		this.descripcion = descripcion;
 	}
 	
+	public String getProfesor() {
+		return profesor.getNombre();
+	}
 	/*
 	@OneToMany
 	private List<Usuario> alumnos;
