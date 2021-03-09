@@ -19,11 +19,15 @@ public class Material {
 	@OneToOne
 	private Curso curso;
 	
+	private String archivo;
+	
 	@Lob
 	@JsonIgnore
 	private Lob material;
 	
-	public Material() {}
+	public Material(String archivo) {
+		this.archivo = archivo;
+	}
 	
 	public long getId() {
 		return id;
@@ -31,6 +35,14 @@ public class Material {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+	public String getArchivo() {
+		return archivo;
+	}
+
+	public void setArchivo(String archivo) {
+		this.archivo = archivo;
 	}
 
 	
