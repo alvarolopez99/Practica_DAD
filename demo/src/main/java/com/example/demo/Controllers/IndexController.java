@@ -575,6 +575,9 @@ public class IndexController {
 		if(u == null) {
 			Usuario user = new Usuario("------------", "------------", "------------", "------------", 0, 0, "------------", 0, null);
 			sesion.setAttribute("user", user);
+			model.addAttribute("hayUsuario", false);
+		} else {
+			model.addAttribute("hayUsuario", true);
 		}
 		/*Optional<Usuario> u = userRep.findByNombre("alvaro");
 		if (u.isPresent()) {
@@ -584,6 +587,8 @@ public class IndexController {
 		else {
 			model.addAttribute("hayUsuario", false);
 		}*/
+		
+		
 			
 		return "paginaprincipal";
 	}

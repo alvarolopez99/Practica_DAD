@@ -48,15 +48,12 @@
 				<hr>
                 <br>
 
-				
-				<a href="/profile">Mi perfil</a><br>
+				{{#hayUsuario}}
+					<a href="/profile">Mi perfil</a><br>
+				{{/hayUsuario}}
 				<hr>
                 <br>
-	
-				<p>
-				{{#hayUsuario}}
-					{{usuario}}
-				{{/hayUsuario}}
+                
 				</p><br>
 	
 	   		</div>
