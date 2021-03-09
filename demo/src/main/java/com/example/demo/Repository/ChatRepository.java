@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.Model.Chat;
+import com.example.demo.Model.Usuario;
 
 public interface ChatRepository  extends JpaRepository<Chat, Long> {
 
@@ -12,7 +13,7 @@ public interface ChatRepository  extends JpaRepository<Chat, Long> {
 	List<Chat> findByProfesor(long id);
 	List<Chat> findByAlumno(long id);
 	
-	Optional<Chat> findByProfesorAndAlumno(long id, long id2);
+	Optional<Chat> findByProfesorAndAlumno(Usuario u1, Usuario u2);
 	
 	
 }

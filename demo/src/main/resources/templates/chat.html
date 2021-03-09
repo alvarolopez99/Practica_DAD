@@ -30,11 +30,11 @@ a {
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-        <a id="exit" href="/">X</a></p>
+        <a id="exit" href="/anuncios">X</a></p>
     </div>
     
     <div>
-    	<p align="center"> Historial de chat -&nbsp;  <b>{{target}}</b> 
+    	<p align="center"> Historial de chat -&nbsp;  <b>{{target.nombre}} {{target.primerApellido}}</b> 
     </div> 
     <div>
     	<p align="center"> 
@@ -45,7 +45,7 @@ a {
 	</div>
     
     <div align="center">
-	    <form name="message" action="/chat/{{target}}/send">
+	    <form name="message" action="/chat/{{target.id}}/send">
 	        <input name="usermsg" type="text" id="usermsg" size="63" />
 	        <input name="submitmsg" type="submit"  id="submitmsg" />
 	    </form>

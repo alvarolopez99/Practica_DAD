@@ -29,26 +29,35 @@ public class ChatController {
 	@Autowired
 	private ChatRepository chatRepo;
 	
-	Chat chat = null;
 	
-	
-	private List<Mensaje> mensajes;
 	@GetMapping("/chat/{profesor}/send")	//Pagina del chat cuando se envia un mensaje
 	public String envioMensaje(Model model, @RequestParam String usermsg, @PathVariable String profesor, HttpSession sesion) {
 
 		
 		//Añadir la carga de mensajes mediante lista
 		
-		if(!usermsg.equals("")) {
+		Optional<Usuario> p = repositorio.findById(Long.parseLong(profesor));
+		if(p.isPresent()) {
+			Usuario prof = p.get();
 			Usuario user = (Usuario)sesion.getAttribute("user");
-			chat.AñadirMensaje(new Mensaje(user, usermsg));	//Se añade el nuevo mensaje creado
-			chatRepo.save(chat);
+			model.addAttribute("user", user.getNombre());
+			Optional<Chat> chatO = chatRepo.findByProfesorAndAlumno(prof, user);
+			if(chatO.isPresent()) {
+				Chat chat = chatO.get();
+				if(!usermsg.equals("")) {
+					
+					chat.AñadirMensaje(new Mensaje(user, usermsg));	//Se añade el nuevo mensaje creado
+					model.addAttribute("mensajes", chat.getMensajes());
+					chatRepo.save(chat);
+							
+				}
+				model.addAttribute("target", chat.getProfesor());
+				
+			}
+			else {
+				model.addAttribute("mensajes", null);
+			}
 		}
-		
-		model.addAttribute("mensajes", mensajes);
-		model.addAttribute("user", "Pablo");
-		model.addAttribute("target", profesor);
-		
 
 		return "chat";
 	}
@@ -63,15 +72,16 @@ public class ChatController {
 		
 		/* Para la lista de mensajes */
 		 
-		 Optional<Usuario> profUser = repositorio.findByNombre(profesor);
+		 Optional<Usuario> profUser = repositorio.findById(Long.parseLong(profesor));
 		 
 		 if(profUser.isPresent()) {	//Busca al profesor del chat y si existe
 			 
 			 Usuario prof = profUser.get();
-			 model.addAttribute("target", prof.getNombre() + prof.getPrimerApellido());
+			 model.addAttribute("target", prof);
 			 
-			 Optional<Chat> currentChat = chatRepo.findByProfesorAndAlumno(prof.getId(), user.getId());
+			 Optional<Chat> currentChat = chatRepo.findByProfesorAndAlumno(prof, user);
 			 
+			 Chat chat;
 			 if(currentChat.isPresent()) {	//El chat ya existe
 				 
 				 chat = currentChat.get();
@@ -86,23 +96,6 @@ public class ChatController {
 			 
 			 model.addAttribute("mensajes", chat.getMensajes());
 		 }
-		 
-		
-		 /*
-		//Provisional
-		mensajes = new ArrayList<Mensaje>();
-		Usuario u = new Usuario();
-		u.setNombre("Pablo");
-		Usuario v = new Usuario();
-		v.setNombre(profesor);
-		Mensaje m1 = new Mensaje(u, "Hola, necesito ayuda");
-		Mensaje m2 = new Mensaje(v, "Patata");
-		mensajes.add(m1);
-		mensajes.add(m2);
-		
-		model.addAttribute("mensajes", mensajes);
-		model.addAttribute("user", "Pablo");
-		model.addAttribute("target", profesor);*/
 		
 
 		return "chat";

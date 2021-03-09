@@ -21,6 +21,7 @@ public class Chat {
 	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Mensaje> mensajes;
 	
+	public Chat() {}
 	public Chat(Usuario profesor, Usuario alumno) {
 		this.profesor = profesor;
 		this.alumno = alumno;
@@ -41,6 +42,22 @@ public class Chat {
 	
 	public List<Mensaje> getMensajes(){
 		return mensajes;
+	}
+	
+	public Usuario getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(Usuario u) {
+		profesor = u;
+	}
+	
+	public Usuario getAlumno() {
+		return alumno;
+	}
+
+	public void setAlumno(Usuario u) {
+		alumno = u;
 	}
 	
 	

@@ -387,6 +387,7 @@ public class IndexController {
 		}
 	}
 	
+	
 	/*@GetMapping("/iniciada")
 	public String sesionIniciadaMain(Model model, @RequestParam String nombreUsuario) {		
 		
@@ -419,42 +420,25 @@ public class IndexController {
 		
 		@PostMapping("/anuncioCreado")
 		public String anuncioCreado(Model model, @RequestParam String materia, @RequestParam String curso, 
-				@RequestParam String horario, @RequestParam String precio, @RequestParam String contenido) {
+				@RequestParam String horario, @RequestParam String precio, @RequestParam String contenido, HttpSession session) {
 			
-			usuario.setNombre("Alvaro");
-			//anuncios.add(new Anuncio (usuario, materia, contenido, horario, precio, curso) ); //Falta pasar como primer parámetro el profesor que crea el anuncio
-			Anuncio anuncio = new Anuncio(materia, contenido, horario, precio, curso);
+			Usuario user = (Usuario)session.getAttribute("user");
+			Anuncio anuncio = new Anuncio(user, materia, contenido, horario, precio, curso);
 			repositorioAnuncios.save(anuncio);
 			
-			//service.CrearAnuncio();
 			
 			return "anuncio_creado";
 		}
 		
-		
-		
 		@GetMapping("/anuncios/{IDAnuncio}")
 		public String anuncio(Model model, @PathVariable int IDAnuncio) {
 			
-			//model.addAttribute("infoProfesor", idAnuncio);
-			//model.addAttribute("nombreProfesor", "Nombre del profesor");
-
 			
 			Optional<Anuncio> anuncio = repositorioAnuncios.findById(IDAnuncio);
 			
 			 if (anuncio.isPresent()) {
 					model.addAttribute("infoAnuncio",anuncio.get());
-			 } else {
-			
 			 }
-			
-			/*Anuncio anuncio = anuncios.get(IDAnuncio-1);
-			
-			model.addAttribute("infoAnuncio", anuncio);
-			Usuario profesor = anuncio.getProfesor();
-			model.addAttribute("profesor", profesor);
-			
-			*/
 			
 			return "Anuncio";
 		}
@@ -475,22 +459,6 @@ public class IndexController {
 	@GetMapping("/cursosDisponibles")
 	public String cursosDisponibles(Model model, HttpSession sesion) {
 		
-		/*
-		List <String> imagenes_Cursos = Arrays.asList("https://i0.wp.com/mathsteachercircles.org.au/wp-content/uploads/2020/10/cropped-MTC_Icon_RGB.png?fit=190%2C190&ssl=1","https://pbs.twimg.com/profile_images/1110160859689615361/V8CE--1C.png");
-		
-		for (int i=0; i<imagenes_Cursos.size();i++) {
-			Curso c = new Curso();
-			c.setImagen(imagenes_Cursos.get(i));
-			cursos.add(c);
-		}
-		*/
-		//imagenes_Cursos.add("https://i0.wp.com/mathsteachercircles.org.au/wp-content/uploads/2020/10/cropped-MTC_Icon_RGB.png?fit=190%2C190&ssl=1");
-		//imagenes_Cursos.add("https://pbs.twimg.com/profile_images/1110160859689615361/V8CE--1C.png");
-		
-		/*
-		 * Usuario usuario = (Usuario) sesion.getAttribute("user");
-		 * List<Curso> listaCursos = usuario.getCursos(); */
-		
 		
 		Usuario usuario = (Usuario) sesion.getAttribute("user");
 		
@@ -510,13 +478,7 @@ public class IndexController {
 	
 	
 	@GetMapping("/eliminarCurso/{index}")
-	public String eliminarCurso(Model model, @PathVariable int index/*, HttpSession sesion*/) {
-			
-		/*
-		 * Usuario usuario = (Usuario) sesion.getAttribute("user");
-		 * Curso c = repositorioCurso.findById(index);
-		 * usuario.EliminarCurso(c);
-		*/
+	public String eliminarCurso(Model model, @PathVariable int index) {
 		
 		Curso cursoEliminado = repositorioCurso.findById(index);
 		repositorioCurso.delete(cursoEliminado);
