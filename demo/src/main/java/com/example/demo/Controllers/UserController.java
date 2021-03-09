@@ -162,13 +162,13 @@ public class UserController {
 		}
 	}
 	
-	List<Pregunta> preguntas = new ArrayList<Pregunta>();
 	@GetMapping("/{curso}/examen")
 	public String hacerExamen(Model model, @PathVariable String curso){
 		
 		
 		Curso c = cursoRepo.findById(Long.parseLong(curso));
 		model.addAttribute("curso", c.getTitulo());
+		model.addAttribute("id", c.getId());
 		
 		Optional<Examen> e = examRepo.findByCurso(c);
 		if(e.isPresent()) {			
@@ -183,6 +183,8 @@ public class UserController {
 			@RequestParam String resp4, @RequestParam String resp5, HttpSession session, @PathVariable String curso){
 		
 		List<String> respuestas = new ArrayList<String>();
+		
+		
 		respuestas.add(resp1);
 		respuestas.add(resp2);
 		respuestas.add(resp3);
@@ -191,31 +193,42 @@ public class UserController {
 		
 		int i = 0;
 		int puntuacion = 0;
-		for(Pregunta p: preguntas){
-			if(p.getRespuesta().equalsIgnoreCase(respuestas.get(i))) {
-				puntuacion++;
+		
+		Curso c = cursoRepo.findById(Long.parseLong(curso));
+		Optional<Examen> e = examRepo.findByCurso(c);
+		
+		if(e.isPresent()) {	
+			
+			for(Pregunta p: e.get().getPreguntas()){			
+				
+				if(p.getRespuesta().equalsIgnoreCase(respuestas.get(i))) {
+					puntuacion++;
+					System.out.println("Acierto");
+				}
+				i++;
 			}
-			i++;
+			
+			if(puntuacion >= 3) {
+				Usuario u = (Usuario)session.getAttribute("user");
+				
+				//Provisional
+				u = new Usuario();
+				u.setCorreo("urjc.fower@gmail.com");			
+				
+				/******/
+				
+				String contenido = "Enhorabuena. Has completado con éxito el curso "+ curso+"disponible en la plataforma Sapiotheca";
+				mail.sendEmail(u.getCorreo(), "Certificado "+curso, contenido);
+				model.addAttribute("mensaje","Has obtenido una puntuación de "+puntuacion+"/5");
+				model.addAttribute("mensaje2", "¡Enhorabuena por completar el curso!");
+			}
+			else {
+				model.addAttribute("mensaje","Has obtenido una puntuación de "+puntuacion+"/5");
+				model.addAttribute("mensaje2", "Sigue intentándolo para obtener tu certificado");
+			}
 		}
 		
-		if(puntuacion >= 3) {
-			Usuario u = (Usuario)session.getAttribute("user");
-			
-			//Provisional
-			u = new Usuario();
-			u.setCorreo("urjc.fower@gmail.com");			
-			
-			/******/
-			
-			String contenido = "Enhorabuena. Has completado con éxito el curso "+ curso+"disponible en la plataforma Sapiotheca";
-			mail.sendEmail(u.getCorreo(), "Certificado "+curso, contenido);
-			model.addAttribute("mensaje","Has obtenido una puntuación de "+puntuacion+"/5");
-			model.addAttribute("mensaje2", "¡Enhorabuena por completar el curso!");
-		}
-		else {
-			model.addAttribute("mensaje","Has obtenido una puntuación de "+puntuacion+"/5");
-			model.addAttribute("mensaje2", "Sigue intentándolo para obtener tu certificado");
-		}
+		
 		
 		return "examenCompletado";
 	}
