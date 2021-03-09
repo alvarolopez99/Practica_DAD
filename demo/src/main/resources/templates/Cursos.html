@@ -32,14 +32,14 @@ p {
 	<!-- <ol style="list-style: none; font-size: 14px; line-height: 32px;"> -->	
 	<table>
 	<tr>
-		<td><p>{{titulo}} </p></td>
-		<td><p>{{descripcion}} </p></td>
-		<td><p>Creado por: {{creador}} </p></td>
-		<td><a href="/curso/{{id}}">Ver</a></td>
-		<td><a href="/{{id}}/examen">Resolver examen</a></td>
+		<td><p>{{titulo}} | </p></td>
+		<td><p>{{descripcion}} | </p></td>
+		<td><p>Creado por: {{creador}} | </p></td>
+		<td><a href="/curso/{{id}}">Ver | </a></td>
+		<td><a href="/{{id}}/examen">Resolver examen | </a></td>
 		{{#puedeGestionarCursos}}
-			<td><a href="/{{id}}/crearexamen">Crear examen</a></td>
-			<td><a href="/eliminarCurso/{{id}}">Eliminar curso</a></td>
+			<td><a href="/{{id}}/crearexamen">Crear examen | </a></td>
+			<td><a href="/eliminarCurso/{{id}}">Eliminar curso | </a></td>
 		{{/puedeGestionarCursos}}
 		
 	</tr>
