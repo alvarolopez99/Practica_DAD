@@ -26,11 +26,10 @@ img {
 </head>
 <body>
 
-<br><br>
 <div style="float: left; width: 45%">
 
 	<div align= "left" style="margin-left:35%">
-		<p align="left" style="font-size:25px"><br><br><b>Datos de usuario</b><br><br></p>
+		<p align="left" style="font-size:25px"><br><b>Datos de usuario</b><br><br></p>
 	</div>
 	<div align= "left" style="margin-left:35%">
 	<p >
@@ -61,7 +60,7 @@ img {
 {{#hayUsuario}}
 	<div style="float: right; width: 45%">
 		<div id="titulo" align= "left" style="margin-left:15%">
-			<p align="left" style="font-size:25px"><br><br><b>Editar perfil</b><br><br></p>
+			<p align="left" style="font-size:25px"><br><b>Editar perfil</b><br><br></p>
 		</div>
 		<div align="left" style="margin-left:15%">
 			<form action="/modifyUser" method="post" enctype="multipart/form-data">
@@ -98,7 +97,7 @@ img {
 		    	<p><br>Actualizar foto de perfil:</p><input type='file' name='image' accept=".jpg, .jpeg, .png">
 		        <br><br>
 				<br/><input type='submit' id='submit' value='Confirmar' disabled="disabled">
-		
+		   <br>   <br>   <br>   <br>
 			</form>
 			<div id="disp" style= "color:green; font-size:18px; font-weight:bold;"> </div>
 		</div> 
@@ -108,6 +107,7 @@ img {
 
 <div id="disp" style="color:green; font-size:18px; font-weight:bold;"></div>
 <br><br>
+   <br>   <br>
 </body>
 <script>
 		var password = document.getElementById('pwd');
