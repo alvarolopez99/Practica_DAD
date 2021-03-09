@@ -21,6 +21,9 @@ public class Curso {
 	@JsonIgnore
 	private ArrayList<Blob> archivo;
 	
+
+	private ArrayList<String> nombresArchivos;
+	
 	
 	@ManyToOne
 	private Usuario profesor;
@@ -67,6 +70,15 @@ public class Curso {
 	public void setArchivo(ArrayList<Blob> archivo) {
 		this.archivo = archivo;
 	}
+	
+	public ArrayList<String> getNombresArchivos() {
+		return nombresArchivos;
+	}
+
+	public void setNombresArchivos(ArrayList<String> nombresArchivos) {
+		this.nombresArchivos = nombresArchivos;
+	}
+	
 
 	public String getTitulo() {
 		return titulo;
