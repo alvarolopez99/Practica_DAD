@@ -29,6 +29,54 @@ public class ChatController {
 	@Autowired
 	private ChatRepository chatRepo;
 	
+	@GetMapping("/chatsProfesor")
+	public String chatsProfesor(Model model, HttpSession session) {
+		
+		Usuario profesor = (Usuario) session.getAttribute("user");
+		
+		List<Chat> chats = chatRepo.findByProfesor(profesor);
+		
+		model.addAttribute("chats", chats);
+
+		return "Chats";
+	}
+	
+	@GetMapping("/chatsProfesor/{idChat}")
+	public String chatProfesorAlumno(Model model, HttpSession session, @PathVariable String idChat) {
+		
+		Optional<Chat> chat = chatRepo.findById(Long.parseLong(idChat));
+		if(chat.isPresent()) {
+			Chat c = chat.get();
+			
+			model.addAttribute("mensajes", c.getMensajes());
+			Usuario profesor = (Usuario)session.getAttribute("user");
+			model.addAttribute("user", profesor.getNombre());		
+			model.addAttribute("target", c.getAlumno());
+			model.addAttribute("idChat", idChat);
+		}
+
+		return "chatProfesor";
+	}
+	
+	@GetMapping("/chatsProfesor/{idChat}/send")
+	public String chatProfesorAlumno(Model model, HttpSession session, @PathVariable String idChat, @RequestParam String usermsg) {
+		
+		Optional<Chat> chat = chatRepo.findById(Long.parseLong(idChat));
+		if(chat.isPresent()) {
+			Chat c = chat.get();
+			Usuario profesor = (Usuario)session.getAttribute("user");
+			c.AñadirMensaje(new Mensaje(profesor, usermsg));
+			
+			chatRepo.save(c);
+			
+			model.addAttribute("mensajes", c.getMensajes());
+			model.addAttribute("user", profesor.getNombre());		
+			model.addAttribute("target", c.getAlumno());
+			model.addAttribute("idChat", idChat);
+		}
+
+		return "chatProfesor";
+	}
 	
 	@GetMapping("/chat/{profesor}/send")	//Pagina del chat cuando se envia un mensaje
 	public String envioMensaje(Model model, @RequestParam String usermsg, @PathVariable String profesor, HttpSession sesion) {

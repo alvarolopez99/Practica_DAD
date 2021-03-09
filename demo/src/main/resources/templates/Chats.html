@@ -1,0 +1,52 @@
+<html>
+
+{{>Inicial}}
+
+
+<style>
+body {
+  background-color: ivory;
+  overflow-y:  scroll
+}
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+</style>
+
+
+<head>
+  <meta charset="UTF-8">
+</head>
+
+
+<body>
+
+<div id="titulo">
+	<p align="center" style="font-size:25px"><br><br><b>Mis chats - Profesor</b><br><br></p>
+</div>
+
+<div align="center">
+
+	{{#chats}}
+		
+		<p>
+		<p><a href="/chatsProfesor/{{id}}">{{alumno.nombre}} {{alumno.primerApellido}}</a></p>
+		<br>
+		
+	{{/chats}}
+	
+	{{^chats}}
+		<p>No hay chats disponibles</p>
+	{{/chats}}
+
+
+   	<br><br> <a href="/paginaprincipal">Página principal</a>
+	
+</div>
+
+</body>
+
+
+{{>footer}}
+</html>

@@ -9,9 +9,9 @@ import com.example.demo.Model.Usuario;
 
 public interface ChatRepository  extends JpaRepository<Chat, Long> {
 
-	List<Chat> findById(long id);
-	List<Chat> findByProfesor(long id);
-	List<Chat> findByAlumno(long id);
+	Optional<Chat> findById(long id);
+	List<Chat> findByProfesor(Usuario u);
+	List<Chat> findByAlumno(Usuario u);
 	
 	Optional<Chat> findByProfesorAndAlumno(Usuario u1, Usuario u2);
 	
