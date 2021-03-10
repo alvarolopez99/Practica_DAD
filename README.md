@@ -103,7 +103,7 @@ El formulario para crear un nuevo curso consta de un título y una descripción.
 
 En esta pantalla se suben los materiales (pdf) asociados a un curso. Por supuesto, un curso puede constar de varios materiales.
 
-![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDAD/Subiendo material_a_curso.png)
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDAD/Subiendo_material_a_curso.png)
 
 
 ### Pantalla de mostrar material de un curso
@@ -138,7 +138,7 @@ Una vez resuelto el examen, se muestra el número de preguntas resueltas.
 
 Además de mostrar el número de preguntas resueltas, se envía un certificado al correo asociado al usuario si éste ha superado con éxito el examen.
 
-![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDAD/Certificado_Examen Correo.png)
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDAD/Certificado_Examen_Correo.png)
 
 
 ### Pantalla de lista de foros disponibles
