@@ -168,7 +168,7 @@ public class UserController {
 		
 		Curso c = cursoRepo.findById(Long.parseLong(curso));
 		model.addAttribute("curso", c.getTitulo());
-		model.addAttribute("id", c.getId());
+		model.addAttribute("id", Long.parseLong(curso));
 		
 		Optional<Examen> e = examRepo.findByCurso(c);
 		if(e.isPresent()) {			
