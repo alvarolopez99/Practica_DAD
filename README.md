@@ -26,6 +26,17 @@ Solo se pueden examinar del curso los usuarios premium, y al completarlo se obti
 - Filtrado de lenguaje soez: Cuando un usuario utiliza palabras malsonantes, el sistema lo reemplazará por una censura a dicha palabra.
 - Reescalado de imágenes: Al seleccionar una imagen de perfil, esta será reescalada para adaptarse al tamaño 300x300 de la web.
 
+##Diagramas de la aplicación
+
+###Diagrama de navegación
+![](https://github.com/alvarolopez99/Saphioteca/DiagramasDAD/DiagramaNavegacion.png)
+
+###Diagrama UML
+![](https://github.com/alvarolopez99/Saphioteca/DiagramasDAD/UMLDAD.png)
+
+###Diagrama E/R
+![](https://github.com/alvarolopez99/Saphioteca/DiagramasDAD/ERDAD.png)
+
 ## Integrantes del grupo
 Sergio Arévalo Gil -> s.arevalog.2017@alumnos.urjc.es - SergioE17
 
