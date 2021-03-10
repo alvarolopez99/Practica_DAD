@@ -29,13 +29,13 @@ Solo se pueden examinar del curso los usuarios premium, y al completarlo se obti
 ##Diagramas de la aplicación
 
 ###Diagrama de navegación
-![](https://github.com/alvarolopez99/Saphioteca/DiagramasDAD/DiagramaNavegacion.png)
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/DiagramasDAD/DiagramaNavegacion.png)
 
 ###Diagrama UML
-![](https://github.com/alvarolopez99/Saphioteca/DiagramasDAD/UMLDAD.png)
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/DiagramasDAD/UMLDAD.png)
 
 ###Diagrama E/R
-![](https://github.com/alvarolopez99/Saphioteca/DiagramasDAD/ERDAD.png)
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/DiagramasDAD/ERDAD.png)
 
 ## Integrantes del grupo
 Sergio Arévalo Gil -> s.arevalog.2017@alumnos.urjc.es - SergioE17
