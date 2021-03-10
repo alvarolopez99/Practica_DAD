@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.Model.Chat;
@@ -62,7 +63,7 @@ public class ChatController {
 		return "chatProfesor";
 	}
 	
-	@GetMapping("/chatsProfesor/{idChat}/send")
+	@PostMapping("/chatsProfesor/{idChat}/send")
 	public String chatProfesorAlumno(Model model, HttpSession session, @PathVariable String idChat, @RequestParam String usermsg) {
 		
 		Optional<Chat> chat = chatRepo.findById(Long.parseLong(idChat));
@@ -82,7 +83,7 @@ public class ChatController {
 		return "chatProfesor";
 	}
 	
-	@GetMapping("/chat/{profesor}/send")	//Pagina del chat cuando se envia un mensaje
+	@PostMapping("/chat/{profesor}/send")	//Pagina del chat cuando se envia un mensaje
 	public String envioMensaje(Model model, @RequestParam String usermsg, @PathVariable String profesor, HttpSession sesion) {
 
 		
