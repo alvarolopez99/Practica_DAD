@@ -82,7 +82,7 @@ En esta pantalla el usuario puede iniciar sesión a partir de su correo y contra
 
 Desde la pantalla de perfil puede verse toda la información del usuario. Además, en la parte derecha se pueden editar dichos datos con su consiguiente actualización.
 
-![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDAD/Mi_perfi.PNG)
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDAD/Mi_perfil.PNG)
 
 
 ### Pantalla de lista de cursos disponibles
@@ -131,7 +131,7 @@ En esta pantalla, el usuario (alumno) intenta resolver cada una de las cinco pre
 
 Una vez resuelto el examen, se muestra el número de preguntas resueltas. 
 
-![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDAD/Resultado_Examenn.PNG)
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDAD/Resultado_Examen.PNG)
 
 
 ### Ejemplo de envío de certificado utilizando el servicio de correo
