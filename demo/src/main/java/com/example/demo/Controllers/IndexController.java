@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.Uso_BD;
 import com.example.demo.Model.Anuncio;
 import com.example.demo.Model.Curso;
 import com.example.demo.Model.Foros;
@@ -57,11 +56,8 @@ public class IndexController {
 	private List<Mensaje> m;
 	public static Usuario usuario = new Usuario();
 	public static String bphoto;
-	public Uso_BD uso_bd = new Uso_BD();
-	//public Service service = new Service();
-
-
-	//public Service service = new Service();
+	
+	
 	
 	@Autowired 
 	private UsuarioRepository userRep;
