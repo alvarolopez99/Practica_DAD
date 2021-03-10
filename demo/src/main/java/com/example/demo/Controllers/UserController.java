@@ -210,13 +210,7 @@ public class UserController {
 			
 			if(puntuacion >= 3) {
 				Usuario u = (Usuario)session.getAttribute("user");
-				
-				//Provisional
-				u = new Usuario();
-				u.setCorreo("urjc.fower@gmail.com");			
-				
-				/******/
-				
+
 				String contenido = "Enhorabuena. Has completado con éxito el curso "+ curso+"disponible en la plataforma Sapiotheca";
 				mail.sendEmail(u.getCorreo(), "Certificado "+curso, contenido);
 				model.addAttribute("mensaje","Has obtenido una puntuación de "+puntuacion+"/5");
