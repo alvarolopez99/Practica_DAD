@@ -12,6 +12,8 @@ public class Sapiotheca {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Sapiotheca.class, args);
+		
+		//FASE 2 - 11/03/2021
 	}
 	
 }
