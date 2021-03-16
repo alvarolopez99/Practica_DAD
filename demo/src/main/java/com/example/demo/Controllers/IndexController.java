@@ -57,15 +57,12 @@ public class IndexController {
 	public static Usuario usuario = new Usuario();
 	public static String bphoto;
 	
-	
-	
 	@Autowired 
 	private UsuarioRepository userRep;
 	
 	@Autowired 
 	private AnuncioRepository repositorioAnuncios;
 	
-
 	@Autowired 
 	private ForosRepository repositorioForos;
 	
@@ -77,7 +74,6 @@ public class IndexController {
 	
 	@Autowired
 	private FilterService filter;
-	
 	
 	public IndexController () {		
 		
@@ -325,13 +321,13 @@ public class IndexController {
 				model.addAttribute("anuncios",  repositorioAnuncios.findAll());
 			}
 
-			return "Anuncios";
+			return "Anuncios/Anuncios";
 		}	
 		
 		@GetMapping("/crearAnuncio")
 		public String crearAnuncio(Model model) {
 			
-			return "formulario_crear_anuncio";
+			return "Anuncios/formulario_crear_anuncio";
 			
 		}
 		
@@ -345,7 +341,7 @@ public class IndexController {
 			repositorioAnuncios.save(anuncio);
 			
 			
-			return "anuncio_creado";
+			return "Anuncios/anuncio_creado";
 		}
 		
 		@GetMapping("/anuncios/{IDAnuncio}")
@@ -358,7 +354,7 @@ public class IndexController {
 					model.addAttribute("infoAnuncio",anuncio.get());
 			 }
 			
-			return "Anuncio";
+			return "Anuncios/Anuncio";
 		}
 		
 		@GetMapping("/eliminarAnuncio/{index}")
@@ -368,7 +364,7 @@ public class IndexController {
 			
 			repositorioAnuncios.deleteById(index);
 
-			return "anuncio_eliminado";
+			return "Anuncios/anuncio_eliminado";
 		}
 		
 		
@@ -392,7 +388,7 @@ public class IndexController {
 		
 		model.addAttribute("cursos", cursos);
 		
-		return "Cursos";
+		return "Cursos/Cursos";
 	}
 	
 	
@@ -403,7 +399,7 @@ public class IndexController {
 		repositorioCurso.delete(cursoEliminado);
 		
 		
-		return "CursoEliminado";
+		return "Cursos/CursoEliminado";
 	}
 	
 	@GetMapping("/curso/{index}")
@@ -426,14 +422,14 @@ public class IndexController {
 		
 		
 		
-		return "informacion_curso";
+		return "Cursos/informacion_curso";
 	}
 	
 	
 	@GetMapping("/crearCurso")
 	public String crearCurso(Model model) {
 	
-		return "Crear_Curso";
+		return "Cursos/Crear_Curso";
 	}
 	
 	@PostMapping("/{id}/materialSubido")
@@ -455,13 +451,13 @@ public class IndexController {
 			}			
 			repositorioCurso.save(curso);
 		}	
-		return "material_Añadido";
+		return "Cursos/material_Añadido";
 	}
 	
 	@GetMapping("/{id}/añadirMaterial")
 	public String subirMaterial (Model model, @PathVariable int id){
 		model.addAttribute("id", id);
-		return "subir_Material";
+		return "Cursos/subir_Material";
 	}
 	
 	
@@ -477,13 +473,13 @@ public class IndexController {
 		Curso nuevoCurso = new Curso(titulo, descripcion, usuario);
 		repositorioCurso.save(nuevoCurso);
 		
-		return "Curso_Creado_Confirmacion";
+		return "Cursos/Curso_Creado_Confirmacion";
 	}
 	
 	@GetMapping("/cursosDisponibles/Actualizado")
 	public String actualizarNuevoCurso(Model model) {	
 		
-		return "Nuevo_Curso";
+		return "Cursos/Nuevo_Curso";
 	}
 	
 	@GetMapping("/paginaprincipal")
