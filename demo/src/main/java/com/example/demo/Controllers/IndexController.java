@@ -85,13 +85,13 @@ public class IndexController {
 	
 	@GetMapping("/")
 	public String indexMain(Model model) {
-		return "PaginaInicio";
+		return "PaginaInicio/PaginaInicio";
 	}
 	
 	
 	@GetMapping("/administrador")
 	public String administrador(Model model) {
-		return "Administrador";
+		return "Administrador/Administrador";
 	}
 	
 	@PostMapping("/profesorAgregado")
@@ -102,7 +102,7 @@ public class IndexController {
 		
 		Optional<Usuario> u = userRep.findByCorreo(correo);
 		if(u.isPresent()) {
-			return "volver_a_registro";
+			return "PaginaDeInicio/volver_a_registro";
 		}else {		
 			
 			Usuario profesor = new Usuario(nombreUsuario, apellido1, apellido2, contraseña_1, 0, 1, correo, 0, null);
@@ -142,7 +142,7 @@ public class IndexController {
 			sesion.setAttribute("user", profesor);
 		}
 		
-		return "ProfesorAgregadoConfirmacion";
+		return "Administrador/ProfesorAgregadoConfirmacion";
 	}
 
 	
@@ -171,7 +171,7 @@ public class IndexController {
 		
 		repositorioForos.save(foroNuevo);
 
-		return "forocreado";
+		return "Foros/forocreado";
 	}
 	
 	@GetMapping("/foros/{IDForo}")
@@ -183,7 +183,7 @@ public class IndexController {
 				model.addAttribute("infoForo",foro.get());
 		 }
 		
-		return "Foro";
+		return "Foros/Foro";
 	}
 	
 	@PostMapping("/foros/{IDForo}/respuesta")
@@ -200,7 +200,7 @@ public class IndexController {
 			model.addAttribute("infoForo",foro.get());
 		 }
 		
-		return "Foro";
+		return "Foros/Foro";
 	}
 	
 	
@@ -208,7 +208,7 @@ public class IndexController {
 	@GetMapping("/foros/nuevoforo")
 	public String CrearForo (Model model) {
 		
-		return "CrearForo";
+		return "Foros/CrearForo";
 	}
 	
 	
@@ -218,14 +218,14 @@ public class IndexController {
 	@GetMapping("/login")
 	public String loginMain(Model model) {
 		model.addAttribute("atributo", true);
-		return "Iniciar_Sesion";
+		return "PaginaDeInicio/Iniciar_Sesion";
 	}
 	
 	//Llamada cuando pulsemos el botón de Registrarse, aparecerá el formulario de New User
 	@GetMapping("/newuser")
 	public String newuserMain(Model model) {
 		model.addAttribute("atributo", true);
-		return "Registro_NuevoUsuario";
+		return "PaginaDeInicio/Registro_NuevoUsuario";
 	}
 	
 	
@@ -289,7 +289,7 @@ public class IndexController {
 					
 				sesion.setAttribute("user", registrado);
 				
-				return "bienvenido";
+				return "PaginaDeInicio/bienvenido";
 			}
 		}
 	
@@ -307,7 +307,7 @@ public class IndexController {
 				return "volver_a_login";
 			}
 		}else {
-			return "no_registrado";
+			return "PaginaDeInicio/no_registrado";
 		}
 	}
 	
@@ -501,7 +501,7 @@ public class IndexController {
 			}
 		} 
 
-		return "paginaprincipal";
+		return "PaginaPrincipal/paginaprincipal";
 	}
 	
 

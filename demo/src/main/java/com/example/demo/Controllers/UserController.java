@@ -92,7 +92,7 @@ public class UserController {
 			}else {
 				model.addAttribute("imagen", false);
 			}
-			return "editarperfil";
+			return "Perfiles/editarperfil";
 		}
 	}
 	
@@ -108,7 +108,7 @@ public class UserController {
 		
 		
 		model.addAttribute("mensaje", "Se ha eliminado correctamente al usuario");
-		return "usuarioModificado";
+		return "Perfiles/usuarioModificado";
 	}
 	
 	@PostMapping("/modifyUser")
@@ -120,7 +120,7 @@ public class UserController {
 		Blob foto = user.getFotoPerfil();
 		
 		if(!user.getContraseña().equals(contraseña_1)) {
-			return "volver_a_profile";
+			return "PaginaDeInicio/volver_a_profile";
 		}else {		
 			if(!nombreUsuario.equals("")) user.setNombre(nombreUsuario);
 			if(!apellido1.equals("")) user.setPrimerApellido(apellido1);
@@ -158,7 +158,7 @@ public class UserController {
 			
 	
 			model.addAttribute("mensaje", "Se han modificado correctamente tus datos");
-			return "usuarioModificado";
+			return "Perfiles/usuarioModificado";
 		}
 	}
 	
@@ -175,7 +175,7 @@ public class UserController {
 			model.addAttribute("preguntas", e.get().getPreguntas());
 		}
 		
-		return "resolverExamen";
+		return "Examenes/resolverExamen";
 	}
 	
 	@PostMapping("/{curso}/examen/completado")
@@ -224,7 +224,7 @@ public class UserController {
 		
 		
 		
-		return "examenCompletado";
+		return "Examenes/examenCompletado";
 	}
 	
 	@GetMapping("/{curso}/crearexamen")
@@ -232,7 +232,7 @@ public class UserController {
 		
 		model.addAttribute("curso", curso);
 		
-		return "crearExamen";
+		return "Examenes/crearExamen";
 	}
 	
 	@PostMapping("/{curso}/examencreado")
@@ -265,7 +265,7 @@ public class UserController {
 		
 		model.addAttribute("curso", curso);
 		model.addAttribute("mensaje", "Se ha creado el exámen con éxito");
-		return "examenCreado";
+		return "Examenes/examenCreado";
 	}
 	
 	@GetMapping("/sesion_cerrada")
@@ -277,6 +277,6 @@ public class UserController {
 			sesion.setAttribute("user", null);
 		}
 		
-		return "sesion_cerrada";
+		return "PaginaDeInicio/sesion_cerrada";
 	}
 }

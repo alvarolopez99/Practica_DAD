@@ -43,7 +43,7 @@ public class ChatController {
 		
 		model.addAttribute("chats", chats);
 
-		return "Chats";
+		return "Chats/Chats";
 	}
 	
 	@GetMapping("/chatsProfesor/{idChat}")
@@ -60,7 +60,7 @@ public class ChatController {
 			model.addAttribute("idChat", idChat);
 		}
 
-		return "chatProfesor";
+		return "Chats/chatProfesor";
 	}
 	
 	@PostMapping("/chatsProfesor/{idChat}/send")
@@ -80,7 +80,7 @@ public class ChatController {
 			model.addAttribute("idChat", idChat);
 		}
 
-		return "chatProfesor";
+		return "Chats/chatProfesor";
 	}
 	
 	@PostMapping("/chat/{profesor}/send")	//Pagina del chat cuando se envia un mensaje
@@ -112,7 +112,7 @@ public class ChatController {
 			}
 		}
 
-		return "chat";
+		return "Chats/chat";
 	}
 	
 	@GetMapping("/chat/{profesor}")	//Pagina de inicio del chat
@@ -151,6 +151,6 @@ public class ChatController {
 		 }
 		
 
-		return "chat";
+		return "Chats/chat";
 	}
 }
