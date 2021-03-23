@@ -35,7 +35,7 @@ public class ForoController {
 		}
 		
 		
-		return "Foros";
+		return "Foros/Foros";
 	}
 	
 	

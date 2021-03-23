@@ -216,9 +216,9 @@ public class IndexController {
 		if(u.isPresent()) {
 			if(contrasena.equals(u.get().getContraseña())) {
 				sesion.setAttribute("user", u.get());
-				return "bienvenidoI";
+				return "PaginaDeInicio/bienvenidoI";
 			}else {
-				return "volver_a_login";
+				return "PaginaDeInicio/volver_a_login";
 			}
 		}else {
 			return "PaginaDeInicio/no_registrado";

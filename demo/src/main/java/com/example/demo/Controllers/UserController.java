@@ -232,7 +232,7 @@ public class UserController {
 		
 		model.addAttribute("curso", curso);
 		
-		return "Examenes/crearExamen";
+		return "Examenes/crearExamen";			
 	}
 	
 	@PostMapping("/{curso}/examencreado")
