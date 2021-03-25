@@ -28,6 +28,7 @@ p {
 	 	 	<p>Introduzca su correo:</p><input type='text' name='correo' placeholder="Introduzca su correo" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/><br><br>
 	 		<p>Introduzca su contraseña:</p><input type='password' name='contrasena' placeholder="Introduzca su contraseña" aria-hidden="true" required/><br><br>
 	  		<br><input type='submit' value='Iniciar sesión'/>
+	  		<input type="hidden" name="_csrf" value="{{token}}"/>
 	  
 		</form>
 	</div>

@@ -43,6 +43,7 @@ p {
 				<p>Responder:</p>
 				<textarea name='respuesta' rows=5 cols=40></textarea>
 				<input type='submit' value='Enviar'/>
+				<input type="hidden" name="_csrf" value="{{token}}"/>
 			
 			</form>
 		{{/infoForo}}

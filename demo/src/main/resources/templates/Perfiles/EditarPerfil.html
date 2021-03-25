@@ -97,6 +97,7 @@ img {
 		    	<p><br>Actualizar foto de perfil:</p><input type='file' name='image' accept=".jpg, .jpeg, .png">
 		        <br><br>
 				<br/><input type='submit' id='submit' value='Confirmar' disabled="disabled">
+				<input type="hidden" name="_csrf" value="{{token}}"/>
 		   <br>   <br>   <br>   <br>
 			</form>
 			<div id="disp" style= "color:green; font-size:18px; font-weight:bold;"> </div>

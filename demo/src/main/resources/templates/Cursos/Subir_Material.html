@@ -31,6 +31,7 @@ p {
       <input type='text' name='nombreMaterial'/>
       <p><br>Sube el material:</p><input type='file' name='archivo' accept=".png, .jpg, .jpeg, .pdf, .pptx"/>
       <input type='submit' value='Guardar'/>
+      <input type="hidden" name="_csrf" value="{{token}}"/>
   </form>
 </div>
 
