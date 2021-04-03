@@ -2,6 +2,7 @@ package com.example.demo.Controllers;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,9 @@ public class AnuncioController {
 	private AnuncioRepository repositorioAnuncios;
 	
 	@GetMapping("/anuncios")
-	public String anuncios(Model model) {
+	public String anuncios(Model model/*, HttpServletRequest request*/) {
 		
-	
+		//model.addAttribute("teacher", request.isUserInRole("profesor"));
 		if (repositorioAnuncios.findAll() != null) {
 			model.addAttribute("anuncios",  repositorioAnuncios.findAll());
 		}
@@ -54,9 +55,9 @@ public class AnuncioController {
 	}
 	
 	@GetMapping("/anuncios/{IDAnuncio}")
-	public String anuncio(Model model, @PathVariable int IDAnuncio) {
+	public String anuncio(Model model, @PathVariable int IDAnuncio/*, HttpServletRequest request*/) {
 		
-		
+		//model.addAttribute("user", request.isUserInRole("usuario_Registrado"));
 		Optional<Anuncio> anuncio = repositorioAnuncios.findById(IDAnuncio);
 		
 		 if (anuncio.isPresent()) {

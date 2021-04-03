@@ -35,8 +35,9 @@ p {
 		{{/foro}}
 
 		<br>
-		<a href="/foros/nuevoforo">Crear foro</a>
-	    
+		{{#user}}
+			<a href="/foros/nuevoforo">Crear foro</a>
+	    {{/user}}
    </div>
    
    	<div align="center">

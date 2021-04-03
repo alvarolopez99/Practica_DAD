@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,20 +31,16 @@ public class CursoController {
 	private UsuarioRepository userRep;
 	
 	@GetMapping("/cursosDisponibles")
-	public String cursosDisponibles(Model model, HttpSession sesion) {
+	public String cursosDisponibles(Model model, HttpSession sesion/*, HttpServletRequest request*/) {
 		
+		/*
+		model.addAttribute("user", request.isUserInRole("usuario_Registrado"));
+		model.addAttribute("teacher", request.isUserInRole("profesor"));
+		*/
 		
 		Usuario usuario = (Usuario) sesion.getAttribute("user");		
 		
-		
-		if (userRep.findById(usuario.getId()).isPresent()) {
-			model.addAttribute("puedeGestionarCursos", true);
-		} else {
-			model.addAttribute("puedeGestionarCursos", false);
-		}
-		
-		List<Curso> cursos = repositorioCurso.findAll();
-		
+		List<Curso> cursos = repositorioCurso.findAll();	
 		
 		model.addAttribute("cursos", cursos);
 		

@@ -12,15 +12,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class CSRFHandlerConfiguration implements WebMvcConfigurer {
-
+	/*
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new CSRFHandlerInterceptor());
 	}
+	*/
 }
 
 class CSRFHandlerInterceptor implements HandlerInterceptor {
-
+	/*
 	@Override
 	public void postHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler,
 			final ModelAndView modelAndView) throws Exception {
@@ -33,4 +34,5 @@ class CSRFHandlerInterceptor implements HandlerInterceptor {
 			}
 		}
 	}
+	*/
 }

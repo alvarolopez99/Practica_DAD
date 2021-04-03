@@ -41,8 +41,10 @@ p {
 </div>
 <div align="center">
 <br><br>
-<p><b>¿Tienes alguna duda adicional o quieres contratar los servicios?</b><p>
-<p><a href="/chat/{{infoAnuncio.profesor.id}}">Chatea</a> con {{infoAnuncio.profesor.nombre}} {{infoAnuncio.profesor.primerApellido}}</p>
+{{#user}}
+	<p><b>¿Tienes alguna duda adicional o quieres contratar los servicios?</b><p>
+	<p><a href="/chat/{{infoAnuncio.profesor.id}}">Chatea</a> con {{infoAnuncio.profesor.nombre}} {{infoAnuncio.profesor.primerApellido}}</p>
+{{/user}}
 <br><br><br>
 <br><a href="/anuncios">Volver</a><br>
 

@@ -51,7 +51,9 @@ p {
 	
 		<td><a><b>Materia:</b> {{materia}}
 		<br> <b>Curso: </b>{{curso}}
-		<td><a href="/eliminarAnuncio/{{id}}">Eliminar anuncio</a></td>
+		{{#teacher}}
+			<td><a href="/eliminarAnuncio/{{id}}">Eliminar anuncio</a></td>
+		{{/teacher}}
 		<td><a href="/anuncios/{{id}}">Ver</a></td>
 	
 	</tr>
@@ -65,7 +67,9 @@ p {
 	
 	<br>
 	<div class="enlace">
-	<a href="/crearAnuncio">Crear anuncio</a>
+	{{#teacher}}
+		<a href="/crearAnuncio">Crear anuncio</a>
+	{{/teacher}}
 	</div>
 	
 	<br>

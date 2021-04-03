@@ -2,6 +2,7 @@ package com.example.demo.Controllers;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,9 @@ public class ForoController {
 	private ForosRepository repositorioForos;
 	
 	@GetMapping("/foros")
-	public String MostrarForos (Model model) {
+	public String MostrarForos (Model model/*, HttpServletRequest request*/) {
+		
+		//model.addAttribute("user", request.isUserInRole("usuario_Registrado") || request.isUserInRole("profesor"));
 		
 		if (repositorioForos.findAll() != null) {
 			model.addAttribute("foro",  repositorioForos.findAll());
@@ -50,8 +53,9 @@ public class ForoController {
 	}
 	
 	@GetMapping("/foros/{IDForo}")
-	public String VerForo(Model model, @PathVariable int IDForo) {
+	public String VerForo(Model model, @PathVariable int IDForo/*, HttpServletRequest request*/) {
 		
+		//model.addAttribute("user", request.isUserInRole("usuario_Registrado") || request.isUserInRole("profesor"));
 		
 		Optional<Foros> foro = repositorioForos.findById(IDForo);
 		 if (foro.isPresent()) {
@@ -62,8 +66,9 @@ public class ForoController {
 	}
 	
 	@PostMapping("/foros/{IDForo}/respuesta")
-	public String VerForo (Model model, @PathVariable int IDForo, @RequestParam String respuesta, HttpSession session) {
+	public String VerForo (Model model, @PathVariable int IDForo, @RequestParam String respuesta, HttpSession session/*, HttpServletRequest request*/) {
 		
+		//model.addAttribute("user", request.isUserInRole("usuario_Registrado") || request.isUserInRole("profesor"));
 		
 		Optional<Foros> foro = repositorioForos.findById(IDForo);
 		 if (foro.isPresent()) {

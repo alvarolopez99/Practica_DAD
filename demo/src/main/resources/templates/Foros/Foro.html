@@ -36,17 +36,18 @@ p {
    	 		<br><b>{{emisor.nombre}}:&nbsp;</b>{{CuerpoMensaje}}
     	{{/infoForo.mensajes}}
 	
-	
-		{{#infoForo}}
-			<form action="/foros/{{IDForo}}/respuesta" method="post">	
-	
-				<p>Responder:</p>
-				<textarea name='respuesta' rows=5 cols=40></textarea>
-				<input type='submit' value='Enviar'/>
-				<input type="hidden" name="_csrf" value="{{token}}"/>
-			
-			</form>
-		{{/infoForo}}
+		{{#user}}
+			{{#infoForo}}
+				<form action="/foros/{{IDForo}}/respuesta" method="post">	
+		
+					<p>Responder:</p>
+					<textarea name='respuesta' rows=5 cols=40></textarea>
+					<input type='submit' value='Enviar'/>
+					<input type="hidden" name="_csrf" value="{{token}}"/>
+				
+				</form>
+			{{/infoForo}}
+		{{/user}}
 	
 	<a href="/foros">VOLVER</a>
 	

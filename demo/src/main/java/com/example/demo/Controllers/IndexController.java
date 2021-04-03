@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialException;
 import javax.swing.ImageIcon;
@@ -68,7 +69,10 @@ public class IndexController {
 	
 	
 	@GetMapping("/")
-	public String indexMain(Model model) {
+	public String indexMain(Model model/*, HttpServletRequest request*/) {
+		
+		//model.addAttribute("admin", request.isUserInRole("administrador"));
+		
 		return "PaginaDeInicio/PaginaInicio";
 	}
 	
@@ -89,7 +93,10 @@ public class IndexController {
 			return "PaginaDeInicio/volver_a_registro";
 		}else {		
 			
-			Usuario profesor = new Usuario(nombreUsuario, apellido1, apellido2, contraseña_1, 0, 1, correo, 0, null);
+			List<String> roles = new ArrayList<String>();
+			roles.add("profesor");
+			
+			Usuario profesor = new Usuario(nombreUsuario, apellido1, apellido2, contraseña_1, 0, 1, correo, 0, null, roles);
 				
 			byte[] bytes;
 			
@@ -168,9 +175,12 @@ public class IndexController {
 				metodoP = 0;
 			else
 				metodoP = 1;
-
+			
+			List<String> roles = new ArrayList<String>();
+			roles.add("user");
+			
 			Usuario registrado = new Usuario(nombreUsuario, primerApellido, apellido2, contraseña_1, 0, tipoU, correo,
-					metodoP, null);
+					metodoP, null, roles);
 
 			byte[] bytes;
 
@@ -228,21 +238,24 @@ public class IndexController {
 	
 	
 	@GetMapping("/paginaprincipal")
-	public String paginaPrincipal(Model model, HttpSession sesion) {	
-				
+	public String paginaPrincipal(Model model, HttpSession sesion/*, HttpServletRequest request*/) {	
+		
+		//model.addAttribute("user", request.isUserInRole("usuario_Registrado"));
+		
+		/*
 		Usuario u = (Usuario) sesion.getAttribute("user");
 		if(u == null) {
-			
 			Optional<Usuario> user = userRep.findByCorreo("------------");
 			if(user.isPresent()){
 			  sesion.setAttribute("user", user.get());
 			}
 			else{
-			  u = new Usuario("------------", "------------", "------------", "------------", 0, 0, "------------", 0, null);;
+			  u = new Usuario("------------", "------------", "------------", "------------", 0, 0, "------------", 0, null, null);
 			  sesion.setAttribute("user", u);
 			  userRep.save(u);
 			}
 		} 
+		*/
 
 		return "PaginaPrincipal/paginaprincipal";
 	}

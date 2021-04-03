@@ -32,12 +32,15 @@ public class Usuario {
 	@OneToMany
 	private List<Curso> cursos;
 	
+	@ElementCollection(fetch = FetchType.EAGER)
+	private List<String> roles;
+	
 	public Usuario() {
 		
 	}
 	
 	public Usuario(String nombre, String primerApellido, String segundoApellido, String contraseña,
-			int tipoUsuario, int tipoSuscripcion, String correo, int metodoPago, Blob fotoPerfil) {
+			int tipoUsuario, int tipoSuscripcion, String correo, int metodoPago, Blob fotoPerfil, List<String> roles) {
 		super();
 		this.nombre = nombre;
 		this.primerApellido = primerApellido;
@@ -48,6 +51,7 @@ public class Usuario {
 		this.correo = correo;
 		this.metodoPago = metodoPago;
 		this.fotoPerfil = fotoPerfil;
+		this.roles = roles;
 		cursos = new ArrayList<Curso>();
 	}
 	
