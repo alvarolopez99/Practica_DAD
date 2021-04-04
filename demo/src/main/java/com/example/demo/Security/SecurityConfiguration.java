@@ -29,6 +29,10 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder(10, new SecureRandom());
 	}
+	*/
+	
+	@Autowired
+	public UserRepositoryAuthenticationProvider authenticationProvider;
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -43,6 +47,9 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		
 		auth.inMemoryAuthentication().withUser("teacher")
 		.password(encoder.encode("teacherpass")).roles("profesor");
+		
+		// ¿COMPATIBLE CON LO ANTERIOR?
+		auth.authenticationProvider(authenticationProvider);
 	}
 	
 	@Override
@@ -120,7 +127,7 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		http.formLogin().usernameParameter("nombreUsuario");
 		http.formLogin().passwordParameter("contraseña_1");	
 		
-		/* COMPLETAR:
+		// COMPLETAR:
 		http.formLogin().defaultSuccessUrl("/private");
 		http.formLogin().failureUrl("/loginerror");
 
@@ -133,5 +140,5 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		
 	}
-	*/
+	
 }

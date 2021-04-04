@@ -35,6 +35,7 @@ public class Usuario {
 	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
 	
+
 	public Usuario() {
 		
 	}
@@ -53,6 +54,14 @@ public class Usuario {
 		this.fotoPerfil = fotoPerfil;
 		this.roles = roles;
 		cursos = new ArrayList<Curso>();
+	}
+	
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
 	}
 	
 	public long getId() {
