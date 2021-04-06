@@ -56,14 +56,6 @@ public class Usuario {
 		cursos = new ArrayList<Curso>();
 	}
 	
-	public List<String> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<String> roles) {
-		this.roles = roles;
-	}
-	
 	public long getId() {
 		return id;
 	}
@@ -139,6 +131,14 @@ public class Usuario {
 	
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
+	}
+	
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
 	}
 
 }
