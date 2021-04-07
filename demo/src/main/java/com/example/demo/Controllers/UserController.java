@@ -9,10 +9,12 @@ import java.util.List;
 import java.util.Optional;
 import java.sql.Blob;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,8 +51,12 @@ public class UserController {
 	MailService mail;
 	
 	@GetMapping("/profile")
-	public String editUser(Model model, HttpSession sesion) throws SQLException, IOException, ClassNotFoundException {
+	public String editUser(Model model, HttpSession sesion,
+			HttpServletRequest request) throws SQLException, IOException, ClassNotFoundException {
 
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
+		
 		// Leer usuario actual del httpsession
 
 		Usuario user = (Usuario) sesion.getAttribute("user");

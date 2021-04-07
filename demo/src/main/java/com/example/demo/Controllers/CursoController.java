@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -75,16 +76,14 @@ public class CursoController {
 			model.addAttribute("archivos", listaImagenes);
 			model.addAttribute("index", index);
 		}
-		
-		
-		
 		return "Cursos/informacion_curso";
 	}
 	
 	
 	@GetMapping("/crearCurso")
-	public String crearCurso(Model model) {
-	
+	public String crearCurso(Model model, HttpServletRequest request) {
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		return "Cursos/Crear_Curso";
 	}
 	
@@ -111,12 +110,12 @@ public class CursoController {
 	}
 	
 	@GetMapping("/{id}/añadirMaterial")
-	public String subirMaterial (Model model, @PathVariable int id){
+	public String subirMaterial (Model model, @PathVariable int id, HttpServletRequest request){
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		model.addAttribute("id", id);
 		return "Cursos/subir_Material";
-	}
-	
-	
+	}	
 	
 	@PostMapping("/crearCursoConfirmacion")
 	public String crearCursoConfirmacion(Model model, @RequestParam String titulo, @RequestParam String descripcion, HttpSession sesion) {

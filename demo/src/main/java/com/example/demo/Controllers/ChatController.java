@@ -1,8 +1,10 @@
 package com.example.demo.Controllers;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,7 +66,10 @@ public class ChatController {
 	}
 	
 	@PostMapping("/chatsProfesor/{idChat}/send")
-	public String chatProfesorAlumno(Model model, HttpSession session, @PathVariable String idChat, @RequestParam String usermsg) {
+	public String chatProfesorAlumno(Model model, HttpSession session, @PathVariable String idChat, @RequestParam String usermsg,
+			HttpServletRequest request) {
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		
 		Optional<Chat> chat = chatRepo.findById(Long.parseLong(idChat));
 		if(chat.isPresent()) {
@@ -84,8 +89,10 @@ public class ChatController {
 	}
 	
 	@PostMapping("/chat/{profesor}/send")	//Pagina del chat cuando se envia un mensaje
-	public String envioMensaje(Model model, @RequestParam String usermsg, @PathVariable String profesor, HttpSession sesion) {
-
+	public String envioMensaje(Model model, @RequestParam String usermsg, @PathVariable String profesor, HttpSession sesion,
+			HttpServletRequest request) {
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		
 		//Añadir la carga de mensajes mediante lista
 		
@@ -116,7 +123,11 @@ public class ChatController {
 	}
 	
 	@GetMapping("/chat/{profesor}")	//Pagina de inicio del chat
-	public String abrirChat(Model model, @PathVariable String profesor, HttpSession sesion) {
+	public String abrirChat(Model model, @PathVariable String profesor, HttpSession sesion,
+			HttpServletRequest request) {
+		
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		
 		/*	Para recuperar el usuario actual */
 		Usuario user = (Usuario)sesion.getAttribute("user");

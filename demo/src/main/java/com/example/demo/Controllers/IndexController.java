@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 
 import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -91,12 +92,12 @@ public class IndexController {
 		Optional<Usuario> u = userRep.findByCorreo(correo);
 		if(u.isPresent()) {
 			return "PaginaDeInicio/volver_a_registro";
-		}else {		
+		}else {					
+			//List<String> roles = new ArrayList<String>();
+			//roles.add("profesor");
 			
-			List<String> roles = new ArrayList<String>();
-			roles.add("profesor");
-			
-			Usuario profesor = new Usuario(nombreUsuario, apellido1, apellido2, contraseña_1, 0, 1, correo, 0, null, roles);
+			Usuario profesor = new Usuario(nombreUsuario, apellido1, apellido2, contraseña_1, 0, 1, correo, 0, null,
+					"USER", "PROFESOR");
 				
 			byte[] bytes;
 			
@@ -137,14 +138,18 @@ public class IndexController {
 	
 	//Llamada cuando pulsamos el botón de Login, aparecerá el formulario para logearse.
 	@GetMapping("/login")
-	public String loginMain(Model model) {
+	public String loginMain(Model model, HttpServletRequest request) {
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		model.addAttribute("atributo", true);
 		return "PaginaDeInicio/Iniciar_Sesion";
 	}
 	
 	//Llamada cuando pulsemos el botón de Registrarse, aparecerá el formulario de New User
 	@GetMapping("/newuser")
-	public String newuserMain(Model model) {
+	public String newuserMain(Model model, HttpServletRequest request) {
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		model.addAttribute("atributo", true);
 		return "PaginaDeInicio/Registro_NuevoUsuario";
 	}
@@ -176,11 +181,11 @@ public class IndexController {
 			else
 				metodoP = 1;
 			
-			List<String> roles = new ArrayList<String>();
-			roles.add("user");
+			//List<String> roles = new ArrayList<String>();
+			//roles.add("user");
 			
 			Usuario registrado = new Usuario(nombreUsuario, primerApellido, apellido2, contraseña_1, 0, tipoU, correo,
-					metodoP, null, roles);
+					metodoP, null, "ADMIN");
 
 			byte[] bytes;
 
@@ -220,6 +225,9 @@ public class IndexController {
 	@PostMapping("/bienvenidoI")
 	public String bienvenidoInicio(Model model, @RequestParam String correo, @RequestParam String contrasena, HttpSession sesion) {
 		
+		System.out.println("Hola, has iniciado sesion");
+
+		
 		model.addAttribute("correo", correo);
 		
 		Optional<Usuario> u = userRep.findByCorreo(correo);
@@ -238,9 +246,9 @@ public class IndexController {
 	
 	
 	@GetMapping("/paginaprincipal")
-	public String paginaPrincipal(Model model, HttpSession sesion/*, HttpServletRequest request*/) {	
+	public String paginaPrincipal(Model model, HttpSession sesion, HttpServletRequest request) {	
 		
-		//model.addAttribute("user", request.isUserInRole("usuario_Registrado"));
+		model.addAttribute("user", request.isUserInRole("USER"));
 		
 		/*
 		Usuario u = (Usuario) sesion.getAttribute("user");

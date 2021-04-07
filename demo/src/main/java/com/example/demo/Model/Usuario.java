@@ -41,7 +41,7 @@ public class Usuario {
 	}
 	
 	public Usuario(String nombre, String primerApellido, String segundoApellido, String contraseña,
-			int tipoUsuario, int tipoSuscripcion, String correo, int metodoPago, Blob fotoPerfil, List<String> roles) {
+			int tipoUsuario, int tipoSuscripcion, String correo, int metodoPago, Blob fotoPerfil, String... roles) {
 		super();
 		this.nombre = nombre;
 		this.primerApellido = primerApellido;
@@ -52,8 +52,8 @@ public class Usuario {
 		this.correo = correo;
 		this.metodoPago = metodoPago;
 		this.fotoPerfil = fotoPerfil;
-		this.roles = roles;
-		cursos = new ArrayList<Curso>();
+		this.roles = List.of(roles);
+		//cursos = new ArrayList<Curso>();
 	}
 	
 	public long getId() {

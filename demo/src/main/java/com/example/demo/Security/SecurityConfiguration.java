@@ -35,24 +35,6 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 	public UserRepositoryAuthenticationProvider authenticationProvider;
 	
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
-		auth.inMemoryAuthentication().withUser("user")
-			.password(encoder.encode("pass")).roles("usuario_Registrado");
-
-		auth.inMemoryAuthentication().withUser("admin")
-			.password(encoder.encode("adminpass")).roles("usuario_Registrado", "administrador");
-		
-		auth.inMemoryAuthentication().withUser("teacher")
-		.password(encoder.encode("teacherpass")).roles("profesor");
-		
-		// ¿COMPATIBLE CON LO ANTERIOR?
-		auth.authenticationProvider(authenticationProvider);
-	}
-	
-	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
 		// PÁGINAS PÚBLICAS
@@ -64,6 +46,10 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/newuser").permitAll();
 		http.authorizeRequests().antMatchers("/login").permitAll();
 		http.authorizeRequests().antMatchers("/paginaprincipal").permitAll();
+		
+		
+		//http.authorizeRequests().antMatchers("/administrador").permitAll();
+		//http.authorizeRequests().antMatchers("/profesorAgregado").permitAll();
 		
 		// Cursos
 		http.authorizeRequests().antMatchers("/cursosDisponibles").permitAll();
@@ -81,51 +67,52 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 	
 		
 		
-		// PÁGINAS PRIVADAS
-		http.authorizeRequests().anyRequest().authenticated();
+		
 		
 		// Cursos - Profesor
-		http.authorizeRequests().antMatchers("/eliminarCurso/{index}").hasAnyRole("profesor");
-		http.authorizeRequests().antMatchers("/crearCurso").hasAnyRole("profesor");
-		http.authorizeRequests().antMatchers("/{id}/añadirMaterial").hasAnyRole("profesor");
-		http.authorizeRequests().antMatchers("/crearCursoConfirmacion").hasAnyRole("profesor");
-		http.authorizeRequests().antMatchers("/{curso}/examencreado").hasAnyRole("profesor");
+		http.authorizeRequests().antMatchers("/eliminarCurso/{index}").hasAnyRole("PROFESOR");
+		http.authorizeRequests().antMatchers("/crearCurso").hasAnyRole("PROFESOR");
+		http.authorizeRequests().antMatchers("/{id}/añadirMaterial").hasAnyRole("PROFESOR");
+		http.authorizeRequests().antMatchers("/crearCursoConfirmacion").hasAnyRole("PROFESOR");
+		http.authorizeRequests().antMatchers("/{curso}/examencreado").hasAnyRole("PROFESOR");
 				
 		// Chats - Profesor
-		http.authorizeRequests().antMatchers("/chatsProfesor").hasAnyRole("profesor");
-		http.authorizeRequests().antMatchers("/chatsProfesor/{idChat}").hasAnyRole("profesor");
-		http.authorizeRequests().antMatchers("/chatsProfesor/{idChat}/send").hasAnyRole("profesor");			
+		http.authorizeRequests().antMatchers("/chatsProfesor").hasAnyRole("PROFESOR");
+		http.authorizeRequests().antMatchers("/chatsProfesor/{idChat}").hasAnyRole("PROFESOR");
+		http.authorizeRequests().antMatchers("/chatsProfesor/{idChat}/send").hasAnyRole("PROFESOR");			
 		
 		// Anuncios - Profesor
-		http.authorizeRequests().antMatchers("/crearAnuncio").hasAnyRole("profesor");
-		http.authorizeRequests().antMatchers("/anuncioCreado").hasAnyRole("profesor");
-		http.authorizeRequests().antMatchers("/eliminarAnuncio/{index}").hasAnyRole("profesor");
+		http.authorizeRequests().antMatchers("/crearAnuncio").hasAnyRole("PROFESOR");
+		http.authorizeRequests().antMatchers("/anuncioCreado").hasAnyRole("PROFESOR");
+		http.authorizeRequests().antMatchers("/eliminarAnuncio/{index}").hasAnyRole("PROFESOR");
 		
 		// Administrador
-		http.authorizeRequests().antMatchers("/administrador").hasAnyRole("administrador");
-		http.authorizeRequests().antMatchers("/profesorAgregado").hasAnyRole("administrador");
+		http.authorizeRequests().antMatchers("/administrador").hasAnyRole("ADMIN");
+		http.authorizeRequests().antMatchers("/profesorAgregado").hasAnyRole("ADMIN");
 		
 		// Perfil - Usuario Registrado
-		http.authorizeRequests().antMatchers("/modifyUser").hasAnyRole("usuario_Registrado");
-		http.authorizeRequests().antMatchers("/profile").hasAnyRole("usuario_Registrado");
+		http.authorizeRequests().antMatchers("/modifyUser").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/profile").hasAnyRole("USER");
 		
 		// Examen - Usuario Registrado
-		http.authorizeRequests().antMatchers("/{curso}/examen").hasAnyRole("usuario_Registrado");
-		http.authorizeRequests().antMatchers("/{curso}/examen/completado").hasAnyRole("usuario_Registrado");
+		http.authorizeRequests().antMatchers("/{curso}/examen").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/{curso}/examen/completado").hasAnyRole("USER");
 		
 		// Foros - Usuario Registrado y Profesor
-		http.authorizeRequests().antMatchers("/foros/{IDForo}").hasAnyRole("usuario_Registrado", "profesor");
-		http.authorizeRequests().antMatchers("/foros/{IDForo}/respuesta").hasAnyRole("usuario_Registrado", "profesor");
+		//http.authorizeRequests().antMatchers("/foros/{IDForo}").hasAnyRole("user", "profesor");
+		//http.authorizeRequests().antMatchers("/foros/{IDForo}/respuesta").hasAnyRole("user", "profesor");
 		
 		// Chats - Usuario Registrado
-		http.authorizeRequests().antMatchers("/chat/{profesor}").hasAnyRole("usuario_Registrado");
-		http.authorizeRequests().antMatchers("/chat/{profesor}/send").hasAnyRole("usuario_Registrado");
+		http.authorizeRequests().antMatchers("/chat/{profesor}").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/chat/{profesor}/send").hasAnyRole("USER");
 		
+		// PÁGINAS PRIVADAS
+		http.authorizeRequests().anyRequest().authenticated();	
 		
 		// Login form
 		http.formLogin().loginPage("/login");
-		http.formLogin().usernameParameter("nombreUsuario");
-		http.formLogin().passwordParameter("contraseña_1");	
+		http.formLogin().usernameParameter("correo");
+		http.formLogin().passwordParameter("contrasena");	
 		
 		// COMPLETAR:
 		http.formLogin().defaultSuccessUrl("/private");
@@ -137,8 +124,27 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		
 
 		// Disable CSRF at the moment
-		http.csrf().disable();
+		//http.csrf().disable();
 		
 	}
+
+
 	
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+
+		/*auth.inMemoryAuthentication().withUser("user")
+			.password(encoder.encode("pass")).roles("USER");
+
+		auth.inMemoryAuthentication().withUser("admin")
+			.password(encoder.encode("adminpass")).roles("USER", "ADMIN");
+		
+		auth.inMemoryAuthentication().withUser("teacher")
+		.password(encoder.encode("teacherpass")).roles("PROFESOR");*/
+		
+		// ¿COMPATIBLE CON LO ANTERIOR?
+		auth.authenticationProvider(authenticationProvider);
+	}
 }

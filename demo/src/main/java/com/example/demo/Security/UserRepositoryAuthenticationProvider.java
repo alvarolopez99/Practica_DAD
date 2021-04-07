@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -27,9 +28,18 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		
-		Optional<Usuario> usuario = userRepository.findByNombre(authentication.getName());
+		System.out.println("**************************");
+		System.out.println("He llegado al authenticate");
+		System.out.println("**************************");
+		
+		Optional<Usuario> usuario = userRepository.findByCorreo(authentication.getName());
+		
+		System.out.println("**************************");
+		System.out.println(usuario.get().getCorreo());
+		System.out.println("**************************");
 		
 		if (usuario == null) {
+			//System.out.print("");
 			throw new BadCredentialsException("El usuario no existe");
 		}
 		
