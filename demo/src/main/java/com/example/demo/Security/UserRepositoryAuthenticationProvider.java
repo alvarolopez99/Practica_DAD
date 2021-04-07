@@ -16,27 +16,35 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.example.demo.Sapiotheca;
 import com.example.demo.Model.Usuario;
 import com.example.demo.Repository.UsuarioRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @Component
 public class UserRepositoryAuthenticationProvider implements AuthenticationProvider {
+	
 
 	@Autowired
 	private UsuarioRepository userRepository;
+	
+	private static final Logger LOGGER=LoggerFactory.getLogger(Sapiotheca.class);
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		
-		System.out.println("**************************");
-		System.out.println("He llegado al authenticate");
-		System.out.println("**************************");
+		
+		LOGGER.info("**************************");
+		LOGGER.info("He llegado al authenticate");
+		LOGGER.info("**************************");
 		
 		Optional<Usuario> usuario = userRepository.findByCorreo(authentication.getName());
 		
-		System.out.println("**************************");
-		System.out.println(usuario.get().getCorreo());
-		System.out.println("**************************");
+		LOGGER.info("**************************");
+		LOGGER.info(usuario.get().getCorreo());
+		LOGGER.info("**************************");
 		
 		if (usuario == null) {
 			//System.out.print("");

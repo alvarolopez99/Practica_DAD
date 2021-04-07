@@ -18,6 +18,8 @@ import javax.sql.rowset.serial.SerialException;
 import javax.swing.ImageIcon;
 
 import org.apache.tomcat.jni.File;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
@@ -25,9 +27,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.Sapiotheca;
 import com.example.demo.Model.Anuncio;
 import com.example.demo.Model.Curso;
 import com.example.demo.Model.Foros;
@@ -51,6 +55,8 @@ import javax.imageio.ImageIO;
 
 @Controller
 public class IndexController {
+	
+	private static final Logger LOGGER=LoggerFactory.getLogger(Sapiotheca.class);
 	
 	private List<Foros> foros = new ArrayList<>();
 	public static Usuario usuario = new Usuario();
@@ -137,7 +143,7 @@ public class IndexController {
 	
 	
 	//Llamada cuando pulsamos el botón de Login, aparecerá el formulario para logearse.
-	@GetMapping("/login")
+	@RequestMapping("/login")
 	public String loginMain(Model model, HttpServletRequest request) {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
@@ -225,7 +231,7 @@ public class IndexController {
 	@PostMapping("/bienvenidoI")
 	public String bienvenidoInicio(Model model, @RequestParam String correo, @RequestParam String contrasena, HttpSession sesion) {
 		
-		System.out.println("Hola, has iniciado sesion");
+		LOGGER.info("Hola, has iniciado sesion");
 
 		
 		model.addAttribute("correo", correo);
