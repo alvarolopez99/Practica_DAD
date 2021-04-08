@@ -19,14 +19,16 @@ public class Runner implements CommandLineRunner {
   @Override
   public void run(String... args) throws Exception {
     
-    
-    System.out.println("Sending message...");
-    rabbitTemplate.convertAndSend(topicExchangeName, "foo.bar.baz", "|*Image*|"+"Hello from RabbitMQ!");
   }
   
   public static void mailPetition(String correo, String contenido) {
 	  System.out.println("Sending message...");
 	  rabbitTemplate.convertAndSend(Runner.topicExchangeName, "foo.bar.baz", "|*Mail*|"+correo+";;"+contenido);
+  }
+  
+  public static void imagePetition() {
+	  System.out.println("Sending message...");
+	  rabbitTemplate.convertAndSend(topicExchangeName, "foo.bar.baz", "|*Image*|"+"Hello from RabbitMQ!");
   }
 
 }
