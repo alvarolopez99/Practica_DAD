@@ -65,41 +65,21 @@ public class ServiciointernoApplication {
 	  
 	public static void main(String[] args) {
 		SpringApplication.run(ServiciointernoApplication.class, args);
-
-		final Logger LOGGER=LoggerFactory.getLogger(ServiciointernoApplication.class);
+		
+		int puerto = 9999;
 		
 		try {
-			
-			ServerSocket serverSocket = new ServerSocket(9999);
-			Socket socket = serverSocket.accept();
-			
-			LOGGER.info("*SE HAN CONECTADO*");
-			
-			InputStreamReader InStrReaderStn = new InputStreamReader(socket.getInputStream());
-			BufferedReader BRSocketIn = new BufferedReader(InStrReaderStn);
-
-			PrintWriter PWSocketOut = new PrintWriter(socket.getOutputStream()); //Para escribir en el socket
+			ServerSocket serverSocket = new ServerSocket(puerto);
 			
 			while(true) {
-				//LOGGER.info("************");
-				
-				String  line = "";
-				line = BRSocketIn.readLine();
-				if (line !=null) {
-				
-					LOGGER.info("MENSAJE DEL CLIENTE: " + line);
-					
-					PWSocketOut.println("Hola cliente, soy el servidor");
-					PWSocketOut.flush();
-				}
-				//PWSocketOut.println(line);
-				//PWSocketOut.println("Soy el servidor");
-				//PWSocketOut.flush();
-				}
-			
-			} catch (IOException e) {	
-			e.printStackTrace();
+				Socket socket = serverSocket.accept();
+				Thread t = new Thread(new ProcesadorSockets(socket));
+				t.start();
 			}
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
 		
 
 
