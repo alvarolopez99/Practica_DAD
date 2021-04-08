@@ -24,8 +24,7 @@ public class Sapiotheca {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Sapiotheca.class, args);
-		
-		
+			
 		//FASE 2 - 11/03/2021
 		final Logger LOGGER=LoggerFactory.getLogger(Sapiotheca.class);
 
@@ -51,11 +50,9 @@ public class Sapiotheca {
 	
 			int n = 1;
 			
-			//while(n<1) {
-				String response = BRSocketIn.readLine();
-				System.out.println();
-				LOGGER.info("RESPUESTA DEL SERVIDOR: " + response +" *******");
-			//}
+			String response = BRSocketIn.readLine();
+			System.out.println();
+			LOGGER.info("RESPUESTA DEL SERVIDOR: " + response +" *******");
 				
 			BRSocketIn.close();
 			socket.close();

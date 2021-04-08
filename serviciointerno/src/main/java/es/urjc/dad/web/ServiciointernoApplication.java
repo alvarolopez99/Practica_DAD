@@ -78,9 +78,9 @@ public class ServiciointernoApplication {
 			//ServerSocket serverSocket = new ServerSocket(puerto);
 			
 			while(true) {
-				Socket socket = serverSocket.accept();
+				Socket socket = serverSocket.accept();		// Esperar a que llegue una petición de un cliente
 				Thread t = new Thread(new ProcesadorSockets(socket));
-				t.start();
+				t.start();									// Ejecutarla en un hilo y seguir atendiendo nuevas peticiones
 			}
 		} catch (IOException e) {
 			
