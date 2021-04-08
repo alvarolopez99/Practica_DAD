@@ -12,6 +12,8 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import javax.net.ServerSocketFactory;
+
 public class ProcesadorSockets implements Runnable{
 
 	Socket socket;
@@ -27,7 +29,7 @@ public class ProcesadorSockets implements Runnable{
 		final Logger LOGGER=LoggerFactory.getLogger(ServiciointernoApplication.class);
 		
 		try {
-	
+			
 			InputStreamReader InStrReaderStn = new InputStreamReader(socket.getInputStream());
 			BufferedReader BRSocketIn = new BufferedReader(InStrReaderStn);
 

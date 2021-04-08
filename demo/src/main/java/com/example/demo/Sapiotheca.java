@@ -5,7 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.NoSuchElementException;
+
+import javax.net.SocketFactory;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -27,11 +31,13 @@ public class Sapiotheca {
 
 		String host = "127.0.0.1";
 		int port = 9999;
+		SocketFactory ssf = SocketFactory.getDefault();
+
 		
 		try {
-
 			//Leer de la entrada estandar, enviar al servidor por el socket, leer del socket e imprimir
-			Socket socket = new Socket(host, port);
+			//Socket socket = new Socket(host, port);
+			Socket socket = ssf.createSocket(host, port);
 			InputStreamReader InStrReaderStn = new InputStreamReader(System.in);
 			BufferedReader BRStdIn = new BufferedReader(InStrReaderStn);
 			InputStreamReader InStrReaderSocket = new InputStreamReader(socket.getInputStream());
@@ -55,7 +61,10 @@ public class Sapiotheca {
 			socket.close();
 			PWSocketOut.close();
 			
-		}catch(IOException e) {
+		}  catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		catch(IOException e) {
 			e.printStackTrace();
 		}
 		

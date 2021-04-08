@@ -1,6 +1,9 @@
 package es.urjc.dad.web;
 
 import java.net.Socket;
+
+import javax.net.ServerSocketFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -67,9 +70,12 @@ public class ServiciointernoApplication {
 		SpringApplication.run(ServiciointernoApplication.class, args);
 		
 		int puerto = 9999;
+		ServerSocketFactory ssf = ServerSocketFactory.getDefault();
+
 		
 		try {
-			ServerSocket serverSocket = new ServerSocket(puerto);
+			ServerSocket serverSocket = ssf.createServerSocket(puerto);
+			//ServerSocket serverSocket = new ServerSocket(puerto);
 			
 			while(true) {
 				Socket socket = serverSocket.accept();
