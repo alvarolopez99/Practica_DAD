@@ -27,7 +27,8 @@ import es.urjc.dad.web.rabbit.Receiver;
 public class ServiciointernoApplication {
 
 	  public static final String topicExchangeName = "spring-boot-exchange";
-
+		
+		
 	  static final String queueName = "spring-boot";
 
 	  @Bean
@@ -60,16 +61,13 @@ public class ServiciointernoApplication {
 	    return new MessageListenerAdapter(receiver, "receiveMessage");
 	  }
 
-	  public static void main(String[] args) throws InterruptedException {
-	    SpringApplication.run(ServiciointernoApplication.class, args).close();
-	  }
+	
 	  
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		SpringApplication.run(ServiciointernoApplication.class, args);
 
 		final Logger LOGGER=LoggerFactory.getLogger(ServiciointernoApplication.class);
-
-
+		
 		try {
 			
 			ServerSocket serverSocket = new ServerSocket(9999);
@@ -94,20 +92,18 @@ public class ServiciointernoApplication {
 					PWSocketOut.println("Hola cliente, soy el servidor");
 					PWSocketOut.flush();
 				}
-				
 				//PWSocketOut.println(line);
 				//PWSocketOut.println("Soy el servidor");
 				//PWSocketOut.flush();
-			}
+				}
 			
-		} catch (IOException e) {
-			
+			} catch (IOException e) {	
 			e.printStackTrace();
-		}
+			}
 		
 
 
 	
-	}*/
+	}	
 
 }
