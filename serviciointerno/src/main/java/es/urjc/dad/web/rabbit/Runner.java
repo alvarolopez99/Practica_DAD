@@ -21,11 +21,11 @@ public class Runner implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    System.out.println("Sending message...");
+    /*System.out.println("Sending message...");
     rabbitTemplate.convertAndSend(ServiciointernoApplication.topicExchangeName, "foo.bar.baz", "|*Mail*|"+"Hello from RabbitMQ!");
     
     System.out.println("Sending message...");
-    rabbitTemplate.convertAndSend(ServiciointernoApplication.topicExchangeName, "foo.bar.baz", "|*Image*|"+"Hello from RabbitMQ!");
+    rabbitTemplate.convertAndSend(ServiciointernoApplication.topicExchangeName, "foo.bar.baz", "|*Image*|"+"Hello from RabbitMQ!");*/
   }
 
 }

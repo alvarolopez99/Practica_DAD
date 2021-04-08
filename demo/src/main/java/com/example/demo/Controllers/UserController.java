@@ -30,6 +30,7 @@ import com.example.demo.Model.Pregunta;
 import com.example.demo.Repository.CursoRepository;
 import com.example.demo.Repository.ExamenRepository;
 import com.example.demo.Repository.UsuarioRepository;
+import com.example.demo.rabbit.Runner;
 import com.example.demo.services.ImageService;
 import com.example.demo.services.MailService;
 
@@ -218,7 +219,10 @@ public class UserController {
 				Usuario u = (Usuario)session.getAttribute("user");
 
 				String contenido = "Enhorabuena. Has completado con éxito el curso "+ curso+"disponible en la plataforma Sapiotheca";
-				mail.sendEmail(u.getCorreo(), "Certificado "+curso, contenido);
+				
+				Runner.mailPetition(u.getCorreo(), contenido);
+				
+				//mail.sendEmail(u.getCorreo(), "Certificado "+curso, contenido);
 				model.addAttribute("mensaje","Has obtenido una puntuación de "+puntuacion+"/5");
 				model.addAttribute("mensaje2", "¡Enhorabuena por completar el curso!");
 			}
