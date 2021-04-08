@@ -25,21 +25,31 @@ public class ServiciointernoApplication {
 		try {
 			
 			ServerSocket serverSocket = new ServerSocket(9999);
-			LOGGER.info("*A LA ESPERA*");
 			Socket socket = serverSocket.accept();
+			
 			LOGGER.info("*SE HAN CONECTADO*");
+			
 			InputStreamReader InStrReaderStn = new InputStreamReader(socket.getInputStream());
 			BufferedReader BRSocketIn = new BufferedReader(InStrReaderStn);
 
 			PrintWriter PWSocketOut = new PrintWriter(socket.getOutputStream()); //Para escribir en el socket
 			
-			
 			while(true) {
-				LOGGER.info("************");
-				//String line = BRSocketIn.readLine();
+				//LOGGER.info("************");
+				
+				String  line = "";
+				line = BRSocketIn.readLine();
+				if (line !=null) {
+				
+					LOGGER.info("MENSAJE DEL CLIENTE: " + line);
+					
+					PWSocketOut.println("Hola cliente, soy el servidor");
+					PWSocketOut.flush();
+				}
+				
 				//PWSocketOut.println(line);
-				PWSocketOut.println("HelloClient");
-				PWSocketOut.flush();
+				//PWSocketOut.println("Soy el servidor");
+				//PWSocketOut.flush();
 			}
 			
 		} catch (IOException e) {

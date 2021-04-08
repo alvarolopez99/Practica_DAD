@@ -29,37 +29,33 @@ public class Sapiotheca {
 		int port = 9999;
 		
 		try {
-			LOGGER.info("*ANTES DE CREAR SOCKET*");
+
 			//Leer de la entrada estandar, enviar al servidor por el socket, leer del socket e imprimir
 			Socket socket = new Socket(host, port);
-			LOGGER.info("*SOCKET CREADO*");
 			InputStreamReader InStrReaderStn = new InputStreamReader(System.in);
 			BufferedReader BRStdIn = new BufferedReader(InStrReaderStn);
-			
-			
 			InputStreamReader InStrReaderSocket = new InputStreamReader(socket.getInputStream());
 			BufferedReader BRSocketIn = new BufferedReader(InStrReaderSocket);
-			
 			PrintWriter PWSocketOut = new PrintWriter(socket.getOutputStream()); //Para escribir en el socket
 			
 			String line;
 		
-				PWSocketOut.println("HelloServer");
-				
-				while(!(line = BRStdIn.readLine()).equals("x")) {
-				LOGGER.info("*ESPERANDO*");
+			PWSocketOut.println("Hola servidor, soy el cliente");
+			PWSocketOut.flush();
+	
+			int n = 1;
+			
+			//while(n<1) {
 				String response = BRSocketIn.readLine();
 				System.out.println();
-				LOGGER.info("****" + response);
-				}
+				LOGGER.info("RESPUESTA DEL SERVIDOR: " + response +" *******");
+			//}
 				
 			BRSocketIn.close();
 			socket.close();
 			PWSocketOut.close();
 			
-			
 		}catch(IOException e) {
-			
 			e.printStackTrace();
 		}
 		
