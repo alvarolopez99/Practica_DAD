@@ -42,7 +42,7 @@ public class ForoController {
 		
 		Principal p = request.getUserPrincipal();
 		
-		boolean esUser = request.isUserInRole("ADMIN");
+		boolean esUser = request.isUserInRole("USER");
 			
 		model.addAttribute("user", esUser);	
 		model.addAttribute("rol", u.get().getRoles());

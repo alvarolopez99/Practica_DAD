@@ -107,36 +107,46 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/chat/{profesor}/send").hasAnyRole("USER");
 		
 		// PÁGINAS PRIVADAS
-		http.authorizeRequests().anyRequest().authenticated();	
+		
 		
 		// Login form
 		http.formLogin().loginPage("/login");
 		http.formLogin().usernameParameter("correo");
-		http.formLogin().passwordParameter("contrasena");	
+		http.formLogin().passwordParameter("contrasena");
+		http.formLogin().defaultSuccessUrl("/paginaprincipal");
 		
 		// COMPLETAR:
-		http.formLogin().defaultSuccessUrl("/private");
-		http.formLogin().failureUrl("/loginerror");
+		//http.formLogin().defaultSuccessUrl("/private");
+		//http.formLogin().failureUrl("/loginerror");
 
 		// Logout
 		http.logout().logoutUrl("/sesion_cerrada");
 		http.logout().logoutSuccessUrl("/");
 		
-
+		http.authorizeRequests().anyRequest().authenticated();	
 		// Disable CSRF at the moment
 		//http.csrf().disable();
 		
 	}
+	
+	/*@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder(10, new SecureRandom());
+	}
 
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
+		auth.authenticationProvider(authenticationProvider).passwordEncoder(passwordEncoder());
+	}*/
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		/*PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
-		/*auth.inMemoryAuthentication().withUser("user")
-			.password(encoder.encode("pass")).roles("USER");
+		auth.inMemoryAuthentication().withUser("aaa@aaa.aaa")
+			.password(encoder.encode("aaa")).roles("USER");
 
 		auth.inMemoryAuthentication().withUser("admin")
 			.password(encoder.encode("adminpass")).roles("USER", "ADMIN");

@@ -32,6 +32,8 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 	
 	private static final Logger LOGGER=LoggerFactory.getLogger(Sapiotheca.class);
 
+	
+	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		
@@ -59,12 +61,12 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 		}
 		
 		
-		List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
+		List<GrantedAuthority> roles = new ArrayList<>();
 		for (String rol: usuario.get().getRoles()) {
 			roles.add(new SimpleGrantedAuthority(rol));
 		}
 		
-		return new UsernamePasswordAuthenticationToken(usuario.get().getNombre(), password, roles);
+		return new UsernamePasswordAuthenticationToken(usuario.get().getCorreo(), password, roles);
 	}
 
 	@Override

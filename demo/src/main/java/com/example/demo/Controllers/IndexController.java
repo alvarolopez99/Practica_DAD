@@ -103,7 +103,7 @@ public class IndexController {
 			//roles.add("profesor");
 			
 			Usuario profesor = new Usuario(nombreUsuario, apellido1, apellido2, contraseña_1, 0, 1, correo, 0, null,
-					"USER", "PROFESOR");
+					"ROLE_USER", "ROLE_PROFESOR");
 				
 			byte[] bytes;
 			
@@ -143,7 +143,7 @@ public class IndexController {
 	
 	
 	//Llamada cuando pulsamos el botón de Login, aparecerá el formulario para logearse.
-	@RequestMapping("/login")
+	@GetMapping("/login")
 	public String loginMain(Model model, HttpServletRequest request) {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
@@ -191,7 +191,7 @@ public class IndexController {
 			//roles.add("user");
 			
 			Usuario registrado = new Usuario(nombreUsuario, primerApellido, apellido2, contraseña_1, 0, tipoU, correo,
-					metodoP, null, "ADMIN");
+					metodoP, null, "ROLE_USER", "ROLE_ADMIN");
 
 			byte[] bytes;
 
