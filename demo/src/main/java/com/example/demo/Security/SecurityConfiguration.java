@@ -56,19 +56,17 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/curso/{index}").permitAll();
 		http.authorizeRequests().antMatchers("/{id}/materialSubido").permitAll();
 		
-		// Foros
+		//* Foros
 		http.authorizeRequests().antMatchers("/foros").permitAll();
 		http.authorizeRequests().antMatchers("/foros/{IDForo}").permitAll();
 		http.authorizeRequests().antMatchers("/foros/{IDForo}/respuesta").permitAll();
+		//*/
+		http.authorizeRequests().antMatchers("/foros/nuevoforo/creado").permitAll();
 		
 		// Anuncios
 		http.authorizeRequests().antMatchers("/anuncios").permitAll();
 		http.authorizeRequests().antMatchers("/anuncios/{IDAnuncio}").permitAll();
 	
-		
-		
-		
-		
 		// Cursos - Profesor
 		http.authorizeRequests().antMatchers("/eliminarCurso/{index}").hasAnyRole("PROFESOR");
 		http.authorizeRequests().antMatchers("/crearCurso").hasAnyRole("PROFESOR");
@@ -109,11 +107,12 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		// PÁGINAS PRIVADAS
 		
 		
-		// Login form
+		/* Login form
 		http.formLogin().loginPage("/login");
 		http.formLogin().usernameParameter("correo");
 		http.formLogin().passwordParameter("contrasena");
 		http.formLogin().defaultSuccessUrl("/paginaprincipal");
+		//*/
 		
 		// COMPLETAR:
 		//http.formLogin().defaultSuccessUrl("/private");

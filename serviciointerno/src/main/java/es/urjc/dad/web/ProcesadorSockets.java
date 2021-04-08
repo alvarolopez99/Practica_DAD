@@ -3,6 +3,9 @@ package es.urjc.dad.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import es.urjc.dad.web.services.FilterService;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,14 +21,17 @@ public class ProcesadorSockets implements Runnable{
 
 	Socket socket;
 	final Logger LOGGER=LoggerFactory.getLogger(ServiciointernoApplication.class);
+	FilterService filterService = new FilterService();
 	
 	public ProcesadorSockets(Socket socket) {
 		this.socket = socket;
-	}
+		}
 	
 	@Override
 	public void run() {
 		
+		
+
 		final Logger LOGGER=LoggerFactory.getLogger(ServiciointernoApplication.class);
 		
 		try {
@@ -35,18 +41,20 @@ public class ProcesadorSockets implements Runnable{
 
 			PrintWriter PWSocketOut = new PrintWriter(socket.getOutputStream()); //Para escribir en el socket
 			
-			while(true) {
+			
 				
-				String  line = "";
-				line = BRSocketIn.readLine();
-				if (line !=null) {
+				String Mensaje = BRSocketIn.readLine();
 				
-					LOGGER.info("MENSAJE DEL CLIENTE: " + line);
+				if (Mensaje !=null) {
+				
+					//LOGGER.info("MENSAJE DEL CLIENTE: " + Mensaje);
+				
+					Mensaje = filterService.filtrarLenguaje(Mensaje);
 					
-					PWSocketOut.println("Hola cliente, soy el servidor");
+					PWSocketOut.println(Mensaje);
 					PWSocketOut.flush();
 				}
-			}
+		
 			
 		} catch (IOException e) {	
 			e.printStackTrace();

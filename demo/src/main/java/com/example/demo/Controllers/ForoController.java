@@ -6,6 +6,8 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.Sapiotheca;
 import com.example.demo.Model.Foros;
 import com.example.demo.Model.Mensaje;
 import com.example.demo.Model.Usuario;
@@ -34,6 +37,7 @@ public class ForoController {
 	@Autowired
 	private UsuarioRepository userRep;
 	
+	final Logger LOGGER=LoggerFactory.getLogger(Sapiotheca.class);
 	
 	@GetMapping("/foros")
 	public String MostrarForos (Model model, HttpServletRequest request) {
@@ -61,7 +65,7 @@ public class ForoController {
 			HttpServletRequest request) {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
-		Foros foroNuevo = new Foros(asunto, mensaje, null);
+		Foros foroNuevo = new Foros(filter.filtrarLenguaje(asunto), filter.filtrarLenguaje(mensaje), null);
 		
 		repositorioForos.save(foroNuevo);
 
