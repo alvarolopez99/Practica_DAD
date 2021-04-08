@@ -6,15 +6,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class Receiver {
 
-	private CountDownLatch latch = new CountDownLatch(1);	//Sincronizacion
-
 	public void receiveMessage(String message) {
 		  if(message.contains("|*Image*|")) {
 			  message = message.substring(9);
 			  System.out.println("Received Reescale Petition<" + message + ">");
 		  }
 		  else if(message.contains("|*Mail*|")) {
-			  message = message.substring(7);
+			  message = message.substring(8);
 			  System.out.println("Received Mail Send Petition <" + message + ">");
 		  }
 		  
@@ -22,7 +20,4 @@ public class Receiver {
 	    
 	  }
 
-	  public CountDownLatch getLatch() {
-	    return latch;
-	  }
 }
