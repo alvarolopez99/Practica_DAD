@@ -1,12 +1,12 @@
-package es.urjc.dad.Repository;
+package es.urjc.dad.web.Repository;
 import java.util.List;
 
 import javax.persistence.ManyToOne;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import es.urjc.dad.Model.Anuncio;
-import es.urjc.dad.Model.Usuario;
+import es.urjc.dad.web.Model.Anuncio;
+import es.urjc.dad.web.Model.Usuario;
 
 
 public interface AnuncioRepository extends JpaRepository<Anuncio, Integer> {

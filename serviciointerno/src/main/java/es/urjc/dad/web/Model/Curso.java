@@ -1,4 +1,4 @@
-package es.urjc.dad.Model;
+package es.urjc.dad.web.Model;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;

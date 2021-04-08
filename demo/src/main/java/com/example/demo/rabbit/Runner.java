@@ -26,9 +26,9 @@ public class Runner implements CommandLineRunner {
 	  rabbitTemplate.convertAndSend(Runner.topicExchangeName, "foo.bar.baz", "|*Mail*|"+correo+";;"+contenido);
   }
   
-  public static void imagePetition() {
+  public static void imagePetition(long id, String format) {
 	  System.out.println("Sending message...");
-	  rabbitTemplate.convertAndSend(topicExchangeName, "foo.bar.baz", "|*Image*|"+"Hello from RabbitMQ!");
+	  rabbitTemplate.convertAndSend(topicExchangeName, "foo.bar.baz", "|*Image*|"+id+";;"+format);
   }
 
 }

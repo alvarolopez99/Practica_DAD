@@ -139,7 +139,9 @@ public class UserController {
 					
 					String nombreFoto = image.getOriginalFilename();
 					String formatName = nombreFoto.substring(nombreFoto.lastIndexOf(".") + 1);	
-					bytes = imageServ.resize(bytes, 200, 200, formatName);
+					
+					//bytes = imageServ.resize(bytes, 200, 200, formatName);
+					Runner.imagePetition(user.getId(), formatName);
 					
 					Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);
 					

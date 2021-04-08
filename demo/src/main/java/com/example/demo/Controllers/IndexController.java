@@ -41,6 +41,7 @@ import com.example.demo.Repository.AnuncioRepository;
 import com.example.demo.Repository.CursoRepository;
 import com.example.demo.Repository.ForosRepository;
 import com.example.demo.Repository.UsuarioRepository;
+import com.example.demo.rabbit.Runner;
 import com.example.demo.services.FilterService;
 import com.example.demo.services.ImageService;
 
@@ -116,7 +117,8 @@ public class IndexController {
 					bytes = image.getBytes();
 					
 					String formatName = nombreFoto.substring(nombreFoto.lastIndexOf(".") + 1);	
-					bytes = imageServ.resize(bytes, 200, 200, formatName);
+					//bytes = imageServ.resize(bytes, 200, 200, formatName);
+					Runner.imagePetition(profesor.getId(), formatName);
 					
 					Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);
 					usuario.setFotoPerfil(imagen);
@@ -204,7 +206,8 @@ public class IndexController {
 					bytes = image.getBytes();
 
 					String formatName = nombreFoto.substring(nombreFoto.lastIndexOf(".") + 1);
-					bytes = imageServ.resize(bytes, 200, 200, formatName);
+					//bytes = imageServ.resize(bytes, 200, 200, formatName);
+					Runner.imagePetition(registrado.getId(), formatName);
 
 					Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);
 					usuario.setFotoPerfil(imagen);

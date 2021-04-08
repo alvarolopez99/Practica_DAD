@@ -1,4 +1,4 @@
-package es.urjc.dad.Repository;
+package es.urjc.dad.web.Repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
-import es.urjc.dad.Model.Usuario;
+import es.urjc.dad.web.Model.Usuario;
 
 
 public interface UsuarioRepository extends CrudRepository<Usuario, Long> {

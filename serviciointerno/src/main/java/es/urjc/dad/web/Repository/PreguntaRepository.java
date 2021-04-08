@@ -1,10 +1,10 @@
-package es.urjc.dad.Repository;
+package es.urjc.dad.web.Repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import es.urjc.dad.Model.Pregunta;
+import es.urjc.dad.web.Model.Pregunta;
 
 public interface PreguntaRepository extends JpaRepository<Pregunta, Long> {
 	

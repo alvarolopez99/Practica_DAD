@@ -1,10 +1,10 @@
-package es.urjc.dad.Repository;
+package es.urjc.dad.web.Repository;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import es.urjc.dad.Model.Curso;
+import es.urjc.dad.web.Model.Curso;
 
 import java.sql.Blob;
 
