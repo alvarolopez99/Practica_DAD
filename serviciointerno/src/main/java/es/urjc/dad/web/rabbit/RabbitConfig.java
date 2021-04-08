@@ -1,4 +1,4 @@
-package rabbit;
+package es.urjc.dad.web.rabbit;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;

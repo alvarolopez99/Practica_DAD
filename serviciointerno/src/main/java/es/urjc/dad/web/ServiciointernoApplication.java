@@ -20,33 +20,33 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import rabbit.Receiver;
+import es.urjc.dad.web.rabbit.Receiver;
 
 
 @SpringBootApplication
 public class ServiciointernoApplication {
 
-	static final String topicExchangeName = "spring-boot-exchange";
+	  public static final String topicExchangeName = "spring-boot-exchange";
 
 	  static final String queueName = "spring-boot";
 
 	  @Bean
-	  Queue queue() {
+	  Queue queue() {	//Crea una cola AMQ
 	    return new Queue(queueName, false);
 	  }
 
 	  @Bean
-	  TopicExchange exchange() {
+	  TopicExchange exchange() {	
 	    return new TopicExchange(topicExchangeName);
 	  }
 
 	  @Bean
-	  Binding binding(Queue queue, TopicExchange exchange) {
-	    return BindingBuilder.bind(queue).to(exchange).with("foo.bar.#");
+	  Binding binding(Queue queue, TopicExchange exchange) {	//Enlaza los anteriores
+	    return BindingBuilder.bind(queue).to(exchange).with("foo.bar.#");	//Mensajes con clave foor.bar+ se dirigen a la cola
 	  }
 
 	  @Bean
-	  SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
+	  SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,		//Sets para la cola de mensajes
 	      MessageListenerAdapter listenerAdapter) {
 	    SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
 	    container.setConnectionFactory(connectionFactory);
@@ -56,7 +56,7 @@ public class ServiciointernoApplication {
 	  }
 
 	  @Bean
-	  MessageListenerAdapter listenerAdapter(Receiver receiver) {
+	  MessageListenerAdapter listenerAdapter(Receiver receiver) {	//Delega la escucha de mensajes al receiver y al metodo receiveMessage
 	    return new MessageListenerAdapter(receiver, "receiveMessage");
 	  }
 

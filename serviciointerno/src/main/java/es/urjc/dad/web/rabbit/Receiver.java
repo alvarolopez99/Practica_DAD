@@ -1,4 +1,4 @@
-package rabbit;
+package es.urjc.dad.web.rabbit;
 
 import java.util.concurrent.CountDownLatch;
 import org.springframework.stereotype.Component;
@@ -10,7 +10,7 @@ public class Receiver {
 
 	  public void receiveMessage(String message) {
 	    System.out.println("Received <" + message + ">");
-	    latch.countDown();
+	    //latch.countDown();
 	  }
 
 	  public CountDownLatch getLatch() {
