@@ -32,11 +32,15 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 	
 	private static final Logger LOGGER=LoggerFactory.getLogger(Sapiotheca.class);
 
+	public UserRepositoryAuthenticationProvider() {
+		LOGGER.info("**************************");
+		LOGGER.info("Constructor sin parametros");
+		LOGGER.info("**************************");
+		}
 	
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		
 		
 		LOGGER.info("**************************");
 		LOGGER.info("He llegado al authenticate");
@@ -47,6 +51,7 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 		LOGGER.info("**************************");
 		LOGGER.info(usuario.get().getCorreo());
 		LOGGER.info("**************************");
+		
 		
 		if (usuario == null) {
 			//System.out.print("");

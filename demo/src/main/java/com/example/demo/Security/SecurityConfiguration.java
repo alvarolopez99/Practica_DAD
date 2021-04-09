@@ -107,12 +107,12 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		// PÁGINAS PRIVADAS
 		
 		
-		/* Login form
+		//Login form
 		http.formLogin().loginPage("/login");
 		http.formLogin().usernameParameter("correo");
 		http.formLogin().passwordParameter("contrasena");
 		http.formLogin().defaultSuccessUrl("/paginaprincipal");
-		//*/
+		http.formLogin().failureUrl("/");
 		
 		// COMPLETAR:
 		//http.formLogin().defaultSuccessUrl("/private");
