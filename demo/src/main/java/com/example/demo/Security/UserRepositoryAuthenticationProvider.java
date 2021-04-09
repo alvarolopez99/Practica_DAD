@@ -48,23 +48,29 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 		
 		Optional<Usuario> usuario = userRepository.findByCorreo(authentication.getName());
 		
-		LOGGER.info("**************************");
-		LOGGER.info(usuario.get().getCorreo());
-		LOGGER.info("**************************");
-		
-		
-		if (usuario == null) {
-			//System.out.print("");
+		if(usuario.isPresent()) {
+			LOGGER.info("**************************");
+			LOGGER.info("Usuario: " + usuario.get().getCorreo());
+			LOGGER.info("**************************");
+		}else {
 			throw new BadCredentialsException("El usuario no existe");
 		}
 		
+		
 		String password = (String) authentication.getCredentials();
 		
-		// LA CONTRASEÑA DEBERÍA ESTAR ENCRIPTADA: usuario.get().getContraseñaHash()
-		if (! new BCryptPasswordEncoder().matches(password, usuario.get().getContraseña())) {
-			throw new BadCredentialsException("La contraseña es incorrecta");
-		}
+		LOGGER.info("**************************");
+		LOGGER.info("Contraseña BD: " + usuario.get().getContraseña());
+		LOGGER.info("**************************");
 		
+		LOGGER.info("**************************");
+		LOGGER.info("Contraseña introducida: " + password);
+		LOGGER.info("**************************");
+		
+		// LA CONTRASEÑA DEBERÍA ESTAR ENCRIPTADA: usuario.get().getContraseñaHash()
+		/*if (! new BCryptPasswordEncoder().matches(password, usuario.get().getContraseña())) {
+			throw new BadCredentialsException("La contraseña es incorrecta");
+		}*/
 		
 		List<GrantedAuthority> roles = new ArrayList<>();
 		for (String rol: usuario.get().getRoles()) {
@@ -77,7 +83,7 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 	@Override
 	public boolean supports(Class<?> authentication) {
 		
-		return false;
+		return true;
 	}
 	
 	

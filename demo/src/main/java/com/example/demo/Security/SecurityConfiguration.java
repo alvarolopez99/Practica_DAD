@@ -24,13 +24,6 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 	private String encodedPassword;
 	*/
 	
-	/*
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder(10, new SecureRandom());
-	}
-	*/
-	
 	@Autowired
 	public UserRepositoryAuthenticationProvider authenticationProvider;
 	
@@ -41,20 +34,15 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		
 		// Página de inicio, página principal y login
 		http.authorizeRequests().antMatchers("/").permitAll();
-		http.authorizeRequests().antMatchers("/bienvenidoI").permitAll();
 		http.authorizeRequests().antMatchers("/bienvenido").permitAll();
 		http.authorizeRequests().antMatchers("/newuser").permitAll();
 		http.authorizeRequests().antMatchers("/login").permitAll();
+		http.authorizeRequests().antMatchers("/logout").permitAll();
 		http.authorizeRequests().antMatchers("/paginaprincipal").permitAll();
-		
-		
-		//http.authorizeRequests().antMatchers("/administrador").permitAll();
-		//http.authorizeRequests().antMatchers("/profesorAgregado").permitAll();
 		
 		// Cursos
 		http.authorizeRequests().antMatchers("/cursosDisponibles").permitAll();
 		http.authorizeRequests().antMatchers("/curso/{index}").permitAll();
-		http.authorizeRequests().antMatchers("/{id}/materialSubido").permitAll();
 		
 		//* Foros
 		http.authorizeRequests().antMatchers("/foros").permitAll();
@@ -71,7 +59,9 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/eliminarCurso/{index}").hasAnyRole("PROFESOR");
 		http.authorizeRequests().antMatchers("/crearCurso").hasAnyRole("PROFESOR");
 		http.authorizeRequests().antMatchers("/{id}/añadirMaterial").hasAnyRole("PROFESOR");
+		http.authorizeRequests().antMatchers("/{id}/materialSubido").hasAnyRole("PROFESOR");
 		http.authorizeRequests().antMatchers("/crearCursoConfirmacion").hasAnyRole("PROFESOR");
+		http.authorizeRequests().antMatchers("/{curso}/crearExamen").hasAnyRole("PROFESOR");
 		http.authorizeRequests().antMatchers("/{curso}/examencreado").hasAnyRole("PROFESOR");
 				
 		// Chats - Profesor
@@ -90,22 +80,20 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		
 		// Perfil - Usuario Registrado
 		http.authorizeRequests().antMatchers("/modifyUser").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/deleteUser").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/profile").hasAnyRole("USER");
 		
 		// Examen - Usuario Registrado
 		http.authorizeRequests().antMatchers("/{curso}/examen").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/{curso}/examen/completado").hasAnyRole("USER");
 		
-		// Foros - Usuario Registrado y Profesor
-		//http.authorizeRequests().antMatchers("/foros/{IDForo}").hasAnyRole("user", "profesor");
-		//http.authorizeRequests().antMatchers("/foros/{IDForo}/respuesta").hasAnyRole("user", "profesor");
+		//http.authorizeRequests().antMatchers("/sesion_cerrada").hasAnyRole("USER");
 		
 		// Chats - Usuario Registrado
 		http.authorizeRequests().antMatchers("/chat/{profesor}").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/chat/{profesor}/send").hasAnyRole("USER");
 		
-		// PÁGINAS PRIVADAS
-		
+		// PÁGINAS PRIVADAS		
 		
 		//Login form
 		http.formLogin().loginPage("/login");
@@ -113,13 +101,9 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		http.formLogin().passwordParameter("contrasena");
 		http.formLogin().defaultSuccessUrl("/paginaprincipal");
 		http.formLogin().failureUrl("/");
-		
-		// COMPLETAR:
-		//http.formLogin().defaultSuccessUrl("/private");
-		//http.formLogin().failureUrl("/loginerror");
 
 		// Logout
-		http.logout().logoutUrl("/sesion_cerrada");
+		http.logout().logoutUrl("/logout");
 		http.logout().logoutSuccessUrl("/");
 		
 		http.authorizeRequests().anyRequest().authenticated();	
@@ -131,12 +115,6 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 	/*@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder(10, new SecureRandom());
-	}
-
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-		auth.authenticationProvider(authenticationProvider).passwordEncoder(passwordEncoder());
 	}*/
 	
 	@Override

@@ -24,6 +24,22 @@ border: 1px solid black;
 text-align: center;
 }
 
+label{
+  color: darkslateblue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+label:active{
+  text-decoration: underline;
+  color: red;
+}
+
+
+#file_input_id{
+  display:none;
+}
+
 
 </style>
 
@@ -67,7 +83,15 @@ text-align: center;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{^atributo}}|{{/atributo}}
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
-				{{^atributo}}<a href="/sesion_cerrada">Cerrar sesión</a>{{/atributo}}
+				<form action="/logout" method="post">
+					<label for="file_input_id">Cerrar sesión</label>
+					<input type="submit" id="file_input_id">
+					<!--<input type='submit' value='Cerrar sesión'/>-->
+					<!--<span><input type='submit' value='Cerrar sesión'/></span>-->
+					<input type="hidden" name="_csrf" value="{{token}}" />
+					<!--<a href="/sesion_cerrada">Cerrar sesión</a>-->
+				</form>
+
 				
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

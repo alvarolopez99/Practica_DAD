@@ -280,8 +280,11 @@ public class UserController {
 		return "Examenes/examenCreado";
 	}
 	
-	@GetMapping("/sesion_cerrada")
-	public String sesionCerrada(Model model, HttpSession sesion) {
+	/*@GetMapping("/sesion_cerrada")
+	public String sesionCerrada(Model model, HttpSession sesion, HttpServletRequest request) {		
+		
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		
 		Usuario u = (Usuario)sesion.getAttribute("user");
 		
@@ -290,5 +293,5 @@ public class UserController {
 		}
 		
 		return "PaginaDeInicio/sesion_cerrada";
-	}
+	}*/
 }

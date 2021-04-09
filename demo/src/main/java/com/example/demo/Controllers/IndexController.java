@@ -231,7 +231,7 @@ public class IndexController {
 	}
 	
 	
-	@PostMapping("/bienvenidoI")
+	/*@PostMapping("/bienvenidoI")
 	public String bienvenidoInicio(Model model, @RequestParam String correo, @RequestParam String contrasena, HttpSession sesion) {
 		
 		LOGGER.info("Hola, has iniciado sesion");
@@ -250,7 +250,7 @@ public class IndexController {
 		}else {
 			return "PaginaDeInicio/no_registrado";
 		}
-	}	
+	}	*/
 		
 	
 	
