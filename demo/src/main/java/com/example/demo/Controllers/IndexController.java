@@ -52,8 +52,6 @@ import java.io.ByteArrayOutputStream;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
-
-
 @Controller
 public class IndexController {
 	
@@ -70,20 +68,10 @@ public class IndexController {
 	private ImageService imageServ;
 	
 	
-	public IndexController () {		
-		
-		foros.add(new Foros("DUDA", "BLABLABLA", null));	
-	}
-	
-	
 	@GetMapping("/")
-	public String indexMain(Model model/*, HttpServletRequest request*/) {
-		
-		//model.addAttribute("admin", request.isUserInRole("administrador"));
-		
+	public String indexMain(Model model) {	
 		return "PaginaDeInicio/PaginaInicio";
-	}
-	
+	}	
 	
 	@GetMapping("/administrador")
 	public String administrador(Model model) {
@@ -92,7 +80,7 @@ public class IndexController {
 	
 	@PostMapping("/profesorAgregado")
 	public String profesorAgregado(Model model, @RequestParam String correo, @RequestParam String contraseña_1, @RequestParam String apellido1,
-			@RequestParam String apellido2, @RequestParam String nombreUsuario, HttpSession sesion, @RequestParam MultipartFile image) throws IOException, SerialException, SQLException {
+			@RequestParam String apellido2, @RequestParam String nombreUsuario/*, HttpSession sesion*/, @RequestParam MultipartFile image) throws IOException, SerialException, SQLException {
 			
 		model.addAttribute("correo", correo);
 		
@@ -100,10 +88,8 @@ public class IndexController {
 		if(u.isPresent()) {
 			return "PaginaDeInicio/volver_a_registro";
 		}else {					
-			//List<String> roles = new ArrayList<String>();
-			//roles.add("profesor");
 			
-			Usuario profesor = new Usuario(nombreUsuario, apellido1, apellido2, contraseña_1, 0, 1, correo, 0, null,
+			Usuario profesor = new Usuario(nombreUsuario, apellido1, apellido2, contraseña_1, 1, 1, correo, 0, null,
 					"ROLE_USER", "ROLE_PROFESOR");
 				
 			byte[] bytes;
@@ -136,13 +122,11 @@ public class IndexController {
 			
 			userRep.save(profesor);
 				
-			sesion.setAttribute("user", profesor);
+			//sesion.setAttribute("user", profesor);
 		}
 		
 		return "Administrador/ProfesorAgregadoConfirmacion";
 	}
-
-	
 	
 	//Llamada cuando pulsamos el botón de Login, aparecerá el formulario para logearse.
 	@GetMapping("/login")
@@ -169,7 +153,7 @@ public class IndexController {
 	public String bienvenido(Model model, @RequestParam String correo, @RequestParam String contraseña_1,
 			@RequestParam MultipartFile image, @RequestParam String nombreUsuario, @RequestParam String primerApellido,
 			@RequestParam String apellido2, @RequestParam("tipoUsuario") String tipoUsuario,
-			@RequestParam("metodoPago") String metodoPago, HttpSession sesion) {
+			@RequestParam("metodoPago") String metodoPago/*, HttpSession sesion*/) {
 
 		model.addAttribute("correo", correo);
 
@@ -224,55 +208,17 @@ public class IndexController {
 
 			userRep.save(registrado);
 
-			sesion.setAttribute("user", registrado);
+			//sesion.setAttribute("user", registrado);
 
 			return "PaginaDeInicio/bienvenido";
 		}
 	}
 	
-	
-	/*@PostMapping("/bienvenidoI")
-	public String bienvenidoInicio(Model model, @RequestParam String correo, @RequestParam String contrasena, HttpSession sesion) {
-		
-		LOGGER.info("Hola, has iniciado sesion");
-
-		
-		model.addAttribute("correo", correo);
-		
-		Optional<Usuario> u = userRep.findByCorreo(correo);
-		if(u.isPresent()) {
-			if(contrasena.equals(u.get().getContraseña())) {
-				sesion.setAttribute("user", u.get());
-				return "PaginaDeInicio/bienvenidoI";
-			}else {
-				return "PaginaDeInicio/volver_a_login";
-			}
-		}else {
-			return "PaginaDeInicio/no_registrado";
-		}
-	}	*/
-		
-	
-	
 	@GetMapping("/paginaprincipal")
-	public String paginaPrincipal(Model model, HttpSession sesion, HttpServletRequest request) {	
+	public String paginaPrincipal(Model model, HttpServletRequest request) {	
 		
 		model.addAttribute("user", request.isUserInRole("USER"));
-		
-		/*
-		Usuario u = (Usuario) sesion.getAttribute("user");
-		if(u == null) {
-			Optional<Usuario> user = userRep.findByCorreo("------------");
-			if(user.isPresent()){
-			  sesion.setAttribute("user", user.get());
-			}
-			else{
-			  u = new Usuario("------------", "------------", "------------", "------------", 0, 0, "------------", 0, null, null);
-			  sesion.setAttribute("user", u);
-			  userRep.save(u);
-			}
-		} 
-		*/
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 
 		return "PaginaPrincipal/paginaprincipal";
 	}

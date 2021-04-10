@@ -3,6 +3,7 @@ package com.example.demo.Controllers;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.security.Principal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +53,7 @@ public class UserController {
 	MailService mail;
 	
 	@GetMapping("/profile")
-	public String editUser(Model model, HttpSession sesion,
+	public String editUser(Model model/*, HttpSession sesion*/,
 			HttpServletRequest request) throws SQLException, IOException, ClassNotFoundException {
 
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
@@ -60,22 +61,27 @@ public class UserController {
 		
 		// Leer usuario actual del httpsession
 
-		Usuario user = (Usuario) sesion.getAttribute("user");
-		Blob foto = user.getFotoPerfil();
+		//Usuario user = (Usuario) sesion.getAttribute("user");
+		
+		Principal p = request.getUserPrincipal();
+		
+		Optional<Usuario> user = userRepo.findByCorreo(p.getName());
+		
+		Blob foto = user.get().getFotoPerfil();
 
-		if (user.getCorreo() == null) {
+		if (user.get().getCorreo() == null) {
 			return "no_registrado";
 		} else {
 			model.addAttribute("hayUsuario", true);
-			model.addAttribute("usuario", user);
+			model.addAttribute("usuario", user.get());
 
-			if (user.getTipoSuscripcion() == 0) {
+			if (user.get().getTipoSuscripcion() == 0) {
 				model.addAttribute("tipoSuscripcion", "Estándar");
 			} else {
 				model.addAttribute("tipoSuscripcion", "Premium");
 			}
 
-			if (user.getTipoUsuario() == 0) {
+			if (user.get().getTipoUsuario() == 0) {
 				model.addAttribute("tipoUsuario", "Alumno");
 				model.addAttribute("esAlumno", "true");
 			} else {
@@ -83,7 +89,7 @@ public class UserController {
 				model.addAttribute("esAlumno", "false");
 			}
 
-			if (user.getMetodoPago() == 0) {
+			if (user.get().getMetodoPago() == 0) {
 				model.addAttribute("pago", "Tarjeta de crédito");
 			} else {
 				model.addAttribute("pago", "Paypal");
@@ -103,7 +109,7 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("/deleteUser")
+	/*@GetMapping("/deleteUser")
 	public String deleteUser(Model model, HttpSession session) {
 		
 		//Leer usuario actual del httpsession
@@ -116,22 +122,28 @@ public class UserController {
 		
 		model.addAttribute("mensaje", "Se ha eliminado correctamente al usuario");
 		return "Perfiles/usuarioModificado";
-	}
+	}*/
 	
 	@PostMapping("/modifyUser")
-	public String modifyUser(Model model, HttpSession sesion, @RequestParam String nombreUsuario, @RequestParam String apellido1,
-			@RequestParam String apellido2, @RequestParam String contraseña_1, @RequestParam MultipartFile image) throws IOException, SQLException{
+	public String modifyUser(Model model, /*HttpSession sesion,*/ @RequestParam String nombreUsuario, @RequestParam String apellido1,
+			@RequestParam String apellido2, @RequestParam String contraseña_1, @RequestParam MultipartFile image,
+			HttpServletRequest request) throws IOException, SQLException{
 
 		
-		Usuario user = (Usuario)sesion.getAttribute("user");
-		Blob foto = user.getFotoPerfil();
+		//Usuario user = (Usuario)sesion.getAttribute("user");
 		
-		if(!user.getContraseña().equals(contraseña_1)) {
+		Principal p = request.getUserPrincipal();
+		
+		Optional<Usuario> user = userRepo.findByCorreo(p.getName());
+		
+		Blob foto = user.get().getFotoPerfil();
+		
+		if(!user.get().getContraseña().equals(contraseña_1)) {
 			return "PaginaDeInicio/volver_a_profile";
 		}else {		
-			if(!nombreUsuario.equals("")) user.setNombre(nombreUsuario);
-			if(!apellido1.equals("")) user.setPrimerApellido(apellido1);
-			if(!apellido2.equals("")) user.setSegundoApellido(apellido2);
+			if(!nombreUsuario.equals("")) user.get().setNombre(nombreUsuario);
+			if(!apellido1.equals("")) user.get().setPrimerApellido(apellido1);
+			if(!apellido2.equals("")) user.get().setSegundoApellido(apellido2);
 			
 			if (!image.isEmpty()) {
 				try {					
@@ -141,7 +153,7 @@ public class UserController {
 					String formatName = nombreFoto.substring(nombreFoto.lastIndexOf(".") + 1);	
 					
 					//bytes = imageServ.resize(bytes, 200, 200, formatName);
-					Runner.imagePetition(user.getId(), formatName);
+					Runner.imagePetition(user.get().getId(), formatName);
 					
 					Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);
 					
@@ -150,20 +162,22 @@ public class UserController {
 					
 					model.addAttribute("imagen", bphoto);
 					
-					user.setFotoPerfil(imagen);
+					user.get().setFotoPerfil(imagen);
 				}
 				catch (Exception exc){
 					return "Fallo al establecer la imagen de perfil";
 				}
 			} else {
-				byte[] bdata = foto.getBytes(1, (int) foto.length());
-				String s = java.util.Base64.getEncoder().encodeToString(bdata);
-				model.addAttribute("imagen", s);
-				user.setFotoPerfil(foto);
+				if(foto != null) {
+					byte[] bdata = foto.getBytes(1, (int) foto.length());
+					String s = java.util.Base64.getEncoder().encodeToString(bdata);
+					model.addAttribute("imagen", s);
+					user.get().setFotoPerfil(foto);
+				}
 			}
 			
-			userRepo.save(user);
-			sesion.setAttribute("user", user);
+			userRepo.save(user.get());
+			//sesion.setAttribute("user", user);
 			
 	
 			model.addAttribute("mensaje", "Se han modificado correctamente tus datos");

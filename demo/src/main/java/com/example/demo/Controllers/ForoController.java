@@ -41,15 +41,8 @@ public class ForoController {
 	
 	@GetMapping("/foros")
 	public String MostrarForos (Model model, HttpServletRequest request) {
-		
-		Optional<Usuario> u = userRep.findById((long) 1);
-		
-		Principal p = request.getUserPrincipal();
-		
-		boolean esUser = request.isUserInRole("USER");
 			
-		model.addAttribute("user", esUser);	
-		model.addAttribute("rol", u.get().getRoles());
+		model.addAttribute("user", request.isUserInRole("USER"));	
 
 		
 		if (repositorioForos.findAll() != null) {

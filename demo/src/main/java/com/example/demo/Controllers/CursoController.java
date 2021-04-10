@@ -1,6 +1,8 @@
 package com.example.demo.Controllers;
 
+import java.security.Principal;
 import java.sql.Blob;
+import java.util.Optional;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,14 +34,14 @@ public class CursoController {
 	private UsuarioRepository userRep;
 	
 	@GetMapping("/cursosDisponibles")
-	public String cursosDisponibles(Model model, HttpSession sesion/*, HttpServletRequest request*/) {
+	public String cursosDisponibles(Model model/*, HttpSession sesion*/, HttpServletRequest request) {
 		
-		/*
-		model.addAttribute("user", request.isUserInRole("usuario_Registrado"));
-		model.addAttribute("teacher", request.isUserInRole("profesor"));
-		*/
 		
-		Usuario usuario = (Usuario) sesion.getAttribute("user");		
+		model.addAttribute("user", request.isUserInRole("USER"));
+		model.addAttribute("profesor", request.isUserInRole("PROFESOR"));
+		
+		
+		//Usuario usuario = (Usuario) sesion.getAttribute("user");		
 		
 		List<Curso> cursos = repositorioCurso.findAll();	
 		
@@ -118,12 +120,18 @@ public class CursoController {
 	}	
 	
 	@PostMapping("/crearCursoConfirmacion")
-	public String crearCursoConfirmacion(Model model, @RequestParam String titulo, @RequestParam String descripcion, HttpSession sesion) {
-			
-		Usuario usuario = (Usuario) sesion.getAttribute("user");
+	public String crearCursoConfirmacion(Model model, @RequestParam String titulo, @RequestParam String descripcion/*, HttpSession sesion*/,
+			HttpServletRequest request) {
 		
-		Curso nuevoCurso = new Curso(titulo, descripcion, usuario);
-		repositorioCurso.save(nuevoCurso);
+		Principal p = request.getUserPrincipal();
+			
+		Optional<Usuario> usuario = userRep.findByCorreo(p.getName());
+		
+		if(usuario.isPresent()) {
+			Curso nuevoCurso = new Curso(titulo, descripcion, usuario.get());
+			repositorioCurso.save(nuevoCurso);
+		}
+		
 		
 		return "Cursos/Curso_Creado_Confirmacion";
 	}

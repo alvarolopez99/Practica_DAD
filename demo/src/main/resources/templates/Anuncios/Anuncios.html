@@ -44,6 +44,8 @@ p {
 	
 <div align="center">
 
+	{{profesor}}<br>
+
 	{{#anuncios}}
 	
 	<table>
@@ -51,31 +53,38 @@ p {
 	
 		<td><a><b>Materia:</b> {{materia}}
 		<br> <b>Curso: </b>{{curso}}
-		{{#teacher}}
-			<td><a href="/eliminarAnuncio/{{id}}">Eliminar anuncio</a></td>
-		{{/teacher}}
+		<td><a href="/eliminarAnuncio/{{id}}">Eliminar anuncio</a></td>
 		<td><a href="/anuncios/{{id}}">Ver</a></td>
+		
+		
 	
 	</tr>
 	</table>
-	
+		
 	{{/anuncios}}
 	
 	{{^anuncios}}
-	<p>No hay anuncios añadidos</p>
+		<p>No hay anuncios añadidos</p>
+		{{#profesor}}
+			<p>soy profesor</p>
+		{{/profesor}}
 	{{/anuncios}}
 	
+		
 	<br>
 	<div class="enlace">
-	{{#teacher}}
+	{{#profesor}}
 		<a href="/crearAnuncio">Crear anuncio</a>
-	{{/teacher}}
+	{{/profesor}}
 	</div>
 	
 	<br>
-    <a href="/paginaprincipal">Página principal</a>
-	
+    <a href="/paginaprincipal">Página principal</a>	
 	<br>
+	
+	
+	
+	
 </div>
 <br><br>
 </body>

@@ -33,33 +33,32 @@
 	<div align="center">
 		<div class="contenedorExterior">
     		<div class="contenedorInterior">
-   
-				<h1>SAPIOTHECA</h1>
+   			
+				<br><h1>SAPIOTHECA</h1>
 
 				<hr>
-				<a href="cursosDisponibles">Cursos</a><br>					<hr>
+				<br><a href="cursosDisponibles">Cursos</a><br><br>				<hr>
 				<br>
 	
-				<a href="foros">Foros</a><br>
+				<a href="foros">Foros</a><br><br>
 				<hr>
                 <br>
 	
-				<a href="anuncios">Tablón de anuncios</a><br>
+				<a href="anuncios">Tablón de anuncios</a><br><br>
 				<hr>
                 <br>
                 {{#user}}
 					<a href="/profile">Mi perfil</a><br>
 				{{/user}}
-				<br><hr><br><a href="/administrador">Administrador</a><hr>
-				<hr>
-                <br>
+				{{#admin}}
+				<br><hr><br><a href="/administrador">Administrador</a><br><br><hr>
+				{{/admin}}
                 
-				</p><br>   <br>   <br>
+				</p>
 	
 	   		</div>
 		</div>
 	</div>
-	<br>
 <br>	
 </body>
 </html>

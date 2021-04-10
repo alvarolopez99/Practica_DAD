@@ -25,19 +25,11 @@ import org.slf4j.LoggerFactory;
 
 @Component
 public class UserRepositoryAuthenticationProvider implements AuthenticationProvider {
-	
 
 	@Autowired
 	private UsuarioRepository userRepository;
 	
-	private static final Logger LOGGER=LoggerFactory.getLogger(Sapiotheca.class);
-
-	public UserRepositoryAuthenticationProvider() {
-		LOGGER.info("**************************");
-		LOGGER.info("Constructor sin parametros");
-		LOGGER.info("**************************");
-		}
-	
+	private static final Logger LOGGER=LoggerFactory.getLogger(Sapiotheca.class);	
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -52,7 +44,7 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 			LOGGER.info("**************************");
 			LOGGER.info("Usuario: " + usuario.get().getCorreo());
 			LOGGER.info("**************************");
-		}else {
+		} else {
 			throw new BadCredentialsException("El usuario no existe");
 		}
 		
@@ -82,9 +74,11 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 
 	@Override
 	public boolean supports(Class<?> authentication) {
-		
+
 		return true;
 	}
+
+
 	
 	
 	

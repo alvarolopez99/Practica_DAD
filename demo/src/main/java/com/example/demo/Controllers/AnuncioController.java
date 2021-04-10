@@ -1,5 +1,6 @@
 package com.example.demo.Controllers;
 
+import java.security.Principal;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.Model.Anuncio;
 import com.example.demo.Model.Usuario;
 import com.example.demo.Repository.AnuncioRepository;
+import com.example.demo.Repository.UsuarioRepository;
 
 @Controller
 public class AnuncioController {
@@ -24,10 +26,16 @@ public class AnuncioController {
 	@Autowired 
 	private AnuncioRepository repositorioAnuncios;
 	
+	@Autowired 
+	private UsuarioRepository userRep;
+	
 	@GetMapping("/anuncios")
-	public String anuncios(Model model/*, HttpServletRequest request*/) {
+	public String anuncios(Model model, HttpServletRequest request) {
 		
-		//model.addAttribute("teacher", request.isUserInRole("profesor"));
+		boolean esUser = request.isUserInRole("PROFESOR");
+		
+		model.addAttribute("profesor", esUser);
+		//model.addAttribute("user", request.isUserInRole("USER"));
 		if (repositorioAnuncios.findAll() != null) {
 			model.addAttribute("anuncios",  repositorioAnuncios.findAll());
 		}
@@ -47,10 +55,14 @@ public class AnuncioController {
 	
 	@PostMapping("/anuncioCreado")
 	public String anuncioCreado(Model model, @RequestParam String materia, @RequestParam String curso, 
-			@RequestParam String horario, @RequestParam String precio, @RequestParam String contenido, HttpSession session) {
+			@RequestParam String horario, @RequestParam String precio, @RequestParam String contenido/*, HttpSession session*/,
+			HttpServletRequest request) {
 		
-		Usuario user = (Usuario)session.getAttribute("user");
-		Anuncio anuncio = new Anuncio(user, materia, contenido, horario, precio, curso);
+		//Usuario user = (Usuario)session.getAttribute("user");
+		
+		Principal p = request.getUserPrincipal();
+		Optional<Usuario> user = userRep.findByCorreo(p.getName());
+		Anuncio anuncio = new Anuncio(user.get(), materia, contenido, horario, precio, curso);
 		repositorioAnuncios.save(anuncio);
 		
 		
@@ -58,9 +70,9 @@ public class AnuncioController {
 	}
 	
 	@GetMapping("/anuncios/{IDAnuncio}")
-	public String anuncio(Model model, @PathVariable int IDAnuncio/*, HttpServletRequest request*/) {
+	public String anuncio(Model model, @PathVariable int IDAnuncio, HttpServletRequest request) {
 		
-		//model.addAttribute("user", request.isUserInRole("usuario_Registrado"));
+		model.addAttribute("user", request.isUserInRole("USER"));
 		Optional<Anuncio> anuncio = repositorioAnuncios.findById(IDAnuncio);
 		
 		 if (anuncio.isPresent()) {
@@ -70,11 +82,11 @@ public class AnuncioController {
 		return "Anuncios/Anuncio";
 	}
 	
-	@GetMapping("/eliminarAnuncio/{index}")
-	public String eliminarAnuncio(Model model, @PathVariable int index) {
+	@GetMapping("/eliminarAnuncio/{IDAnuncio}")
+	public String eliminarAnuncio(Model model, @PathVariable int IDAnuncio) {
 		
 		
-		repositorioAnuncios.deleteById(index);
+		repositorioAnuncios.deleteById(IDAnuncio);
 
 		return "Anuncios/anuncio_eliminado";
 	}

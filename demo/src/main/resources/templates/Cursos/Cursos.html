@@ -39,11 +39,11 @@ p {
 		{{#user}}
 			<td><a href="/{{id}}/examen">Resolver examen  </a></td>
 		{{/user}}
-		{{#teacher}}
+		{{#profesor}}
 			<td><a href="/{{id}}/crearexamen">Crear examen  </a></td>
 			<td><a href="/eliminarCurso/{{id}}">Eliminar curso  </a></td>
 			<td><a href="/{{id}}/añadirMaterial">Añadir material  </a></td>
-		{{/teacher}}
+		{{/profesor}}
 		
 	</tr>
 	</table>
@@ -59,9 +59,9 @@ p {
 	
 	<br>
 	
-	{{#puedeGestionarCursos}}
+	{{#profesor}}
 		<a href="/crearCurso">Crear curso</a>
-	{{/puedeGestionarCursos}}
+	{{/profesor}}
 
    	<br><br> <a href="/paginaprincipal">Pagina principal</a>
 	
