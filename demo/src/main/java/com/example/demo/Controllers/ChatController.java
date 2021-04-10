@@ -137,6 +137,8 @@ public class ChatController {
 	@GetMapping("/chat/{profesor}")	//Pagina de inicio del chat
 	public String abrirChat(Model model, @PathVariable String profesor/*, HttpSession sesion*/, HttpServletRequest request) {
 		
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
+		
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
 		

@@ -34,7 +34,7 @@ public class AnuncioController {
 		
 		boolean esUser = request.isUserInRole("PROFESOR");
 		
-		model.addAttribute("user", esUser);
+		model.addAttribute("prof", esUser);
 		//model.addAttribute("user", request.isUserInRole("USER"));
 		if (repositorioAnuncios.findAll() != null) {
 			model.addAttribute("anuncios",  repositorioAnuncios.findAll());
@@ -48,6 +48,8 @@ public class AnuncioController {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
 		
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
+		
 		return "Anuncios/formulario_crear_anuncio";
 		
 	}
@@ -57,6 +59,8 @@ public class AnuncioController {
 	public String anuncioCreado(Model model, @RequestParam String materia, @RequestParam String curso, 
 			@RequestParam String horario, @RequestParam String precio, @RequestParam String contenido/*, HttpSession session*/,
 			HttpServletRequest request) {
+		
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
 		
 		//Usuario user = (Usuario)session.getAttribute("user");
 		
@@ -73,6 +77,7 @@ public class AnuncioController {
 	public String anuncio(Model model, @PathVariable int IDAnuncio, HttpServletRequest request) {
 		
 		model.addAttribute("user", request.isUserInRole("USER"));
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
 		Optional<Anuncio> anuncio = repositorioAnuncios.findById(IDAnuncio);
 		
 		 if (anuncio.isPresent()) {
@@ -83,8 +88,9 @@ public class AnuncioController {
 	}
 	
 	@GetMapping("/eliminarAnuncio/{IDAnuncio}")
-	public String eliminarAnuncio(Model model, @PathVariable int IDAnuncio) {
+	public String eliminarAnuncio(Model model, @PathVariable int IDAnuncio, HttpServletRequest request) {
 		
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
 		
 		repositorioAnuncios.deleteById(IDAnuncio);
 

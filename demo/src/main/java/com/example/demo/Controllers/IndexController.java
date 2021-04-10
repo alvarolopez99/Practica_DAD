@@ -69,7 +69,7 @@ public class IndexController {
 	
 	
 	@GetMapping("/")
-	public String indexMain(Model model) {	
+	public String indexMain(Model model) {			
 		return "PaginaDeInicio/PaginaInicio";
 	}	
 	
@@ -159,7 +159,7 @@ public class IndexController {
 
 		Optional<Usuario> u = userRep.findByCorreo(correo);
 		if (u.isPresent()) {
-			return "volver_a_registro";
+			return "PaginaDeInicio/volver_a_registro";
 		} else {
 			int tipoU, metodoP;
 
@@ -219,6 +219,7 @@ public class IndexController {
 		
 		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
+		model.addAttribute("p", request.isUserInRole("PROFESOR"));
 
 		return "PaginaPrincipal/paginaprincipal";
 	}

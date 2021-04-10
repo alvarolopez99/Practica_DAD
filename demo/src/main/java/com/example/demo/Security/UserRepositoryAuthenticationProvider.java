@@ -60,9 +60,9 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 		LOGGER.info("**************************");
 		
 		// LA CONTRASEÑA DEBERÍA ESTAR ENCRIPTADA: usuario.get().getContraseñaHash()
-		/*if (! new BCryptPasswordEncoder().matches(password, usuario.get().getContraseña())) {
+		if (! new BCryptPasswordEncoder().matches(password, usuario.get().getContraseña())) {
 			throw new BadCredentialsException("La contraseña es incorrecta");
-		}*/
+		}
 		
 		List<GrantedAuthority> roles = new ArrayList<>();
 		for (String rol: usuario.get().getRoles()) {

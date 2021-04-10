@@ -43,6 +43,7 @@ public class ForoController {
 	public String MostrarForos (Model model, HttpServletRequest request) {
 			
 		model.addAttribute("user", request.isUserInRole("USER"));	
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
 
 		
 		if (repositorioForos.findAll() != null) {
@@ -56,6 +57,9 @@ public class ForoController {
 	@PostMapping("/foros/nuevoforo/creado")
 	public String NuevoForo(Model model, @RequestParam String asunto, @RequestParam String mensaje,
 			HttpServletRequest request) {
+		
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
+		
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
 		Foros foroNuevo = new Foros(filter.filtrarLenguaje(asunto), filter.filtrarLenguaje(mensaje), null);
@@ -66,9 +70,10 @@ public class ForoController {
 	}
 	
 	@GetMapping("/foros/{IDForo}")
-	public String VerForo(Model model, @PathVariable int IDForo/*, HttpServletRequest request*/) {
+	public String VerForo(Model model, @PathVariable int IDForo, HttpServletRequest request) {
 		
-		//model.addAttribute("user", request.isUserInRole("usuario_Registrado") || request.isUserInRole("profesor"));
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
+		model.addAttribute("user", request.isUserInRole("USER"));
 		
 		Optional<Foros> foro = repositorioForos.findById(IDForo);
 		 if (foro.isPresent()) {
@@ -79,15 +84,17 @@ public class ForoController {
 	}
 	
 	@PostMapping("/foros/{IDForo}/respuesta")
-	public String VerForo (Model model, @PathVariable int IDForo, @RequestParam String respuesta, HttpSession session/*, HttpServletRequest request*/) {
+	public String VerForo (Model model, @PathVariable int IDForo, @RequestParam String respuesta, HttpServletRequest request) {
 		
-		//model.addAttribute("user", request.isUserInRole("usuario_Registrado") || request.isUserInRole("profesor"));
+		model.addAttribute("user", request.isUserInRole("USER"));
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
 		
 		Optional<Foros> foro = repositorioForos.findById(IDForo);
 		 if (foro.isPresent()) {
 			Foros f = foro.get();
-			Usuario user = (Usuario) session.getAttribute("user");
-			f.AñadirMensaje(new Mensaje(user, filter.filtrarLenguaje(respuesta)));
+			Principal p = request.getUserPrincipal();
+			Optional<Usuario> user = userRep.findByCorreo(p.getName());
+			f.AñadirMensaje(new Mensaje(user.get(), filter.filtrarLenguaje(respuesta)));
 			repositorioForos.save(f);
 			
 			model.addAttribute("infoForo",foro.get());
@@ -99,7 +106,9 @@ public class ForoController {
 	
 	
 	@GetMapping("/foros/nuevoforo")
-	public String CrearForo (Model model) {
+	public String CrearForo (Model model, HttpServletRequest request) {
+		
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
 		
 		return "Foros/CrearForo";
 	}

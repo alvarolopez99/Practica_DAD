@@ -47,9 +47,6 @@ public class UserController {
 	CursoRepository cursoRepo;
 	
 	@Autowired
-	private ImageService imageServ;
-	
-	@Autowired
 	MailService mail;
 	
 	@GetMapping("/profile")
@@ -58,6 +55,8 @@ public class UserController {
 
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
+		
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
 		
 		// Leer usuario actual del httpsession
 
@@ -186,8 +185,9 @@ public class UserController {
 	}
 	
 	@GetMapping("/{curso}/examen")
-	public String hacerExamen(Model model, @PathVariable String curso){
+	public String hacerExamen(Model model, @PathVariable String curso, HttpServletRequest request){
 		
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
 		
 		Curso c = cursoRepo.findById(Long.parseLong(curso));
 		model.addAttribute("curso", c.getTitulo());
@@ -203,7 +203,8 @@ public class UserController {
 	
 	@PostMapping("/{curso}/examen/completado")
 	public String completarExamen(Model model, @RequestParam String resp1, @RequestParam String resp2, @RequestParam String resp3,
-			@RequestParam String resp4, @RequestParam String resp5, HttpSession session, @PathVariable String curso){
+			@RequestParam String resp4, @RequestParam String resp5,/* HttpSession session,*/ @PathVariable String curso,
+			HttpServletRequest request){
 		
 		List<String> respuestas = new ArrayList<String>();
 		
@@ -232,11 +233,15 @@ public class UserController {
 			}
 			
 			if(puntuacion >= 3) {
-				Usuario u = (Usuario)session.getAttribute("user");
+				//Usuario u = (Usuario)session.getAttribute("user");
+				
+				Principal p = request.getUserPrincipal();
+				
+				Optional<Usuario> u = userRepo.findByCorreo(p.getName());
 
 				String contenido = "Enhorabuena. Has completado con éxito el curso "+ curso+"disponible en la plataforma Sapiotheca";
 				
-				Runner.mailPetition(u.getCorreo(), contenido);
+				Runner.mailPetition(u.get().getCorreo(), contenido);
 				
 				//mail.sendEmail(u.getCorreo(), "Certificado "+curso, contenido);
 				model.addAttribute("mensaje","Has obtenido una puntuación de "+puntuacion+"/5");
@@ -254,7 +259,9 @@ public class UserController {
 	}
 	
 	@GetMapping("/{curso}/crearexamen")
-	public String crearExamen(Model model, @PathVariable String curso){
+	public String crearExamen(Model model, @PathVariable String curso, HttpServletRequest request){
+		
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
 		
 		model.addAttribute("curso", curso);
 		
@@ -265,9 +272,10 @@ public class UserController {
 	public String creadoExamen(Model model,  @PathVariable String curso, @RequestParam String resp1, @RequestParam String resp2, @RequestParam String resp3,
 			@RequestParam String resp4, @RequestParam String resp5, HttpSession session,
 			@RequestParam String preg1, @RequestParam String preg2, @RequestParam String preg3,
-			@RequestParam String preg4, @RequestParam String preg5){
+			@RequestParam String preg4, @RequestParam String preg5,
+			HttpServletRequest request){
 		
-
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
 		
 		//Base de datos
 		Curso c = cursoRepo.findById(Long.parseLong(curso));

@@ -44,8 +44,6 @@ p {
 	
 <div align="center">
 
-	{{profesor}}<br>
-
 	{{#anuncios}}
 	
 	<table>
@@ -53,9 +51,9 @@ p {
 	
 		<td><a><b>Materia:</b> {{materia}}
 		<br> <b>Curso: </b>{{curso}}
-		{{#user}}
+		{{#prof}}
 			<td><a href="/eliminarAnuncio/{{id}}">Eliminar anuncio</a></td>
-		{{/user}}
+		{{/prof}}
 		<td><a href="/anuncios/{{id}}">Ver</a></td>
 		
 		
@@ -67,17 +65,14 @@ p {
 	
 	{{^anuncios}}
 		<p>No hay anuncios añadidos</p>
-		{{#user}}
-			<p>soy profesor</p>
-		{{/user}}
 	{{/anuncios}}
 	
 		
 	<br>
 	<div class="enlace">
-	{{#user}}
+	{{#prof}}
 		<a href="/crearAnuncio">Crear anuncio</a>
-	{{/user}}
+	{{/prof}}
 	</div>
 	
 	<br>

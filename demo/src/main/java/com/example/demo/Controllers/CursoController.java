@@ -38,7 +38,7 @@ public class CursoController {
 		
 		
 		model.addAttribute("user", request.isUserInRole("USER"));
-		model.addAttribute("profesor", request.isUserInRole("PROFESOR"));
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
 		
 		
 		//Usuario usuario = (Usuario) sesion.getAttribute("user");		
@@ -52,7 +52,9 @@ public class CursoController {
 	
 	
 	@GetMapping("/eliminarCurso/{index}")
-	public String eliminarCurso(Model model, @PathVariable int index) {
+	public String eliminarCurso(Model model, @PathVariable int index, HttpServletRequest request) {
+		
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
 		
 		Curso cursoEliminado = repositorioCurso.findById(index);
 		repositorioCurso.delete(cursoEliminado);
@@ -62,7 +64,9 @@ public class CursoController {
 	}
 	
 	@GetMapping("/curso/{index}")
-	public String verCurso(Model model, @PathVariable int index) throws SQLException {	
+	public String verCurso(Model model, @PathVariable int index, HttpServletRequest request) throws SQLException {	
+		
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
 		
 		Curso curso = repositorioCurso.findById(index);
 		ArrayList<String> listaImagenes = new ArrayList<String>();
@@ -84,13 +88,19 @@ public class CursoController {
 	
 	@GetMapping("/crearCurso")
 	public String crearCurso(Model model, HttpServletRequest request) {
+		
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
+		
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
 		return "Cursos/Crear_Curso";
 	}
 	
 	@PostMapping("/{id}/materialSubido")
-	public String materialAñadido (Model model, @PathVariable int id, @RequestParam MultipartFile archivo){
+	public String materialAñadido (Model model, @PathVariable int id, @RequestParam MultipartFile archivo,
+			HttpServletRequest request){
+		
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
 		
 		Curso curso = repositorioCurso.findById(id);
 		ArrayList<Blob> listaAntigua = curso.getArchivos();
@@ -122,6 +132,8 @@ public class CursoController {
 	@PostMapping("/crearCursoConfirmacion")
 	public String crearCursoConfirmacion(Model model, @RequestParam String titulo, @RequestParam String descripcion/*, HttpSession sesion*/,
 			HttpServletRequest request) {
+		
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
 		
 		Principal p = request.getUserPrincipal();
 			
