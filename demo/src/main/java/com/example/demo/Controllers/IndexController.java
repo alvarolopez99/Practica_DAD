@@ -21,6 +21,7 @@ import org.apache.tomcat.jni.File;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,6 +68,8 @@ public class IndexController {
 	@Autowired
 	private ImageService imageServ;
 	
+    @Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@GetMapping("/")
 	public String indexMain(Model model) {			
@@ -89,7 +92,7 @@ public class IndexController {
 			return "PaginaDeInicio/volver_a_registro";
 		}else {					
 			
-			Usuario profesor = new Usuario(nombreUsuario, apellido1, apellido2, contraseña_1, 1, 1, correo, 0, null,
+			Usuario profesor = new Usuario(nombreUsuario, apellido1, apellido2, passwordEncoder.encode(contraseña_1), 1, 1, correo, 0, null,
 					"ROLE_USER", "ROLE_PROFESOR");
 				
 			byte[] bytes;
@@ -176,7 +179,7 @@ public class IndexController {
 			//List<String> roles = new ArrayList<String>();
 			//roles.add("user");
 			
-			Usuario registrado = new Usuario(nombreUsuario, primerApellido, apellido2, contraseña_1, 0, tipoU, correo,
+			Usuario registrado = new Usuario(nombreUsuario, primerApellido, apellido2, passwordEncoder.encode(contraseña_1), 0, tipoU, correo,
 					metodoP, null, "ROLE_USER", "ROLE_ADMIN");
 
 			byte[] bytes;

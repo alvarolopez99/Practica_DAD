@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @Configuration
@@ -26,6 +28,11 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	public UserRepositoryAuthenticationProvider authenticationProvider;
+	
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder(10, new SecureRandom());
+	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,6 +46,9 @@ public class UserController {
 	ExamenRepository examRepo;
 	@Autowired
 	CursoRepository cursoRepo;
+	
+    @Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	MailService mail;
@@ -137,7 +141,7 @@ public class UserController {
 		
 		Blob foto = user.get().getFotoPerfil();
 		
-		if(!user.get().getContraseña().equals(contraseña_1)) {
+		if(!passwordEncoder.matches(contraseña_1, user.get().getContraseña())) {
 			return "PaginaDeInicio/volver_a_profile";
 		}else {		
 			if(!nombreUsuario.equals("")) user.get().setNombre(nombreUsuario);
