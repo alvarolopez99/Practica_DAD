@@ -1,5 +1,6 @@
 package com.example.demo.Controllers;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -20,6 +21,7 @@ import com.example.demo.Repository.ChatRepository;
 import com.example.demo.Repository.UsuarioRepository;
 import com.example.demo.services.FilterService;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -37,11 +39,15 @@ public class ChatController {
 	private FilterService filter;
 	
 	@GetMapping("/chatsProfesor")
-	public String chatsProfesor(Model model, HttpSession session) {
+	public String chatsProfesor(Model model/*, HttpSession session*/, HttpServletRequest request) {
 		
-		Usuario profesor = (Usuario) session.getAttribute("user");
+		//Usuario profesor = (Usuario) session.getAttribute("user");
 		
-		List<Chat> chats = chatRepo.findByProfesor(profesor);
+		Principal p = request.getUserPrincipal();
+		
+		Optional<Usuario> profesor = repositorio.findByCorreo(p.getName());
+		
+		List<Chat> chats = chatRepo.findByProfesor(profesor.get());
 		
 		model.addAttribute("chats", chats);
 
@@ -49,15 +55,17 @@ public class ChatController {
 	}
 	
 	@GetMapping("/chatsProfesor/{idChat}")
-	public String chatProfesorAlumno(Model model, HttpSession session, @PathVariable String idChat) {
+	public String chatProfesorAlumno(Model model/*, HttpSession session*/, HttpServletRequest request, @PathVariable String idChat) {
 		
 		Optional<Chat> chat = chatRepo.findById(Long.parseLong(idChat));
 		if(chat.isPresent()) {
 			Chat c = chat.get();
 			
 			model.addAttribute("mensajes", c.getMensajes());
-			Usuario profesor = (Usuario)session.getAttribute("user");
-			model.addAttribute("user", profesor.getNombre());		
+			//Usuario profesor = (Usuario)session.getAttribute("user");
+			Principal p = request.getUserPrincipal();		
+			Optional<Usuario> profesor = repositorio.findByCorreo(p.getName());
+			model.addAttribute("user", profesor.get().getNombre());		
 			model.addAttribute("target", c.getAlumno());
 			model.addAttribute("idChat", idChat);
 		}
@@ -74,13 +82,15 @@ public class ChatController {
 		Optional<Chat> chat = chatRepo.findById(Long.parseLong(idChat));
 		if(chat.isPresent()) {
 			Chat c = chat.get();
-			Usuario profesor = (Usuario)session.getAttribute("user");
-			c.AñadirMensaje(new Mensaje(profesor, filter.filtrarLenguaje(usermsg)));
+			//Usuario profesor = (Usuario)session.getAttribute("user");
+			Principal p = request.getUserPrincipal();		
+			Optional<Usuario> profesor = repositorio.findByCorreo(p.getName());
+			c.AñadirMensaje(new Mensaje(profesor.get(), filter.filtrarLenguaje(usermsg)));
 			
 			chatRepo.save(c);
 			
 			model.addAttribute("mensajes", c.getMensajes());
-			model.addAttribute("user", profesor.getNombre());		
+			model.addAttribute("user", profesor.get().getNombre());		
 			model.addAttribute("target", c.getAlumno());
 			model.addAttribute("idChat", idChat);
 		}
@@ -99,14 +109,16 @@ public class ChatController {
 		Optional<Usuario> p = repositorio.findById(Long.parseLong(profesor));
 		if(p.isPresent()) {
 			Usuario prof = p.get();
-			Usuario user = (Usuario)sesion.getAttribute("user");
-			model.addAttribute("user", user.getNombre());
-			Optional<Chat> chatO = chatRepo.findByProfesorAndAlumno(prof, user);
+			//Usuario user = (Usuario)sesion.getAttribute("user");
+			Principal principal = request.getUserPrincipal();		
+			Optional<Usuario> user = repositorio.findByCorreo(principal.getName());
+			model.addAttribute("user", user.get().getNombre());
+			Optional<Chat> chatO = chatRepo.findByProfesorAndAlumno(prof, user.get());
 			if(chatO.isPresent()) {
 				Chat chat = chatO.get();
 				if(!usermsg.equals("")) {
 					
-					chat.AñadirMensaje(new Mensaje(user, filter.filtrarLenguaje(usermsg)));	//Se añade el nuevo mensaje creado
+					chat.AñadirMensaje(new Mensaje(user.get(), filter.filtrarLenguaje(usermsg)));	//Se añade el nuevo mensaje creado
 					model.addAttribute("mensajes", chat.getMensajes());
 					chatRepo.save(chat);
 							
@@ -123,15 +135,16 @@ public class ChatController {
 	}
 	
 	@GetMapping("/chat/{profesor}")	//Pagina de inicio del chat
-	public String abrirChat(Model model, @PathVariable String profesor, HttpSession sesion,
-			HttpServletRequest request) {
+	public String abrirChat(Model model, @PathVariable String profesor/*, HttpSession sesion*/, HttpServletRequest request) {
 		
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
 		
 		/*	Para recuperar el usuario actual */
-		Usuario user = (Usuario)sesion.getAttribute("user");
-		model.addAttribute("user", user.getNombre());
+		//Usuario user = (Usuario)sesion.getAttribute("user");
+		Principal p = request.getUserPrincipal();		
+		Optional<Usuario> user = repositorio.findByCorreo(p.getName());
+		model.addAttribute("user", user.get().getNombre());
 
 		
 		/* Para la lista de mensajes */
@@ -143,7 +156,7 @@ public class ChatController {
 			 Usuario prof = profUser.get();
 			 model.addAttribute("target", prof);
 			 
-			 Optional<Chat> currentChat = chatRepo.findByProfesorAndAlumno(prof, user);
+			 Optional<Chat> currentChat = chatRepo.findByProfesorAndAlumno(prof, user.get());
 			 
 			 Chat chat;
 			 if(currentChat.isPresent()) {	//El chat ya existe
@@ -154,7 +167,7 @@ public class ChatController {
 			 }
 			 else {	// Se crea el chat porque no existe
 				 
-				 chat = new Chat(prof, user);
+				 chat = new Chat(prof, user.get());
 				 chatRepo.save(chat);
 			 }
 			 
