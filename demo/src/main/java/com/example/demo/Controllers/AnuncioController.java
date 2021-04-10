@@ -34,7 +34,7 @@ public class AnuncioController {
 		
 		boolean esUser = request.isUserInRole("PROFESOR");
 		
-		model.addAttribute("profesor", esUser);
+		model.addAttribute("user", esUser);
 		//model.addAttribute("user", request.isUserInRole("USER"));
 		if (repositorioAnuncios.findAll() != null) {
 			model.addAttribute("anuncios",  repositorioAnuncios.findAll());
