@@ -24,6 +24,7 @@ import com.example.demo.Model.Curso;
 import com.example.demo.Model.Usuario;
 import com.example.demo.Repository.CursoRepository;
 import com.example.demo.Repository.UsuarioRepository;
+import com.example.demo.services.FilterService;
 
 @Controller
 public class CursoController {
@@ -32,6 +33,8 @@ public class CursoController {
 	private CursoRepository repositorioCurso;
 	@Autowired 
 	private UsuarioRepository userRep;
+	@Autowired
+	private FilterService filter;
 	
 	@GetMapping("/cursosDisponibles")
 	public String cursosDisponibles(Model model/*, HttpSession sesion*/, HttpServletRequest request) {
@@ -140,7 +143,7 @@ public class CursoController {
 		Optional<Usuario> usuario = userRep.findByCorreo(p.getName());
 		
 		if(usuario.isPresent()) {
-			Curso nuevoCurso = new Curso(titulo, descripcion, usuario.get());
+			Curso nuevoCurso = new Curso(filter.filtrarLenguaje(titulo), filter.filtrarLenguaje(descripcion), usuario.get());
 			repositorioCurso.save(nuevoCurso);
 		}
 		

@@ -19,6 +19,7 @@ import com.example.demo.Model.Anuncio;
 import com.example.demo.Model.Usuario;
 import com.example.demo.Repository.AnuncioRepository;
 import com.example.demo.Repository.UsuarioRepository;
+import com.example.demo.services.FilterService;
 
 @Controller
 public class AnuncioController {
@@ -28,6 +29,9 @@ public class AnuncioController {
 	
 	@Autowired 
 	private UsuarioRepository userRep;
+	
+	@Autowired
+	private FilterService filter;
 	
 	@GetMapping("/anuncios")
 	public String anuncios(Model model, HttpServletRequest request) {
@@ -66,7 +70,8 @@ public class AnuncioController {
 		
 		Principal p = request.getUserPrincipal();
 		Optional<Usuario> user = userRep.findByCorreo(p.getName());
-		Anuncio anuncio = new Anuncio(user.get(), materia, contenido, horario, precio, curso);
+		Anuncio anuncio = new Anuncio(user.get(), filter.filtrarLenguaje(materia), filter.filtrarLenguaje(contenido), 
+				filter.filtrarLenguaje(horario), filter.filtrarLenguaje(precio), filter.filtrarLenguaje(curso));
 		repositorioAnuncios.save(anuncio);
 		
 		

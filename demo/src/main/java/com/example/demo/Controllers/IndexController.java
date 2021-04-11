@@ -180,7 +180,7 @@ public class IndexController {
 			//roles.add("user");
 			
 			Usuario registrado = new Usuario(nombreUsuario, primerApellido, apellido2, passwordEncoder.encode(contraseña_1), 0, tipoU, correo,
-					metodoP, null, "ROLE_USER", "ROLE_ADMIN");
+					metodoP, null, "ROLE_USER");
 
 			byte[] bytes;
 

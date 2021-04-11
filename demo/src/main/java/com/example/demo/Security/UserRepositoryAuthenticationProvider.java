@@ -34,10 +34,6 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		
-		LOGGER.info("**************************");
-		LOGGER.info("He llegado al authenticate");
-		LOGGER.info("**************************");
-		
 		Optional<Usuario> usuario = userRepository.findByCorreo(authentication.getName());
 		
 		if(usuario.isPresent()) {
@@ -51,19 +47,8 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 		
 		String password = (String) authentication.getCredentials();
 		
-		LOGGER.info("**************************");
-		LOGGER.info("Contraseña BD: " + usuario.get().getContraseña());
-		LOGGER.info("**************************");
-		
-		LOGGER.info("**************************");
-		LOGGER.info("Contraseña introducida: " + password);
-		LOGGER.info("**************************");
-		
 		// LA CONTRASEÑA DEBERÍA ESTAR ENCRIPTADA: usuario.get().getContraseñaHash()
 		if (! new BCryptPasswordEncoder().matches(password, usuario.get().getContraseña())) {
-			LOGGER.info("**************************");
-			LOGGER.info("CONTRASEÑA INCORRECTA");
-			LOGGER.info("**************************");
 			throw new BadCredentialsException("La contraseña es incorrecta");
 		}
 		
