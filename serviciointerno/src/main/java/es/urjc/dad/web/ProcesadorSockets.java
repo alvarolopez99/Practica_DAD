@@ -29,8 +29,6 @@ public class ProcesadorSockets implements Runnable{
 	
 	@Override
 	public void run() {
-		
-		
 
 		final Logger LOGGER=LoggerFactory.getLogger(ServiciointernoApplication.class);
 		
@@ -40,22 +38,16 @@ public class ProcesadorSockets implements Runnable{
 			BufferedReader BRSocketIn = new BufferedReader(InStrReaderStn);
 
 			PrintWriter PWSocketOut = new PrintWriter(socket.getOutputStream()); //Para escribir en el socket
-			
-			
 				
 				String Mensaje = BRSocketIn.readLine();
 				
 				if (Mensaje !=null) {
-				
-					//LOGGER.info("MENSAJE DEL CLIENTE: " + Mensaje);
-				
+		
 					Mensaje = filterService.filtrarLenguaje(Mensaje);
-					
 					PWSocketOut.println(Mensaje);
 					PWSocketOut.flush();
 				}
 		
-			
 		} catch (IOException e) {	
 			e.printStackTrace();
 		}

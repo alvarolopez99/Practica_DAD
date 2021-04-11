@@ -33,11 +33,11 @@ public class FilterService {
 
 		
 		try {
+			
 			//Leer de la entrada estandar, enviar al servidor por el socket, leer del socket e imprimir
-
 			Socket socket = ssf.createSocket(host, port); 	//Socket socket = new Socket(host, port);
-			InputStreamReader InStrReaderStn = new InputStreamReader(System.in);
-			BufferedReader BRStdIn = new BufferedReader(InStrReaderStn);
+			InputStreamReader InStrReaderStn = new InputStreamReader(System.in); //Entrada
+			BufferedReader BRStdIn = new BufferedReader(InStrReaderStn);		 //Salida
 			InputStreamReader InStrReaderSocket = new InputStreamReader(socket.getInputStream());
 			BufferedReader BRSocketIn = new BufferedReader(InStrReaderSocket);
 			PrintWriter PWSocketOut = new PrintWriter(socket.getOutputStream()); //Para escribir en el socket
@@ -46,10 +46,8 @@ public class FilterService {
 		
 			PWSocketOut.println(input);
 			PWSocketOut.flush();
-	
+			
 			response = BRSocketIn.readLine();
-			//System.out.println();
-			//LOGGER.info("MENSAJE FILTRADO: " + response);
 				
 			BRSocketIn.close();
 			socket.close();

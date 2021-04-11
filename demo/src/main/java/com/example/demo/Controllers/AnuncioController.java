@@ -65,9 +65,7 @@ public class AnuncioController {
 			HttpServletRequest request) {
 		
 		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
-		
-		//Usuario user = (Usuario)session.getAttribute("user");
-		
+			
 		Principal p = request.getUserPrincipal();
 		Optional<Usuario> user = userRep.findByCorreo(p.getName());
 		Anuncio anuncio = new Anuncio(user.get(), filter.filtrarLenguaje(materia), filter.filtrarLenguaje(contenido), 

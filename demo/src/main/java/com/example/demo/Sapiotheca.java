@@ -29,13 +29,7 @@ public class Sapiotheca {
 			
 		//FASE 2 - 11/03/2021
 		final Logger LOGGER=LoggerFactory.getLogger(Sapiotheca.class);
-		/*
-		FilterService filterService = new FilterService();
-		String mensaje = "Hola servidor hijoputa, soy el cliente capullo";
-		mensaje = filterService.filtrarLenguaje(mensaje);
 		
-		LOGGER.info("MENSAJE FILTRADO: " + mensaje);
-		*/
 	}
 	
 }

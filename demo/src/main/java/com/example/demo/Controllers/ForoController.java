@@ -53,7 +53,6 @@ public class ForoController {
 		return "Foros/Foros";
 	}
 	
-	
 	@PostMapping("/foros/nuevoforo/creado")
 	public String NuevoForo(Model model, @RequestParam String asunto, @RequestParam String mensaje,
 			HttpServletRequest request) {
@@ -102,8 +101,6 @@ public class ForoController {
 		
 		return "Foros/Foro";
 	}
-	
-	
 	
 	@GetMapping("/foros/nuevoforo")
 	public String CrearForo (Model model, HttpServletRequest request) {

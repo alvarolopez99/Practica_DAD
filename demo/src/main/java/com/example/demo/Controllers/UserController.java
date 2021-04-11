@@ -63,8 +63,6 @@ public class UserController {
 		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
 		
 		// Leer usuario actual del httpsession
-
-		//Usuario user = (Usuario) sesion.getAttribute("user");
 		
 		Principal p = request.getUserPrincipal();
 		
@@ -133,7 +131,6 @@ public class UserController {
 			HttpServletRequest request) throws IOException, SQLException{
 
 		
-		//Usuario user = (Usuario)sesion.getAttribute("user");
 		
 		Principal p = request.getUserPrincipal();
 		
@@ -155,7 +152,7 @@ public class UserController {
 					String nombreFoto = image.getOriginalFilename();
 					String formatName = nombreFoto.substring(nombreFoto.lastIndexOf(".") + 1);	
 					
-					//bytes = imageServ.resize(bytes, 200, 200, formatName);
+				
 					Runner.imagePetition(user.get().getId(), formatName);
 					
 					Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);
@@ -180,7 +177,6 @@ public class UserController {
 			}
 			
 			userRepo.save(user.get());
-			//sesion.setAttribute("user", user);
 			
 	
 			model.addAttribute("mensaje", "Se han modificado correctamente tus datos");

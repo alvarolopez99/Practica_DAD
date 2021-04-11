@@ -41,10 +41,7 @@ public class CursoController {
 		
 		
 		model.addAttribute("user", request.isUserInRole("USER"));
-		model.addAttribute("prof", request.isUserInRole("PROFESOR"));
-		
-		
-		//Usuario usuario = (Usuario) sesion.getAttribute("user");		
+		model.addAttribute("prof", request.isUserInRole("PROFESOR"));	
 		
 		List<Curso> cursos = repositorioCurso.findAll();	
 		

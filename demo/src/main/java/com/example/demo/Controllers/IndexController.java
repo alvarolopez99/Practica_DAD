@@ -106,7 +106,6 @@ public class IndexController {
 					bytes = image.getBytes();
 					
 					String formatName = nombreFoto.substring(nombreFoto.lastIndexOf(".") + 1);	
-					//bytes = imageServ.resize(bytes, 200, 200, formatName);
 					Runner.imagePetition(profesor.getId(), formatName);
 					
 					Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);

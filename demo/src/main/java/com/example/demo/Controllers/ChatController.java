@@ -41,8 +41,6 @@ public class ChatController {
 	@GetMapping("/chatsProfesor")
 	public String chatsProfesor(Model model/*, HttpSession session*/, HttpServletRequest request) {
 		
-		//Usuario profesor = (Usuario) session.getAttribute("user");
-		
 		Principal p = request.getUserPrincipal();
 		
 		Optional<Usuario> profesor = repositorio.findByCorreo(p.getName());
@@ -62,7 +60,6 @@ public class ChatController {
 			Chat c = chat.get();
 			
 			model.addAttribute("mensajes", c.getMensajes());
-			//Usuario profesor = (Usuario)session.getAttribute("user");
 			Principal p = request.getUserPrincipal();		
 			Optional<Usuario> profesor = repositorio.findByCorreo(p.getName());
 			model.addAttribute("user", profesor.get().getNombre());		
@@ -82,7 +79,6 @@ public class ChatController {
 		Optional<Chat> chat = chatRepo.findById(Long.parseLong(idChat));
 		if(chat.isPresent()) {
 			Chat c = chat.get();
-			//Usuario profesor = (Usuario)session.getAttribute("user");
 			Principal p = request.getUserPrincipal();		
 			Optional<Usuario> profesor = repositorio.findByCorreo(p.getName());
 			c.AñadirMensaje(new Mensaje(profesor.get(), filter.filtrarLenguaje(usermsg)));
@@ -109,7 +105,6 @@ public class ChatController {
 		Optional<Usuario> p = repositorio.findById(Long.parseLong(profesor));
 		if(p.isPresent()) {
 			Usuario prof = p.get();
-			//Usuario user = (Usuario)sesion.getAttribute("user");
 			Principal principal = request.getUserPrincipal();		
 			Optional<Usuario> user = repositorio.findByCorreo(principal.getName());
 			model.addAttribute("user", user.get().getNombre());
@@ -143,7 +138,6 @@ public class ChatController {
 		model.addAttribute("token", token.getToken());
 		
 		/*	Para recuperar el usuario actual */
-		//Usuario user = (Usuario)sesion.getAttribute("user");
 		Principal p = request.getUserPrincipal();		
 		Optional<Usuario> user = repositorio.findByCorreo(p.getName());
 		model.addAttribute("user", user.get().getNombre());
