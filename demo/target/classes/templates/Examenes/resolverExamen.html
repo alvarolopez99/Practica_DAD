@@ -1,0 +1,44 @@
+
+<html>
+{{>Otros/Inicial}}
+
+<style>
+body {
+  background-color: ivory;
+  overflow-y:  scroll
+}
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+</style>
+
+<head>
+
+	<meta charset="UTF-8"/>
+	
+</head>
+
+<div align="center">
+
+    <br><br>
+    <p>Exámen de evaluación: {{curso}}</p>	
+    
+    	<form method="post" action="/{{id}}/examen/completado">
+			{{#preguntas}}
+				<p> Pregunta {{-index}}</p>
+        		<p> {{enunciado}} </p>
+        	
+        		<input name="resp{{-index}}" type="text" id="resp{{-index}}" size="50" />
+			{{/preguntas}}
+	
+  	    	<br><br>
+    		<button type="submit">Finalizar</button>
+    		<input type="hidden" name="_csrf" value="{{token}}"/>
+    	</form>
+<br>
+<br>	
+</div>
+
+{{>Otros/footer}}
+</html>

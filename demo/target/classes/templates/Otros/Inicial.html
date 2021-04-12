@@ -1,0 +1,108 @@
+<html>
+
+<style>
+body {
+  background-color: ivory;
+}
+
+
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+
+table
+{
+border-collapse: collapse;
+width: 600px
+}
+
+
+td
+{
+border: 1px solid black;
+text-align: center;
+}
+
+label{
+  color: darkslateblue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+label:active{
+  text-decoration: underline;
+  color: red;
+}
+
+
+#file_input_id{
+  display:none;
+}
+
+
+</style>
+
+<head>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+	<div align="center">
+		<br>
+			<table>
+			<tr>
+				
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			
+				<a href="/cursosDisponibles">Cursos</a>
+				
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+				<a href="/foros">Foros</a>
+				
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+				<a href="/anuncios">Clases particulares</a>
+				
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+				{{#prof}}
+					<a href="/chatsProfesor">Chats</a>
+				
+				
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				{{/prof}}
+				
+				
+				{{^atributo}}<a href="/profile">Perfil</a>{{/atributo}}
+				
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{^atributo}}|{{/atributo}}
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+				<form action="/logout" method="post">
+					<label for="file_input_id">Cerrar sesión</label>
+					<input type="submit" id="file_input_id">
+					<!--<input type='submit' value='Cerrar sesión'/>-->
+					<!--<span><input type='submit' value='Cerrar sesión'/></span>-->
+					<input type="hidden" name="_csrf" value="{{token}}" />
+					<!--<a href="/sesion_cerrada">Cerrar sesión</a>-->
+				</form>
+
+				
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+
+			</tr>
+			</table>
+			
+			<br>
+		<hr>
+	</div>
+</body>

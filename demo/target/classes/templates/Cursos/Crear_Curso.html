@@ -1,0 +1,41 @@
+<html>
+
+{{>Otros/Inicial}}
+
+<style>
+body {
+  background-color: ivory;
+  overflow-y:  scroll
+}
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+</style>
+
+<head>
+
+	<meta charset="UTF-8"/>
+	
+</head>
+
+
+<body>
+	
+	<div align="center">
+		
+	<h1> Crear un nuevo curso </h1>
+	
+	<form action="/crearCursoConfirmacion" method="post">
+		<p>Nombre del curso:</p>
+		<input type='text' name='titulo'/>
+		<p>Resumen:</p>
+		<textarea name='descripcion' rows=5 cols=60></textarea>
+
+		<input type='submit' value='Crear'/>
+		<input type="hidden" name="_csrf" value="{{token}}"/>
+	</form>
+	</div>
+	<br><br>
+</body>
+</html>

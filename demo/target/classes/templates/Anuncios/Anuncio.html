@@ -1,0 +1,54 @@
+<html>
+
+{{>Otros/Inicial}}
+
+<style>
+body {
+  background-color: ivory;
+  overflow-y:  scroll
+}
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+</style>
+
+<head>
+
+	<meta charset="UTF-8"/>
+	
+</head>
+
+<body>
+
+	<div align="center">
+	<h1>CLASES PARTICULARES</h1>
+	
+	
+{{#infoAnuncio}}
+
+		<h2>Profesor:</h2> {{profesor.nombre}} {{profesor.primerApellido}}
+		<h2>Materia:</h2> {{materia}}<br>
+		<h2>Curso: </h2>{{curso}}<br>	
+		<h2>Precio: </h2>{{precio}}<br>	
+		<h2>Horario: </h2>{{horario}}<br>	
+		<h2>Contenido: </h2>{{contenido}}<br>
+	
+	
+{{/infoAnuncio}}
+
+
+</div>
+<div align="center">
+<br><br>
+{{#user}}
+	<p><b>¿Tienes alguna duda adicional o quieres contratar los servicios?</b><p>
+	<p><a href="/chat/{{infoAnuncio.profesor.id}}">Chatea</a> con {{infoAnuncio.profesor.nombre}} {{infoAnuncio.profesor.primerApellido}}</p>
+{{/user}}
+<br><br><br>
+<br><a href="/anuncios">Volver</a><br>
+
+</div>
+<br><br>
+</body>
+</html>

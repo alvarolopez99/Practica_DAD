@@ -1,0 +1,128 @@
+<html>
+{{>Otros/Inicial}}
+<style>
+body {
+  background-color: ivory;
+  overflow-y:  scroll
+}
+
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+}
+
+
+
+</style>
+
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+
+<div style="float: left; width: 45%">
+
+	<div align= "left" style="margin-left:35%">
+		<p align="left" style="font-size:25px"><br><b>Datos de usuario</b><br><br></p>
+	</div>
+	<div align= "left" style="margin-left:35%">
+	<p >
+	{{#hayUsuario}}
+		<p><b>Nombre: </b> {{usuario.nombre}}</p>
+		<p><b>Primer apellido: </b> {{usuario.primerApellido}}</p>
+		<p><b>Segundo Apellido: </b> {{usuario.segundoApellido}}</p>
+		<p><b>Correo electrónico: </b> {{usuario.correo}}</p>
+		<p><b>Tipo de usuario: </b> {{tipoUsuario}}</p>
+		{{#esAlumno}}
+			<p><b>Suscripción: </b> {{tipoSuscripcion}}</p>
+			<p><b>Método de pago: </b> {{pago}}</p>
+		{{/esAlumno}}
+		
+		<p><b>Foto de perfil:<br><br> {{#imagen}}</b><img src="data:image/jpg;base64,{{imagen}}"/></p>{{/imagen}}
+		
+		<br><br>
+	{{/hayUsuario}}
+
+	{{^hayUsuario}}
+		<p><b>No estás registrado </b></p>
+		<br><br>
+	{{/hayUsuario}}
+		</div>
+</div>
+
+
+{{#hayUsuario}}
+	<div style="float: right; width: 45%">
+		<div id="titulo" align= "left" style="margin-left:15%">
+			<p align="left" style="font-size:25px"><br><b>Editar perfil</b><br><br></p>
+		</div>
+		<div align="left" style="margin-left:15%">
+			<form action="/modifyUser" method="post" enctype="multipart/form-data">
+				<p>Actualice su nombre:</p>
+				<input type='text' name='nombreUsuario' placeholder="Introduzca nombre">
+				<p>Primer apellido:</p>
+				<input type='text' name='apellido1' placeholder="Introduzca apellido 1">
+				<p>Segundo apellido:</p>
+				<input type='text' name='apellido2' placeholder="Introduzca apellido 2">
+				<p><br/></p>
+				<p>Introduzca su contraseña para confirmar el cambio:</p>
+				<input type='password' name='contraseña_1' placeholder="Introduzca su contraseña" id='pwd' required>		
+				<p>Repita la contraseña:</p>
+				<input type='password' name='contraseña_2' placeholder="Repita su contraseña" id='cpwd' required>
+				
+				<div id="errorMsg" style="color:red; font-size:18px; font-weight:bold;"></div>
+				<script>
+				var password = document.getElementById('pwd');
+				confirm_password = document.getElementById('cpwd');
+				    function validatePassword() {
+				        if ((confirm_password.value!='')&&(password.value != confirm_password.value)) {
+				            document.getElementById('errorMsg').innerHTML='Passwords Don\'t Match';
+				            document.getElementById('submit').disabled = true;
+				        } else if((confirm_password.value!='')&&(password.value == confirm_password.value)){
+				        	document.getElementById('errorMsg').innerHTML='';
+				        	document.getElementById('submit').disabled = false;	            
+				        }
+				    }
+				    password.onchange = validatePassword;
+				    confirm_password.onkeyup = validatePassword;
+				</script>
+				
+		    	<br>
+		    	<p><br>Actualizar foto de perfil:</p><input type='file' name='image' accept=".jpg, .jpeg, .png">
+		        <br><br>
+				<br/><input type='submit' id='submit' value='Confirmar' disabled="disabled">
+				<input type="hidden" name="_csrf" value="{{token}}"/>
+		   <br>   <br>   <br>   <br>
+			</form>
+			<div id="disp" style= "color:green; font-size:18px; font-weight:bold;"> </div>
+		</div> 
+	</div>
+{{/hayUsuario}}
+
+
+<div id="disp" style="color:green; font-size:18px; font-weight:bold;"></div>
+<br><br>
+   <br>   <br>
+</body>
+<script>
+		var password = document.getElementById('pwd');
+		confirm_password = document.getElementById('cpwd');
+		    function display() {
+		        if ((confirm_password.value!='')&&(password.value != confirm_password.value)) {
+		            document.getElementById('errorMsg').innerHTML='Passwords Don\'t Match';
+		            document.getElementById('submit').disabled = true;
+		        } else if((confirm_password.value!='')&&(password.value == confirm_password.value)){
+		        	document.getElementById('errorMsg').innerHTML='';
+		        	document.getElementById('submit').disabled = false;            
+		        }
+		    }
+
+</script>
+{{>Otros/footer}}
+</html>

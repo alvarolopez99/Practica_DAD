@@ -1,0 +1,52 @@
+<html>
+
+
+<style>
+.contenedorExterior {
+    vertical-align: middle;
+    display: table;
+    width: 400px; /* anchura del padre */
+    height: 570px; /* altura del padre */
+    overflow: hidden;
+}
+.contenedorExterior .contenedorInterior {
+    display: table-cell;
+    vertical-align: middle;
+    width: 150%;
+    margin: 0 auto;
+    text-align: center;
+    background: 	#FDFF6B;
+}
+
+</style>
+
+<head>
+
+	<meta charset="UTF-8"/>
+	
+</head>
+
+<body>
+
+<br>
+	<div align="center">
+		<div class="contenedorExterior">
+   			<div class="contenedorInterior">
+       			<div class="elemento">
+       			
+      				<h1>BIENVENIDO A SAPIOTHECA</h1>
+      				
+					<br><hr><br><a href="/login">Login</a>
+   					<br><hr><br><a href="/newuser">Registrarse</a>
+					<br><hr><br><a href="/paginaprincipal">Continuar sin registrarse</a>				
+    			</div>
+   			</div>
+		</div>
+	</div>
+<br>
+<br>	
+</body>
+
+{{>Otros/footer}}
+
+</html>

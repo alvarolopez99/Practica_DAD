@@ -1,0 +1,42 @@
+<html>
+
+<style>
+body {
+  background-color: ivory;
+}
+
+
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+</style>
+
+
+<head>
+
+	<meta charset="UTF-8"/>
+	
+</head>
+
+<body>
+
+<div id="titulo">
+	<p align="center" style="font-size:25px"><br><br><b>Subir material</b><br><br></p>
+</div>
+
+<div align="center">
+  <form action="/{{id}}/materialSubido" method="post" enctype="multipart/form-data">
+      <p>Nombre del material: </p>
+      <input type='text' name='nombreMaterial'/>
+      <p><br>Sube el material:</p><input type='file' name='archivo' accept=".png, .jpg, .jpeg, .pdf, .pptx"/>
+      <input type='submit' value='Guardar'/>
+      <input type="hidden" name="_csrf" value="{{token}}"/>
+  </form>
+</div>
+
+<br>
+<br>	
+
+</body>
+</html>

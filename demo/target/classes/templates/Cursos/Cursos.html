@@ -1,0 +1,74 @@
+<html>
+
+{{>Otros/Inicial}}
+
+
+<style>
+body {
+  background-color: ivory;
+  overflow-y:  scroll
+}
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+</style>
+
+
+<head>
+  <meta charset="UTF-8">
+</head>
+
+
+<body>
+
+<div id="titulo">
+	<p align="center" style="font-size:25px"><br><br><b>Cursos disponibles</b><br><br></p>
+</div>
+
+<div align="center">
+
+	{{#cursos}}
+
+	<table>
+	<tr>
+		<td><p>{{titulo}}  </p></td>
+		<td><p>{{descripcion}}  </p></td>
+		<td><p>Creado por: {{creador}}  </p></td>
+		<td><a href="/curso/{{id}}">Ver  </a></td>
+		{{#user}}
+			<td><a href="/{{id}}/examen">Resolver examen  </a></td>
+		{{/user}}
+		{{#prof}}
+			<td><a href="/{{id}}/crearexamen">Crear examen  </a></td>
+			<td><a href="/eliminarCurso/{{id}}">Eliminar curso  </a></td>
+			<td><a href="/{{id}}/añadirMaterial">Añadir material  </a></td>
+		{{/prof}}
+		
+	</tr>
+	</table>
+		
+		
+	<br>
+
+	{{/cursos}}
+	
+	{{^cursos}}
+		<p>No hay cursos añadidos</p>
+	{{/cursos}}
+	
+	<br>
+	
+	{{#prof}}
+		<a href="/crearCurso">Crear curso</a>
+	{{/prof}}
+
+   	<br><br> <a href="/paginaprincipal">Pagina principal</a>
+	
+</div>
+
+</body>
+
+
+{{>Otros/footer}}
+</html>

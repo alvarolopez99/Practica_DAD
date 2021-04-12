@@ -1,0 +1,95 @@
+<html>
+<style>
+body {
+  background-color: ivory;
+  overflow-y:  scroll
+}
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+</style>
+
+<head>
+
+  <meta charset="UTF-8">
+  
+</head>
+
+<body>
+<br>
+<div id="titulo">
+<br>	<br>	
+	<p align="center" style="font-size:25px"> 
+	<b>Dar de alta a un profesor</p>
+	
+</div>
+
+
+<div align="center">
+
+	<form action="/profesorAgregado" method="post" enctype="multipart/form-data">
+	
+		<p>Correo electrónico:</p>
+		<input type='text' name='correo' placeholder="Introduzca su correo electrónico" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+		<p><br/></p>
+		
+		<p>Nombre:</p>
+		<input type='text' name='nombreUsuario' placeholder="Introduzca un nombre de usuario" required>
+		<p><br/></p>
+		
+		<p>Primer apellido:</p>
+		<input type='text' name='apellido1' placeholder="Introduzca el primer apellido" required>
+		<p><br/></p>
+		
+		<p>Segundo apellido:</p>
+		<input type='text' name='apellido2' placeholder="Introduzca el segundo apellido" required>
+		<p><br/></p>
+		
+		<p>Contraseña:</p>
+		<input type='password' name='contraseña_1' placeholder="Introduzca su contraseña" id='pwd' required>
+		<p><br/></p>
+		
+		<p>Confirmar contraseña:</p>
+		<input type='password' name='contraseña_2' placeholder="Confirme la contraseña" id='cpwd' required>
+		
+		<br><p><br>Sube una foto de perfil:</p><input type='file' name='image' accept=".jpg, .jpeg, .png" required>
+		
+		<div id="errorMsg" style="color:red; font-size:18px; font-weight:bold;"></div>
+		
+		
+		<script>
+		var password = document.getElementById('pwd');
+		confirm_password = document.getElementById('cpwd');
+		    function validatePassword() {
+		        if ((confirm_password.value!='')&&(password.value != confirm_password.value)) {
+		            document.getElementById('errorMsg').innerHTML='Passwords Don\'t Match';
+		            document.getElementById('submit').disabled = true;
+		        } else if((confirm_password.value!='')&&(password.value == confirm_password.value)){
+		        	document.getElementById('errorMsg').innerHTML='';
+		        	document.getElementById('submit').disabled = false;		        			            
+		        }
+		    }
+		    password.onchange = validatePassword;
+		    confirm_password.onkeyup = validatePassword;
+		</script>        
+        <br><br><br><input type='submit' id='submit' value='Registrarme' disabled="disabled">
+        <input type="hidden" name="_csrf" value="{{token}}"/>
+        
+        <br><br>
+	
+	</form>
+	
+	<div align="center">
+		<a href="/">Volver a la página principal</a><br><br><br>
+	</div>
+	
+	<div id="disp" style= "color:green; font-size:18px; font-weight:bold;"> </div>
+    </div>
+
+    <div id="disp" style="color:green; font-size:18px; font-weight:bold;"></div>
+<br>
+<br>
+</body>
+{{>Otros/footer}}
+</html>

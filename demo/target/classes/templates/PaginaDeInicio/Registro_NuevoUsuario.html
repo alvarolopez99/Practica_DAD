@@ -1,0 +1,143 @@
+<html>
+<style>
+body {
+  background-color: ivory;
+  overflow-y:  scroll
+}
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+</style>
+
+<head>
+
+  <meta charset="UTF-8">
+  
+</head>
+
+<body>
+
+<div id="titulo">
+<br>
+	<p align="center" style="font-size:25px"> 
+	<b>Formulario de registro</p>
+	
+</div>
+
+
+<div align="center">
+
+	<form action="/bienvenido" method="post" enctype="multipart/form-data">
+	
+		<p>Correo electrónico:</p>
+		<input type='text' name='correo' placeholder="Introduzca su correo electrónico" required pattern="[a-z0-9A-Z._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+		<p><br/></p>
+		
+		<p>Nombre de usuario:</p>
+		<input type='text' name='nombreUsuario' placeholder="Introduzca un nombre de usuario" required>
+		<p><br/></p>
+		
+		<p>Primer apellido:</p>
+		<input type='text' name='primerApellido' placeholder="Introduzca el primer apellido" required>
+		<p><br/></p>
+		
+		<p>Segundo apellido:</p>
+		<input type='text' name='apellido2' placeholder="Introduzca el segundo apellido" required>
+		<p><br/></p>
+		
+		<p>Contraseña:</p>
+		<input type='password' name='contraseña_1' placeholder="Introduzca su contraseña" id='pwd' required>
+		<p><br/></p>
+		
+		<p>Repita la contraseña:</p>
+		<input type='password' name='contraseña_2' placeholder="Repita su contraseña" id='cpwd' required>
+		
+		<div id="errorMsg" style="color:red; font-size:18px; font-weight:bold;"></div>
+		
+		
+		<script>
+		var password = document.getElementById('pwd');
+		confirm_password = document.getElementById('cpwd');
+		    function validatePassword() {
+		        if ((confirm_password.value!='')&&(password.value != confirm_password.value)) {
+		            document.getElementById('errorMsg').innerHTML='Passwords Don\'t Match';
+		            document.getElementById('submit').disabled = true;
+		        } else if((confirm_password.value!='')&&(password.value == confirm_password.value)){
+		        	document.getElementById('errorMsg').innerHTML='';
+		        	if(((document.getElementById('choice1').checked)||(document.getElementById('choice2').checked))&&((document.getElementById('choice2_1').checked)||(document.getElementById('choice2_2').checked))){
+		        		document.getElementById('submit').disabled = false;
+		        	}		            
+		        }
+		    }
+		    password.onchange = validatePassword;
+		    confirm_password.onkeyup = validatePassword;
+		</script>
+		
+		
+		<p><br/></p><p>Indique el tipo de suscripción:</p>
+		<input type="radio" id="choice1"
+     	name="tipoUsuario" value="Usuario estándar" onclick="display()">
+    	<label for="choice1">Usuario estándar</label><br>
+
+    	<input type="radio" id="choice2"
+     	name="tipoUsuario" value="Usuario premium" onclick="display()">
+    	<label for="choice2">Usuario premium</label>
+    	
+    	<p><br/></p><p>Indique el método de pago:</p>
+		<input type="radio" id="choice2_1"
+     	name="metodoPago" value="Tarjeta de crédito" onclick="display()">
+    	<label for="choice2_1">Tarjeta de crédito</label><br>
+
+    	<input type="radio" id="choice2_2"
+     	name="metodoPago" value=Paypal onclick="display()">
+    	<label for="choice2_2">Paypal</label>
+    	
+    	<br><p><br>Sube una foto de perfil (Opcional):</p><input type='file' name='image' accept=".jpg, .jpeg, .png">
+        
+        <br><br><br/><input type='submit' id='submit' value='Registrarme' disabled="disabled">
+        <input type="hidden" name="_csrf" value="{{token}}"/>
+        
+        <br><br>
+	
+	</form>
+	
+	
+	
+	<div id="disp" style= "color:green; font-size:18px; font-weight:bold;"> </div>
+    </div>
+
+    <div id="disp" style="color:green; font-size:18px; font-weight:bold;"></div>
+	
+
+<div align="center">
+		<a href="/">Volver a la página principal</a><br><br><br><br>
+<br>
+	</div>
+
+</body>
+
+
+
+	<script>
+			var password = document.getElementById('pwd');
+			confirm_password = document.getElementById('cpwd');
+			   
+			    function display() {
+			    
+		        	if ((confirm_password.value!='')&&(password.value != confirm_password.value)) {
+		           		 document.getElementById('errorMsg').innerHTML='Passwords Don\'t Match';
+		           		 document.getElementById('submit').disabled = true;
+		       		 } else if((confirm_password.value!='')&&(password.value == confirm_password.value))
+		       		 {
+		        			document.getElementById('errorMsg').innerHTML='';
+		        		
+		        			if(((document.getElementById('choice1').checked)||(document.getElementById('choice2').checked))&&((document.getElementById('choice2_1').checked)||(document.getElementById('choice2_2').checked)))
+		        			{
+		        				document.getElementById('submit').disabled = false;
+		        			}		            
+		       		 }
+		   		}
+	</script>
+
+</html>

@@ -1,0 +1,57 @@
+<html>
+
+{{>Otros/Inicial}}
+
+<style>
+body {
+  background-color: ivory;
+  overflow-y:  scroll
+}
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+</style>
+
+<head>
+
+	<meta charset="UTF-8"/>
+	
+</head>
+
+<body>
+
+	<div id="titulo">
+		<p align="center" style="font-size:25px"><br><br><b>Foros</b><br><br></p>
+	</div>
+
+	<div align="center">
+		{{#foro}}
+		<a href="foros/{{id}}">{{Asunto}}</a><br><br>
+		{{/foro}}
+
+		{{^foro}}
+		<p>No hay foros disponibles.</p>
+		{{/foro}}
+
+		<br>
+
+		{{#user}}
+		<a href="/foros/nuevoforo">Crear foro</a>
+		{{/user}}
+	
+
+   </div>
+   
+   	<div align="center">
+   
+    <br>
+    <a href="/paginaprincipal">Pagina principal</a>
+	
+	</div>
+<br><br>	
+</body>
+{{>Otros/footer}}
+</html>
+
+

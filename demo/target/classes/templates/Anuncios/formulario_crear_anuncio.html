@@ -1,0 +1,52 @@
+<html>
+
+
+{{>Otros/Inicial}}
+
+<style>
+body {
+  background-color: ivory;
+  overflow-y:  scroll
+}
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+</style>
+
+<head>
+	<meta charset="UTF-8"/>	
+</head>
+
+<body>
+
+<div align="center">
+	
+
+	<h1> Crear anuncio de clases particulares </h1>
+
+	<form action="/anuncioCreado" method="post">
+	
+		<p>Materia:</p>
+		<input type='text' name='materia'/>
+		
+		<p>Curso:</p>
+		<input type='text' name='curso'/>
+		
+		<p>Horario:</p>
+		<input type='text' name='horario'/>
+		
+		<p>Precio:</p>
+		<input type='text' name='precio'/>
+
+		<p>Contenido:</p>
+		<textarea name='contenido' rows=5 cols=40></textarea>
+		
+		<br><br><br><input type='submit' value='Publicar'/>
+		<input type="hidden" name="_csrf" value="{{token}}"/>
+				
+	</form>
+	
+	</div>
+	<br><br>
+<body>

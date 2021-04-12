@@ -1,0 +1,91 @@
+
+<html>
+{{>Otros/Inicial}}
+
+
+<style>
+body {
+  background-color: ivory;
+  overflow-y:  scroll
+}
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+</style>
+
+<style type="text/css">
+.enlace{                    
+    font-family:verdana,arial;
+    font-size:10pt;
+    text-align:center;
+    color: #2F4F4F;            
+}
+
+.enlace body {background-color: ivory;} 
+.enlace ul {padding: 0; width: 100%;}
+.enlace li {display: inline;}
+.enlace a {outline: none; text-decoration: none; display: inline-block; width: 19.5%; margin-right: 0.625%; text-align: center; line-height: 3; color: black;}
+.enlace li:last-child a {margin-right: 0;}
+.enlace a:link, a:visited, a:focus {background: yellow;}
+.enlace a:hover {background: orange;}
+.enlace a:active {background: red; color: white;}
+</style>
+
+<head>
+  <meta charset="UTF-8">
+</head>
+
+<div id="titulo">
+	<p align="center" style="font-size:25px"><br><br><b>Tablón de anuncios</b><br><br></p>
+</div>
+
+<body>
+	
+<div align="center">
+
+	{{#anuncios}}
+	
+	<table>
+	<tr>
+	
+		<td><a><b>Materia:</b> {{materia}}
+		<br> <b>Curso: </b>{{curso}}
+		{{#prof}}
+			<td><a href="/eliminarAnuncio/{{id}}">Eliminar anuncio</a></td>
+		{{/prof}}
+		<td><a href="/anuncios/{{id}}">Ver</a></td>
+		
+		
+	
+	</tr>
+	</table>
+		
+	{{/anuncios}}
+	
+	{{^anuncios}}
+		<p>No hay anuncios añadidos</p>
+	{{/anuncios}}
+	
+		
+	<br>
+	<div class="enlace">
+	{{#prof}}
+		<a href="/crearAnuncio">Crear anuncio</a>
+	{{/prof}}
+	</div>
+	
+	<br>
+    <a href="/paginaprincipal">Página principal</a>	
+	<br>
+	
+	
+	
+	
+</div>
+<br><br>
+</body>
+
+
+{{>Otros/footer}}
+</html>

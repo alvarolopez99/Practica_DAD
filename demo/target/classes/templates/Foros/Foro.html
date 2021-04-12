@@ -1,0 +1,60 @@
+<html>
+
+{{>Otros/Inicial}}
+
+<style>
+body {
+  background-color: ivory;
+  overflow-y:  scroll
+}
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+</style>
+
+<head>
+
+	<meta charset="UTF-8"/>
+	
+</head>
+
+<body>
+
+	<div align="center">	  
+
+		{{#infoForo}}
+			<h1>{{Asunto}}</h1>
+		{{/infoForo}}
+	
+		{{#infoForo}}
+			<p>{{Cuerpo}}</p>
+		{{/infoForo}}
+	
+	
+		{{#infoForo.mensajes}}
+   	 		<br><b>{{emisor.nombre}}:&nbsp;</b>{{CuerpoMensaje}}
+    	{{/infoForo.mensajes}}
+	
+		{{#user}}
+			{{#infoForo}}
+				<form action="/foros/{{IDForo}}/respuesta" method="post">	
+		
+					<p>Responder:</p>
+					<textarea name='respuesta' rows=5 cols=40></textarea>
+					<input type='submit' value='Enviar'/>
+					<input type="hidden" name="_csrf" value="{{token}}"/>
+				
+				</form>
+			{{/infoForo}}
+		{{/user}}
+	
+	<a href="/foros">VOLVER</a>
+	
+	</div>
+<br><br>	 
+</body>
+{{>Otros/footer}}
+</html>
+
+

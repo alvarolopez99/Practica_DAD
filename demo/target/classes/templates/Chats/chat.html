@@ -1,0 +1,64 @@
+<html>
+
+{{>Otros/Inicial}}
+
+<style>
+body {
+  background-color: ivory;
+  overflow-y:  scroll
+}
+
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+
+a {
+  font-family: verdana;
+  font-size: 15px;
+}
+</style>
+
+<head>
+
+	<meta charset="UTF-8"/>
+	
+</head>
+
+<head>
+<title>Chat</title>
+</head>
+ 
+<div>
+  <div>
+        <p align="center">Bienvenido, <b>{{user}}</b> 
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        <a id="exit" href="/anuncios">X</a></p>
+    </div>
+    
+    <div>
+    	<p align="center"> Historial de chat -&nbsp;  <b>{{target.nombre}} {{target.primerApellido}}</b> 
+    </div> 
+    <div>
+    	<p align="center"> 
+			{{#mensajes}}
+				<br><b>{{emisor.nombre}}:&nbsp;</b>{{CuerpoMensaje}}
+			{{/mensajes}}
+		</p>
+	</div>
+    
+    <div align="center">
+	    <form name="message" action="/chat/{{target.id}}/send" method="post">
+	        <input name="usermsg" type="text" id="usermsg" size="63" />
+	        <input name="submitmsg" type="submit"  id="submitmsg" />
+	        <input type="hidden" name="_csrf" value="{{token}}"/>
+	    </form>
+    </div> 
+</div>
+<br><br>
+</body>
+{{>Otros/footer}}
+</html>
