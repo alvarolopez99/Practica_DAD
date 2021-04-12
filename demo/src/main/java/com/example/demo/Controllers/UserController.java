@@ -129,8 +129,7 @@ public class UserController {
 	public String modifyUser(Model model, /*HttpSession sesion,*/ @RequestParam String nombreUsuario, @RequestParam String apellido1,
 			@RequestParam String apellido2, @RequestParam String contraseña_1, @RequestParam MultipartFile image,
 			HttpServletRequest request) throws IOException, SQLException{
-
-		
+	
 		
 		Principal p = request.getUserPrincipal();
 		
@@ -234,7 +233,6 @@ public class UserController {
 			}
 			
 			if(puntuacion >= 3) {
-				//Usuario u = (Usuario)session.getAttribute("user");
 				
 				Principal p = request.getUserPrincipal();
 				
@@ -253,9 +251,7 @@ public class UserController {
 				model.addAttribute("mensaje2", "Sigue intentándolo para obtener tu certificado");
 			}
 		}
-		
-		
-		
+			
 		return "Examenes/examenCompletado";
 	}
 	

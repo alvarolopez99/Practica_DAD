@@ -125,7 +125,6 @@ public class IndexController {
 			
 			userRep.save(profesor);
 				
-			//sesion.setAttribute("user", profesor);
 		}
 		
 		return "Administrador/ProfesorAgregadoConfirmacion";
@@ -176,9 +175,6 @@ public class IndexController {
 			else
 				metodoP = 1;
 			
-			//List<String> roles = new ArrayList<String>();
-			//roles.add("user");
-			
 			Usuario registrado = new Usuario(nombreUsuario, primerApellido, apellido2, passwordEncoder.encode(contraseña_1), 0, tipoU, correo,
 					metodoP, null, "ROLE_USER");
 
@@ -210,8 +206,6 @@ public class IndexController {
 			}
 
 			userRep.save(registrado);
-
-			//sesion.setAttribute("user", registrado);
 
 			return "PaginaDeInicio/bienvenido";
 		}

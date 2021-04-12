@@ -18,14 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 
-	/*
-	@Value("${security.user}")
-	private String user;
-
-	@Value("${security.encodedPassword}")
-	private String encodedPassword;
-	*/
-	
 	@Autowired
 	public UserRepositoryAuthenticationProvider authenticationProvider;
 	
@@ -51,11 +43,10 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/cursosDisponibles").permitAll();
 		http.authorizeRequests().antMatchers("/curso/{index}").permitAll();
 		
-		//* Foros
+		// Foros
 		http.authorizeRequests().antMatchers("/foros").permitAll();
 		http.authorizeRequests().antMatchers("/foros/{IDForo}").permitAll();
 		http.authorizeRequests().antMatchers("/foros/{IDForo}/respuesta").permitAll();
-		//*/
 		http.authorizeRequests().antMatchers("/foros/nuevoforo/creado").permitAll();
 		
 		// Anuncios
@@ -79,7 +70,6 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		// Anuncios - Profesor
 		http.authorizeRequests().antMatchers("/crearAnuncio").hasAnyRole("PROFESOR");
 		http.authorizeRequests().antMatchers("/anuncioCreado").hasAnyRole("PROFESOR");
-		//http.authorizeRequests().antMatchers("/eliminarAnuncio/{index}").hasAnyRole("PROFESOR");
 		
 		// Administrador
 		http.authorizeRequests().antMatchers("/administrador").hasAnyRole("ADMIN");
@@ -94,11 +84,12 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/{curso}/examen").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/{curso}/examen/completado").hasAnyRole("USER");
 		
-		//http.authorizeRequests().antMatchers("/sesion_cerrada").hasAnyRole("USER");
 		
 		// Chats - Usuario Registrado
 		http.authorizeRequests().antMatchers("/chat/{profesor}").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/chat/{profesor}/send").hasAnyRole("USER");
+		
+		
 		
 		// PÁGINAS PRIVADAS		
 		
@@ -114,31 +105,13 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		http.logout().logoutSuccessUrl("/");
 		
 		http.authorizeRequests().anyRequest().authenticated();	
-		// Disable CSRF at the moment
-		//http.csrf().disable();
 		
 	}
 	
-	/*@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder(10, new SecureRandom());
-	}*/
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-		/*PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
-		auth.inMemoryAuthentication().withUser("aaa@aaa.aaa")
-			.password(encoder.encode("aaa")).roles("USER");
-
-		auth.inMemoryAuthentication().withUser("admin")
-			.password(encoder.encode("adminpass")).roles("USER", "ADMIN");
-		
-		auth.inMemoryAuthentication().withUser("teacher")
-		.password(encoder.encode("teacherpass")).roles("PROFESOR");*/
-		
-		// ¿COMPATIBLE CON LO ANTERIOR?
 		auth.authenticationProvider(authenticationProvider);
 	}
 }
