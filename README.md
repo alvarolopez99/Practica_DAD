@@ -50,12 +50,16 @@ Capturas pertenecientes al resultado final de la fase III de desarrollo:
 
 ### Pantalla de inicio
 
-Primera pantalla que encuentra el usuario al acceder a la dirección básica de la aplicación desde la cual se puede acceder sin registrarse, registrarse o logearse
-
-![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/PaginaInicio.PNG)
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/1PaginaInicio.PNG)
 
 
+### Login
 
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/1Login.PNG)
+
+### Registro
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/3Registro.PNG)
 
 
 
