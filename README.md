@@ -31,8 +31,8 @@ Solo se pueden examinar del curso los usuarios premium, y al completarlo se obti
 - Reescalado de imágenes: Al seleccionar una imagen de perfil, esta será reescalada para adaptarse al tamaño 300x300 de la web.
 
 
-
 ## Diagramas de la aplicación
+
 
 ### Diagrama de navegación
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/DiagramasDAD/DiagramaNavegacion.png)
@@ -51,100 +51,140 @@ Capturas pertenecientes al resultado final de la fase III de desarrollo:
 
 ### Pantalla de inicio
 
+Pagina genérica disponible para todos los usuarios desde donde poder acceder registrarse o logearse
+
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/1PaginaInicio.PNG)
 
 
 ### Login
+
+Pagina para poder logearse y acceder
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/2Login.PNG)
 
 
 ### Registro
 
+Pagina para poder hacer el registro de alumno accesible a cualquier persona
+
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/3Registro.PNG)
 
 
 ### Registro finalizado
+
+Pagina de confirmacion del registro
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/4RegistroFinalizado.PNG)
 
 
 ### Pagina Principal
 
+Pagina principal que aparece una ver nos hemos logeado
+
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/5PaginaPrincipal.PNG)
 
 
 ### Pagina Principal Administrador
+
+Pagina principal desde la visión del administrador
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/6PaginaPrincipalAdmin.PNG)
 
 
 ### Curso profesor
 
+Pagina de los cursos desde la vision del profesor que puede crear cursos
+
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/7CursosProfesor.PNG)
 
 
 ### Crear curso
+
+Pagina de creacion de cursos disponible para profesores
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/8CrearCurso.PNG)
 
 
 ### Crear examen
 
+Pagina de creacion de examenes disponible para profesores
+
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/9CrearExamen.PNG)
 
 
 ### Cursos usuarios
+
+Vision para los usuarios de los cursos disponibles
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/14_Cursos_Usuario.PNG)
 
 
 ### Contenido curso
 
+Pagina donde se puede visualizar el contenido de un curso
+
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/15_Ver_Contenido_Curso_Usuario.PNG)
 
 
 ### Perfil
+
+Pagina de perfil para usuarios logeados
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/10_Perfil.PNG)
 
 
 ### Foros alumnos
 
+Lista de foros que ven los alumnos
+
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/17_Foros_Alumno.PNG)
 
 
 ### Respuestas en foros
+
+Respuesta a un foro
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/18_Responder_Foro.PNG)
 
 
 ### Intercambio mensajes foros
 
+Distintos mensajes en un foro (disponible para usuarios registrados y logeados)
+
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/19_Intercambio_Mensajes_Foro.PNG)
 
 
 ### Anuncios
+
+Vision de los anuncios para profesores donde se pueden crear
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/21_Anuncios_Alumno.PNG)
 
 
 ### Anuncio alumno
 
+Vista de alumnos de los anuncios de profesores disponibles
+
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/22_Anuncio_Alumno.PNG)
 
 
 ### Chats de profesor
+
+Lista de chats disponible para profesores
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/23_Chats_Profesor.PNG)
 
 
 ### Chat
 
+Chat desde la vista de un alumno
+
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/24_Chat.PNG)
 
 
 ### Filtrado lenguaje
+
+El filtrado del lenguaje cambia por "***" las palabrotas que se intenten poner en la aplicación
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/25_Filtrado_Lenguaje.PNG)
 
