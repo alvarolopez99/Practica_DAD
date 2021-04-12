@@ -123,7 +123,6 @@ public class IndexController {
 				}
 			}
 			
-			userRep.save(profesor);
 				
 		}
 		
