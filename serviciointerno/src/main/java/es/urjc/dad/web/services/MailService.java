@@ -1,5 +1,7 @@
 package es.urjc.dad.web.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import java.util.*;
 import javax.mail.*;
@@ -8,6 +10,9 @@ import javax.activation.*;
 
 @Component
 public class MailService {
+	
+	@Autowired
+	private Environment env;
 	
 	public void sendEmail(String to, String subject, String content) {
 		
@@ -29,7 +34,7 @@ public class MailService {
 
             protected PasswordAuthentication getPasswordAuthentication() {
 
-                return new PasswordAuthentication(from, "fower4fower4");
+                return new PasswordAuthentication(from, env.getProperty("service.mailpass"));
 
             }
 

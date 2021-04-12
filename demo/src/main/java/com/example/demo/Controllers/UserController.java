@@ -152,8 +152,6 @@ public class UserController {
 					String nombreFoto = image.getOriginalFilename();
 					String formatName = nombreFoto.substring(nombreFoto.lastIndexOf(".") + 1);	
 					
-				
-					Runner.imagePetition(user.get().getId(), formatName);
 					
 					Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);
 					
@@ -163,6 +161,8 @@ public class UserController {
 					model.addAttribute("imagen", bphoto);
 					
 					user.get().setFotoPerfil(imagen);
+					userRepo.save(user.get());
+					Runner.imagePetition(user.get().getId(), formatName);
 				}
 				catch (Exception exc){
 					return "Fallo al establecer la imagen de perfil";
@@ -172,11 +172,12 @@ public class UserController {
 					byte[] bdata = foto.getBytes(1, (int) foto.length());
 					String s = java.util.Base64.getEncoder().encodeToString(bdata);
 					model.addAttribute("imagen", s);
-					user.get().setFotoPerfil(foto);
+					//user.get().setFotoPerfil(foto);
 				}
+				userRepo.save(user.get());
 			}
 			
-			userRepo.save(user.get());
+			
 			
 	
 			model.addAttribute("mensaje", "Se han modificado correctamente tus datos");

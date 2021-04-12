@@ -106,7 +106,6 @@ public class IndexController {
 					bytes = image.getBytes();
 					
 					String formatName = nombreFoto.substring(nombreFoto.lastIndexOf(".") + 1);	
-					Runner.imagePetition(profesor.getId(), formatName);
 					
 					Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);
 					usuario.setFotoPerfil(imagen);
@@ -116,6 +115,8 @@ public class IndexController {
 					model.addAttribute("fotoperfil", bphoto);
 					
 					profesor.setFotoPerfil(imagen);
+					userRep.save(profesor);
+					Runner.imagePetition(profesor.getId(), formatName);
 				}
 				catch (Exception exc){
 					return "Fallo al establecer la imagen de perfil";
