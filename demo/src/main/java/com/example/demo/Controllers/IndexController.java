@@ -217,7 +217,7 @@ public class IndexController {
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("p", request.isUserInRole("PROFESOR"));
 
-		return "PaginaPrincipal/paginaprincipal";
+		return "PaginaPrincipal/PaginaPrincipal";
 	}
 	
 

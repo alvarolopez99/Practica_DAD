@@ -106,7 +106,7 @@ public class UserController {
 			}else {
 				model.addAttribute("imagen", false);
 			}
-			return "Perfiles/editarperfil";
+			return "Perfiles/EditarPerfil";
 		}
 	}
 	
