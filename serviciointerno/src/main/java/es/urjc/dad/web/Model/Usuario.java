@@ -2,13 +2,13 @@ package es.urjc.dad.web.Model;
 
 import javax.persistence.*;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
-
 @Entity
 public class Usuario {
 	
@@ -19,7 +19,7 @@ public class Usuario {
 	private String nombre;
 	private String primerApellido;
 	private String segundoApellido;
-	private String contraseña;
+	private String contraseñaCodificada;
 	private int tipoUsuario;	//0: Alumno - 1:Profesor
 	private int tipoSuscripcion;	//0: Estándar - 1:Premium
 	private String correo;
@@ -45,7 +45,7 @@ public class Usuario {
 		this.nombre = nombre;
 		this.primerApellido = primerApellido;
 		this.segundoApellido = segundoApellido;
-		this.contraseña = contraseña;
+		this.contraseñaCodificada = contraseña;
 		this.tipoUsuario = tipoUsuario;
 		this.tipoSuscripcion = tipoSuscripcion;
 		this.correo = correo;
@@ -125,11 +125,11 @@ public class Usuario {
 	}
 	
 	public String getContraseña() {
-		return contraseña;
+		return contraseñaCodificada;
 	}
 	
 	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+		this.contraseñaCodificada = contraseña;
 	}
 	
 	public List<String> getRoles() {
