@@ -48,19 +48,136 @@ Solo se pueden examinar del curso los usuarios premium, y al completarlo se obti
 
 Capturas pertenecientes al resultado final de la fase III de desarrollo:
 
+*
+
 ### Pantalla de inicio
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/1PaginaInicio.PNG)
 
+*
 
 ### Login
 
-![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/1Login.PNG)
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/2Login.PNG)
+
+*
 
 ### Registro
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/3Registro.PNG)
 
+*
+
+### Registro finalizado
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/4RegistroFinalizado.PNG)
+
+*
+
+### Pagina Principal
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/5PaginaPrincipal.PNG)
+
+*
+
+### Pagina Principal Administrador
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/6PaginaPrincipalAdmin.PNG)
+
+*
+
+### Curso profesor
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/7CursoProfesor.PNG)
+
+*
+
+### Crear curso
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/8CrearCurso.PNG)
+
+*
+
+### Crear examen
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/8CrearCurso.PNG)
+
+*
+
+### Cursos usuarios
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/8CrearCurso.PNG)
+
+*
+
+### Contenido curso
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/8CrearCurso.PNG)
+
+*
+
+### Perfil
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/8CrearCurso.PNG)
+
+*
+
+
+
+### Foros alumnos
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/8CrearCurso.PNG)
+
+*
+
+
+### Respuesta foros
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/8CrearCurso.PNG)
+
+*
+
+
+### Intercambio mensajes foros
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/8CrearCurso.PNG)
+
+*
+
+
+### Anuncios profesor
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/8CrearCurso.PNG)
+
+*
+
+
+### Anuncios alumno
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/8CrearCurso.PNG)
+
+*
+
+
+### Chats de profesor
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/8CrearCurso.PNG)
+
+*
+
+
+### Chat
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/8CrearCurso.PNG)
+
+*
+
+
+### Filtrado lenguaje
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/8CrearCurso.PNG)
+
+*
 
 
 ## Integrantes del grupo
