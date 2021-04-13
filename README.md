@@ -1,15 +1,16 @@
 # Sapiotheca
 
 ## Temática 
-Aplicación para contratar cursos, repositorio para apuntes y anuncios de clases particulares. Los usuarios premium tendrían acceso a otro tipo de servicios, como acceso al foro comunitario para resolución de dudas o chat privado personalizado con el profesor. 
-Los usuarios podrían ver mensajes en el foro escritos por otros usuarios, ciertos contenidos de los cursos, y los anuncios de los profesores, pero no podrían escribir un nuevo post, o contratar una clase con un profesor.
-Los posts del foro pueden ser escritos por los usuarios que tengan servicio premium, pero los que tengan un plan standard solo podrán visualizarlos. Obviamente, los administradores tienen acceso a esos posts para controlar que no se publique nada ofensivo.
-Los post se componen de mensajes, enviados cada uno por un usuario distinto, que incluye el usuario que lo envío, y el contenido en sí.
+Aplicación para visualizar cursos, repositorio para apuntes y anuncios de clases particulares. Los usuarios premium tendrían acceso a otro tipo de servicios, como acceso al foro comunitario para resolución de dudas o chat privado personalizado con el profesor. 
+Los usuarios estándar podrían ver mensajes en el foro escritos por otros usuarios, ciertos contenidos de los cursos, y los anuncios de los profesores, pero no podrían escribir un nuevo post, o contratar una clase con un profesor.
+Los posts del foro pueden ser escritos por los usuarios que tengan servicio premium, pero los que tengan un plan standard solo podrán visualizarlos. Obviamente, los desarrolladores tienen acceso a esos posts para controlar que no se publique nada ofensivo.
+Los posts se componen de mensajes, enviados cada uno por un usuario distinto, que incluye el usuario que lo envío, y el contenido en sí.
 Los chats serían privados entre un usuario y un profesor, se almacenaría el histórico de mensajes que han intercambiado.
-Los anuncios publicados por cada profesor son visibles por todos los usuarios, aunque solo sería posible contratar estos servicios si eres usuario premium.
-Los cursos estarían disponibles para todos los usuarios.
+Los anuncios de clases particulares publicados por cada profesor son visibles por todos los usuarios, aunque solo sería posible hablar mediante un chat privado con el profesor que ha publicado ese anuncio si eres usuario premium.
+Los cursos se componen de una serie de contenidos (pdfs) y estarían disponibles para todos los usuarios.
 Solo se pueden examinar del curso los usuarios premium, y al completarlo se obtiene un certificado que se enviaría por correo.
 Los profesores pueden crear nuevos cursos y crear un examen por cada curso.
+Por su parte, el administrador, además de las funciones de los usuarios premium, podría dar de alta a un profesor.
 
 
 
@@ -27,7 +28,6 @@ Los profesores pueden crear nuevos cursos y crear un examen por cada curso.
 
 ## Servicio interno
 - Envío de correos con el certificado: Cuando un usuario termine un curso, el servicio interno se encarga de generar y mandar el correo con el certificado generado al usuario determinado.
-- Notificaciones del foro: Cuando un usuario mande un mensaje al foro el servicio interno informa de ese mensaje al usuario que creó dicho foro de dudas.
 - Filtrado de lenguaje soez: Cuando un usuario utiliza palabras malsonantes, el sistema lo reemplazará por una censura a dicha palabra.
 - Reescalado de imágenes: Al seleccionar una imagen de perfil, esta será reescalada para adaptarse al tamaño 300x300 de la web.
 
