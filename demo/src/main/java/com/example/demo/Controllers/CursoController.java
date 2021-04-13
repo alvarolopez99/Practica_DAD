@@ -126,7 +126,7 @@ public class CursoController {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
 		model.addAttribute("id", id);
-		return "Cursos/subir_Material";
+		return "Cursos/Subir_Material";
 	}	
 	
 	@PostMapping("/crearCursoConfirmacion")
