@@ -202,6 +202,60 @@ El filtrado del lenguaje cambia por "***" las palabrotas que se intenten poner e
 - Álvaro López Sierra -> a.lopezsi.2017@alumnos.urjc.es - alvarolopez99
 
 
+## Instrucciones para el despliegue de la aplicación
+
+Lo primero, y obviamente, disponer de una máquina virtual y un iso que nos permita lanzar el sistema operativo. Nosotros hemos utilizado Linux, con la versión de Ubuntu 20.04. En nuestro caso, puesto que hemos utilizado colas de mensajes para implementar comunicación, a parte de los pasos habituales que habría que realizar para desplegar la aplicación con la base de datos, es necesario descargar el servidor RabbitMQ para Ubuntu. De esto hablaremos más adelante.
+Empezaremos descargando Java (comprende el JDK y el environment de Java, JRE). Estando en la Terminal de Ubuntu, hay que realizar 2 pasos:
+
+- sudo apt install default-jdk
+- sudo apt install default-jre
+
+Con esto quedaría instalado Java.
+Vamos ahora a instalar MySQL Workbench, que será la base de datos que utilizaremos en la aplicación.
+Entramos en la página de MySQL y descargamos la versión para Linux en función de la versión de Ubuntu que hayamos escogido. Una vez descargado, lo instalamos y abrimos nuevamente la consola, donde hay que realizar algunos pasos:
+
+- sudo apt install mysql-server
+- sudo mysql_secure_installation (Aquí nos pedirá una contraseña, que debe coincidir con la que hayamos configurado en el properties del proyecto. El resto de preguntas podemos responder yes (y), ya que no influyen en nuestra configuración)
+- Si nos preguntan el nivel de seguridad que queremos, debemos responder LOW.
+- Si no nos lo preguntan, podemos configurarlo nosotros mismos con: SET GLOBAL validate_password.policy=LOW (Si esto no funciona probar con: SET GLOBAL validate_password_policy=LOW)
+- Si todos estos pasos funcionan correctamente, vamos a entrar en mysql, para ello ejecutamos: sudo mysql (Si esto no funciona probar con: sudo mysql -u root -p)
+- Si no ha surgido ningún error nos aparecerá el prompt "mysql>". Aquí dentro lo primero que hay que escribir es ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'contraseña_de_nuestra_BD_del_properties';
+- Por último, se crea el esquema con el comando CREATE DATABASE 'nombre_esquema_sql_del_properties';
+- Indicamos que este esquema es el que queremos usar: USE 'nombre_esquema_sql_del_properties';
+
+Realizando estos pasos, MySQL debería haber quedado instalado.
+Por último, antes de ejecutar la aplicación en Ubuntu necesitamos instalar RabbitMQ (Ojo: este paso solo es necesario si tu aplicación hace uso de este servicio). Para descargar RabbitMQ hay que realizar lo siguiente (desde la Terminal): 
+
+- sudo apt-get update -y
+- sudo apt-get install curl gnupg debian-keyring debian-archive-keyring -y
+- curl -fsSL https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc | sudo apt-key add -
+- sudo apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F77F1EDA57EBB1CC"
+- sudo apt-key adv --keyserver "hkps://keys.openpgp.org" --recv-keys "0x0A9AF2115F4687BD29803A206B73A36E6026DFCA"
+- sudo apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F77F1EDA57EBB1CC"
+- sudo apt-get install apt-transport-https
+- sudo apt-get update -y
+- sudo apt-get install -y erlang-base \ erlang-asn1 erlang-crypto erlang-eldap erlang-ftp erlang-inets \ erlang-mnesia erlang-os-mon erlang-parsetools erlang-public-key \ erlang-runtime-tools erlang-snmp erlang-ssl \ erlang-syntax-tools erlang-tftp erlang-tools erlang-xmerl
+- sudo apt-get update -y
+- curl -1sLf 'https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey' | apt-key add -
+- sudo apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F6609E60DC62814E"
+- sudo apt-get install curl gnupg debian-keyring debian-archive-keyring apt-transport-https -y
+- sudo apt-get install rabbitmq-server -y --fix-missing
+- sudo rabbitmq-server
+
+Si el mensaje indica que RabbitMQ ya está corriendo en el equipo, ya estaría listo para funcionar.
+Lo último, sería testear la aplicación desde Windows para arreglar todos los fallos que surjan, y una vez que se sepa que no se va a modificar más la aplicación, se pueden generar los jar. Esto se hace de la siguiente manera:
+
+- Click derecho sobre el proyecto
+- Run as.. -> Mavel build...
+- En 'Goals' escribir 'clean package'
+- Esperar a que la consola de Spring indique 'BUILD SUCCESS'
+- Realizar el mismo proceso para el proyecto del servicio interno
+- Cuando tengamos los .jar hay que pasarlos a Ubuntu de la manera que se desee (subiéndolos a GitHub y descargando el proyecto de GitHub desde la máquina virtual)
+- Desde Ubuntu, abrimos dos terminales al mismo tiempo y, estando cada una de ellas en el directorio donde tenemos generado el .jar, ejecutarlo mediante el comando: java -jar nombre_de_nuestro_jar.jar
+- Abrir un navegador en Ubuntu y escribir: https://localhost:8443
+
+
+
 ## Trello
 
 <https://trello.com/b/bFCFHGyl/sapiotheca>
