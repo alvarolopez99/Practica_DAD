@@ -155,16 +155,23 @@ Distintos mensajes en un foro (disponible para usuarios registrados y logeados)
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/19_Intercambio_Mensajes_Foro.PNG)
 
 
-### Anuncios
+### Anuncios alumno
 
-Vision de los anuncios para profesores donde se pueden crear
+Vision de los anuncios de clases particulares, visto por los usuarios
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/21_Anuncios_Alumno.PNG)
 
 
+### Anuncios profesor
+
+Vision de los anuncios de clases particulares, visto por los profesores
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/20_Crear_Anuncio_Profesor.PNG)
+
+
 ### Anuncio alumno
 
-Vista de alumnos de los anuncios de profesores disponibles
+Vista de alumnos de un anuncio particular
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/22_Anuncio_Alumno.PNG)
 
