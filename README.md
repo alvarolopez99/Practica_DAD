@@ -1,16 +1,16 @@
 # Sapiotheca
 
 ## Temática 
-Aplicación para visualizar cursos, repositorio para apuntes y anuncios de clases particulares. Los usuarios premium tendrían acceso a otro tipo de servicios, como acceso al foro comunitario para resolución de dudas o chat privado personalizado con el profesor. 
-Los usuarios estándar podrían ver mensajes en el foro escritos por otros usuarios, ciertos contenidos de los cursos, y los anuncios de los profesores, pero no podrían escribir un nuevo post, o contratar una clase con un profesor.
+Aplicación para visualizar cursos, repositorio para apuntes y anuncios de clases particulares. Habría cuatro tipos de usuarios: usuarios premium, usuarios estándar, profesores y administrador. Los usuarios premium tendrían acceso a otros servicios adicionales, como acceso al foro comunitario para resolución de dudas o chat privado personalizado con el profesor. 
+Los usuarios estándar podrían ver mensajes en el foro escritos por otros usuarios, ciertos contenidos de los cursos, y los anuncios de los profesores, pero no podrían escribir un nuevo post, o chatear con un profesor.
 Los posts del foro pueden ser escritos por los usuarios que tengan servicio premium, pero los que tengan un plan standard solo podrán visualizarlos. Obviamente, los desarrolladores tienen acceso a esos posts para controlar que no se publique nada ofensivo.
 Los posts se componen de mensajes, enviados cada uno por un usuario distinto, que incluye el usuario que lo envío, y el contenido en sí.
-Los chats serían privados entre un usuario y un profesor, se almacenaría el histórico de mensajes que han intercambiado.
+Los chats serían privados entre un usuario y un profesor, se almacenaría el histórico de mensajes que han intercambiado. El alumno accedería al chat a través del anuncio, mientras que el profesor accedería al chat a través de su lista de chats.
 Los anuncios de clases particulares publicados por cada profesor son visibles por todos los usuarios, aunque solo sería posible hablar mediante un chat privado con el profesor que ha publicado ese anuncio si eres usuario premium.
 Los cursos se componen de una serie de contenidos (pdfs) y estarían disponibles para todos los usuarios.
-Solo se pueden examinar del curso los usuarios premium, y al completarlo se obtiene un certificado que se enviaría por correo.
-Los profesores pueden crear nuevos cursos y crear un examen por cada curso.
-Por su parte, el administrador, además de las funciones de los usuarios premium, podría dar de alta a un profesor.
+Solo se pueden examinar del curso los usuarios premium, y al completarlo satisfactoriamente (aprobado en el examen) se obtiene un certificado que se enviaría por correo.
+Los profesores pueden eliminar y crear nuevos cursos, crear un examen por cada curso, así como publicar anuncios de clases particulares.
+Por su parte, el administrador, además de las funciones de los usuarios premium y las de los profesores, también podría dar de alta a un profesor.
 
 
 
