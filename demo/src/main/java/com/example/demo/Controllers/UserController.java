@@ -49,6 +49,9 @@ public class UserController {
 	
     @Autowired
 	private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+   	private Runner runner;
 	
 	@Autowired
 	MailService mail;
@@ -161,7 +164,7 @@ public class UserController {
 					
 					user.get().setFotoPerfil(imagen);
 					userRepo.save(user.get());
-					Runner.imagePetition(user.get().getId(), formatName);
+					runner.imagePetition(user.get().getId(), formatName);
 				}
 				catch (Exception exc){
 					return "Fallo al establecer la imagen de perfil";
@@ -240,7 +243,7 @@ public class UserController {
 
 				String contenido = "Enhorabuena. Has completado con éxito el curso "+ curso+"disponible en la plataforma Sapiotheca";
 				
-				Runner.mailPetition(u.get().getCorreo(), contenido);
+				runner.mailPetition(u.get().getCorreo(), contenido);
 				
 				//mail.sendEmail(u.getCorreo(), "Certificado "+curso, contenido);
 				model.addAttribute("mensaje","Has obtenido una puntuación de "+puntuacion+"/5");

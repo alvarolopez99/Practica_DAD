@@ -70,6 +70,9 @@ public class IndexController {
 	
     @Autowired
 	private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+	private Runner runner;
 	
 	@GetMapping("/")
 	public String indexMain(Model model) {			
@@ -116,7 +119,7 @@ public class IndexController {
 					
 					profesor.setFotoPerfil(imagen);
 					userRep.save(profesor);
-					Runner.imagePetition(profesor.getId(), formatName);
+					runner.imagePetition(profesor.getId(), formatName);
 				}
 				catch (Exception exc){
 					return "Fallo al establecer la imagen de perfil";
@@ -196,7 +199,7 @@ public class IndexController {
 
 					String formatName = nombreFoto.substring(nombreFoto.lastIndexOf(".") + 1);
 					//bytes = imageServ.resize(bytes, 200, 200, formatName);
-					Runner.imagePetition(registrado.getId(), formatName);
+					runner.imagePetition(registrado.getId(), formatName);
 
 					Blob imagen = new javax.sql.rowset.serial.SerialBlob(bytes);
 					usuario.setFotoPerfil(imagen);
