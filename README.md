@@ -29,7 +29,7 @@ Por su parte, el administrador, además de las funciones de los usuarios premium
 ## Servicio interno
 - Envío de correos con el certificado: Cuando un usuario termine un curso, el servicio interno se encarga de generar y mandar el correo con el certificado generado al usuario determinado.
 - Filtrado de lenguaje soez: Cuando un usuario utiliza palabras malsonantes, el sistema lo reemplazará por una censura a dicha palabra.
-- Reescalado de imágenes: Al seleccionar una imagen de perfil, esta será reescalada para adaptarse al tamaño 300x300 de la web.
+- Reescalado de imágenes: Al seleccionar una imagen de perfil, esta será reescalada para adaptarse al tamaño 200x200 de la web.
 
 
 ## Diagramas de la aplicación
@@ -52,163 +52,149 @@ Capturas pertenecientes al resultado final de la fase III de desarrollo:
 
 ### Pantalla de inicio
 
-Pagina genérica disponible para todos los usuarios desde donde poder acceder registrarse o logearse
+Pagina genérica disponible para todos los usuarios desde donde poder acceder registrarse o logearse.
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/1PaginaInicio.PNG)
 
 
 ### Login
 
-Pagina para poder logearse y acceder
+Pagina para poder logearse y acceder.
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/2Login.PNG)
 
 
 ### Registro
 
-Pagina para poder hacer el registro de alumno accesible a cualquier persona
+Pagina para poder hacer el registro de alumno accesible a cualquier persona.
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/3Registro.PNG)
 
 
 ### Registro finalizado
 
-Pagina de confirmacion del registro
+Pagina de confirmacion del registro.
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/4RegistroFinalizado.PNG)
 
 
 ### Pagina Principal
 
-Pagina principal que aparece una ver nos hemos logeado
+Pagina principal que aparece una ver nos hemos logeado.
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/5PaginaPrincipal.PNG)
 
 
 ### Pagina Principal Administrador
 
-Pagina principal desde la visión del administrador
+Pagina principal desde la visión del administrador.
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/6PaginaPrincipalAdmin.PNG)
 
 
 ### Curso profesor
 
-Pagina de los cursos desde la vision del profesor que puede crear cursos
+Pagina de los cursos desde la vision del profesor, con la posibilidad de crear cursos.
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/7CursosProfesor.PNG)
 
 
 ### Crear curso
 
-Pagina de creacion de cursos disponible para profesores
+Pagina de creacion de cursos disponible para profesores.
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/8CrearCurso.PNG)
 
 
 ### Crear examen
 
-Pagina de creacion de examenes disponible para profesores
+Pagina de creacion de examenes disponible para profesores.
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/9CrearExamen.PNG)
 
 
 ### Cursos usuarios
 
-Vision para los usuarios de los cursos disponibles
+Vision para los usuarios de los cursos disponibles.
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/14_Cursos_Usuario.PNG)
 
 
 ### Contenido curso
 
-Pagina donde se puede visualizar el contenido de un curso
+Pagina donde se puede visualizar el contenido de un curso.
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/15_Ver_Contenido_Curso_Usuario.PNG)
 
 
 ### Perfil
 
-Pagina de perfil para usuarios logeados
+Pagina de perfil para usuarios logeados.
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/10_Perfil.PNG)
 
 
 ### Foros alumnos
 
-Lista de foros que ven los alumnos
+Lista de foros que ven los alumnos.
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/17_Foros_Alumno.PNG)
 
 
 ### Respuestas en foros
 
-Respuesta a un foro
+Respuesta a un foro.
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/18_Responder_Foro.PNG)
 
 
 ### Intercambio mensajes foros
 
-Distintos mensajes en un foro (disponible para usuarios registrados y logeados)
+Distintos mensajes en un foro (disponible para usuarios registrados y logueados).
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/19_Intercambio_Mensajes_Foro.PNG)
 
 
 ### Anuncios alumno
 
-Vision de los anuncios de clases particulares, visto por los usuarios
+Visión de los anuncios de clases particulares, visto por los usuarios.
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/21_Anuncios_Alumno.PNG)
 
 
 ### Anuncios profesor
 
-Vision de los anuncios de clases particulares, visto por los profesores
+Vision de los anuncios de clases particulares, visto por los profesores.
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/20_Crear_Anuncio_Profesor.PNG)
 
 
 ### Anuncio alumno
 
-Vista de alumnos de un anuncio particular
+Vista de alumnos de un anuncio particular.
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/22_Anuncio_Alumno.PNG)
 
 
 ### Chats de profesor
 
-Lista de chats disponible para profesores
+Lista de chats disponible para profesores.
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/23_Chats_Profesor.PNG)
 
 
 ### Chat
 
-Chat desde la vista de un alumno
+Chat desde el punto de vista de un alumno.
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/24_Chat.PNG)
 
 
 ### Filtrado lenguaje
 
-El filtrado del lenguaje cambia por "***" las palabrotas que se intenten poner en la aplicación
+El filtrado del lenguaje cambia por "***" las palas malsonantes que se intenten poner en la aplicación
 
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/25_Filtrado_Lenguaje.PNG)
-
-
-### Crear anuncio
-
-Pagina disponible para profesores desde la que se puede crear anuncios
-
-![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/26CrearAnuncio.PNG)
-
-
-### Registrar profesores
-
-Pagina disponible para el administrador donde se pueden registrar profesores
-
-![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/27RegistrarProfesor.PNG)
 
 
 
