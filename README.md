@@ -1,14 +1,15 @@
 # Sapiotheca
 
 ## Temática 
-Aplicación para contratar cursos, repositorio para apuntes, videopíldoras. Los contenidos estarían divididos en cursos, a los que los usuarios con un plan standard tendrían acceso solo a algunos, mientras que los usuarios premium tendrían acceso a otro tipo de servicios, como cursos completos, acceso al foro comunitario para resolución de dudas, obtención de apuntes, chat privado personalizado. 
+Aplicación para contratar cursos, repositorio para apuntes y anuncios de clases particulares. Los usuarios premium tendrían acceso a otro tipo de servicios, como acceso al foro comunitario para resolución de dudas o chat privado personalizado con el profesor. 
 Los usuarios podrían ver mensajes en el foro escritos por otros usuarios, ciertos contenidos de los cursos, y los anuncios de los profesores, pero no podrían escribir un nuevo post, o contratar una clase con un profesor.
-Los posts del foro pueden ser escritos por los usuarios que tengan servicio premium, pero los que tengan un plan standard solo podrán visualizarlos. Obviamente, los desarrolladores tienen acceso a esos posts para controlar que no se publique nada ofensivo.
+Los posts del foro pueden ser escritos por los usuarios que tengan servicio premium, pero los que tengan un plan standard solo podrán visualizarlos. Obviamente, los administradores tienen acceso a esos posts para controlar que no se publique nada ofensivo.
 Los post se componen de mensajes, enviados cada uno por un usuario distinto, que incluye el usuario que lo envío, y el contenido en sí.
 Los chats serían privados entre un usuario y un profesor, se almacenaría el histórico de mensajes que han intercambiado.
 Los anuncios publicados por cada profesor son visibles por todos los usuarios, aunque solo sería posible contratar estos servicios si eres usuario premium.
-Los cursos estarían disponibles para todos los usuarios, pero para acceder al curso completo debes estar registrado como usuario premium. Siendo usuario standard solo tienes acceso a ciertos contenidos.
+Los cursos estarían disponibles para todos los usuarios.
 Solo se pueden examinar del curso los usuarios premium, y al completarlo se obtiene un certificado que se enviaría por correo.
+Los profesores pueden crear nuevos cursos y crear un examen por cada curso.
 
 
 
