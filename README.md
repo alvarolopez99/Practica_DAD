@@ -197,6 +197,20 @@ El filtrado del lenguaje cambia por "***" las palabrotas que se intenten poner e
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/25_Filtrado_Lenguaje.PNG)
 
 
+### Crear anuncio
+
+Pagina disponible para profesores desde la que se puede crear anuncios
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/26CrearAnuncio.PNG)
+
+
+### Registrar profesores
+
+Pagina disponible para el administrador donde se pueden registrar profesores
+
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/27RegistrarProfesor.PNG)
+
+
 
 ## Integrantes del grupo
 
