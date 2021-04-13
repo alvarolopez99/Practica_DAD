@@ -35,7 +35,7 @@ Por su parte, el administrador, además de las funciones de los usuarios premium
 ## Diagramas de la aplicación
 
 ### Diagrama de clases
-![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/DIAGRAMACLASES.PNG)
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/CapturasDADFaseIII/DIAGRAMACLASES.png)
 
 ### Diagrama de navegación
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/DiagramasDAD/DiagramaNavegacion.png)
