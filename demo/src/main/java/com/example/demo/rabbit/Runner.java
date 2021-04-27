@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Runner{
 
-  private static RabbitTemplate rabbitTemplate;
+  private RabbitTemplate rabbitTemplate;
   public final String topicExchangeName = "spring-boot-exchange";
 
   public Runner(RabbitTemplate rt) {

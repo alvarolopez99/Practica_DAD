@@ -82,8 +82,7 @@ public class ServiciointernoApplication {
 				Thread t = new Thread(new ProcesadorSockets(socket));
 				t.start();									// Ejecutarla en un hilo y seguir atendiendo nuevas peticiones
 			}
-		} catch (IOException e) {
-			
+		} catch (IOException e) {			
 			e.printStackTrace();
 		}
 		
