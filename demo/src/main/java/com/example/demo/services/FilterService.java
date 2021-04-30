@@ -13,6 +13,8 @@ import javax.net.SocketFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.Sapiotheca;
@@ -21,13 +23,14 @@ import com.example.demo.Sapiotheca;
 @Component
 public class FilterService {
 	
-	
+	@Autowired
+    private Environment env;
 	
 	public String filtrarLenguaje(String input) {
 		
 		final Logger LOGGER=LoggerFactory.getLogger(Sapiotheca.class);
 		String response = "";
-		String host = "127.0.0.1";
+		String host = env.getProperty("service.socketIP");
 		int port = 9999;
 		SocketFactory ssf = SocketFactory.getDefault();
 
