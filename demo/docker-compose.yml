@@ -6,6 +6,7 @@ services:
      - "9090:8443"
     volumes:
      - .:/todo
+    image: sergioe17/web1
     depends_on:
      - db
      - serviciointerno
