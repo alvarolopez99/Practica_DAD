@@ -6,7 +6,7 @@ services:
      - "9090:8443"
     volumes:
      - .:/todo
-    links:
+    depends_on:
      - db
      - serviciointerno
     environment:
@@ -29,7 +29,7 @@ services:
     volumes:
     - .:/todo
     image: sergioe17/serviciointerno
-    links:
+    depends_on:
       - db
       - rabbitmq
     environment:
