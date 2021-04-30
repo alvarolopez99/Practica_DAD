@@ -30,7 +30,7 @@ public class FilterService {
 		
 		final Logger LOGGER=LoggerFactory.getLogger(Sapiotheca.class);
 		String response = "";
-		String host = env.getProperty("service.socketIP");
+		String host = env.getProperty("SERVICE.SOCKETIP");
 		int port = 9999;
 		SocketFactory ssf = SocketFactory.getDefault();
 
