@@ -40,7 +40,7 @@ public class Sapiotheca {
     @Bean
     public CacheManager cacheManager() {
     	LOGGER.info("Activando caché...");
-    	return new ConcurrentMapCacheManager("anuncios");
+    	return new ConcurrentMapCacheManager("cacheSapiotheca");
     }
 	
 }
