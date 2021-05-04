@@ -14,6 +14,7 @@ import javax.net.SocketFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -26,17 +27,20 @@ public class FilterService {
 	@Autowired
     private Environment env;
 	
+	@Value("SERVICE.SOCKETIP")
+	String host;
+	
 	public String filtrarLenguaje(String input) {
 		
 		final Logger LOGGER=LoggerFactory.getLogger(Sapiotheca.class);
 		String response = "";
-		String host = env.getProperty("SERVICE.SOCKETIP");
-		int port = 9999;
+		
+		int port = 8080;
 		SocketFactory ssf = SocketFactory.getDefault();
 
 		
 		try {
-			
+			System.out.println(host);
 			//Leer de la entrada estandar, enviar al servidor por el socket, leer del socket e imprimir
 			Socket socket = ssf.createSocket(host, port); 	//Socket socket = new Socket(host, port);
 			InputStreamReader InStrReaderStn = new InputStreamReader(System.in); //Entrada

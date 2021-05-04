@@ -56,6 +56,7 @@ public class ServiciointernoApplication {
 	    container.setConnectionFactory(connectionFactory);
 	    container.setQueueNames(queueName);
 	    container.setMessageListener(listenerAdapter);
+	    //connectionFactory.
 	    return container;
 	  }
 
@@ -69,7 +70,7 @@ public class ServiciointernoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ServiciointernoApplication.class, args);
 		
-		int puerto = 9999;
+		int puerto = 8080;
 		ServerSocketFactory ssf = ServerSocketFactory.getDefault();
 
 		
