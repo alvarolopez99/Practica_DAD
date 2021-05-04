@@ -173,15 +173,12 @@ public class UserController {
 				if(foto != null) {
 					byte[] bdata = foto.getBytes(1, (int) foto.length());
 					String s = java.util.Base64.getEncoder().encodeToString(bdata);
-					model.addAttribute("imagen", s);
+					//model.addAttribute("imagen", s);
 					//user.get().setFotoPerfil(foto);
 				}
 				userRepo.save(user.get());
 			}
 			
-			
-			
-	
 			model.addAttribute("mensaje", "Se han modificado correctamente tus datos");
 			return "Perfiles/usuarioModificado";
 		}
