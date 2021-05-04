@@ -6,10 +6,11 @@ services:
      - "9090:8443"
     volumes:
      - .:/todo
-    image: sergioe17/web1
+    image: pbayona/web1
     depends_on:
      - db
      - serviciointerno
+     - rabbitmq
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/sapio?createDatabaseIfNotExist=true
       - SERVICE_SOCKETIP=serviciointerno
@@ -25,6 +26,12 @@ services:
   
   rabbitmq:
     image: rabbitmq    
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+    - "15672:15672"
+    - "5672:5672"
     
   serviciointerno:
     build: .
@@ -32,7 +39,7 @@ services:
     - "8080:8080"
     volumes:
     - .:/todo
-    image: sergioe17/serviciointerno
+    image: pbayona/serviciointerno
     depends_on:
       - db
       - rabbitmq

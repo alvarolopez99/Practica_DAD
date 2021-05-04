@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: es.urjc.dad.web.ServiciointernoApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.46 s - in es.urjc.dad.web.ServiciointernoApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.252 s - in es.urjc.dad.web.ServiciointernoApplicationTests

@@ -16,9 +16,12 @@ import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +37,34 @@ public class ServiciointernoApplication {
 		
 	  static final String queueName = "spring-boot";
 
+	    public static final String QUEUE_NAME = "test-queue";
+	    
+	    private static final String EXCHANGE_NAME = "test-queue-exchange";
+	 
+	    @Value("${spring.rabbitmq.host}")
+	    private String host;
+	 
+	    @Value("${spring.rabbitmq.port}")
+	    private Integer port;
+	 
+	    @Value("${spring.rabbitmq.virtualhost}")
+	    private String virtualhost;
+	 
+	    @Bean
+	    public ConnectionFactory connectionFactory() throws Exception {
+	        final CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
+	        connectionFactory.setAddresses(host);
+	        connectionFactory.setPort(port);
+	        connectionFactory.setVirtualHost(virtualhost);
+	        return connectionFactory;
+	    }
+	 
+	    @Bean
+	    public RabbitTemplate rabbitTemplate() throws Exception {
+	        return new RabbitTemplate(connectionFactory());
+	    }
+	 
+	    
 	  @Bean
 	  Queue queue() {	//Crea una cola AMQ
 	    return new Queue(queueName, false);
