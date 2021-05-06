@@ -37,6 +37,7 @@ services:
     build: .
     ports:
     - "8080:8080"
+    - "9999:9999"
     volumes:
     - .:/todo
     image: pbayona/serviciointerno

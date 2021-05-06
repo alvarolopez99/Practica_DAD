@@ -36,10 +36,7 @@ public class ServiciointernoApplication {
 		
 		
 	  static final String queueName = "spring-boot";
-
-	    public static final String QUEUE_NAME = "test-queue";
-	    
-	    private static final String EXCHANGE_NAME = "test-queue-exchange";
+	   
 	 
 	    @Value("${spring.rabbitmq.host}")
 	    private String host;
@@ -101,7 +98,7 @@ public class ServiciointernoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ServiciointernoApplication.class, args);
 		
-		int puerto = 8080;
+		int puerto = 9999;
 		ServerSocketFactory ssf = ServerSocketFactory.getDefault();
 
 		

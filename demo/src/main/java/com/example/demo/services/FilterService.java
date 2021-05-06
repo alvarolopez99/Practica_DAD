@@ -27,7 +27,7 @@ public class FilterService {
 	@Autowired
     private Environment env;
 	
-	@Value("SERVICE.SOCKETIP")
+	@Value("${service.socketip}")
 	String host;
 	
 	public String filtrarLenguaje(String input) {
@@ -35,7 +35,7 @@ public class FilterService {
 		final Logger LOGGER=LoggerFactory.getLogger(Sapiotheca.class);
 		String response = "";
 		
-		int port = 8080;
+		int port = 9999;
 		SocketFactory ssf = SocketFactory.getDefault();
 
 		
