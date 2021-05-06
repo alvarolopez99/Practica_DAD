@@ -19,7 +19,7 @@ public interface ExamenRepository extends JpaRepository<Examen, Long> {
 	@Cacheable
 	Optional<Examen> findByCurso(Curso c);
 
-	@CacheEvict(allEntries=true)			// Todos o sólo ese examen?
+	@CacheEvict
 	void delete(Examen examen);
 	
 	@CacheEvict(allEntries=true)	

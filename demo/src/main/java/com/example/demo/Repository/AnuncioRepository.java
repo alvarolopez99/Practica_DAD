@@ -24,7 +24,7 @@ public interface AnuncioRepository extends JpaRepository<Anuncio, Integer> {
 	@CacheEvict(allEntries=true)
 	Anuncio save(Anuncio anuncio);
 	
-	@CacheEvict(allEntries=true)			// Todas las entradas o sólo la que tenga ese id??
+	@CacheEvict
 	Anuncio deleteById(int id);
 	
 	

@@ -19,7 +19,7 @@ public interface CursoRepository extends JpaRepository<Curso, Long> {
 	@Cacheable
 	Curso findById(long id);
 	
-	@CacheEvict(allEntries=true)		// Todos o sólo el curso que se elimina??
+	@CacheEvict
 	void delete(Curso curso);
 	
 	@CacheEvict(allEntries=true)
