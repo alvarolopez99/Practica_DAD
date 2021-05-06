@@ -15,6 +15,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/sapio?createDatabaseIfNotExist=true
       - SERVICE_SOCKETIP=serviciointerno
       - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_DATASOURCE_PASSWORD=SapiothecaF4
      
   db:
     image: mysql:8.0.23
@@ -23,7 +24,6 @@ services:
       - MYSQL_DATABASE=sapio
       - MYSQL_PASSWORD=SapiothecaF4
       
-  
   rabbitmq:
     image: rabbitmq    
     environment:
@@ -47,4 +47,5 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/sapio?createDatabaseIfNotExist=true
       - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_DATASOURCE_PASSWORD=SapiothecaF4
   
