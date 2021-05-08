@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Collections;
 import java.util.NoSuchElementException;
 
 import javax.net.SocketFactory;
@@ -25,9 +26,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.example.demo.services.FilterService;
+import com.hazelcast.config.Config;
+import com.hazelcast.config.JoinConfig;
 
 @EnableCaching
 @SpringBootApplication
+//@EnableHazelcastHttpSession		¿NO VA LA ANOTACIÓN?
 public class Sapiotheca {
 	
 	static final Log LOGGER = LogFactory.getLog(Sapiotheca.class);
@@ -41,6 +45,15 @@ public class Sapiotheca {
     public CacheManager cacheManager() {
     	LOGGER.info("Activando caché...");
     	return new ConcurrentMapCacheManager("cacheSapiotheca");
+    }
+    
+    @Bean
+    public Config config() {
+	    Config config = new Config();
+	    JoinConfig joinConfig = config.getNetworkConfig().getJoin();
+	    joinConfig.getMulticastConfig().setEnabled(false);
+	    joinConfig.getTcpIpConfig().setEnabled(true).setMembers(Collections.singletonList("127.0.0.1"));
+	    return config;
     }
 	
 }
