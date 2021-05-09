@@ -9,13 +9,16 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import javax.net.SocketFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.CacheManager;
@@ -35,10 +38,13 @@ import com.hazelcast.config.JoinConfig;
 @EnableHazelcastHttpSession
 public class Sapiotheca {
 	
+	@Value("${web.hosts}")
+	List<String> hazelHosts;
+	
 	static final Log LOGGER = LogFactory.getLog(Sapiotheca.class);
 	
-	//FASE 2 - 11/03/2021
 	public static void main(String[] args) {
+
 		SpringApplication.run(Sapiotheca.class, args);		
 	}
 	
@@ -51,9 +57,12 @@ public class Sapiotheca {
     @Bean
     public Config config() {
 	    Config config = new Config();
+		LOGGER.info("**************************");
+		LOGGER.info(hazelHosts);
+		LOGGER.info("**************************");
 	    JoinConfig joinConfig = config.getNetworkConfig().getJoin();
 	    joinConfig.getMulticastConfig().setEnabled(false);
-	    joinConfig.getTcpIpConfig().setEnabled(true).setMembers(Collections.singletonList("127.0.0.1"));
+	    joinConfig.getTcpIpConfig().setEnabled(true).setMembers(hazelHosts);
 	    return config;
     }
 	

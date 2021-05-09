@@ -12,6 +12,7 @@ services:
     build: .
     ports: 
      - "9090:8443"
+     - "5702:5701"
     volumes:
      - .:/todo
     image: pbayona/web1
@@ -24,10 +25,12 @@ services:
       - SERVICE_SOCKETIP=serviciointerno
       - SPRING_RABBITMQ_HOST=rabbitmq
       - SPRING_DATASOURCE_PASSWORD=SapiothecaF4
+      - WEB_HOSTS=web1,web2
   web2:
     build: .
     ports: 
      - "9091:8443"
+     - "5701:5701"
     volumes:
      - .:/todo
     image: pbayona/web1
@@ -40,6 +43,7 @@ services:
       - SERVICE_SOCKETIP=serviciointerno
       - SPRING_RABBITMQ_HOST=rabbitmq
       - SPRING_DATASOURCE_PASSWORD=SapiothecaF4
+      - WEB_HOSTS=web1,web2
   db:
     image: mysql:8.0.23
     environment:
