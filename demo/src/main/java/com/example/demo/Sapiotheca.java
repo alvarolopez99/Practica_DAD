@@ -22,6 +22,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
+import org.springframework.session.hazelcast.config.annotation.web.http.EnableHazelcastHttpSession;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -31,7 +32,7 @@ import com.hazelcast.config.JoinConfig;
 
 @EnableCaching
 @SpringBootApplication
-//@EnableHazelcastHttpSession		¿NO VA LA ANOTACIÓN?
+@EnableHazelcastHttpSession
 public class Sapiotheca {
 	
 	static final Log LOGGER = LogFactory.getLog(Sapiotheca.class);

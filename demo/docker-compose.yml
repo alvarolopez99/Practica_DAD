@@ -1,5 +1,13 @@
 version: "3.9"
 services:
+  haproxy:
+    build: .
+    ports:
+      - "80:80"
+    image: pbayona/haproxy
+    depends_on:
+      - web1
+      - web2
   web1:
     build: .
     ports: 
@@ -16,7 +24,22 @@ services:
       - SERVICE_SOCKETIP=serviciointerno
       - SPRING_RABBITMQ_HOST=rabbitmq
       - SPRING_DATASOURCE_PASSWORD=SapiothecaF4
-     
+  web2:
+    build: .
+    ports: 
+     - "9091:8443"
+    volumes:
+     - .:/todo
+    image: pbayona/web1
+    depends_on:
+     - db
+     - serviciointerno
+     - rabbitmq
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/sapio?createDatabaseIfNotExist=true
+      - SERVICE_SOCKETIP=serviciointerno
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_DATASOURCE_PASSWORD=SapiothecaF4
   db:
     image: mysql:8.0.23
     environment:
