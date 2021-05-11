@@ -75,4 +75,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/sapio?createDatabaseIfNotExist=true
       - SPRING_RABBITMQ_HOST=rabbitmq
       - SPRING_DATASOURCE_PASSWORD=SapiothecaF4
+    
+        
+      
   
