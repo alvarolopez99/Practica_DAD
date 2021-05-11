@@ -8,6 +8,8 @@ services:
     depends_on:
       - web1
       - web2
+      - serviciointerno
+      - serviciointerno2
   web1:
     build: .
     ports: 
@@ -22,7 +24,7 @@ services:
      - rabbitmq
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/sapio?createDatabaseIfNotExist=true
-      - SERVICE_SOCKETIP=serviciointerno
+      - SERVICE_SOCKETIP=haproxy
       - SPRING_RABBITMQ_HOST=rabbitmq
       - SPRING_DATASOURCE_PASSWORD=SapiothecaF4
       - WEB_HOSTS=web1,web2
@@ -40,7 +42,7 @@ services:
      - rabbitmq
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/sapio?createDatabaseIfNotExist=true
-      - SERVICE_SOCKETIP=serviciointerno
+      - SERVICE_SOCKETIP=haproxy
       - SPRING_RABBITMQ_HOST=rabbitmq
       - SPRING_DATASOURCE_PASSWORD=SapiothecaF4
       - WEB_HOSTS=web1,web2
@@ -75,7 +77,20 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/sapio?createDatabaseIfNotExist=true
       - SPRING_RABBITMQ_HOST=rabbitmq
       - SPRING_DATASOURCE_PASSWORD=SapiothecaF4
-    
-        
-      
+
+  serviciointerno2:
+    build: .
+    ports:
+    - "8081:8080"
+    - "10000:9999"
+    volumes:
+    - .:/todo
+    image: pbayona/serviciointerno
+    depends_on:
+      - db
+      - rabbitmq
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/sapio?createDatabaseIfNotExist=true
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_DATASOURCE_PASSWORD=SapiothecaF4
   
