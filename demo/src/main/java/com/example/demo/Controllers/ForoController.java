@@ -1,6 +1,7 @@
 package com.example.demo.Controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +49,8 @@ public class ForoController {
 		
 		if (repositorioForos.findAll() != null) {
 			model.addAttribute("foro",  repositorioForos.findAll());
-		}		
+		}
+		LOGGER.info("foros valor: "+ repositorioForos.findAll());
 		
 		return "Foros/Foros";
 	}
@@ -61,8 +63,9 @@ public class ForoController {
 		
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
-		Foros foroNuevo = new Foros(filter.filtrarLenguaje(asunto), filter.filtrarLenguaje(mensaje), null);
+		Foros foroNuevo = new Foros(filter.filtrarLenguaje(asunto), filter.filtrarLenguaje(mensaje), new ArrayList<Mensaje>());
 		
+		LOGGER.info("FORO CREADO: "+foroNuevo.toString());
 		repositorioForos.save(foroNuevo);
 
 		return "Foros/forocreado";

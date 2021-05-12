@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.Model.Curso;
 import java.sql.Blob;
 
-@CacheConfig(cacheNames="cacheSapiotheca")
+@CacheConfig(cacheNames="cacheCursos")
 public interface CursoRepository extends JpaRepository<Curso, Long> {
 	
 	@Cacheable(key="#root.method.name+#root.target")
@@ -19,10 +19,10 @@ public interface CursoRepository extends JpaRepository<Curso, Long> {
 	@Cacheable(key="#root.method.name+#root.target+#id")
 	Curso findById(long id);
 	
-	@CacheEvict
+	@CacheEvict(allEntries=true, value="cacheCursos")
 	void delete(Curso curso);
 	
-	@CacheEvict(allEntries=true)
+	@CacheEvict(allEntries=true, value="cacheCursos")
 	Curso save(Curso curso);
 	
 	Optional<Curso> findByTitulo(String titulo);

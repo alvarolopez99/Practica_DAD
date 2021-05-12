@@ -11,17 +11,17 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.example.demo.Model.Usuario;
 
-@CacheConfig(cacheNames="cacheSapiotheca")
+@CacheConfig(cacheNames="cacheUsuarios")
 public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 
 	Optional<Usuario> findByNombre(String nombre);	
 	List<Usuario> findByPrimerApellido(String primerApellido);
 	List<Usuario> findBySegundoApellido(String segundoApellido);
 	
-	@Cacheable
+	@Cacheable(key="#root.method.name+#root.target+#id")
 	Optional<Usuario> findByCorreo(String correo);
 	
-	@CacheEvict(allEntries=true)
+	@CacheEvict(allEntries=true, value="cacheUsuarios")
 	Usuario save(Usuario usuario);
 	
 }

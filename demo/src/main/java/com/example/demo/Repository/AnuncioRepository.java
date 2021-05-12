@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.Model.Anuncio;
 import com.example.demo.Model.Usuario;
 
-@CacheConfig(cacheNames="cacheSapiotheca")
+@CacheConfig(cacheNames="cacheAnuncios")
 public interface AnuncioRepository extends JpaRepository<Anuncio, Integer> {
 	
 	@Cacheable(key="#root.method.name+#root.target+#id")
@@ -21,10 +21,10 @@ public interface AnuncioRepository extends JpaRepository<Anuncio, Integer> {
 	@Cacheable(key="#root.method.name+#root.target")
 	List<Anuncio> findAll();
 	
-	@CacheEvict(allEntries=true)
+	@CacheEvict(allEntries=true, value="cacheAnuncios")
 	Anuncio save(Anuncio anuncio);
 	
-	@CacheEvict
+	@CacheEvict(allEntries=true, value="cacheAnuncios")
 	Anuncio deleteById(int id);
 	
 	

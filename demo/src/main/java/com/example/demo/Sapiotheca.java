@@ -32,6 +32,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.example.demo.services.FilterService;
 import com.hazelcast.config.Config;
 import com.hazelcast.config.JoinConfig;
+import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.spring.cache.HazelcastCacheManager;
+import com.hazelcast.instance.impl.HazelcastInstanceFactory;
 
 @EnableCaching
 @SpringBootApplication
@@ -48,10 +51,26 @@ public class Sapiotheca {
 		SpringApplication.run(Sapiotheca.class, args);		
 	}
 	
-    @Bean
-    public CacheManager cacheManager() {
+	@Bean
+	public CacheManager cacheManager() {
+		return new HazelcastCacheManager(hazelcastInstance());
+	}
+    
+    /*@Bean
+    public CacheManager cacheManagerAnuncios() {
     	LOGGER.info("Activando caché...");
-    	return new ConcurrentMapCacheManager("cacheSapiotheca");
+    	return new ConcurrentMapCacheManager("cacheAnuncios");
+    }
+    
+    @Bean
+    public CacheManager cacheManagerUsuarios() {
+    	LOGGER.info("Activando caché...");
+    	return new ConcurrentMapCacheManager("cacheUsuarios");
+    }*/
+    
+    @Bean
+    public HazelcastInstance hazelcastInstance() {
+		return HazelcastInstanceFactory.newHazelcastInstance(config());
     }
     
     @Bean

@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -32,6 +35,7 @@ public class Foros {
 	private String Asunto;
 	private String Cuerpo;
 	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Mensaje> mensajes;
 
@@ -94,6 +98,7 @@ public class Foros {
 	
 	@Override
 	public String toString() {
-		return "Post [id="+id+", user=" + "user" + ", title=" + Asunto + ", text=" + Cuerpo + "]";
+		return "Post [id="+id+", user=" + usuario + ", title=" + Asunto + ", text=" + Cuerpo + "]";
 	}
 }
+
