@@ -200,16 +200,6 @@ El filtrado del lenguaje cambia por "***" las palas malsonantes que se intenten 
 
 
 
-## Integrantes del grupo
-
-- Sergio Arévalo Gil -> s.arevalog.2017@alumnos.urjc.es - SergioE17
-
-- Pablo Bayona González -> p.bayona.2017@alumnos.urjc.es - pbayona
-
-- Carlos Colmenero Gomez-Cambronero -> c.colmenero.2017@alumnos.urjc.es - colme99
-
-- Álvaro López Sierra -> a.lopezsi.2017@alumnos.urjc.es - alvarolopez99
-
 
 ## Instrucciones para el despliegue de la aplicación
 
@@ -263,6 +253,31 @@ Lo último, sería testear la aplicación desde Windows para arreglar todos los 
 - Desde Ubuntu, abrimos dos terminales al mismo tiempo y, estando cada una de ellas en el directorio donde tenemos generado el .jar, ejecutarlo mediante el comando: java -jar nombre_de_nuestro_jar.jar
 - Abrir un navegador en Ubuntu y escribir: https://localhost:8443
 
+
+
+## Novedades Fase 4
+
+La aplicación ahora emplea contenedores Docker, que contienen todo lo necesario para su ejecución. Se ha utilizado Docker Hub para la creación de los repositorios. Las dependencias de dichos contenedores así como la descripción de los contenedores (puertos, imágenes...) se indican en un fichero docker-compose.
+
+Se ha cacheado el resultado de todos los métodos, empleando el mecanismo para cachear de Spring, lo que permite que no se necesite volver a ejecutar el método si se vuelve a invocar con los mismos parámetros. Además, se han eliminado las entradas de la caché en los métodos pertinentes mediante la invalidación de la caché.
+
+Se cuenta con varias instancias tanto de la aplicación, como del servicio interno, de manera que es capaz de responder aunque se caiga algún nodo.
+
+Como balanceador de carga, se ha empleado HAProxy, escogiendo la técnica de Round-Robin entre instancias. En la configuración de Hazelcast se ha elegido la opción de SSL Pass Through, haciendo que SSL llegue hasta la aplicación.
+
+Se ha utilizado Hazelcast para que posibilitar la sesión distribuida, gracias al autodescubrimiento que emplea.
+
+
+
+## Integrantes del grupo
+
+- Sergio Arévalo Gil -> s.arevalog.2017@alumnos.urjc.es - SergioE17
+
+- Pablo Bayona González -> p.bayona.2017@alumnos.urjc.es - pbayona
+
+- Carlos Colmenero Gomez-Cambronero -> c.colmenero.2017@alumnos.urjc.es - colme99
+
+- Álvaro López Sierra -> a.lopezsi.2017@alumnos.urjc.es - alvarolopez99
 
 
 ## Trello
