@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
@@ -15,11 +16,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.Sapiotheca;
 import com.example.demo.Model.Anuncio;
 import com.example.demo.Model.Usuario;
 import com.example.demo.Repository.AnuncioRepository;
 import com.example.demo.Repository.UsuarioRepository;
 import com.example.demo.services.FilterService;
+
+import ch.qos.logback.classic.Logger;
 
 @Controller
 public class AnuncioController {
@@ -42,6 +46,9 @@ public class AnuncioController {
 		//model.addAttribute("user", request.isUserInRole("USER"));
 		if (repositorioAnuncios.findAll() != null) {
 			model.addAttribute("anuncios",  repositorioAnuncios.findAll());
+		}
+		else {
+			model.addAttribute("anuncios",  null);
 		}
 
 		return "Anuncios/Anuncios";
