@@ -1,4 +1,5 @@
 package com.example.demo.Model;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mysql.cj.jdbc.Blob;
 
 @Entity
-public class Foros {
+public class Foros implements Serializable{
 
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)

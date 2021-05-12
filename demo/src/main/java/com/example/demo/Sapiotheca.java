@@ -65,8 +65,8 @@ public class Sapiotheca {
 			
 		    JoinConfig joinConfig = config.getNetworkConfig().getJoin();
 		    
-		    joinConfig.getMulticastConfig().setEnabled(true);
-		    joinConfig.getTcpIpConfig().setEnabled(false).setMembers(hazelHosts);
+		    joinConfig.getMulticastConfig().setEnabled(false);
+		    joinConfig.getTcpIpConfig().setEnabled(true).setMembers(hazelHosts);
 		    
 		    return config;
 	    }

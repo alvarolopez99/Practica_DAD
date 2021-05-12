@@ -7,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.example.demo.Repository.CursoRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.util.ArrayList;
@@ -145,44 +142,7 @@ public class Usuario implements Serializable {
 	public void setRoles(List<String> roles) {
 		this.roles = roles;
 	}
-<<<<<<< HEAD
-=======
 	
-	private void readObject(ObjectInputStream aInputStream) throws ClassNotFoundException, IOException 
-    {       
-    	id = aInputStream.readLong();
-    	
-    	nombre = aInputStream.readUTF();
-    	primerApellido = aInputStream.readUTF();
-    	segundoApellido = aInputStream.readUTF();
-    	contraseñaCodificada = aInputStream.readUTF();
-    	
-    	tipoUsuario = aInputStream.readInt();
-    	tipoSuscripcion = aInputStream.readInt();
-    	
-    	correo = aInputStream.readUTF();
-    	
-    	metodoPago = aInputStream.readInt();
-    }
- 
-    private void writeObject(ObjectOutputStream aOutputStream) throws IOException 
-    {
-    	aOutputStream.writeLong(id);
-        aOutputStream.writeUTF(nombre);
-        aOutputStream.writeUTF(primerApellido);
-        aOutputStream.writeUTF(segundoApellido);
-        aOutputStream.writeUTF(contraseñaCodificada);
-        
-        aOutputStream.writeInt(tipoUsuario);
-        aOutputStream.writeInt(tipoSuscripcion);
-        
-        aOutputStream.writeUTF(correo);
-        
-        aOutputStream.writeInt(metodoPago);  
-    }
-<<<<<<< HEAD
->>>>>>> parent of 61e688a (cache 3)
-=======
->>>>>>> parent of 61e688a (cache 3)
+	
 
 }

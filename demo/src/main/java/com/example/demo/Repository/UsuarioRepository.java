@@ -14,11 +14,11 @@ import com.example.demo.Model.Usuario;
 @CacheConfig(cacheNames="cacheUsuarios")
 public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 
+	@Cacheable(key="#root.method.name+#root.target+#id")
 	Optional<Usuario> findByNombre(String nombre);	
 	List<Usuario> findByPrimerApellido(String primerApellido);
 	List<Usuario> findBySegundoApellido(String segundoApellido);
 	
-	@Cacheable(key="#root.method.name+#root.target+#id")
 	Optional<Usuario> findByCorreo(String correo);
 	
 	@CacheEvict(allEntries=true, value="cacheUsuarios")

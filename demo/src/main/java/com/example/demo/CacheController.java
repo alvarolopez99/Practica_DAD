@@ -50,4 +50,12 @@ public class CacheController {
         HazelcastCache hazelcastCache = (HazelcastCache) hazelcastCacheManager.getCache("cacheAnuncios");
         return hazelcastCache.getNativeCache();
     }
+	
+	@RequestMapping(value = "/cacheForos",method=RequestMethod.GET)
+    public Map<Object, Object> getCacheForosContent() {
+
+        HazelcastCacheManager hazelcastCacheManager = (HazelcastCacheManager) cacheManager;
+        HazelcastCache hazelcastCache = (HazelcastCache) hazelcastCacheManager.getCache("cacheForos");
+        return hazelcastCache.getNativeCache();
+    }
 }
