@@ -80,7 +80,7 @@ public class Sapiotheca {
 		LOGGER.info(hazelHosts);
 		LOGGER.info("**************************");
 	    JoinConfig joinConfig = config.getNetworkConfig().getJoin();
-	    joinConfig.getMulticastConfig().setEnabled(false);
+	    joinConfig.getMulticastConfig().setEnabled(true);
 	    joinConfig.getTcpIpConfig().setEnabled(true).setMembers(hazelHosts);
 	    return config;
     }
