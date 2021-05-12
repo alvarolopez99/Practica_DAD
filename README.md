@@ -43,6 +43,9 @@ Por su parte, el administrador, además de las funciones de los usuarios premium
 ### Diagrama UML
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/DiagramasDAD/UMLDAD.png)
 
+### Diagrama UML
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/DiagramasDAD/Infrastructura.png)
+
 ### Diagrama E/R
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/DiagramasDAD/ERDAD.png)
 
@@ -257,7 +260,13 @@ Lo último, sería testear la aplicación desde Windows para arreglar todos los 
 
 ## Novedades Fase 4
 
-La aplicación ahora emplea contenedores Docker, que contienen todo lo necesario para su ejecución. Se ha utilizado Docker Hub para la creación de los repositorios. Las dependencias de dichos contenedores así como la descripción de los contenedores (puertos, imágenes...) se indican en un fichero docker-compose, lo que facilita además la ejecución de la aplicación.
+La aplicación ahora emplea contenedores Docker, que contienen todo lo necesario para su ejecución. Se ha utilizado Docker Hub para la creación de los repositorios. Las dependencias de dichos contenedores así como la descripción de los contenedores (puertos, imágenes...) se indican en un fichero docker-compose, lo que facilita además la ejecución de la aplicación. A continuación, se indican los contenedores Docker utilizados.
+-	RabbitMQ
+-	MySQL
+-	Servicio interno (dos instancias)
+-	Web (dos instancias)
+-	HAProxy
+
 
 Se ha cacheado el resultado de todos los métodos de Anuncios, Cursos y Usuario, empleando el mecanismo para cachear de Spring, lo que permite que no se necesite volver a ejecutar el método si se vuelve a invocar con los mismos parámetros. Además, se han eliminado las entradas de la caché en los métodos pertinentes mediante la invalidación de la caché.
 
