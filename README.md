@@ -1,5 +1,7 @@
 # Sapiotheca
 
+https://www.youtube.com/watch?v=B_OPpBzuWpM
+
 ## Temática 
 Aplicación para visualizar cursos, repositorio para apuntes y anuncios de clases particulares. Habría cuatro tipos de usuarios: usuarios premium, usuarios estándar, profesores y administrador. Los usuarios premium tendrían acceso a otros servicios adicionales, como acceso al foro comunitario para resolución de dudas o chat privado personalizado con el profesor. 
 Los usuarios estándar podrían ver mensajes en el foro escritos por otros usuarios, ciertos contenidos de los cursos, y los anuncios de los profesores, pero no podrían escribir un nuevo post, o chatear con un profesor.
