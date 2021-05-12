@@ -1,8 +1,4 @@
 package com.example.demo.Model;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -104,32 +100,6 @@ public class Anuncio implements Serializable {
 	public String getContenido() {
 		return contenido;
 	}
-	
-	private void readObject(ObjectInputStream aInputStream) throws ClassNotFoundException, IOException 
-    {       
-    	id = aInputStream.readInt();
-    	
-    	profesor = (Usuario)aInputStream.readObject();
-    	
-    	contenido = aInputStream.readUTF();
-    	materia = aInputStream.readUTF();
-    	horario = aInputStream.readUTF();
-    	precio = aInputStream.readUTF();
-    	curso = aInputStream.readUTF();
-
-    }
- 
-    private void writeObject(ObjectOutputStream aOutputStream) throws IOException 
-    {
-    	aOutputStream.writeInt(id);
-        aOutputStream.writeObject(profesor);
-        aOutputStream.writeUTF(contenido);
-        aOutputStream.writeUTF(materia);
-        aOutputStream.writeUTF(horario);        
-        aOutputStream.writeUTF(precio);
-        aOutputStream.writeUTF(curso);
-        
-    }
 	
 	
 

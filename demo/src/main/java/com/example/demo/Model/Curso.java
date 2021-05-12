@@ -1,8 +1,4 @@
 package com.example.demo.Model;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.util.ArrayList;
@@ -14,7 +10,6 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-
 public class Curso implements Serializable{
 
 	@Id 
@@ -104,37 +99,5 @@ public class Curso implements Serializable{
 	public void setId(long id) {
 		this.id = id;
 	}
-	
-	private void readObject(ObjectInputStream aInputStream) throws ClassNotFoundException, IOException 
-    {       
-    	id = aInputStream.readLong();
-    	
-    	titulo = aInputStream.readUTF();
-    	creador = aInputStream.readUTF();
-    	descripcion = aInputStream.readUTF();
-    	
-    	archivo = (ArrayList<Blob>)aInputStream.readObject();
-    	
-    	profesor = (Usuario)aInputStream.readObject();
-    	
-    	alumnos = (List<Usuario>)aInputStream.readObject();
-    	examenes = (List<Examen>)aInputStream.readObject();
-
-    }
- 
-    private void writeObject(ObjectOutputStream aOutputStream) throws IOException 
-    {
-    	aOutputStream.writeLong(id);
-    	aOutputStream.writeUTF(titulo);
-    	aOutputStream.writeUTF(creador);
-    	aOutputStream.writeUTF(descripcion);
-    	
-    	aOutputStream.writeObject(archivo);
-        aOutputStream.writeObject(profesor);
-        aOutputStream.writeObject(alumnos);
-        aOutputStream.writeObject(examenes);
-
-        
-    }
 	
 }
