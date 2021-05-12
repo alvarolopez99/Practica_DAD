@@ -259,7 +259,7 @@ Lo último, sería testear la aplicación desde Windows para arreglar todos los 
 
 La aplicación ahora emplea contenedores Docker, que contienen todo lo necesario para su ejecución. Se ha utilizado Docker Hub para la creación de los repositorios. Las dependencias de dichos contenedores así como la descripción de los contenedores (puertos, imágenes...) se indican en un fichero docker-compose, lo que facilita además la ejecución de la aplicación.
 
-Se ha cacheado el resultado de todos los métodos, empleando el mecanismo para cachear de Spring, lo que permite que no se necesite volver a ejecutar el método si se vuelve a invocar con los mismos parámetros. Además, se han eliminado las entradas de la caché en los métodos pertinentes mediante la invalidación de la caché.
+Se ha cacheado el resultado de todos los métodos de Anuncios, Cursos y Usuario, empleando el mecanismo para cachear de Spring, lo que permite que no se necesite volver a ejecutar el método si se vuelve a invocar con los mismos parámetros. Además, se han eliminado las entradas de la caché en los métodos pertinentes mediante la invalidación de la caché.
 
 Se cuenta con varias instancias tanto de la aplicación, como del servicio interno, de manera que es capaz de responder aunque se caiga algún nodo.
 
