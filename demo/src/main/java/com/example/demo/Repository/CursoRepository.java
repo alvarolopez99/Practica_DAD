@@ -13,10 +13,10 @@ import java.sql.Blob;
 @CacheConfig(cacheNames="cacheSapiotheca")
 public interface CursoRepository extends JpaRepository<Curso, Long> {
 	
-	@Cacheable
+	@Cacheable(key="#root.method.name+#root.target")
 	List<Curso> findAll();
 	
-	@Cacheable
+	@Cacheable(key="#root.method.name+#root.target+#id")
 	Curso findById(long id);
 	
 	@CacheEvict

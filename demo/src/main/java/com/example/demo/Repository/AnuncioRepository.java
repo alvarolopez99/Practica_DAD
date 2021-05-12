@@ -15,10 +15,10 @@ import com.example.demo.Model.Usuario;
 @CacheConfig(cacheNames="cacheSapiotheca")
 public interface AnuncioRepository extends JpaRepository<Anuncio, Integer> {
 	
-	@Cacheable
+	@Cacheable(key="#root.method.name+#root.target+#id")
 	Optional<Anuncio> findById(int id);
 	
-	@Cacheable
+	@Cacheable(key="#root.method.name+#root.target")
 	List<Anuncio> findAll();
 	
 	@CacheEvict(allEntries=true)

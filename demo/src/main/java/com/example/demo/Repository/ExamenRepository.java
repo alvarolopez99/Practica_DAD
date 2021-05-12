@@ -14,6 +14,7 @@ import com.example.demo.Model.Examen;
 @CacheConfig(cacheNames="cacheSapiotheca")
 public interface ExamenRepository extends JpaRepository<Examen, Long> {
 	
+	@Cacheable(key="#root.method.name+#root.target")
 	List<Examen> findById(long id);
 	
 	@Cacheable

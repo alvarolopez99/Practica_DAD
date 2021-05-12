@@ -14,7 +14,7 @@ import com.example.demo.Model.Usuario;
 @CacheConfig(cacheNames="cacheSapiotheca")
 public interface ChatRepository  extends JpaRepository<Chat, Long> {
 
-	@Cacheable
+	@Cacheable(key="#root.method.name+#root.target+#id")
 	Optional<Chat> findById(long id);
 	
 	@CacheEvict(allEntries=true)
