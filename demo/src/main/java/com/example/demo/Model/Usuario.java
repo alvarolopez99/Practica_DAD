@@ -180,6 +180,9 @@ public class Usuario implements Serializable {
         
         aOutputStream.writeInt(metodoPago);  
     }
+<<<<<<< HEAD
+>>>>>>> parent of 61e688a (cache 3)
+=======
 >>>>>>> parent of 61e688a (cache 3)
 
 }
