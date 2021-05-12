@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +12,17 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
-public class Examen {
+public class Examen implements Serializable{
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Pregunta> preguntas = new ArrayList<Pregunta>();
 	
