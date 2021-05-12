@@ -2,7 +2,7 @@
 
 https://www.youtube.com/watch?v=B_OPpBzuWpM
 
-[![FASE IV](https://img.youtube.com/vi/B_OPpBzuWpM/0.jpg)](https://www.youtube.com/watch?v=B_OPpBzuWpM)
+https://www.youtube.com/embed/B_OPpBzuWpM
 
 ## Temática 
 Aplicación para visualizar cursos, repositorio para apuntes y anuncios de clases particulares. Habría cuatro tipos de usuarios: usuarios premium, usuarios estándar, profesores y administrador. Los usuarios premium tendrían acceso a otros servicios adicionales, como acceso al foro comunitario para resolución de dudas o chat privado personalizado con el profesor. 
