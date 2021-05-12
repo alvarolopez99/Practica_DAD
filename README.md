@@ -43,6 +43,9 @@ Por su parte, el administrador, además de las funciones de los usuarios premium
 ### Diagrama UML
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/DiagramasDAD/UMLDAD.png)
 
+### Diagrama UML
+![](https://github.com/alvarolopez99/Saphioteca/blob/main/DiagramasDAD/Infrastructura.png)
+
 ### Diagrama E/R
 ![](https://github.com/alvarolopez99/Saphioteca/blob/main/DiagramasDAD/ERDAD.png)
 
