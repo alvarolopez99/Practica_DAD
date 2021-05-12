@@ -1,7 +1,6 @@
 version: "3.9"
 services:
   haproxy:
-    build: .
     ports:
       - "80:80"
     image: pbayona/haproxy
@@ -11,7 +10,6 @@ services:
       - serviciointerno
       - serviciointerno2
   web1:
-    build: .
     ports: 
      - "9090:8443"
      - "5702:5701"
@@ -29,7 +27,6 @@ services:
       - SPRING_DATASOURCE_PASSWORD=SapiothecaF4
       - WEB_HOSTS=web1,web2
   web2:
-    build: .
     ports: 
      - "9091:8443"
      - "5701:5701"
@@ -63,7 +60,6 @@ services:
     - "5672:5672"
     
   serviciointerno:
-    build: .
     ports:
     - "8080:8080"
     - "9999:9999"
@@ -79,7 +75,6 @@ services:
       - SPRING_DATASOURCE_PASSWORD=SapiothecaF4
 
   serviciointerno2:
-    build: .
     ports:
     - "8081:8080"
     - "10000:9999"
