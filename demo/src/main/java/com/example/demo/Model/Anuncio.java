@@ -1,8 +1,10 @@
 package com.example.demo.Model;
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity //Persistir esta clase en una BD
-public class Anuncio {
+public class Anuncio implements Serializable {
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO) //Generado automaticamente

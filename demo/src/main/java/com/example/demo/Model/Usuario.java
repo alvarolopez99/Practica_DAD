@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.Repository.CursoRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.io.Serializable;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Usuario {
+public class Usuario implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

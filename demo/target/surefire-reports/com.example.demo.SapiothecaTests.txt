@@ -1,10 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.demo.SapiothecaTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 15.73 s <<< FAILURE! - in com.example.demo.SapiothecaTests
-contextLoads  Time elapsed: 0.002 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'hazelcastInstance' defined in com.example.demo.Sapiotheca: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.hazelcast.core.HazelcastInstance]: Factory method 'hazelcastInstance' threw exception; nested exception is com.hazelcast.config.InvalidConfigurationException: Multiple join configuration cannot be enabled at the same time. Enable only one of: TCP/IP, Multicast, AWS, GCP, Azure, Kubernetes, Eureka or Discovery Strategy
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.hazelcast.core.HazelcastInstance]: Factory method 'hazelcastInstance' threw exception; nested exception is com.hazelcast.config.InvalidConfigurationException: Multiple join configuration cannot be enabled at the same time. Enable only one of: TCP/IP, Multicast, AWS, GCP, Azure, Kubernetes, Eureka or Discovery Strategy
-Caused by: com.hazelcast.config.InvalidConfigurationException: Multiple join configuration cannot be enabled at the same time. Enable only one of: TCP/IP, Multicast, AWS, GCP, Azure, Kubernetes, Eureka or Discovery Strategy
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.799 s - in com.example.demo.SapiothecaTests

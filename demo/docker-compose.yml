@@ -17,7 +17,7 @@ services:
      - "5702:5701"
     volumes:
      - .:/todo
-    image: pbayona/web1
+    image: sergioe17/web1
     depends_on:
      - db
      - serviciointerno
@@ -35,7 +35,7 @@ services:
      - "5701:5701"
     volumes:
      - .:/todo
-    image: pbayona/web1
+    image: sergioe17/web1
     depends_on:
      - db
      - serviciointerno

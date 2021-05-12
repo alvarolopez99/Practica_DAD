@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Properties;
 
 import javax.net.SocketFactory;
 
@@ -34,6 +35,7 @@ import com.hazelcast.config.Config;
 import com.hazelcast.config.JoinConfig;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.spring.cache.HazelcastCacheManager;
+import com.hazelcast.web.WebFilter;
 import com.hazelcast.instance.impl.HazelcastInstanceFactory;
 
 @EnableCaching
@@ -51,10 +53,46 @@ public class Sapiotheca {
 		SpringApplication.run(Sapiotheca.class, args);		
 	}
 	
+	 @Bean
+	    public Config config() {
+		    Config config = new Config();
+		    
+			LOGGER.info("**************************");
+			LOGGER.info("**************************");
+			LOGGER.info(hazelHosts);
+			LOGGER.info("**************************");
+			LOGGER.info("**************************");
+			
+		    JoinConfig joinConfig = config.getNetworkConfig().getJoin();
+		    
+		    joinConfig.getMulticastConfig().setEnabled(true);
+		    joinConfig.getTcpIpConfig().setEnabled(false).setMembers(hazelHosts);
+		    
+		    return config;
+	    }
+	
+	@Bean
+	public HazelcastInstance hazelcastInstance() {
+		return HazelcastInstanceFactory.newHazelcastInstance(config());
+	}
+	    
+	 
 	@Bean
 	public CacheManager cacheManager() {
 		return new HazelcastCacheManager(hazelcastInstance());
 	}
+	
+	@Bean
+	public WebFilter webFilter(HazelcastInstance hazelcastInstance) {
+
+	    Properties properties = new Properties();
+	    properties.put("instance-name", hazelcastInstance.getName());
+	    properties.put("sticky-session", "false");
+	    properties.put("deferred-write", "true");
+
+	    return new WebFilter(properties);
+	}
+	
     
     /*@Bean
     public CacheManager cacheManagerAnuncios() {
@@ -67,22 +105,4 @@ public class Sapiotheca {
     	LOGGER.info("Activando caché...");
     	return new ConcurrentMapCacheManager("cacheUsuarios");
     }*/
-    
-    @Bean
-    public HazelcastInstance hazelcastInstance() {
-		return HazelcastInstanceFactory.newHazelcastInstance(config());
-    }
-    
-    @Bean
-    public Config config() {
-	    Config config = new Config();
-		LOGGER.info("**************************");
-		LOGGER.info(hazelHosts);
-		LOGGER.info("**************************");
-	    JoinConfig joinConfig = config.getNetworkConfig().getJoin();
-	    joinConfig.getMulticastConfig().setEnabled(true);
-	    joinConfig.getTcpIpConfig().setEnabled(true).setMembers(hazelHosts);
-	    return config;
-    }
-	
 }

@@ -1,4 +1,5 @@
 package com.example.demo.Model;
+import java.io.Serializable;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Curso {
+public class Curso implements Serializable{
 
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
