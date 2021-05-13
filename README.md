@@ -276,7 +276,7 @@ La aplicación ahora emplea contenedores Docker, que contienen todo lo necesario
 -	HAProxy
 
 
-Se ha cacheado el resultado de todos los métodos de Anuncios, Cursos y Usuario, empleando el mecanismo para cachear de Spring, lo que permite que no se necesite volver a ejecutar el método si se vuelve a invocar con los mismos parámetros. Además, se han eliminado las entradas de la caché en los métodos pertinentes mediante la invalidación de la caché.
+Se ha cacheado el resultado de todos los métodos de Anuncios, Cursos y Usuario, empleando el mecanismo para cachear de Hazelcast, lo que permite que no se necesite volver a ejecutar el método si se vuelve a invocar con los mismos parámetros. Además, se han eliminado las entradas de la caché en los métodos pertinentes mediante la invalidación de la caché.
 
 Se cuenta con varias instancias tanto de la aplicación, como del servicio interno, de manera que es capaz de responder aunque se caiga algún nodo.
 
